@@ -1,7 +1,7 @@
 # VeriMark handoff: M1 mobile horizontal overflow and sticky header (task_246278037903)
 
 - Status: ready for review. **No application defect confirmed; no CSS/source change made.** Regression guards added.
-- Owner / independent reviewer: Orca worker (Claude) / not yet assigned.
+- Owner / independent reviewer: Orca worker (Claude) / OMP coordinator.
 - Goal: investigate the reported Chrome Device Mode (iPhone 16 Pro Max 440x956, 50% preview zoom) sideways panning and header drift on public routes, fix only confirmed app defects, and add guards.
 - Branch / worktree / base SHA: jamesmikkorecario-dev/m1-mobile-fix / m1-mobile-fix / ed673cf. Delivered SHA is reported separately in worker_done.
 - Changed paths: `e2e/mobile-layout.spec.ts` (new regression guards); this handoff. Local evidence (gitignored, same convention as M1-MOTION-Q): `artifacts/mobile-overflow-sticky/` with `probes/`, `measurements/`, `screenshots/`.
@@ -53,7 +53,7 @@ For the first ~30.4px of scroll the header rides up with the ribbon, then it pin
 | --- | --- | --- |
 | `npm ci` | PASS | 0 vulnerabilities |
 | `npm run typecheck` | PASS | exit 0 |
-| `npm run lint` | PASS | exit 0 |
+| `npm run lint` | PASS | exit 0 on tracked files. `eslint .` also lints gitignored `artifacts/**/*.cjs`: with the probe scripts present it reported 57 `no-undef` errors, all in the four probes. They are archived as `.cjs.txt` in the M1 worktree for that reason |
 | `npm run test -- --run` | PASS | 6 files, 40/40 |
 | `npm run build` | PASS | tsc + vite build, exit 0 |
 | `PLAYWRIGHT_PORT=3431 npx playwright test e2e/mobile-layout.spec.ts --project=chromium-440` | PASS | 20/20, bundled Chromium headless shell |
@@ -69,5 +69,5 @@ Environment: Windows 11, Playwright 1.65.1. Bundled full Chromium (`channel: 'ch
 - Pre-existing risk: the temporal assertions in motion.spec.ts and scroll.spec.ts are timing-sensitive. At default parallelism on this machine they fail intermittently. This is unrelated to this task, which changed no source and no existing test.
 - Security/privacy/design risks: none. No source, token or layout change; design, motion, anchor scrolling, menu, reduced-motion and focus behavior are unchanged.
 - Open decisions / next owner: if the owner wants to suppress Chrome's horizontal swipe-back gesture, `overscroll-behavior-x: none` on `html` would do it. It changes browser navigation UX and does not affect iOS Safari edge swipe, so it needs an explicit owner decision. Not applied.
-- Independent review status: not yet reviewed.
+- Independent review status: reviewed by the OMP coordinator on e294e81. Diff read (new spec + this handoff only, no source change); `npm run typecheck` exit 0; `mobile-layout.spec.ts` 20/20 on `chromium-440`; measurements 01 and 05 spot-checked against the tables above. Unit tests, build, the full e2e suite and the guard mutation check were not rerun by the coordinator. Fast-forwarded into `feat/full-stack-implementation`.
 - Human approvals still needed: owner review of the diagnosis; M1 remains unapproved pending owner review.
