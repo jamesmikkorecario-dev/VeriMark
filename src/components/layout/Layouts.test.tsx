@@ -89,4 +89,3 @@ describe('workspace modal lifecycle', () => {
     expect(document.body.style.position).toBe('');
   });
 });
-
