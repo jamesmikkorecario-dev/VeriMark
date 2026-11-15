@@ -1,0 +1,27 @@
+# M1-MOTION correction contract
+
+Authority: owner's motion audit/refinement request. M1 remains unapproved. Base 6fab432 plus this contract; integration feat/full-stack-implementation. Primary remains permanently main. No M2, broad redesign, packages, backend, push, main merge, deployment or cloud action.
+
+## Audited baseline
+
+Source defines .route-enter / routeIn 480ms from opacity .5 and translateY8px, but no JSX applies the class. No scroll reveal implementation/attributes exist. Normal Chrome at landing/workspace initial navigation returns no document animations, route class count=0, reveal count=0; emulated reduce also none. Browser default prefers-reduced-motion is false in this session (not an assertion about every user/browser/OS). Existing button hover/press and icon transforms work, reduced-motion disables global transitions; workspace native drawer has 220ms entrance only. Public panel appears/disappears without its own transition. Existing page entrances cannot replay on refresh/routes because they are never attached.
+
+Approved reference: 480ms route entrance with 8px travel, 650ms/16px promotional reveal, 220ms action and 250ms icon feedback, cubic-bezier(.22,.78,.23,1). Preserve this restrained direction and current navigation correctness. No endless motion, count-up vanity, parallax or fake network timers.
+
+## Independent ownership
+
+- I motion source: src/pages/LandingPage.tsx and DashboardPage.tsx, motion-only changes in pages.css; src/styles/**; optional src/components/motion/** and its tests; motion-only Navigation.tsx/navigation.css changes (with meaningful extra component tests if required). No route lifecycle rewrite, fixture/schema changes or unrelated layout redesign. Own docs/ai/handoffs/M1-MOTION-I.md.
+- Q independent quality: e2e/** (including reproducible motion walkthrough script), playwright.config.ts only if needed, own docs/ai/handoffs/M1-MOTION-Q.md. Own local video/timeline/frame evidence under artifacts/m1-motion (coordinator later preserves reviewed evidence). No implementation edits. Baseline tests may intentionally fail before supplied source SHA; do not call blocked/failing work success.
+- Coordinator: contracts/docs, source review, sequential integration I then Q, combined verification, temporal visual inspection and evidence preservation/cleanup. Do not launch extra workers for shared landing/workspace CSS ownership.
+
+## Acceptance
+
+Coordinated landing hero text/CTA entrance and subtle credential entrance; promotional section reveals on scroll; dashboard heading/content entrance, restrained metric staging and record interactions; consistent tokens for shared hover/press/link/focus and nav transitions. Initial load, refresh and route remount replay intentional entrances; rerendering filters/forms must not repeatedly animate the whole dashboard. Reveals run once per mount and reset only on deliberate route reentry, not repeated scrolling. No hidden essential content if reduced motion or IntersectionObserver unavailable. Do not globally transform shell/root or ancestors of sticky headers/top-layer dialog. Prefer opacity/transform, no layout shift or interaction gating/delays; stagger bounded and readable content present. Keep focus indicators immediately visible rather than delayed.
+
+Reduced motion must suppress translation/stagger/animations/transitions and keep content available; support media change while mounted. JS observes only for reveal triggers if necessary, cleans up in StrictMode/unmount, no animation dependency. Public panel and issuer drawer transitions may use CSS native discrete transitions or supported state, but never postpone focus/scroll unlock/route/resize cleanup or reintroduce stale state. Prior navigation checks are mandatory. No arbitrary JS timeout delaying dismissal. If platform close transition cannot meet interaction contracts, preserve immediate dismissal and document deliberate tradeoff.
+
+## Quality/evidence
+
+Use installed Chrome (PLAYWRIGHT_CHANNEL=chrome); bundled headless shell has known launch failure. Tests must prove animations trigger, change over time, settle and replay appropriately: initial load, refresh, landing/workspace route changes; scroll reveals; hover/press; mobile panel/drawer opening/closing; dashboard metrics/rows; no infinite motion and reduced-motion enabled/disabled, including live preference change. Audit real default matchMedia result without inferring OS configuration. Capture short desktop/mobile WebM walkthroughs or equivalent replayable traces plus animation timeline JSON and sampled frames, with a checked-in reproduction command/script. Preserve a temporal sequence and inspect actual samples/video, not static screenshot-only assertions. Record no-layout-shift/overflow and availability fallback evidence; respect navigation test assumptions by awaiting actual finite animation completion instead of blanket arbitrary delays. Do not weaken focus/scroll/resize assertions to hide regressions.
+
+Run types, lint, unit/component, build, new relevant Chrome motion tests, entire existing navigation/browser suite and axe. Q may draft tests then consume exact I commits in isolated worktree. Nonbrowser and initial baseline evidence first, dependent full verification after source is ready. Coordinator reruns combined result. No physical-device/screen-reader/browser-setting claims without evidence. Local commits required and worker_done exact SHA/commands/results/limits; no helpers.
