@@ -21,6 +21,8 @@ for (const reducedMotion of ['no-preference', 'reduce'] as const) {
     const link = page.getByRole('link', { name: 'See how it works', exact: true });
     await link.focus();
     await page.keyboard.press('Enter');
+    // Focus marks the React layout-effect commit; instant scroll completes in that same effect.
+    await expect(page.locator('#method')).toBeFocused();
     const frames = [await sample(page)];
     await page.screenshot({ path: info.outputPath('anchor-start.png') });
     await page.waitForTimeout(90);
@@ -145,4 +147,3 @@ test('implemented route entry replays finite visible entrance with immediate foc
   expect(await page.getByRole('main').evaluate(el => el.getAnimations({ subtree: true }).filter(a => a instanceof CSSAnimation).length)).toBe(0);
   await writeFile(info.outputPath('entry-replay.json'), JSON.stringify(samples, null, 2));
 });
-
