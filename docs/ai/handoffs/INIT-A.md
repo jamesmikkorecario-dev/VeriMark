@@ -76,3 +76,13 @@ A first attempted document-generation command failed because Python was unavaila
 - Engineering owners: M03 establishes actual scripts after implementation/design authorization; M04 is first issuance/public-verification trust slice. Full template authoring and delivery follow later milestones.
 
 Human authorization still required for scope changes, final design, application implementation, remote pushes, merges, cloud/paid/destructive operations and releases. Local documentation commits are authorized and no remote action was performed.
+
+## Mandatory stack follow-up ? task_775d04d2074b
+
+Acknowledged React.js + TypeScript, Vite, Supabase backend/PostgreSQL/Auth, Vercel and FREE TIERS ONLY as mandatory; Storage/Edge require justification. No Next.js, separate Node backend or extra cloud service without explicit approval; all styling remains exploratory. Existing compliant work is preserved.
+
+Coordinator subsequently reserved AGENTS/README/START/PRD/DECISION-LOG and canonical architecture/ADR edits. Preliminary uncommitted changes to those five owned docs were restored to this worker's clean base immediately; no overlapping changes are committed. Main performs canonical reconciliation. Only docs/ai/STACK-CONSTRAINTS.md and this handoff carry this follow-up's conflict report.
+
+Potential conflicts: Vercel free-plan eligibility; Auth email/SMTP needs; free backup/restore feasibility; Storage/Edge quota/retention requirements. These are explicitly unverified questions, not vendor capability claims; no alternative or external/paid service is approved. No provider research, production features, provisioning, push or deployment occurred. Engineering scripts remain not configured.
+
+Verification: git diff --check passed before handoff; final scoped diff and unchanged canonical paths checked. Independent review remains with coordinator. Follow-up local commit SHA is reported through worker_done.
