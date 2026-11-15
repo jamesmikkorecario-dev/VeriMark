@@ -1,0 +1,11 @@
+#!/bin/sh
+# VeriMark commit-message policy (docs/delivery/COMMIT-POLICY.md): no AI co-author trailers, promotional footers or session markers.
+# Human Co-authored-by trailers are allowed.
+msg=$(grep -v '^#' "$1")
+if printf '%s\n' "$msg" | grep -Eiq '^co-authored-by:.*(claude|codex|chatgpt|copilot|fable|gemini|cursor|opencode|omp|anthropic|openai|noreply@anthropic\.com|\[bot\])'; then
+  echo 'commit-msg: AI co-author trailers are not allowed (docs/delivery/COMMIT-POLICY.md).' >&2; exit 1
+fi
+if printf '%s\n' "$msg" | grep -Eiq '(generated (with|by) \[?(claude|codex|chatgpt|copilot|cursor|opencode|omp)|claude\.com/claude-code|claude\.ai/code|^(claude-)?session(-id)?: |🤖)'; then
+  echo 'commit-msg: AI promotional footers and session markers are not allowed (docs/delivery/COMMIT-POLICY.md).' >&2; exit 1
+fi
+exit 0
