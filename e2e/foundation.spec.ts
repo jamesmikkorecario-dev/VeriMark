@@ -117,7 +117,7 @@ test('deep landing CTA resets scroll and back restores entry position', async ({
   await expect(closing).toBeInViewport();
   await expect.poll(() => page.evaluate(target => Math.abs(scrollY - target), previousY)).toBeLessThan(3);
   await page.getByRole('link', { name: 'For verifiers', exact: true }).click();
-  await expect(page).toHaveURL('/preview/verify');
+  await expect(page).toHaveURL('/verify');
   await expect(page.getByRole('heading', { level: 1 })).toBeInViewport();
   await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
 });
