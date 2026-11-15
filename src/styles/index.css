@@ -7,6 +7,7 @@
   --gold:#78591a; --gold-bg:#f7f0da; --blue:#345b73; --blue-bg:#e9f1f8;
   --serif:'Iowan Old Style','Palatino Linotype','Book Antiqua',Georgia,serif;
   --sans:'Segoe UI',Arial,sans-serif; --ease:cubic-bezier(.22,.78,.23,1);
+  --section-scroll-gap:16px;
   --motion-enter:480ms; --motion-reveal:650ms; --motion-action:220ms; --motion-icon:250ms;
   --shadow:0 16px 46px rgba(18,43,34,.065);
 }

@@ -5,7 +5,7 @@ import { PublicNavigation, WorkspaceDrawer } from './Navigation';
 
 const publicLinks = (
   <>
-    <Link to="/preview/how">How it works</Link>
+    <Link to="/#method" state={{ sectionScroll: true }}>How it works</Link>
     <Link to="/preview/verify">Verify a record</Link>
     <Link to="/preview/about">About</Link>
     <Link to="/workspace">Demo workspace</Link>
