@@ -34,3 +34,11 @@
 - Coordinator acknowledged source integration and independent review; exact source SHA and semantics sent before handoff. No security/RLS testing applicable to this frontend-only slice; no backend exists here.
 - M1 remains unapproved; no push/main merge/deployment/cloud action performed.
 | Final unmodified full Chrome suite: $env:PLAYWRIGHT_CHANNEL='chrome'; npm run test:e2e -- --workers=2 --reporter=line | FAIL | Exact ae7f816:69passed7failed15skipped in1.2m; all7 failures are foundation responsive accessibility/screenshot audit during entrance at320/390/440/768/1024/1440/1920; remaining navigation/filter/history/reduce cases passed. Log C:/Users/James/AppData/Local/Temp/verimark-motion-final-e2e.txt; Q must await actual finite animation completion before axe. |
+
+## Reduced-action correction: task_a64be75855c7
+
+- Q found the shared button hover translation survived reduction due to stylesheet cascade; page link hover overrides also had greater specificity than the reduced icon selector.
+- Scoped fix: shared styles own reduced hover/active button and SVG transform suppression; page CSS explicitly suppresses hover/active transforms for the four moving link icon families. Scoped !important prevents route stylesheet ordering from restoring action displacement. No universal transform reset, decorative geometry changes, dependencies or e2e edits.
+- Actual local commands: npm run typecheck PASS; npm run lint PASS; npm test -- --run PASS (6 files34 tests); npm run build PASS (35 modules131ms); git diff --check PASS (line-ending advisory only).
+- Actual installed Chrome Playwright Node audit against local Vite3012: normal hovered hero action first confirmed non-none transform; enabling reduce while hovered produced transform=none for action/icon; pressed action/icon also none; reloading with reduction enabled and hovering produced none; reduced workspace row hover and focus stayed transform=none and transitionDuration=0s, arrow hover/press/focus none. Decorative brand span retained matrix(1,0,-0.122785,1,0,0). All assertions passed; browser/context closed.
+- Independent full e2e is not rerun in this follow-up: Q retains failing regression assertion and owns verification against this correction SHA. Coordinator review and Q full verification remain; M1 unapproved.

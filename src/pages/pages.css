@@ -29,6 +29,7 @@
 [data-reveal]:focus-within { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { opacity: 1; transform: none; }
-  .link-arrow svg, .record-open svg, .workspace-section-head a svg, .workcard-hero a svg,
-  .button:hover:not(:disabled), .button:hover:not(:disabled) svg { transform: none; }
+  .link-arrow:is(:hover, :active) svg, .record-open:is(:hover, :active) svg,
+  .workspace-section-head a:is(:hover, :active) svg,
+  .workcard-hero a:is(:hover, :active) svg { transform: none !important; }
 }

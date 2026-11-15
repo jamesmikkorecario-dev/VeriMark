@@ -93,3 +93,10 @@ input,select,textarea { min-width:0; accent-color:var(--forest) }
 @media(max-width:768px) { .container { width:calc(100% - 40px) } }
 @media(max-width:480px) { .container { width:calc(100% - 32px) } .record-paper { padding:22px 20px 0 } .paper-bottom { margin-inline:-20px; padding-inline:20px } .paper-detail-grid { grid-template-columns:1fr } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important } }
+
+/* Reduced motion removes action displacement, including a live change while hovered.
+   Keep this with shared actions so route stylesheet load order cannot restore motion. */
+@media (prefers-reduced-motion: reduce) {
+  .button:is(:hover, :active):not(:disabled),
+  .button:is(:hover, :active):not(:disabled) svg { transform: none !important; }
+}
