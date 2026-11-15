@@ -1,0 +1,291 @@
+{
+  "testedIntegrationCommit": "1540a46",
+  "finalSourceCorrection": "30dd396",
+  "browser": "installed Chrome, PLAYWRIGHT_CHANNEL=chrome",
+  "viewports": [
+    [
+      320,
+      900
+    ],
+    [
+      390,
+      900
+    ],
+    [
+      440,
+      956
+    ],
+    [
+      768,
+      900
+    ],
+    [
+      1024,
+      900
+    ],
+    [
+      1440,
+      900
+    ],
+    [
+      1920,
+      900
+    ]
+  ],
+  "testsPassed": 76,
+  "testsSkipped": 15,
+  "testsFailed": 0,
+  "axeScans": 36,
+  "axeViolations": 0,
+  "browserScreenshots": 54,
+  "snapshots": [
+    {
+      "path": "before-issuer-open-440.png",
+      "sha256": "59ed2a7ab3aafd6041281ebd24e92b977dba684aeb84026473e02271f12ed84f"
+    },
+    {
+      "path": "before-public-scrolled-440.png",
+      "sha256": "46d1bbee3c207f15d972f7e93006fde4e23400555868e91de69640f43cf50eab"
+    },
+    {
+      "path": "browser/foundation-public-and-work-c1469-cessibility-and-screenshots-chromium-1024/landing.png",
+      "sha256": "0a949852be570666f4427e1656d2cadf123242830519c0b2368195b21b1d3933"
+    },
+    {
+      "path": "browser/foundation-public-and-work-c1469-cessibility-and-screenshots-chromium-1024/workspace.png",
+      "sha256": "fc5cd1cbd50d3615502053225005a41dd2df477b2d0b45fd57c39a65810a062a"
+    },
+    {
+      "path": "browser/foundation-public-and-work-c1469-cessibility-and-screenshots-chromium-1440/landing.png",
+      "sha256": "bc4a7534673df988575ce5f6f49424637d3163e75d0291680c3ddb184168e61b"
+    },
+    {
+      "path": "browser/foundation-public-and-work-c1469-cessibility-and-screenshots-chromium-1440/workspace.png",
+      "sha256": "5c6b33ccf8cd15d8bc047e0522f9850889798ff6068066a093023f66bd735cd6"
+    },
+    {
+      "path": "browser/foundation-public-and-work-c1469-cessibility-and-screenshots-chromium-1920/landing.png",
+      "sha256": "d562f7f626d04142c0d483e6779b241120d26f35a3390e4d4b36284be3cac34c"
+    },
+    {
+      "path": "browser/foundation-public-and-work-c1469-cessibility-and-screenshots-chromium-1920/workspace.png",
+      "sha256": "9c7c64b52a9b5212264a02bc7e2224e8c7c1db4a9c58c1c5be9e69304aafd79e"
+    },
+    {
+      "path": "browser/foundation-public-and-work-c1469-cessibility-and-screenshots-chromium-320/landing.png",
+      "sha256": "897ab6aa96282c103c7129db46ee928a250971b716333a959bde25ef86599d69"
+    },
+    {
+      "path": "browser/foundation-public-and-work-c1469-cessibility-and-screenshots-chromium-320/workspace.png",
+      "sha256": "47bda1dd98ad43d71659af17852fed38e59ee5a24bfedb84a34f9c571769746b"
+    },
+    {
+      "path": "browser/foundation-public-and-work-c1469-cessibility-and-screenshots-chromium-390/landing.png",
+      "sha256": "aca2302f0364a4c69b60cec3444ef55375a50d8aaf253544bcb14b0996d3f44a"
+    },
+    {
+      "path": "browser/foundation-public-and-work-c1469-cessibility-and-screenshots-chromium-390/workspace.png",
+      "sha256": "4d10b64e9d9430605baedcfd543fdc73d660ba84908cd4eab774020744e654df"
+    },
+    {
+      "path": "browser/foundation-public-and-work-c1469-cessibility-and-screenshots-chromium-440/landing.png",
+      "sha256": "e387b7f5cd16762137b99dfe256e631f43ae49c8d42f86ed0e449ec15d842739"
+    },
+    {
+      "path": "browser/foundation-public-and-work-c1469-cessibility-and-screenshots-chromium-440/workspace.png",
+      "sha256": "6a55a6a9ae222ade58853e683e1329fafad25ef457aa67cccd143f02d72e4544"
+    },
+    {
+      "path": "browser/foundation-public-and-work-c1469-cessibility-and-screenshots-chromium-768/landing.png",
+      "sha256": "12c43921a3d361a5ad22585d68ff8fe9b1a3911c4a2eaffe2d8ec9abdb1fa609"
+    },
+    {
+      "path": "browser/foundation-public-and-work-c1469-cessibility-and-screenshots-chromium-768/workspace.png",
+      "sha256": "23605ca8f0a7acf1027217d94dc4c4059132afbf93e0a2d29eaa582b86d463ac"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-1024/closed.png",
+      "sha256": "0a949852be570666f4427e1656d2cadf123242830519c0b2368195b21b1d3933"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-1024/desktop-scrolled.png",
+      "sha256": "54a4b72834889296b9f579e7f59a91bb5a50cf448dda53c6e70893a7f6a42708"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-1440/closed.png",
+      "sha256": "bc4a7534673df988575ce5f6f49424637d3163e75d0291680c3ddb184168e61b"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-1440/desktop-scrolled.png",
+      "sha256": "8668dff59e15643973d037b3597f750ca4f23d447d2c7d4330027229bf4922e1"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-1920/closed.png",
+      "sha256": "d562f7f626d04142c0d483e6779b241120d26f35a3390e4d4b36284be3cac34c"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-1920/desktop-scrolled.png",
+      "sha256": "dd4277797ef6ebbd38dbec5ad0d2e4b858a981972f2a09b4ef5c63d8100e35ac"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-320/closed.png",
+      "sha256": "897ab6aa96282c103c7129db46ee928a250971b716333a959bde25ef86599d69"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-320/scrolled-closed.png",
+      "sha256": "4be26c8f5a2f4c1c5b5650c019de7be251c7e755ed57ad53c5ee82852d91f6f2"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-320/scrolled-open.png",
+      "sha256": "53175c79875b66d6488098982326a1faf88d5c9814e5935c4c9ef86dd3c8f671"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-390/closed.png",
+      "sha256": "252d611f33910b6eeb172b1fb8ca01fdf6afd327dd1c1e57f22181aca7f463fa"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-390/scrolled-closed.png",
+      "sha256": "e2429635c1ec9f5c7928c45eb2a0f440654b8593508ead00b61892b155ddb787"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-390/scrolled-open.png",
+      "sha256": "695bc7b3c880abea824549b508e2edfe0d93a56bc48a4a8076ee60ca3a89746a"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-440/closed.png",
+      "sha256": "e387b7f5cd16762137b99dfe256e631f43ae49c8d42f86ed0e449ec15d842739"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-440/scrolled-closed.png",
+      "sha256": "5308ab329618c2331fa5ad3654a90b7ab2e4c09adb223c2dd586f03ddd3190e1"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-440/scrolled-open.png",
+      "sha256": "0bb4415a1534c1938998f4942f8f03d7b2717f6e79673b8245a85d0a10786968"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-768/closed.png",
+      "sha256": "12c43921a3d361a5ad22585d68ff8fe9b1a3911c4a2eaffe2d8ec9abdb1fa609"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-768/scrolled-closed.png",
+      "sha256": "8c0f18757dcf58010b7026dd311942180af5f1090353fb1c9cfb9a05d7756ce6"
+    },
+    {
+      "path": "browser/navigation--sticky-header-controls-dismissal-and-screenshots-chromium-768/scrolled-open.png",
+      "sha256": "bf80199f5dba6687c053f00c4d42dfad30ba492b418943e8f3a2c72622561c37"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-1024/closed.png",
+      "sha256": "fc5cd1cbd50d3615502053225005a41dd2df477b2d0b45fd57c39a65810a062a"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-1024/desktop-scrolled.png",
+      "sha256": "a377c80f1f214cd6d8b157a812a5570a62c140ffee2d90236e05c26193033a94"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-1440/closed.png",
+      "sha256": "5c6b33ccf8cd15d8bc047e0522f9850889798ff6068066a093023f66bd735cd6"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-1440/desktop-scrolled.png",
+      "sha256": "70dfc3c3fdea60abc1b1d962996bec32307c4b6dccbef1507e4ec3a9e0bfed5d"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-1920/closed.png",
+      "sha256": "9c7c64b52a9b5212264a02bc7e2224e8c7c1db4a9c58c1c5be9e69304aafd79e"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-1920/desktop-scrolled.png",
+      "sha256": "ec6cc72abd7c9e4328983b99a9775850a73e08153b1c84f205b645b2c047b3e0"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-320/closed.png",
+      "sha256": "47bda1dd98ad43d71659af17852fed38e59ee5a24bfedb84a34f9c571769746b"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-320/scrolled-closed.png",
+      "sha256": "e1e6297e2155b941b3e0b4cc8faff71ddc43fc6951f866db0f65e21ba1d433c7"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-320/scrolled-open.png",
+      "sha256": "556ab67b5d5f2e5b935aa71c3fe7c6fdf3ffb1b23552db13977f4cab417e6745"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-390/closed.png",
+      "sha256": "4d10b64e9d9430605baedcfd543fdc73d660ba84908cd4eab774020744e654df"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-390/scrolled-closed.png",
+      "sha256": "ad253289be39b9a4b2f7ca811d4f96dc0b7c3dbf765a3e3dc5dbe63a4cf50c89"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-390/scrolled-open.png",
+      "sha256": "6df646e99f7820886cb28e4716730671fe50843d2881f8126e0953993ecaeceb"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-440/closed.png",
+      "sha256": "6a55a6a9ae222ade58853e683e1329fafad25ef457aa67cccd143f02d72e4544"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-440/scrolled-closed.png",
+      "sha256": "d22487534eae20a88be36c82ba8e88a380325a1e43007f4afef1ea96a8a0c594"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-440/scrolled-open.png",
+      "sha256": "5b81ad66b89a0a615e1e25816e4748e39420ff91b68b6a7aeb3ee1cf8c757083"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-768/closed.png",
+      "sha256": "23605ca8f0a7acf1027217d94dc4c4059132afbf93e0a2d29eaa582b86d463ac"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-768/scrolled-closed.png",
+      "sha256": "ea21bfad84ff0976416bbb03c7cab08420faf17649c76e578048f25fbaa07deb"
+    },
+    {
+      "path": "browser/navigation--workspace-stic-83537-s-dismissal-and-screenshots-chromium-768/scrolled-open.png",
+      "sha256": "213bd76d1c23d89279d1462d3e5d2a316fe375dc05be10439ef15dfb4f8d1466"
+    },
+    {
+      "path": "browser/navigation-short-drawer-sc-14f19-labels-under-reduced-motion-chromium-320/short-long-labels.png",
+      "sha256": "e95dcb3861cabd8fc2d7741c8ba66950af212931a12c0b897fed8c021aa97e98"
+    },
+    {
+      "path": "browser/navigation-short-drawer-sc-14f19-labels-under-reduced-motion-chromium-390/short-long-labels.png",
+      "sha256": "7dc978cc149fed77108d2ee82f835a2ddb1ef89f782756a3c4d97c517f62a938"
+    },
+    {
+      "path": "browser/navigation-short-drawer-sc-14f19-labels-under-reduced-motion-chromium-440/short-long-labels.png",
+      "sha256": "d6c1be1240e4951c4fff72c148724cc7524a874298501f82d550a68bac94cfb2"
+    },
+    {
+      "path": "browser/navigation-short-drawer-sc-14f19-labels-under-reduced-motion-chromium-768/short-long-labels.png",
+      "sha256": "f1897dace726b762e8ff4c1ba1cd212f99243a5d9d96dcaa9c5deca9b2639d93"
+    },
+    {
+      "path": "issuer-closed-440.png",
+      "sha256": "27b42bda75975fa2abd963115283a1aa7c78d9d61c55fae45fb8d5ae1ef0e627"
+    },
+    {
+      "path": "issuer-open-440.png",
+      "sha256": "24aae26a712019f4a9f5cae09e7aaa2a1c36272497cd447121a3b378fa9ed70b"
+    },
+    {
+      "path": "issuer-scrolled-440.png",
+      "sha256": "204dee6717219c82fdf9def71eb6bd253b82a24c6610added7df4ab12bdd9452"
+    },
+    {
+      "path": "public-closed-440.png",
+      "sha256": "f42bc27dc554dd161c0ec339a501cda50753f24547bb53a9c7de8d8b1b1ff3d6"
+    },
+    {
+      "path": "public-open-440.png",
+      "sha256": "60ff1a5a6c44755869636f531ce3d035e802171c963baeaa64d8f56ead8bf0fd"
+    },
+    {
+      "path": "public-scrolled-440.png",
+      "sha256": "9712af0dd1c8c125cf0e409bbf9195f9fc53874094aad4061f09c966ae284920"
+    }
+  ]
+}

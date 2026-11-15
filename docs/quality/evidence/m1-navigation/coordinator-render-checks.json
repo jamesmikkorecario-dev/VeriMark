@@ -1,0 +1,32 @@
+[
+  {
+    "page": "public",
+    "viewport": {
+      "width": 440,
+      "height": 956
+    },
+    "scrolledHeaderTop": 0,
+    "bodyPosition": "static",
+    "panel": {
+      "x": 123,
+      "y": 67.5,
+      "width": 300,
+      "height": 243
+    }
+  },
+  {
+    "page": "issuer",
+    "viewport": {
+      "width": 440,
+      "height": 956
+    },
+    "scrolledHeaderTop": 0,
+    "bodyPosition": "fixed",
+    "panel": {
+      "x": 0,
+      "y": 0,
+      "width": 360,
+      "height": 956
+    }
+  }
+]

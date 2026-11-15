@@ -34,3 +34,5 @@ M1 frontend: React + TypeScript + Vite, CSS variables/native components and Reac
 M1 configures dev, typecheck, lint, test, build and test:e2e scripts. See docs/delivery/M1-LOCAL-DEVELOPMENT.md for commands and prerequisites. No backend credentials are needed.
 
 agents/*.md are portable role guides, not automatically registered Orca agents. .claude/ and .opencode/ are unverified adapter examples; see [native status](docs/ai/NATIVE-AGENTS.md). Automatic instruction loading is not claimed for any installed harness. Orca requires explicit task dispatch and its installed orchestration skill. Scoped local commits are allowed; remote pushes, merges and releases require explicit authorization.
+
+M1 mobile navigation correction: see [root causes, verification and screenshots](docs/ai/handoffs/M1-NAV.md). Public header is sticky with anchored icon-only navigation; mobile issuer navigation uses a modal sidebar drawer. M1 remains awaiting owner approval.
