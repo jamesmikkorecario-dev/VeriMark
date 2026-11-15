@@ -1,0 +1,175 @@
+{
+  "route": "/workspace",
+  "timeline": [
+    {
+      "time": 293.10000002384186,
+      "opacity": "0.649521",
+      "transform": "matrix(1, 0, 0, 1, 0, 5.60766)",
+      "animations": [
+        {
+          "state": "running",
+          "time": 40.17499999376012,
+          "timing": {
+            "delay": 0,
+            "direction": "normal",
+            "duration": 480,
+            "easing": "linear",
+            "endDelay": 0,
+            "fill": "both",
+            "iterationStart": 0,
+            "iterations": 1,
+            "activeDuration": 480,
+            "currentIteration": 0,
+            "endTime": 480,
+            "localTime": 40.17499999376012,
+            "progress": 0.08369791665366692
+          }
+        }
+      ]
+    },
+    {
+      "time": 484.60000002384186,
+      "opacity": "0.962953",
+      "transform": "matrix(1, 0, 0, 1, 0, 0.592753)",
+      "animations": [
+        {
+          "state": "running",
+          "time": 226.97499999376015,
+          "timing": {
+            "delay": 0,
+            "direction": "normal",
+            "duration": 480,
+            "easing": "linear",
+            "endDelay": 0,
+            "fill": "both",
+            "iterationStart": 0,
+            "iterations": 1,
+            "activeDuration": 480,
+            "currentIteration": 0,
+            "endTime": 480,
+            "localTime": 226.97499999376015,
+            "progress": 0.47286458332033365
+          }
+        }
+      ]
+    },
+    {
+      "time": 926.9000000357628,
+      "opacity": "1",
+      "transform": "matrix(1, 0, 0, 1, 0, 0)",
+      "animations": [
+        {
+          "state": "finished",
+          "time": 480,
+          "timing": {
+            "delay": 0,
+            "direction": "normal",
+            "duration": 480,
+            "easing": "linear",
+            "endDelay": 0,
+            "fill": "both",
+            "iterationStart": 0,
+            "iterations": 1,
+            "activeDuration": 480,
+            "currentIteration": 0,
+            "endTime": 480,
+            "localTime": 480,
+            "progress": 1
+          }
+        }
+      ]
+    }
+  ],
+  "stagedStart": {
+    "time": 284,
+    "opacity": "0.5",
+    "transform": "matrix(1, 0, 0, 1, 0, 8)",
+    "animations": [
+      {
+        "state": "running",
+        "time": 26.97499999376013,
+        "timing": {
+          "delay": 60,
+          "direction": "normal",
+          "duration": 480,
+          "easing": "linear",
+          "endDelay": 0,
+          "fill": "both",
+          "iterationStart": 0,
+          "iterations": 1,
+          "activeDuration": 480,
+          "currentIteration": 0,
+          "endTime": 540,
+          "localTime": 26.97499999376013,
+          "progress": 0
+        }
+      }
+    ]
+  },
+  "evidence": {
+    "defaultReduced": false,
+    "events": [
+      {
+        "event": "animationstart",
+        "time": 267.60000002384186,
+        "target": "page-heading route-enter",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationstart",
+        "time": 317.19999998807907,
+        "target": "metric route-enter",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationstart",
+        "time": 370.30000001192093,
+        "target": "metric route-enter",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationstart",
+        "time": 410.10000002384186,
+        "target": "metric route-enter",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationstart",
+        "time": 437.10000002384186,
+        "target": "dashboard-main route-enter motion-stage-3",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationend",
+        "time": 730.4000000357628,
+        "target": "page-heading route-enter",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationend",
+        "time": 797,
+        "target": "metric route-enter",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationend",
+        "time": 850.6999999880791,
+        "target": "metric route-enter",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationend",
+        "time": 890.3000000119209,
+        "target": "metric route-enter",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationend",
+        "time": 917.1000000238419,
+        "target": "dashboard-main route-enter motion-stage-3",
+        "animation": "routeIn"
+      }
+    ],
+    "shifts": []
+  }
+}

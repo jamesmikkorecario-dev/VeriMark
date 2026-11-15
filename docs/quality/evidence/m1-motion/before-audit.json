@@ -1,0 +1,37 @@
+{
+  "defaultReducedMotion": false,
+  "runs": [
+    {
+      "reducedMotion": "no-preference",
+      "route": "/",
+      "preference": false,
+      "animations": [],
+      "routeClassCount": 0,
+      "revealCount": 0
+    },
+    {
+      "reducedMotion": "no-preference",
+      "route": "/workspace",
+      "preference": false,
+      "animations": [],
+      "routeClassCount": 0,
+      "revealCount": 0
+    },
+    {
+      "reducedMotion": "reduce",
+      "route": "/",
+      "preference": true,
+      "animations": [],
+      "routeClassCount": 0,
+      "revealCount": 0
+    },
+    {
+      "reducedMotion": "reduce",
+      "route": "/workspace",
+      "preference": true,
+      "animations": [],
+      "routeClassCount": 0,
+      "revealCount": 0
+    }
+  ]
+}

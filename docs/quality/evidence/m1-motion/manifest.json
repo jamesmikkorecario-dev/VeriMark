@@ -1,0 +1,305 @@
+{
+  "sourceCommit": "44a6838",
+  "testedIntegrationCommit": "1b0ea68",
+  "capture": "Q stage-corrected-final:14 passed",
+  "videoAliases": [
+    {
+      "file": "credential-stages-desktop.webm",
+      "source": "motion--coordinated-entran-a6661-vive-the-stylesheet-cascade-chromium-1440/video.webm",
+      "case": "motion--coordinated-entran-a6661-vive-the-stylesheet-cascade-chromium-1440"
+    },
+    {
+      "file": "credential-stages-mobile.webm",
+      "source": "motion--coordinated-entran-a6661-vive-the-stylesheet-cascade-chromium-390/video.webm",
+      "case": "motion--coordinated-entran-a6661-vive-the-stylesheet-cascade-chromium-390"
+    },
+    {
+      "file": "landing-desktop.webm",
+      "source": "motion--temporal-entrance-refresh-replay-and-live-reduction-chromium-1440/video.webm",
+      "case": "motion--temporal-entrance-refresh-replay-and-live-reduction-chromium-1440"
+    },
+    {
+      "file": "landing-mobile.webm",
+      "source": "motion--temporal-entrance-refresh-replay-and-live-reduction-chromium-390/video.webm",
+      "case": "motion--temporal-entrance-refresh-replay-and-live-reduction-chromium-390"
+    },
+    {
+      "file": "dashboard-stages-desktop.webm",
+      "source": "motion--workspace-coordina-f4c7b-vive-the-stylesheet-cascade-chromium-1440/video.webm",
+      "case": "motion--workspace-coordina-f4c7b-vive-the-stylesheet-cascade-chromium-1440"
+    },
+    {
+      "file": "dashboard-stages-mobile.webm",
+      "source": "motion--workspace-coordina-f4c7b-vive-the-stylesheet-cascade-chromium-390/video.webm",
+      "case": "motion--workspace-coordina-f4c7b-vive-the-stylesheet-cascade-chromium-390"
+    },
+    {
+      "file": "workspace-desktop.webm",
+      "source": "motion--workspace-temporal-1a0e5-h-replay-and-live-reduction-chromium-1440/video.webm",
+      "case": "motion--workspace-temporal-1a0e5-h-replay-and-live-reduction-chromium-1440"
+    },
+    {
+      "file": "workspace-mobile.webm",
+      "source": "motion--workspace-temporal-1a0e5-h-replay-and-live-reduction-chromium-390/video.webm",
+      "case": "motion--workspace-temporal-1a0e5-h-replay-and-live-reduction-chromium-390"
+    },
+    {
+      "file": "interactions-desktop.webm",
+      "source": "motion-hover-and-press-fee-c17ed-and-reduced-mode-removes-it-chromium-1440/video.webm",
+      "case": "motion-hover-and-press-fee-c17ed-and-reduced-mode-removes-it-chromium-1440"
+    },
+    {
+      "file": "interactions-mobile.webm",
+      "source": "motion-hover-and-press-fee-c17ed-and-reduced-mode-removes-it-chromium-390/video.webm",
+      "case": "motion-hover-and-press-fee-c17ed-and-reduced-mode-removes-it-chromium-390"
+    },
+    {
+      "file": "reveals-desktop.webm",
+      "source": "motion-promotional-reveal--68fc9-ver-keeps-content-available-chromium-1440/video.webm",
+      "case": "motion-promotional-reveal--68fc9-ver-keeps-content-available-chromium-1440"
+    },
+    {
+      "file": "reveals-mobile.webm",
+      "source": "motion-promotional-reveal--68fc9-ver-keeps-content-available-chromium-390/video.webm",
+      "case": "motion-promotional-reveal--68fc9-ver-keeps-content-available-chromium-390"
+    },
+    {
+      "file": "reduced-desktop.webm",
+      "source": "motion-reduced-initial-mou-17420-ain-all-promotional-content-chromium-1440/video.webm",
+      "case": "motion-reduced-initial-mou-17420-ain-all-promotional-content-chromium-1440"
+    },
+    {
+      "file": "reduced-mobile.webm",
+      "source": "motion-reduced-initial-mou-17420-ain-all-promotional-content-chromium-390/video.webm",
+      "case": "motion-reduced-initial-mou-17420-ain-all-promotional-content-chromium-390"
+    }
+  ],
+  "traceArchive": "artifacts/m1-motion-worker/stage-corrected-final",
+  "files": [
+    {
+      "path": "before-audit.json",
+      "bytes": 753,
+      "sha256": "b530dffb91f992995944c9413cc0cedfec25cd46b1dc95625460a6570a021773"
+    },
+    {
+      "path": "credential-stages-desktop.webm",
+      "bytes": 152970,
+      "sha256": "978c9fdce581bdf07935e8d78525505f193780fa32ec735928cfb0f0e4b5b159"
+    },
+    {
+      "path": "credential-stages-mobile.webm",
+      "bytes": 131533,
+      "sha256": "72cd84fb5546d1797e74b92096f00219d303afe5f35c12bcdc9a446a2093fa3e"
+    },
+    {
+      "path": "dashboard-stages-desktop.webm",
+      "bytes": 145397,
+      "sha256": "fe3186e52062af0ffae0da87ced9eb94207ecec88c0622a37655a663c72df481"
+    },
+    {
+      "path": "dashboard-stages-mobile.webm",
+      "bytes": 107167,
+      "sha256": "982991dead6d0687e839875b4391394b63e3b3e257436238f14a7e7447e42d95"
+    },
+    {
+      "path": "interactions-desktop.webm",
+      "bytes": 329315,
+      "sha256": "610a9cd510238b4d106c2b9e1c89d0c25be1432c892521619b2570ecb1f4cc90"
+    },
+    {
+      "path": "interactions-mobile.webm",
+      "bytes": 338174,
+      "sha256": "6347b6e251f10faefaa8ea7ca2f679bd87ee49b327c8fb5d9190ed11e5c6313b"
+    },
+    {
+      "path": "landing-desktop.webm",
+      "bytes": 324407,
+      "sha256": "ef5c557456f8fc894e084b5ad76ca2f3b6d04368355ad6a3f487af47787f3a49"
+    },
+    {
+      "path": "landing-mobile.webm",
+      "bytes": 280973,
+      "sha256": "c95aa768f510b113aeb5b9df4047d28ad4062a748bbd37281a1c7ba79edc5937"
+    },
+    {
+      "path": "reduced-desktop.webm",
+      "bytes": 139722,
+      "sha256": "64a322e767353ea2d51752ab7a09a90d04ca699dbec59efa247fbe138b3351a8"
+    },
+    {
+      "path": "reduced-mobile.webm",
+      "bytes": 120730,
+      "sha256": "34c3ed9a5d9e09f6a660d589b754d8861b0bcf63c4a39be0a353fbe14fa26e60"
+    },
+    {
+      "path": "reveals-desktop.webm",
+      "bytes": 411591,
+      "sha256": "5d9a72a5eb4a1c469e70b34959bc5a8a20f717be092692f39d4e118c58cfa212"
+    },
+    {
+      "path": "reveals-mobile.webm",
+      "bytes": 390861,
+      "sha256": "ff29a5a7b6379dd97517fefce0297bf7df6fd9ea6e4a05d08d67325b5a806c8b"
+    },
+    {
+      "path": "samples/motion--coordinated-entran-a6661-vive-the-stylesheet-cascade-chromium-1440/coordination.json",
+      "bytes": 276,
+      "sha256": "2ad7d1f6cc78cd3a2ecfdebc43940dd45d1970eb65fe1e7f3681f38767b92b35"
+    },
+    {
+      "path": "samples/motion--coordinated-entran-a6661-vive-the-stylesheet-cascade-chromium-390/coordination.json",
+      "bytes": 275,
+      "sha256": "19543e61e560b676b78ec6dcd372316bf1b650fcd9c67a4883fc3f92089b1143"
+    },
+    {
+      "path": "samples/motion--temporal-entrance-refresh-replay-and-live-reduction-chromium-1440/entrance-middle.png",
+      "bytes": 115339,
+      "sha256": "9d80772a17f55749758f5e1ba60687223b4e80b40ed9b99d70562cf6cc44241e"
+    },
+    {
+      "path": "samples/motion--temporal-entrance-refresh-replay-and-live-reduction-chromium-1440/entrance-settled.png",
+      "bytes": 86102,
+      "sha256": "2caa1b4cc7ae5605aab93e8c0bfee4b496bfc5f39fabddad9df800df24a92af8"
+    },
+    {
+      "path": "samples/motion--temporal-entrance-refresh-replay-and-live-reduction-chromium-1440/entrance-start.png",
+      "bytes": 106186,
+      "sha256": "437c7135363bba83e8d40480704b235298dc78c5b6f0acdf99c6f4e68f04d681"
+    },
+    {
+      "path": "samples/motion--temporal-entrance-refresh-replay-and-live-reduction-chromium-1440/timeline.json",
+      "bytes": 4092,
+      "sha256": "a4682125cc02fc63fcb30666e1596c0bbc53f0c06d49f484a59f5b1099eaa830"
+    },
+    {
+      "path": "samples/motion--temporal-entrance-refresh-replay-and-live-reduction-chromium-390/entrance-middle.png",
+      "bytes": 49288,
+      "sha256": "3ef63385b79a889daea16e25d0822ce9da3e101cfa97145fe0bb8e6f17e96948"
+    },
+    {
+      "path": "samples/motion--temporal-entrance-refresh-replay-and-live-reduction-chromium-390/entrance-settled.png",
+      "bytes": 37324,
+      "sha256": "283d6056fd8f1f8036fb58bc13cc5b0e6a9d041c797220a3b90aeeb560bfe46e"
+    },
+    {
+      "path": "samples/motion--temporal-entrance-refresh-replay-and-live-reduction-chromium-390/entrance-start.png",
+      "bytes": 40110,
+      "sha256": "8873e73cf60a0cca9b9c4b26ee21dd050ae7d0fac260d88fb10a6798292d8b39"
+    },
+    {
+      "path": "samples/motion--temporal-entrance-refresh-replay-and-live-reduction-chromium-390/menu-open.png",
+      "bytes": 45495,
+      "sha256": "a9126899630ad5227b4ad8f93b6cf34dc0217573796a4c839f1f581ad4aea473"
+    },
+    {
+      "path": "samples/motion--temporal-entrance-refresh-replay-and-live-reduction-chromium-390/menu-timeline.json",
+      "bytes": 703,
+      "sha256": "56bb2967a333076d846939982bc64bc4fe8621ec717fadefe88ecd1388307830"
+    },
+    {
+      "path": "samples/motion--temporal-entrance-refresh-replay-and-live-reduction-chromium-390/timeline.json",
+      "bytes": 4119,
+      "sha256": "dbbbe588bdfa946568ca495b7937a4581f4868c39d7711da3c52ce0b48abe35c"
+    },
+    {
+      "path": "samples/motion--workspace-coordina-f4c7b-vive-the-stylesheet-cascade-chromium-1440/coordination.json",
+      "bytes": 1241,
+      "sha256": "e9aacab0a4647361999e3387cb5faf5bc06c216493a0c5ef44e7f80f9dc83171"
+    },
+    {
+      "path": "samples/motion--workspace-coordina-f4c7b-vive-the-stylesheet-cascade-chromium-390/coordination.json",
+      "bytes": 1236,
+      "sha256": "24b9743074e88fdabf359d5ce4a3f8883ae655680981a8643018f337c52ddeb6"
+    },
+    {
+      "path": "samples/motion--workspace-temporal-1a0e5-h-replay-and-live-reduction-chromium-1440/entrance-middle.png",
+      "bytes": 106384,
+      "sha256": "5070ab642aaa38c172e76671b670765e65a7a62d2c19acbeefc2ae1309f26882"
+    },
+    {
+      "path": "samples/motion--workspace-temporal-1a0e5-h-replay-and-live-reduction-chromium-1440/entrance-settled.png",
+      "bytes": 78891,
+      "sha256": "34b02adbe2c8b022fdfe62d62272ad52e7004c3981341d68ab6ac5e05fd67608"
+    },
+    {
+      "path": "samples/motion--workspace-temporal-1a0e5-h-replay-and-live-reduction-chromium-1440/entrance-start.png",
+      "bytes": 88871,
+      "sha256": "7885f8549c296aba8ba419f8e31679460ca447c28bafc42da6025b94ff60b8e4"
+    },
+    {
+      "path": "samples/motion--workspace-temporal-1a0e5-h-replay-and-live-reduction-chromium-1440/timeline.json",
+      "bytes": 4415,
+      "sha256": "7ebe164e06b04a810e6a85bbb7702d6eed0e6bc3b19fdc0c40b42fb218afe640"
+    },
+    {
+      "path": "samples/motion--workspace-temporal-1a0e5-h-replay-and-live-reduction-chromium-390/entrance-middle.png",
+      "bytes": 47221,
+      "sha256": "88498f2697bda255dde2408600820d74d94aabc234bd19131b15e22500d3a72b"
+    },
+    {
+      "path": "samples/motion--workspace-temporal-1a0e5-h-replay-and-live-reduction-chromium-390/entrance-settled.png",
+      "bytes": 35029,
+      "sha256": "a21c9fac853387342e497bebe6981466856043042ea1be6ed07936772e616cd3"
+    },
+    {
+      "path": "samples/motion--workspace-temporal-1a0e5-h-replay-and-live-reduction-chromium-390/entrance-start.png",
+      "bytes": 40654,
+      "sha256": "240303a8a2f361b2a830c7acfc5b3be66aae1a1400f51915bcc436aac6aac4d4"
+    },
+    {
+      "path": "samples/motion--workspace-temporal-1a0e5-h-replay-and-live-reduction-chromium-390/menu-open.png",
+      "bytes": 18478,
+      "sha256": "d3aa6deb60cfe5f282cc02029e15e7f3f412616d317fa99dec2e37b72cb4bfa8"
+    },
+    {
+      "path": "samples/motion--workspace-temporal-1a0e5-h-replay-and-live-reduction-chromium-390/menu-timeline.json",
+      "bytes": 766,
+      "sha256": "524711aec08a75ebf31bfe951052fdac2e59f9f122893632a560251b79761915"
+    },
+    {
+      "path": "samples/motion--workspace-temporal-1a0e5-h-replay-and-live-reduction-chromium-390/timeline.json",
+      "bytes": 4431,
+      "sha256": "fcc8f4b4d0ed7aea704ab9e2af6c9d8ed51c1d5a2b8fdb544c89f1c560959459"
+    },
+    {
+      "path": "samples/motion-promotional-reveal--68fc9-ver-keeps-content-available-chromium-1440/reveal-running.png",
+      "bytes": 69843,
+      "sha256": "3a1db92e2e5c0d32259a832f24f6fc23a711278f9c1b6b1fded602d503e34c38"
+    },
+    {
+      "path": "samples/motion-promotional-reveal--68fc9-ver-keeps-content-available-chromium-1440/reveal-settled.png",
+      "bytes": 51811,
+      "sha256": "f6b2e093e0b20943efee378e1d0c07856c2a3d32a22e81db7b71afdf93dc7d41"
+    },
+    {
+      "path": "samples/motion-promotional-reveal--68fc9-ver-keeps-content-available-chromium-1440/reveal-timeline.json",
+      "bytes": 923,
+      "sha256": "6e0ab79a7e72ef89b9f7207d4d6c12e2d84cbe3e05720e34d2f6bfbac0427270"
+    },
+    {
+      "path": "samples/motion-promotional-reveal--68fc9-ver-keeps-content-available-chromium-390/reveal-running.png",
+      "bytes": 44208,
+      "sha256": "2eef139e7dd07db35f092fd712562d1ce3dbfee4c283873466dc5d4136794fb4"
+    },
+    {
+      "path": "samples/motion-promotional-reveal--68fc9-ver-keeps-content-available-chromium-390/reveal-settled.png",
+      "bytes": 31035,
+      "sha256": "c34268393fb46600dea0068a68f0696271cc9fe110cdeb811d641f7ba81cf76c"
+    },
+    {
+      "path": "samples/motion-promotional-reveal--68fc9-ver-keeps-content-available-chromium-390/reveal-timeline.json",
+      "bytes": 925,
+      "sha256": "60af52815713827e46c8336cf3bf727c512e47494b3843c10dfd2d2193794ce7"
+    },
+    {
+      "path": "workspace-desktop.webm",
+      "bytes": 334764,
+      "sha256": "31a215cec4021763c84aa43cac082aaa0dff5d439eacc99d8c9c798bb0bcc0ab"
+    },
+    {
+      "path": "workspace-mobile.webm",
+      "bytes": 283158,
+      "sha256": "dc8cbdbe3a4d03a0ed0caaa3a3720ffb7a256c45edb007e148da2835dab985fa"
+    }
+  ]
+}

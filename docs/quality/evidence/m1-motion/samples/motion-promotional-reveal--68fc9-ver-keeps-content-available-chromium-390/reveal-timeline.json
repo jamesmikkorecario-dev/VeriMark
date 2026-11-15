@@ -1,0 +1,40 @@
+{
+  "running": {
+    "time": 1060.1000000238419,
+    "opacity": "1",
+    "transform": "matrix(1, 0, 0, 1, 0, 9.11158)",
+    "animations": [
+      {
+        "state": "running",
+        "time": 79.92099998913326,
+        "timing": {
+          "delay": 0,
+          "direction": "normal",
+          "duration": 650,
+          "easing": "cubic-bezier(0.22, 0.78, 0.23, 1)",
+          "endDelay": 0,
+          "fill": "backwards",
+          "iterationStart": 0,
+          "iterations": 1,
+          "activeDuration": 650,
+          "currentIteration": 0,
+          "endTime": 650,
+          "localTime": 79.92099998913326,
+          "progress": 0.43052654541730356
+        }
+      }
+    ]
+  },
+  "settled": {
+    "time": 1630.699999988079,
+    "opacity": "1",
+    "transform": "none",
+    "animations": []
+  },
+  "repeated": {
+    "time": 1708.1000000238419,
+    "opacity": "1",
+    "transform": "none",
+    "animations": []
+  }
+}

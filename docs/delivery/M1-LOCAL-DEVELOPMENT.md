@@ -39,3 +39,7 @@ npm run test:e2e -- --workers=4
 Alternatively select edge with channel msedge, or set PLAYWRIGHT_EXECUTABLE_PATH to a compatible local executable; do not set both selectors. Without an override, Playwright uses its bundled Chromium (install with npx playwright install chromium on a supported machine). Default-shell failure is an environment limitation, not a passing check.
 
 The coordinator left a local preview running at http://127.0.0.1:3001/ to avoid concurrent tests on port 3000. The normal dev command uses port 3000 when free.
+
+### Motion review
+
+See ../ai/handoffs/M1-MOTION.md and ../quality/evidence/m1-motion/README.md. Reproduce recorded desktop/mobile motion with powershell -File e2e/capture-motion.ps1 -EvidenceName review -Port 3107. Full browser runs can set PLAYWRIGHT_PORT to a free port; strictPort prevents silently testing another server. No unrelated process is killed or reused. Reduce mode intentionally removes playback and action displacement.

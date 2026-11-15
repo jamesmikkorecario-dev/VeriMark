@@ -1,0 +1,65 @@
+{
+  "route": "/workspace",
+  "stages": [
+    {
+      "target": "dashboard-heading",
+      "delayMs": 0,
+      "animations": [
+        {
+          "delay": 0,
+          "duration": 480,
+          "currentTime": 26.75799999330192,
+          "state": "running"
+        }
+      ]
+    },
+    {
+      "target": "metric",
+      "delayMs": 60,
+      "animations": [
+        {
+          "delay": 60,
+          "duration": 480,
+          "currentTime": 26.75799999330192,
+          "state": "running"
+        }
+      ]
+    },
+    {
+      "target": "metric",
+      "delayMs": 110,
+      "animations": [
+        {
+          "delay": 110,
+          "duration": 480,
+          "currentTime": 26.75799999330192,
+          "state": "running"
+        }
+      ]
+    },
+    {
+      "target": "metric",
+      "delayMs": 160,
+      "animations": [
+        {
+          "delay": 160,
+          "duration": 480,
+          "currentTime": 26.75799999330192,
+          "state": "running"
+        }
+      ]
+    },
+    {
+      "target": "dashboard-content",
+      "delayMs": 180,
+      "animations": [
+        {
+          "delay": 180,
+          "duration": 480,
+          "currentTime": 26.75799999330192,
+          "state": "running"
+        }
+      ]
+    }
+  ]
+}

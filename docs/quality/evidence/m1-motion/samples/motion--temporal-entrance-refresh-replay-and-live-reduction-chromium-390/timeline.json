@@ -1,0 +1,167 @@
+{
+  "route": "/",
+  "timeline": [
+    {
+      "time": 365.5,
+      "opacity": "0.672664",
+      "transform": "matrix(1, 0, 0, 1, 0, 5.23737)",
+      "animations": [
+        {
+          "state": "running",
+          "time": 46.614999975141124,
+          "timing": {
+            "delay": 0,
+            "direction": "normal",
+            "duration": 480,
+            "easing": "linear",
+            "endDelay": 0,
+            "fill": "backwards",
+            "iterationStart": 0,
+            "iterations": 1,
+            "activeDuration": 480,
+            "currentIteration": 0,
+            "endTime": 480,
+            "localTime": 46.614999975141124,
+            "progress": 0.09711458328154401
+          }
+        }
+      ]
+    },
+    {
+      "time": 577.6000000238419,
+      "opacity": "0.973299",
+      "transform": "matrix(1, 0, 0, 1, 0, 0.427219)",
+      "animations": [
+        {
+          "state": "running",
+          "time": 253.28299997514114,
+          "timing": {
+            "delay": 0,
+            "direction": "normal",
+            "duration": 480,
+            "easing": "linear",
+            "endDelay": 0,
+            "fill": "backwards",
+            "iterationStart": 0,
+            "iterations": 1,
+            "activeDuration": 480,
+            "currentIteration": 0,
+            "endTime": 480,
+            "localTime": 253.28299997514114,
+            "progress": 0.5276729166148774
+          }
+        }
+      ]
+    },
+    {
+      "time": 965.2000000476837,
+      "opacity": "1",
+      "transform": "none",
+      "animations": []
+    }
+  ],
+  "stagedStart": {
+    "time": 353.80000001192093,
+    "opacity": "0.5",
+    "transform": "matrix(1, 0, 0, 1, 0, 8)",
+    "animations": [
+      {
+        "state": "running",
+        "time": 29.94899997514111,
+        "timing": {
+          "delay": 100,
+          "direction": "normal",
+          "duration": 480,
+          "easing": "linear",
+          "endDelay": 0,
+          "fill": "both",
+          "iterationStart": 0,
+          "iterations": 1,
+          "activeDuration": 480,
+          "currentIteration": 0,
+          "endTime": 580,
+          "localTime": 29.94899997514111,
+          "progress": 0
+        }
+      }
+    ]
+  },
+  "evidence": {
+    "defaultReduced": false,
+    "events": [
+      {
+        "event": "animationstart",
+        "time": 329.10000002384186,
+        "target": "section-label",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationstart",
+        "time": 373.2000000476837,
+        "target": "",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationstart",
+        "time": 408.80000001192093,
+        "target": "hero-intro",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationstart",
+        "time": 422.2000000476837,
+        "target": "hero-right route-enter motion-stage-2",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationstart",
+        "time": 435.60000002384186,
+        "target": "hero-actions",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationstart",
+        "time": 488.9000000357628,
+        "target": "hero-footnote",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationend",
+        "time": 795.7000000476837,
+        "target": "section-label",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationend",
+        "time": 835.6000000238419,
+        "target": "",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationend",
+        "time": 875.5,
+        "target": "hero-intro",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationend",
+        "time": 902.3000000119209,
+        "target": "hero-right route-enter motion-stage-2",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationend",
+        "time": 929.4000000357628,
+        "target": "hero-actions",
+        "animation": "routeIn"
+      },
+      {
+        "event": "animationend",
+        "time": 955.7000000476837,
+        "target": "hero-footnote",
+        "animation": "routeIn"
+      }
+    ],
+    "shifts": []
+  }
+}

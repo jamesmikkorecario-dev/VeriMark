@@ -1,0 +1,17 @@
+{
+  "route": "/",
+  "stages": [
+    {
+      "target": "credential",
+      "delayMs": 100,
+      "animations": [
+        {
+          "delay": 100,
+          "duration": 480,
+          "currentTime": 26.97099997373298,
+          "state": "running"
+        }
+      ]
+    }
+  ]
+}

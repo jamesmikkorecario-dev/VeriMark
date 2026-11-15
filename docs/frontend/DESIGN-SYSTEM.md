@@ -20,3 +20,7 @@ Preserve documentary credential objects, small corners, forest sidebar, thin rul
 Finite 480ms page entrance and short hover/press feedback respect prefers-reduced-motion; all animation/transitions stop in reduce mode. Content stays accessible without reveal scripts or artificial delays.
 
 See M1 handoff for actual browser/visual evidence and deviations. Presentation neither enforces authorization nor proves authenticity.
+
+## Implemented M1 motion
+
+Shared duration tokens are --motion-enter480ms, --motion-reveal650ms, --motion-action220ms and --motion-icon250ms, using --ease. Hero children stage0/40/80/120/160ms; credential100ms; dashboard heading/metrics/content0/60/110/160/180ms. Route entry classes must be applied to content, never sticky shell ancestors. Composed stage selectors protect delays from animation shorthand/load order. PromotionalReveals progressively observes targets once per mount with full-opacity copy, a16px travel reveal and no-observer/live-reduction fallback. Reduced mode removes interaction transforms as well as durations; decorative geometry stays intact. Focus feedback/dismissal remains immediate. See ../ai/handoffs/M1-MOTION.md and ../quality/evidence/m1-motion/README.md for actual temporal evidence.
