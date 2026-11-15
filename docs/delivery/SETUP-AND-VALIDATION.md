@@ -51,6 +51,8 @@ From repository root, run `node tools/validate-initialization.cjs` for tracked l
 
 After committing the reviewed workflow, run `powershell -NoProfile -File tools/Export-Workflow.ps1`. It exports committed allowlisted workflow, input, configuration, documentation and prototype paths into ignored `artifacts/VeriMark-workflow.zip`, prints SHA-256, and excludes `.git`, actual environment secrets, dependencies and unrelated working files. Rerun after a later documentation commit to refresh the archive. It does not export uncommitted changes. Inspect the ZIP entry list before sharing; the archive includes clearly fictional prototype data and an example environment file only.
 
+## Approval and release boundary
+
 Local isolated tests/docs are permitted within scope; integration coordinator reviews and cherry-picks sequentially. No main merge, push, service connection/provisioning, deployment, paid activity, production secrets or shared migrations without explicit approval. Complete privacy/eligibility and restore gates before real pilot; current documents do not establish legal clearance or production readiness.
 
 ## Mandatory stack update
