@@ -2,7 +2,9 @@
 
 Documentation setup is ready for review when scoped docs match inputs, examples stay inactive, ownership/diff/link checks pass, sources/unknowns are recorded and coordinator independently reviews the commit. This does not mean the MVP works.
 
-Implementation slices require:
+Implementation slices require applicable gates below. The owner-authorized M1 is frontend-only: server/RLS/lifecycle gates are deferred until those features exist, with no backend pass inferred. See docs/ai/handoffs/M1.md.
+
+Implementation gates:
 
 - Working acceptance cases including loading, empty, error, success and denied states.
 - Server/database tenant isolation and private Storage policies passing direct negative tests.

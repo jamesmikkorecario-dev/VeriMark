@@ -1,11 +1,11 @@
-﻿# VeriMark technology decisions
+# VeriMark technology decisions
 
-Status: core stack APPROVED by mandatory user update, 2026-11-15 (ADR-0003); supporting libraries and detailed design remain proposals. No application dependencies are installed. Product authority: `setup-inputs/PROJECT_DETAILS.md` and `docs/product/PRD.md`. Documentation authorization does not authorize scaffolding or deployment.
+Status: core stack APPROVED by mandatory user update, 2026-11-15 (ADR-0003); Editorial Systems approved for M1; additional supporting libraries remain deferred. M1 pins frontend/testing dependencies in package.json and lockfile. Product authority: `setup-inputs/PROJECT_DETAILS.md` and `docs/product/PRD.md`. The master prompt authorizes M1 scaffolding/local checks; deployment remains unauthorized.
 
 | Layer | Choice and purpose |
 | --- | --- |
 | Client | React + TypeScript + Vite SPA; public verification loads live status |
-| UI | Tailwind CSS + shadcn/ui proposed; styling, typography, colors and components remain exploratory |
+| UI | M1: CSS variables and reusable native React controls, approved Editorial Systems; Tailwind/shadcn deferred |
 | Navigation | React Router |
 | Server state | TanStack Query; invalidate after lifecycle changes; never treat cached verification as current |
 | Forms | React Hook Form + Zod; repeat validation at trusted boundary |
@@ -24,4 +24,4 @@ Online database verification depends on platform availability. QR codes locate r
 
 FREE TIERS ONLY. No Next.js, separate Node.js backend or additional cloud service without explicit approval. Supabase Storage is justified for private assets; Edge Functions for guarded verification/delivery and bounded rendering, subject to free-tier feasibility. No provisioning is authorized. Vendor tier eligibility, limits, privacy law and brand clearance are owned by quality/delivery documentation, not assumed here. Region, retention periods, capacity targets, issuer-review policy, public name/sharing policy and approval separation of duties remain human decisions. Proposed technical bounds are in API-CONTRACTS.md and need pilot measurement; they are not vendor quotas.
 
-Versions and CLI commands must be selected at scaffolding time; no runnable build, test or lint gate exists yet. See ADRs for trade-offs and SYSTEM-ARCHITECTURE.md for boundaries.
+M1 configures frontend static, unit/component, build and browser gates; backend checks remain deferred. See ADRs for trade-offs and SYSTEM-ARCHITECTURE.md for boundaries.

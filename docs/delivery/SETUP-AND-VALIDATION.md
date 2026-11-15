@@ -60,3 +60,7 @@ Local isolated tests/docs are permitted within scope; integration coordinator re
 React.js + TypeScript, Vite, Supabase backend/PostgreSQL/Auth and Vercel hosting are approved requirements, with FREE TIERS ONLY. Storage/Edge Functions are conditional on documented need. No Next.js, separate Node backend, substituted host or extra cloud service without explicit approval. Styling, colors, typography and components remain exploratory; no visual approval has been granted. This authorization permits no production features, provisioning, push or deployment.
 
 Vercel Hobby eligibility for organizational use remains unresolved. Default Auth SMTP is unsuitable for general production email-based onboarding/reset; no external SMTP service is approved. Free recovery must cover DB exports and any private Storage objects without assuming a paid backup or extra cloud service. Report these conflicts and block dependent release work rather than substituting services or treating approval as implicit.
+
+## Implemented M1 frontend commands
+
+The initialization command inventory above is historical. M1 configures npm ci, npm run dev, npm run typecheck, npm run lint, npm test -- --run, npm run build and npm run test:e2e. See M1-LOCAL-DEVELOPMENT.md and ../ai/handoffs/M1.md for prerequisites and actual evidence. No backend or deployment checks are implied.

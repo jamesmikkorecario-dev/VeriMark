@@ -1,6 +1,6 @@
 # VeriMark eleven-milestone roadmap
 
-Status: proposed implementation order; initialization only is authorized. All M01?M11 are planned, not completed. Dependencies are gates; independent planning may proceed, but implementation waits for contracts and design approval. M04 is the smallest end-to-end trust slice, using a reviewed fixture template before full authoring at M05. No dates promised.
+Status: proposed implementation order; the owner separately authorized the M1 frontend slice in docs/ai/M1-CONTRACT.md. Its numbering differs from this historical roadmap. All M01?M11 are planned, not completed. Dependencies are gates; independent planning may proceed, but implementation waits for contracts and design approval. M04 is the smallest end-to-end trust slice, using a reviewed fixture template before full authoring at M05. No dates promised.
 
 | Milestone | Outcome | Depends on | Accountable roles | Exit acceptance | Required evidence |
 | --- | --- | --- | --- | --- | --- |

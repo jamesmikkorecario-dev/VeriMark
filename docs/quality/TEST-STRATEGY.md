@@ -1,6 +1,6 @@
 # VeriMark test strategy
 
-Planned gates only: no app, package.json or test harness exists. All application scripts/tests are NOT CONFIGURED. Documentation validation is not software execution. Behavior and permissions must follow the PRD, API contracts and database/RLS docs; see SECURITY-THREAT-MODEL.md for threat analysis.
+M1 implements frontend static, unit/component, build and browser gates; see docs/ai/handoffs/M1.md for exact passing evidence. Backend/API/RLS and later lifecycle tests below remain planned. Documentation validation is not software execution. Behavior and permissions must follow the PRD, API contracts and database/RLS docs; see SECURITY-THREAT-MODEL.md for threat analysis.
 
 | Layer | Required coverage before accepting the affected slice |
 | --- | --- |

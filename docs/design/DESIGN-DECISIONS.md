@@ -16,3 +16,7 @@
 No final production tokens, API contract, auth model, schema or signing standard is established here. Scenario selectors are visibly labeled review tools, not proposed product controls. Exceptional scenario selection hides the happy-path content to avoid conflicting valid/revoked signals; reset restores it. Actual production state priority and server error mapping need implementation review.
 
 No screen-reader study or user comprehension research has occurred. Real backend authorization and negative access tests belong to a future functional slice; the denied screen here is presentation only.
+
+## M1 approval update - 2026-11-15
+
+The owner approved Editorial Systems for application implementation in the master prompt. Its authoritative committed package is design-references/verimark-visual-design. Earlier exploration recommendations and pending-approval labels below are historical; they do not override current authorization. M1 delivers frontend demonstration only; see docs/ai/handoffs/M1.md.

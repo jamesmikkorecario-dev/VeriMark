@@ -1,0 +1,66 @@
+{
+  "applicationCommit": "63d03f1",
+  "browser": "installed Chrome through Playwright channel chrome",
+  "viewports": [
+    320,
+    390,
+    768,
+    1024,
+    1440,
+    1920
+  ],
+  "browserCasesPassed": 36,
+  "axeScans": 12,
+  "axeViolations": 0,
+  "screenshots": [
+    {
+      "path": "landing-1024.png",
+      "sha256": "22e9748f733b5f6f3b2b6f1a4e368f23b53b2e63ee46abd7b95cd3a177bb5028"
+    },
+    {
+      "path": "landing-1440.png",
+      "sha256": "62b6ce4f5cc01eddf77bb7b611dd164e28d89c821027bcebb4ae106fd611c78a"
+    },
+    {
+      "path": "landing-1920.png",
+      "sha256": "3b1934d8332c308fa22758c3ebfc1be4236246b40db8cabd2d59580504d859c4"
+    },
+    {
+      "path": "landing-320.png",
+      "sha256": "8c66e4210a2960df7b648e85947891687b9eeb146f8bc531d16b8237b87e6f51"
+    },
+    {
+      "path": "landing-390.png",
+      "sha256": "7e3fd41e7cf23a258e69db92ab753a0eb7418085b33b907af6b0f7b733619f84"
+    },
+    {
+      "path": "landing-768.png",
+      "sha256": "a0a6cb37e9a1e05e2477b9129acb07107e3fab7bc15e1f2e0fb1c29422588c8f"
+    },
+    {
+      "path": "workspace-1024.png",
+      "sha256": "fc5cd1cbd50d3615502053225005a41dd2df477b2d0b45fd57c39a65810a062a"
+    },
+    {
+      "path": "workspace-1440.png",
+      "sha256": "5c6b33ccf8cd15d8bc047e0522f9850889798ff6068066a093023f66bd735cd6"
+    },
+    {
+      "path": "workspace-1920.png",
+      "sha256": "9c7c64b52a9b5212264a02bc7e2224e8c7c1db4a9c58c1c5be9e69304aafd79e"
+    },
+    {
+      "path": "workspace-320.png",
+      "sha256": "d71a009651b4a2b85ca49b272d9895e83d1745fd0cbe610934a29ae91dc71f69"
+    },
+    {
+      "path": "workspace-390.png",
+      "sha256": "b34a4d706cd017b9133782de5799f66f7a835163af0e95e7877ad8175d9b95d4"
+    },
+    {
+      "path": "workspace-768.png",
+      "sha256": "3d1240d7112c278e9457b316f42f66779d070202878d8c3c981f184fb8e956c9"
+    }
+  ],
+  "originalReferenceFilesVerified": 40
+}

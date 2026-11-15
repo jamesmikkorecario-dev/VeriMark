@@ -1,21 +1,22 @@
-# VeriMark design system — PROVISIONAL
+# Editorial Systems design system
 
-Human visual selection is pending. No finalized production tokens, approved theme or production component styling exist. See docs/design/VISUAL-DIRECTIONS.md and DESIGN-DECISIONS.md (relative links below) for rationale. The three standalone prototypes are the actual exploration sources, not a commitment to their CSS values.
+The owner approved **VeriMark - Editorial Systems** for M1 on 2026-11-15. [Committed reference package](../../design-references/verimark-visual-design/README.md) is authoritative; its proposal labels are preserved historical provenance. Earlier explorations remain under prototypes/design and preserved branches.
 
-| Exploration | Provisional palette (background / surface / text / action) | Typography and layout source |
-| --- | --- | --- |
-| Civic Ledger | #f2efe6 / #fffdf6 / #233c38 / #205b48 | Georgia editorial headings/body, Arial navigation; square edges, asymmetric register; [prototype](../../prototypes/design/ledger/index.html) |
-| Signal Desk | #111c2b / #1c2b3e / #ecf4ff / #b8ee78 | Courier New headings/metadata, Arial body; equal evidence columns, stacked header, hard shadows; [prototype](../../prototypes/design/signal/index.html) |
-| Open Commons | #edf3fc / #ffffff / #1f315a / #364daf | Trebuchet MS humanist headings/body; rounded panels, independent step tiles; [prototype](../../prototypes/design/commons/index.html) |
+Tokens/shared controls live in src/styles/index.css and src/components/ui/index.tsx. Page composition lives in src/pages/pages.css. Plain CSS variables avoid unnecessary dependencies; Tailwind/shadcn are deferred.
 
-These exact values describe experiments only. Their complete prototype-local variables (muted, border, focus, radius, fonts) are inline in each HTML file and generated in prototypes/design/build.cjs. System font fallbacks vary by OS. No production dark-mode promise follows from Signal Desk's dark exploration.
+| Token | Value / purpose |
+| --- | --- |
+| --canvas / --paper | #f6f5f0 / #fffefa: canvas and credential |
+| --ink / --forest / --forest2 | #1d3730 / #143d32 / #0f3229: reading, action, sidebar |
+| --mint / --surface2 | #c1e3ab / #e3e8df: accent and layers |
+| --line | #d7dcd3: document rules |
+| --muted | #59685f: darkened for readable secondary text |
+| --serif | Iowan Old Style, Palatino Linotype, Book Antiqua, Georgia, serif |
+| --sans | Segoe UI, Arial, sans-serif |
+| --ease | cubic-bezier(.22,.78,.23,1) |
 
-## Shared proposed behavior
+Preserve documentary credential objects, small corners, forest sidebar, thin rules and editorial headings. System font rendering varies by OS; no external fonts. Small shared buttons are at least 44px high. Status includes words, never color alone. Selected control/status text is raised from prototype for readability. Page breakpoints live in pages.css; shared container/credential thresholds are 768/480px. Acceptance widths: 320,390,768,1024,1440,1920px.
 
-Textual lifecycle status, semantic labeled controls, visible focus, readable comparison fields, no misleading QR proof/accreditation claims, and account-free guarded recipient access apply across directions. Prototype body text is 17px; display headings vary by direction and viewport. Prototype grids stack below 700px; panels/buttons/edges intentionally differ. These are exploration values, not approved production font, spacing or breakpoint tokens. Motion is nonessential and reduced-motion preference must be respected.
+Finite 480ms page entrance and short hover/press feedback respect prefers-reduced-motion; all animation/transitions stop in reduce mode. Content stays accessible without reveal scripts or artificial delays.
 
-## Approval gate
-
-Compare six screens per direction at desktop and mobile, test comprehension with representative issuers/verifiers/recipients, and obtain human choice. Then define production semantic tokens, typography/spacing scale, breakpoint rationale, focus/contrast pairs and component variants; verify accessibility before promotion. Civic Ledger is recommended for testing only. Read [visual directions](../design/VISUAL-DIRECTIONS.md), [decisions](../design/DESIGN-DECISIONS.md), [component contract](COMPONENT-LIBRARY.md), [states](ROUTES-AND-STATES.md) and [accessibility plan](ACCESSIBILITY.md).
-
-The mandatory implementation stack is React.js + TypeScript, Vite, Supabase/PostgreSQL/Auth and Vercel, free tiers only. Standalone HTML prototypes remain authorized isolated exploration and introduce no alternative production backend, framework or hosting. Storage/Edge require justification; no Next.js, separate Node backend, extra cloud, paid service, provisioning or deployment is implied. No stack conflict was identified for these local artifacts; Vercel eligibility, auth SMTP and backup constraints require canonical delivery review before production work.
+See M1 handoff for actual browser/visual evidence and deviations. Presentation neither enforces authorization nor proves authenticity.
