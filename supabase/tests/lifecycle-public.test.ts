@@ -25,17 +25,17 @@ describe('public verification', () => {
   });
   it('unknown, malformed and hostile identifiers are all NOT_FOUND', async () => {
     for (const id of ['A'.repeat(22), '', 'short', 'A'.repeat(23), "'; drop table credentials; --", '%'.repeat(22), 'A'.repeat(21) + '\n', null]) {
-      expect((await db.fails(verify(id))).code).toBe('NOT_FOUND');
+      expect(await verify(id)).toBeNull();
     }
   });
   it('an internal id is not a public id', async () => {
     const [c] = await issue(db, t, [row('Internal Id Person')]);
-    expect((await db.fails(verify(c.id))).code).toBe('NOT_FOUND');
+    expect(await verify(c.id)).toBeNull();
   });
   it('counts checks per organization for found records only', async () => {
     const [c] = await issue(db, t, [row('Counted Person')]);
     const before = (await db.rpc<{ verificationChecks: number }>(t.viewer, 'get_metrics', { p_org: t.org })).verificationChecks;
-    await verify(c.publicId); await verify(c.publicId); await db.fails(verify('B'.repeat(22)));
+    await verify(c.publicId); await verify(c.publicId); await verify('B'.repeat(22));
     expect((await db.rpc<{ verificationChecks: number }>(t.viewer, 'get_metrics', { p_org: t.org })).verificationChecks).toBe(before + 2);
   });
   it('is expired exactly at the expiry instant and valid just before it', async () => {
@@ -53,6 +53,16 @@ describe('public verification', () => {
     expect(await s(false, true, true)).toBe('replaced');
     expect(await s(false, false, true)).toBe('expired');
     expect(await s(false, false, false)).toBe('valid');
+  });
+  it('failed guesses use up the budget too', async () => {
+    const hits = async (bucket: string) => (await db.admin<{ n: number }>("select coalesce(sum(hits), 0)::int as n from public.rate_windows where bucket = $1", [bucket]))[0].n;
+    const [v, d] = [await hits('verify'), await hits('delivery')];
+    for (let i = 0; i < 5; i++) { await verify('C'.repeat(22)); await verify('not-an-id'); await exchange('D'.repeat(43)); }
+    expect(await hits('verify')).toBe(v + 10);
+    expect(await hits('delivery')).toBe(d + 5);
+    await db.admin("update public.rate_windows set hits = 120 where bucket = 'delivery'");
+    expect((await db.fails(exchange('D'.repeat(43)))).code).toBe('RATE_LIMITED');
+    await db.admin("delete from public.rate_windows where bucket = 'delivery'");
   });
   it('fails closed with RATE_LIMITED once the shared budget is used, and recovers in the next window', async () => {
     const [c] = await issue(db, t, [row('Throttle Person')]);
@@ -147,12 +157,12 @@ describe('private delivery links', () => {
   });
   it('the public id, a wrong secret and malformed input are all DELIVERY_UNAVAILABLE', async () => {
     const [c] = await issue(db, t, [row('Guess Person')]); await link(c.id);
-    for (const token of [c.publicId, 'A'.repeat(43), '', 'A'.repeat(44), null, c.id]) expect((await db.fails(exchange(token))).code).toBe('DELIVERY_UNAVAILABLE');
+    for (const token of [c.publicId, 'A'.repeat(43), '', 'A'.repeat(44), null, c.id]) expect(await exchange(token)).toBeNull();
   });
   it('a new link disables the previous one', async () => {
     const [c] = await issue(db, t, [row('Regenerated Person')]);
     const first = await link(c.id); const second = await link(c.id);
-    expect((await db.fails(exchange(first.token))).code).toBe('DELIVERY_UNAVAILABLE');
+    expect(await exchange(first.token)).toBeNull();
     expect((await exchange(second.token)).publicId).toBe(c.publicId);
   });
   it('expired links, and links of revoked or replaced records, stop working', async () => {
@@ -160,7 +170,7 @@ describe('private delivery links', () => {
     const la = await link(a.id); const lb = await link(b.id); const lc = await link(c.id);
     await db.admin("update public.delivery_capabilities set expires_at = now() - interval '1 second' where credential_id = $1", [a.id]);
     await revoke(b.id); await replace(c.id, row('Replaced Link Fixed'));
-    for (const l of [la, lb, lc]) expect((await db.fails(exchange(l.token))).code).toBe('DELIVERY_UNAVAILABLE');
+    for (const l of [la, lb, lc]) expect(await exchange(l.token)).toBeNull();
     expect((await db.fails(link(b.id))).code).toBe('INVALID_TRANSITION');
   });
   it('lasts thirty days', async () => {

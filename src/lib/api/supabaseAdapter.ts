@@ -1,6 +1,6 @@
 import { createClient, type SupabaseClient, type User } from '@supabase/supabase-js';
 import {
-  ApiError, type ApiErrorCode, type FieldError, type SessionUser, type VeriMarkApi,
+  ApiError, type ApiErrorCode, type DeliveredCredential, type FieldError, type SessionUser, type VerificationResult, type VeriMarkApi,
 } from './types';
 
 // true = the caller may retry the same request later.
@@ -138,7 +138,16 @@ export function createSupabaseApi(url: string, publishableKey: string, client: S
     getMetrics: organizationId => rpc('get_metrics', { p_org: organizationId }),
 
     // A failure that is not an explicit answer from the database must never look like "not found" or "valid".
-    verifyCredential: publicId => rpc('verify_credential', { p_public_id: publicId }, 'UNABLE_TO_VERIFY'),
-    exchangeDelivery: token => rpc('exchange_delivery', { p_token: token }),
+    // The database answers NULL for "no such record"; only that explicit answer becomes NOT_FOUND / DELIVERY_UNAVAILABLE.
+    async verifyCredential(publicId) {
+      const result = await rpc<VerificationResult | null>('verify_credential', { p_public_id: publicId }, 'UNABLE_TO_VERIFY');
+      if (result === null) throw new ApiError('NOT_FOUND', 'NOT_FOUND');
+      return result;
+    },
+    async exchangeDelivery(token) {
+      const result = await rpc<DeliveredCredential | null>('exchange_delivery', { p_token: token });
+      if (result === null) throw new ApiError('DELIVERY_UNAVAILABLE', 'DELIVERY_UNAVAILABLE');
+      return result;
+    },
   };
 }

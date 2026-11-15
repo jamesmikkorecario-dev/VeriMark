@@ -55,6 +55,8 @@ create table public.organization_invites (
   revoked_at timestamptz
 );
 create index organization_invites_org_idx on public.organization_invites (organization_id, created_at desc);
+create unique index organization_invites_outstanding_idx on public.organization_invites (organization_id, email)
+  where accepted_at is null and revoked_at is null;
 
 -- Platform authority is granted only by an operator with direct database access. No function writes this table.
 create table public.platform_admins (
@@ -240,6 +242,7 @@ begin
   return v_uid;
 end $$;
 
+-- Lock order for every operation: organization row, then membership row, then batch or credential rows.
 -- Returns the caller's role after locking the membership row, so removal or demotion cannot race the caller's transaction.
 -- Non-members get NOT_FOUND (no tenant discovery); members without a listed role get FORBIDDEN.
 create function app.require_role(p_org uuid, p_roles text[]) returns text
@@ -488,6 +491,8 @@ create trigger audit_log_append_only before update or delete on public.audit_log
 create trigger audit_log_no_truncate before truncate on public.audit_log for each statement execute function app.reject_change();
 create trigger issuer_reviews_append_only before update or delete on public.issuer_reviews for each row execute function app.reject_change();
 create trigger batch_approvals_append_only before update or delete on public.batch_approvals for each row execute function app.reject_change();
+create trigger issuer_reviews_no_truncate before truncate on public.issuer_reviews for each statement execute function app.reject_change();
+create trigger batch_approvals_no_truncate before truncate on public.batch_approvals for each statement execute function app.reject_change();
 
 -- A profile row for every account. Only a display name is taken from user-editable metadata; never authority.
 create function app.handle_new_user() returns trigger
@@ -544,11 +549,11 @@ create function public.rename_organization(p_org uuid, p_display_name text, p_ex
 language plpgsql security definer set search_path = '' as $$
 declare v_name text := app.clean(coalesce(p_display_name, '')); v_org public.organizations;
 begin
+  select * into v_org from public.organizations o where o.id = p_org for update;
   perform app.require_role(p_org, array['owner']);
   if app.text_error(to_jsonb(v_name), 120, true) is not null then
     perform app.fail('VALIDATION', jsonb_build_array(jsonb_build_object('field', 'displayName', 'code', app.text_error(to_jsonb(v_name), 120, true)))::text);
   end if;
-  select * into v_org from public.organizations o where o.id = p_org for update;
   if v_org.revision is distinct from p_expected_revision then perform app.fail('REVISION_CONFLICT'); end if;
   update public.organizations o set display_name = v_name, revision = o.revision + 1 where o.id = p_org returning * into v_org;
   perform app.audit(p_org, 'organization.renamed', 'organization', p_org, v_name);
@@ -614,6 +619,8 @@ create function public.create_invite(p_org uuid, p_email text, p_role text) retu
 language plpgsql security definer set search_path = '' as $$
 declare v_uid uuid := app.uid(); v_email text := lower(app.clean(coalesce(p_email, ''))); v_token text; v_invite public.organization_invites;
 begin
+  -- Serializes the daily cap and the supersession of earlier invitations for the same address.
+  perform 1 from public.organizations o where o.id = p_org for update;
   perform app.require_role(p_org, array['owner']);
   if char_length(v_email) > 254 or v_email !~ '^[^@\s]+@[^@\s]+\.[^@\s]+$' then
     perform app.fail('VALIDATION', '[{"field":"email","code":"INVALID"}]');
@@ -637,6 +644,7 @@ end $$;
 create function public.revoke_invite(p_org uuid, p_invite uuid) returns void
 language plpgsql security definer set search_path = '' as $$
 begin
+  perform 1 from public.organizations o where o.id = p_org for update;
   perform app.require_role(p_org, array['owner']);
   update public.organization_invites i set revoked_at = now()
    where i.organization_id = p_org and i.id = p_invite and i.accepted_at is null and i.revoked_at is null;
@@ -651,11 +659,14 @@ declare v_uid uuid := app.uid(); v_invite public.organization_invites; v_email t
 begin
   if p_token is null or p_token !~ '^[A-Za-z0-9_-]{43}$' then perform app.fail('NOT_FOUND'); end if;
   select lower(u.email) into v_email from auth.users u where u.id = v_uid and u.email_confirmed_at is not null;
+  -- Find the organization without locking, lock it (lock order), then re-read the invitation under the lock.
+  perform 1 from public.organizations o
+   where o.id = (select i.organization_id from public.organization_invites i where i.token_hash = app.token_hash(p_token))
+   for update;
   select * into v_invite from public.organization_invites i
    where i.token_hash = app.token_hash(p_token) and i.accepted_at is null and i.revoked_at is null and i.expires_at > now()
    for update;
   if not found or v_email is null or v_invite.email <> v_email then perform app.fail('NOT_FOUND'); end if;
-  perform 1 from public.organizations o where o.id = v_invite.organization_id for update;
   update public.organization_invites i set accepted_at = now(), accepted_by = v_uid where i.id = v_invite.id;
   insert into public.organization_members (organization_id, user_id, role) values (v_invite.organization_id, v_uid, v_invite.role)
   on conflict (organization_id, user_id) do nothing;      -- an existing member keeps the current role
@@ -727,6 +738,9 @@ create function public.save_template(p_org uuid, p_id uuid, p_name text, p_confi
 language plpgsql security definer set search_path = '' as $$
 declare v_uid uuid := app.uid(); v_name text := app.clean(coalesce(p_name, '')); v_errors jsonb := '[]'::jsonb; v_template public.credential_templates;
 begin
+  if p_id is null then
+    perform 1 from public.organizations o where o.id = p_org for update;   -- serializes the template cap
+  end if;
   perform app.require_role(p_org, array['owner', 'issuer']);
   if app.text_error(to_jsonb(v_name), 120, true) is not null then
     v_errors := v_errors || jsonb_build_object('field', 'name', 'code', app.text_error(to_jsonb(v_name), 120, true));
@@ -1078,15 +1092,17 @@ end $$;
 -- Public, account-free operations
 -- ---------------------------------------------------------------------------------------------
 
--- Exact lookup by unpredictable identifier. Returns only the public allowlist; malformed and unknown identifiers are indistinguishable.
+-- Exact lookup by unpredictable identifier. Returns only the public allowlist, or NULL when there is no such record;
+-- malformed and unknown identifiers are indistinguishable. A miss returns NULL instead of raising so that the
+-- rate-budget increment is committed: failed guesses must count.
 create function public.verify_credential(p_public_id text) returns jsonb
 language plpgsql security definer set search_path = '' as $$
 declare v_c public.credentials; v_org public.organizations; v_now timestamptz := now();
 begin
   perform app.rate_check('verify', 600);
-  if p_public_id is null or p_public_id !~ '^[A-Za-z0-9_-]{22}$' then perform app.fail('NOT_FOUND'); end if;
+  if p_public_id is null or p_public_id !~ '^[A-Za-z0-9_-]{22}$' then return null; end if;
   select * into v_c from public.credentials c where c.public_id = p_public_id;
-  if not found then perform app.fail('NOT_FOUND'); end if;
+  if not found then return null; end if;
   select * into v_org from public.organizations o where o.id = v_c.organization_id;
   update public.verification_counters v set checks = v.checks + 1 where v.organization_id = v_c.organization_id;
   return jsonb_build_object(
@@ -1098,16 +1114,17 @@ begin
     'replacementPublicId', (select s.public_id from public.credentials s where s.id = v_c.replaced_by));
 end $$;
 
--- Exchanges a private delivery secret for the one credential it was created for. Every failure looks the same.
+-- Exchanges a private delivery secret for the one credential it was created for. Every failure is the same NULL
+-- (not an exception, so failed guesses count against the rate budget).
 create function public.exchange_delivery(p_token text) returns jsonb
 language plpgsql security definer set search_path = '' as $$
 declare v_c public.credentials; v_now timestamptz := now();
 begin
   perform app.rate_check('delivery', 120);
-  if p_token is null or p_token !~ '^[A-Za-z0-9_-]{43}$' then perform app.fail('DELIVERY_UNAVAILABLE'); end if;
+  if p_token is null or p_token !~ '^[A-Za-z0-9_-]{43}$' then return null; end if;
   select c.* into v_c from public.delivery_capabilities d join public.credentials c on c.id = d.credential_id
    where d.token_hash = app.token_hash(p_token) and d.revoked_at is null and d.expires_at > v_now;
-  if not found then perform app.fail('DELIVERY_UNAVAILABLE'); end if;
+  if not found then return null; end if;
   return jsonb_build_object(
     'publicId', v_c.public_id, 'status', app.credential_status(v_c.revoked_at, v_c.replaced_at, v_c.expires_at, v_now),
     'issuerDisplayName', v_c.issuer_display_name, 'recipientDisplayName', v_c.recipient_display_name, 'title', v_c.title,
@@ -1166,3 +1183,11 @@ grant execute on function
   public.create_delivery_link(uuid, uuid), public.list_audit(uuid, text, integer), public.get_metrics(uuid)
 to authenticated;
 grant execute on function public.verify_credential(text), public.exchange_delivery(text) to anon, authenticated;
+
+-- Objects created by later migrations start with no client access; each must be granted explicitly, as above.
+-- (Applies to objects created by the role running this migration, which is the role that runs all migrations.)
+alter default privileges in schema public revoke all on tables from public, anon, authenticated;
+alter default privileges in schema public revoke all on sequences from public, anon, authenticated;
+alter default privileges in schema public revoke all on functions from public, anon, authenticated;
+alter default privileges in schema app revoke all on functions from public, anon, authenticated;
+alter default privileges revoke execute on functions from public;

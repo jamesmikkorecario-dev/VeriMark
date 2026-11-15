@@ -92,6 +92,14 @@ describe('invitations', () => {
     expect((await db.fails(db.rpc(user, 'accept_invite', { p_token: 'not-a-token' }))).code).toBe('NOT_FOUND');
     expect(await role(t.org, user)).toBeUndefined();
   });
+  it('the database allows only one outstanding invitation per address', async () => {
+    await invite('single@example.test');
+    await expect(db.admin(`insert into public.organization_invites (organization_id, email, role, token_hash, expires_at, created_by)
+      values ($1, 'single@example.test', 'viewer', '\\x00', now() + interval '1 day', $2)`, [t.org, t.owner])).rejects.toThrow(/organization_invites_outstanding_idx/);
+    const second = await invite('single@example.test', 'viewer');
+    expect(await db.admin("select count(*)::int as n from public.organization_invites where email = 'single@example.test' and revoked_at is null and accepted_at is null")).toEqual([{ n: 1 }]);
+    expect(second.token).toMatch(/^[A-Za-z0-9_-]{43}$/);
+  });
   it('accepting never changes an existing member\'s role', async () => {
     const created = await invite('alpha-owner@example.test', 'viewer');
     expect(await db.rpc(t.owner, 'accept_invite', { p_token: created.token })).toMatchObject({ role: 'owner' });

@@ -176,8 +176,25 @@ describe('history cannot be rewritten, even by the database owner path used by f
     await expect(db.admin('delete from public.credentials where id = $1', [credA.id])).rejects.toThrow('VM:INVALID_TRANSITION');
     await expect(db.admin('truncate public.credentials cascade')).rejects.toThrow('VM:INVALID_TRANSITION');
   });
+  it.each(['credential_events', 'audit_log', 'issuer_reviews', 'batch_approvals'])('%s cannot be truncated', async table => {
+    await expect(db.admin(`truncate public.${table} cascade`)).rejects.toThrow('VM:INVALID_TRANSITION');
+  });
   it.each(['credential_events', 'audit_log', 'issuer_reviews', 'batch_approvals'])('%s is append-only', async table => {
     await expect(db.admin(`update public.${table} set organization_id = organization_id`)).rejects.toThrow('VM:INVALID_TRANSITION');
     await expect(db.admin(`delete from public.${table}`)).rejects.toThrow('VM:INVALID_TRANSITION');
+  });
+});
+
+describe('objects added by a later migration', () => {
+  it('are not reachable by clients until granted explicitly', async () => {
+    await db.script(`create table public.future_table (id int primary key, secret text);
+      insert into public.future_table values (1, 'x');
+      create function public.future_probe() returns text language sql security definer set search_path = '' as $f$ select 'exposed' $f$;
+      create function app.future_helper() returns text language sql as $f$ select 'exposed' $f$;`);
+    for (const actor of [null, a.owner]) {
+      await expect(db.as(actor, 'select public.future_probe()')).rejects.toThrow(/permission denied/);
+      await expect(db.as(actor, 'select app.future_helper()')).rejects.toThrow(/permission denied/);
+      await expect(db.as(actor, 'select * from public.future_table')).rejects.toThrow(/permission denied/);
+    }
   });
 });

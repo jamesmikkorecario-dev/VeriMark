@@ -30,6 +30,8 @@ Never granted to clients: recipient e-mail, revocation/replacement reasons, acto
 | | `revoke_credential`, `replace_credential`, `create_delivery_link` | owner, issuer |
 | Public | `verify_credential`, `exchange_delivery` | anyone |
 
+`verify_credential` and `exchange_delivery` return NULL when there is no matching record, instead of raising, so that every attempt (including a failed guess) is counted in the rate budget; the adapter turns NULL into `NOT_FOUND` / `DELIVERY_UNAVAILABLE`.
+
 Errors raised for clients have the message `VM:<CODE>` (codes in `src/lib/api/types.ts`). `VM:VALIDATION` carries a JSON list of `{field, code, row?}` in DETAIL; `VM:RATE_LIMITED` carries the retry delay in seconds.
 
 ## Invariants enforced in the database
@@ -43,6 +45,9 @@ Errors raised for clients have the message `VM:<CODE>` (codes in `src/lib/api/ty
 - Status is computed at read time: revoked > replaced > expired (`expires_at <= now()`) > valid.
 - Public IDs are 128 random bits (22 characters). Delivery and invitation secrets are 256 random bits; only SHA-256 hashes are stored. A new delivery link, a revocation or a replacement disables earlier links. Delivery links last 30 days, invitations 7.
 - The last owner of an organization cannot be removed or demoted.
+- At most one outstanding invitation per organization and address (partial unique index); a new one supersedes the old.
+- Lock order is always organization row, then membership row, then batch or credential rows. Operations that change organization-level state (name, members, invitations, new templates, review) lock the organization FOR UPDATE; issuance and replacement lock it FOR SHARE.
+- Objects created by later migrations get no client privileges by default (`alter default privileges`); each needs an explicit grant.
 - Platform administrators are created only by an operator with direct database access; no function writes `platform_admins`.
 
 ## Limits
@@ -53,7 +58,7 @@ Organization, template name and template text fields 120 characters (body prefix
 
 - The rate budget is global, not per client: one abusive caller can exhaust it for everyone for up to a minute. A per-client limit needs something in front of the database.
 - Idempotency receipts and the oldest rate windows are the only data ever deleted; there is no retention or erasure process yet.
-- Lock ordering (organization → membership → batch/credential) was reviewed but not exercised under real concurrent connections.
+- Lock ordering was reviewed twice (author and independent reviewer; one inconsistency was found and fixed) but has not been exercised with real concurrent connections: the test engine has a single connection. Deadlocks, quota races and issue-versus-suspension interleavings need a multi-connection test on a real PostgreSQL before pilot.
 - `auth.users.email_confirmed_at` is trusted for invitation matching, so e-mail confirmation must stay enabled in Supabase Auth.
 
 ## Applying to a Supabase project (requires owner approval; not done)
@@ -65,3 +70,7 @@ Organization, template name and template text fields 120 characters (body prefix
 5. Add the site URL and `/update-password`, `/sign-in` to the Auth redirect allow-list.
 6. Create the first platform administrator in the SQL editor: `insert into public.platform_admins (user_id) values ('<auth user id>');`
 7. Re-run the scenarios in `supabase/tests` against the project with two test organizations before real use.
+
+## Independent review (2026-11-16)
+
+A separate reviewer (Codex, read-only, commit `5ee2ca7`) found no critical or high issue and reported: failed public lookups not counted by the rate budget (confirmed by probe); inconsistent organization/membership lock order that could deadlock; invitation and template caps that could be exceeded concurrently; no safe default privileges for later migrations; missing TRUNCATE guards on two append-only tables. All five are fixed in the migration, each with a regression test except the two concurrency items, which cannot be raced on the single-connection test engine. Accepted and still open: the global (not per-client) rate budget.
