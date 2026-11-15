@@ -11,8 +11,8 @@
 .hero-content > :nth-child(3) { animation-delay: 80ms; }
 .hero-content > :nth-child(4) { animation-delay: 120ms; }
 .hero-content > :nth-child(5) { animation-delay: 160ms; }
-.motion-stage-2 { animation-delay: 100ms; }
-.motion-stage-3 { animation-delay: 180ms; }
+.route-enter.motion-stage-2 { animation-delay: 100ms; }
+.route-enter.motion-stage-3 { animation-delay: 180ms; }
 .metric:nth-child(1) { animation-delay: 60ms; }
 .metric:nth-child(2) { animation-delay: 110ms; }
 .metric:nth-child(3) { animation-delay: 160ms; }

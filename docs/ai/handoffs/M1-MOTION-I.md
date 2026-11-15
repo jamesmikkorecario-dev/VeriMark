@@ -42,3 +42,10 @@
 - Actual local commands: npm run typecheck PASS; npm run lint PASS; npm test -- --run PASS (6 files34 tests); npm run build PASS (35 modules131ms); git diff --check PASS (line-ending advisory only).
 - Actual installed Chrome Playwright Node audit against local Vite3012: normal hovered hero action first confirmed non-none transform; enabling reduce while hovered produced transform=none for action/icon; pressed action/icon also none; reloading with reduction enabled and hovering produced none; reduced workspace row hover and focus stayed transform=none and transitionDuration=0s, arrow hover/press/focus none. Decorative brand span retained matrix(1,0,-0.122785,1,0,0). All assertions passed; browser/context closed.
 - Independent full e2e is not rerun in this follow-up: Q retains failing regression assertion and owns verification against this correction SHA. Coordinator review and Q full verification remain; M1 unapproved.
+
+## Stage-delay correction: task_4bc9c97694ed
+
+- Independent review found shared .route-enter animation shorthand, loaded after page CSS, reset equal-specificity .motion-stage delay rules. Only source change: compose selectors .route-enter.motion-stage-2 and .route-enter.motion-stage-3 so delay declarations outrank the shorthand independent of stylesheet order. Existing durations, metric timing, nav and reduced behavior unchanged.
+- Actual installed Chrome computed-style audit against local Vite3012: credential delay0.1s, dashboard-content delay0.18s; both duration0.48s/name routeIn. Metric delays remained0.06s/0.11s/0.16s. Live reduction and reload under reduction set animationName=none for both coordinated targets. All assertions passed, browser/context closed.
+- Actual commands: npm run typecheck PASS; npm run lint PASS; npm test -- --run PASS (6 files34 tests); npm run build PASS (35 modules247ms); git diff --check PASS (line-ending advisory only).
+- No unit test mirroring these two CSS selectors added: Q owns the meaningful computed-style browser delay regression and final independent suite. No e2e/config edits or approval claims; coordinator review/Q verification remain.
