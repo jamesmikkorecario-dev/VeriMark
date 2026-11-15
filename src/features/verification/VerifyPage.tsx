@@ -27,16 +27,16 @@ export default function VerifyPage() {
   const title = !publicId ? 'Verify a record' : missing ? 'Record not found' : result ? headings[result.status] : current?.error ? limited ? 'Too many checks' : 'Unable to verify' : 'Checking record';
   const retry = () => { setState(null); setAttempt(n=>n+1); };
   return <PublicLayout><section className="container"><div className="public-record">
-    {api.mode === 'demo' && <p>Demonstration · Fictional data</p>}<h1>{title}</h1>
+    {api.mode === 'demo' && <p>Demonstration Â· Fictional data</p>}<h1>{title}</h1>
     {!publicId ? <form onSubmit={e=>{ e.preventDefault(); let id=entry.trim(); try { const url=new URL(id); const match=url.pathname.match(/^\/verify\/([^/]+)\/?$/); id=match?.[1] ?? ''; } catch { /* A plain ID is also accepted. */ } if(!idPattern.test(id)) {setValidation('Enter a 22-character record ID or a full verification URL.'); return;} setValidation(''); navigate(`/verify/${id}`); }}>
       <FormField id="record-id" label="Record ID or verification URL" error={validation}><TextInput value={entry} onChange={e=>setEntry(e.target.value)} /></FormField><Button type="submit">Check record</Button>
     </form> : <div aria-live="polite" className="public-record-result" data-status={result?.status}>
       {missing ? <p>No public record was found for this ID.</p> : result ? <>
         <StatusPill status={result.status}/><p>{explanations[result.status]}</p>
-        <dl><dt>Recipient</dt><dd>{result.recipientDisplayName}</dd><dt>Title</dt><dd>{result.title}</dd><dt>Achievement</dt><dd>{result.achievement}</dd><dt>Issuer</dt><dd>{result.issuer.displayName}</dd><dt>Issuer review</dt><dd>{result.issuer.reviewState === 'reviewed' ? 'Identity and authority reviewed by VeriMark — not an accreditation' : result.issuer.reviewState === 'pending' ? 'Not yet reviewed' : 'Suspended'}</dd><dt>Issued</dt><dd><RecordTime value={result.issuedAt}/></dd><dt>Expiry</dt><dd>{result.expiresAt ? <RecordTime value={result.expiresAt}/> : 'No expiry'}</dd><dt>Checked at</dt><dd><RecordTime value={result.checkedAt}/></dd><dt>Record ID</dt><dd>{result.publicId}</dd></dl>
+        <dl><dt>Recipient</dt><dd>{result.recipientDisplayName}</dd><dt>Title</dt><dd>{result.title}</dd><dt>Achievement</dt><dd>{result.achievement}</dd><dt>Issuer</dt><dd>{result.issuer.displayName}</dd><dt>Issuer review</dt><dd>{result.issuer.reviewState === 'reviewed' ? 'Identity and authority reviewed by VeriMark â€” not an accreditation' : result.issuer.reviewState === 'pending' ? 'Not yet reviewed' : 'Suspended'}</dd><dt>Issued</dt><dd><RecordTime value={result.issuedAt}/></dd><dt>Expiry</dt><dd>{result.expiresAt ? <RecordTime value={result.expiresAt}/> : 'No expiry'}</dd><dt>Checked at</dt><dd><RecordTime value={result.checkedAt}/></dd><dt>Record ID</dt><dd>{result.publicId}</dd></dl>
         {result.status === 'replaced' && result.replacementPublicId && idPattern.test(result.replacementPublicId) && <Link to={`/verify/${result.replacementPublicId}`}>View replacement record</Link>}
         <p>Compare these details with the document you were shown. A QR code or link only locates this record.</p><p>This is an online database check, not a cryptographic proof.</p>
-      </> : current?.error ? <><p>{limited ? `Please retry after ${current.error instanceof ApiError ? current.error.retryAfterSeconds ?? 60 : 60} seconds.` : 'No conclusion can be drawn about this record. Please try again.'}</p><Button onClick={retry}>Try again</Button></> : <LoadingState label="Checking the current record…"/>}
+      </> : current?.error ? <><p>{limited ? `Please retry after ${current.error instanceof ApiError ? current.error.retryAfterSeconds ?? 60 : 60} seconds.` : 'No conclusion can be drawn about this record. Please try again.'}</p><Button onClick={retry}>Try again</Button></> : <LoadingState label="Checking the current recordâ€¦"/>}
     </div>}
   </div></section></PublicLayout>;
 }
