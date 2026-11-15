@@ -160,4 +160,3 @@ test('public open panel follows sticky header while scrolling and dismisses on f
   await expect(trigger).toHaveAccessibleName('Open navigation');
 });
 
-

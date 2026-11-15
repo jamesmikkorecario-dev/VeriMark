@@ -44,8 +44,9 @@ for (const reducedMotion of ['no-preference', 'reduce'] as const) {
 
 test('direct and cross-route hash arrive instantly; POP restores saved positions', async ({ page }, info) => {
   await page.goto('/#method');
-  await aligned(page);
   const direct = [await sample(page)];
+  expect(Math.abs(direct[0].top! - direct[0].header! - 16)).toBeLessThan(2);
+  await aligned(page);
   await page.waitForTimeout(100);
   direct.push(await sample(page));
   expect(Math.abs(direct[0].y - direct[1].y)).toBeLessThan(2);
@@ -53,6 +54,7 @@ test('direct and cross-route hash arrive instantly; POP restores saved positions
   await page.getByRole('navigation', { name: 'Footer navigation' }).getByRole('link', { name: 'How it works' }).click();
   await aligned(page);
   direct.push(await sample(page));
+  expect(Math.abs(direct[2].top! - direct[2].header! - 16)).toBeLessThan(2);
   await page.evaluate(() => scrollTo(0, 700));
   await expect.poll(() => page.evaluate(() => scrollY)).toBe(700);
   // Allow the browser scroll event to record this history entry before leaving.
