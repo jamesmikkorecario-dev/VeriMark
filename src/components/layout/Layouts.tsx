@@ -2,28 +2,31 @@ import { type ReactNode } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Brand, ButtonLink, Icon } from '../ui';
 import { PublicNavigation, WorkspaceDrawer } from './Navigation';
+import { useEnvironment } from './environment';
 
 const publicLinks = (
   <>
     <Link to="/#method" state={{ sectionScroll: true }}>How it works</Link>
-    <Link to="/preview/verify">Verify a record</Link>
+    <Link to="/verify">Verify a record</Link>
     <Link to="/preview/about">About</Link>
     <Link to="/workspace">Demo workspace</Link>
+    <Link to="/sign-in">Sign in</Link>
   </>
 );
 
 export function PublicLayout({ children }: { children: ReactNode }) {
   const location = useLocation();
+  const demo = useEnvironment() === 'demo';
   return (
     <>
       <a className="skip-link" href="#main">Skip to content</a>
-      <div className="demo-ribbon">M1 PREVIEW / FICTIONAL DATA · NO LIVE VERIFICATION</div>
+      {demo && <div className="demo-ribbon">DEMONSTRATION / FICTIONAL DATA · NOTHING HERE IS REAL</div>}
       <header className="public-header">
         <div className="experience-container header-row">
           <Brand />
           <nav className="nav-desktop" aria-label="Main navigation">{publicLinks}</nav>
           <div className="header-end">
-            <ButtonLink className="desktop-action" to="/preview/verify" size="sm">
+            <ButtonLink className="desktop-action" to="/verify" size="sm">
               Verify credential <Icon name="arrow" />
             </ButtonLink>
             <div className="mobile-navigation">
@@ -39,11 +42,11 @@ export function PublicLayout({ children }: { children: ReactNode }) {
         <div className="experience-container">
           <div className="footer-top">
             <div><Brand inverse /><p>Meaningful achievements deserve<br />records people can understand.</p></div>
-            <nav aria-label="Footer navigation">{publicLinks}<Link to="/preview/recipient">Recipient view</Link></nav>
+            <nav aria-label="Footer navigation">{publicLinks}</nav>
           </div>
           <div className="footer-bottom">
-            <span>© 2026 VeriMark · M1 preview</span>
-            <span>Fictional data. No live credential verification.</span>
+            <span>© 2026 VeriMark{demo ? ' · Demonstration' : ''}</span>
+            <span>{demo ? 'Fictional data. Nothing here is a real record.' : 'Review is an identity check, not accreditation.'}</span>
           </div>
         </div>
       </footer>

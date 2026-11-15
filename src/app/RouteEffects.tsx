@@ -1,10 +1,24 @@
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import { useLocation, useNavigationType } from 'react-router-dom';
+import { sectionTitle } from '../features/organizations/ShellContext';
 
+const publicTitles: Record<string, string> = {
+  '/sign-in': 'Sign in', '/sign-up': 'Create an account', '/reset-password': 'Reset your password',
+  '/update-password': 'Set a new password', '/invite': 'Join an organization', '/verify': 'Verify a credential', '/receive': 'Your credential',
+};
+
+/** Titles never include URL fragments, so delivery and invitation secrets cannot leak into history or tab titles. */
 function titleFor(path: string) {
   if (path === '/') return 'Achievement, on the record | VeriMark';
   if (path === '/workspace') return 'Demonstration workspace | VeriMark';
   if (/^\/(workspace|preview)\/[^/]+$/.test(path)) return 'Unavailable in M1 | VeriMark';
+  const normalized = path.length > 1 ? path.replace(/\/+$/, '') : path;
+  if (publicTitles[normalized]) return `${publicTitles[normalized]} | VeriMark`;
+  if (/^\/verify\/[^/]+$/.test(normalized)) return 'Verification result | VeriMark';
+  if (normalized === '/app' || normalized.startsWith('/app/')) {
+    const section = sectionTitle(normalized);
+    if (section !== 'Workspace' || normalized === '/app') return `${section} | VeriMark workspace`;
+  }
   return 'Page not found | VeriMark';
 }
 
