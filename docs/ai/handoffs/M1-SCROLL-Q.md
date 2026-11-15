@@ -44,3 +44,15 @@ No concrete implementation defect found in read-only RouteEffects/LandingPage/La
 
 Coordinator: please independently review test commits and this evidence, then integrate if accepted. Owner visual approval of M1 remains outstanding; no M2 or release authorization inferred.
 
+
+## Follow-up: task_8c660be0d2e3 focus commit boundary
+
+Coordinator's final182-case integration run reported166 pass/15 skip/1 reduced1920 failure, archived separately at artifacts/m1-scroll-coordinator-initial. Its first sample was pre-React commit (t430/y0/focus empty), followed by t629/y1102/focus method and unchanged t736/y1102; this did not show smooth scrolling under reduction. The temporal test now awaits observable #method focus immediately after Enter, before the first sample: RouteEffects focuses with preventScroll and performs instant reduction scrolling synchronously in the same layout effect. No new settling sleep or geometry wait was introduced; immediate displacement remains <2px, with all offset/restoration assertions intact. Both normal and reduced cases use this commit boundary; existing90ms interval remains an intentional subsequent temporal sample.
+
+The first local follow-up invocation accidentally ran the unchanged assertion because a CRLF-specific textual replacement did not match this LF file; it reproduced the pre-commit race at320 (6 pass/1 fail). Those uncorrected-control artifacts remain at artifacts/m1-scroll/focus-boundary-reduced; the actual two-line correction was inspected in git diff before corrected reruns. Corrected focused run: PLAYWRIGHT_CHANNEL=chrome PLAYWRIGHT_PORT=3021 npm run test:e2e -- e2e/scroll.spec.ts --grep 'anchor temporal reduce,' --workers=2 --output=artifacts/m1-scroll/focus-boundary-reduced-corrected:7 passed,9.8s. Corrected1920 timeline: t395.8/550.2/624.5 all y1102, focus method, method top111.21875, measured header95. Video/trace/PNG/JSON retained in that directory.
+
+Scope remains e2e/scroll.spec.ts and this handoff only; no source/config/dependency changes, helpers, push, main or cloud action. Coordinator owns the final182-case integration rerun and preservation of its initial failure. Follow-up full scroll suite and lint results are recorded below when complete.
+
+Follow-up test commit:84dfd14fb10492c18330079c5e3df8ea6b452b1d. Reduced first/final positions by width:320=1765,390=1672,440=1600,768=1562,1024=1136,1440=1102,1920=1102; method focused in every first sample. Coordinator independent review requested for this scoped correction; final integration rerun remains coordinator-owned.
+
+Final follow-up verification on84dfd14: PLAYWRIGHT_CHANNEL=chrome PLAYWRIGHT_PORT=3021 npm run test:e2e -- e2e/scroll.spec.ts --workers=2 --output=artifacts/m1-scroll/focus-boundary-scroll:42 passed,1.5m,exit0; npm run lint:PASS,exit0. Source unchanged (git diff -- src empty); no tolerance or restoration assertion relaxed. Full182-case rerun intentionally left to coordinator as dispatched.
