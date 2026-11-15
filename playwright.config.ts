@@ -21,9 +21,9 @@ export default defineConfig({
     ...(channel ? { channel } : {}),
     ...(executablePath ? { launchOptions: { executablePath } } : {}),
   },
-  projects: [320, 390, 768, 1024, 1440, 1920].map(width => ({
+  projects: [320, 390, 440, 768, 1024, 1440, 1920].map(width => ({
     name: 'chromium-' + width,
-    use: { ...devices['Desktop Chrome'], viewport: { width, height: 900 } },
+    use: { ...devices['Desktop Chrome'], viewport: { width, height: width === 440 ? 956 : 900 } },
   })),
   webServer: {
     command: 'npm run dev -- --host 127.0.0.1',
@@ -31,3 +31,4 @@ export default defineConfig({
     reuseExistingServer: false,
   },
 });
+

@@ -57,8 +57,13 @@ test('keyboard traversal, skip contrast and menu Escape restoration', async ({ p
       const controlled = await menu.getAttribute('aria-controls');
       expect(controlled).toBeTruthy();
       const navigation = page.locator('[id="' + controlled + '"]');
-      await page.keyboard.press('Tab');
-      await expect(navigation.getByRole('link').first()).toBeFocused();
+      if (route === '/workspace') {
+        await expect(page.getByRole('dialog', { name: 'Workspace navigation', exact: true })).toBeVisible();
+        await expect(navigation.getByRole('button', { name: 'Close workspace navigation' })).toBeFocused();
+      } else {
+        await page.keyboard.press('Tab');
+        await expect(navigation.getByRole('link').first()).toBeFocused();
+      }
       await page.keyboard.press('Escape');
       await expect(menu).toHaveAttribute('aria-expanded', 'false');
       await expect(menu).toBeFocused();
@@ -115,3 +120,4 @@ test('deep landing CTA resets scroll and back restores entry position', async ({
   await expect(page.getByRole('heading', { level: 1 })).toBeInViewport();
   await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
 });
+
