@@ -1,0 +1,12 @@
+.public-record { max-width:850px; margin:56px auto; padding:clamp(20px,4vw,44px); overflow-wrap:anywhere; min-width:0; background:var(--paper); border:1px solid var(--line) }
+.public-record h1 { font:400 clamp(32px,6vw,54px)/1.1 var(--serif) }
+.public-record dl { display:grid; grid-template-columns:minmax(0,1fr); gap:8px }
+.public-record dt { color:var(--muted); font-size:13px; margin-top:12px }
+.public-record dd { margin:0; white-space:pre-wrap; overflow-wrap:anywhere }
+.public-record form,.public-record-actions { display:grid; gap:16px; margin-block:24px }
+.public-record input { max-width:100% }
+.public-record-result { border-top:3px solid var(--line); padding-top:24px }
+.public-record-result[data-status=valid] { border-color:var(--forest) }
+.public-record-result[data-status=replaced] { border-top-style:double; border-top-width:6px }
+.public-record-result[data-status=revoked] { border-top-style:dashed }
+.public-record-result[data-status=expired] { border-top-style:dotted }

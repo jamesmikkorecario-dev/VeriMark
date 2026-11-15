@@ -12,5 +12,6 @@ export function verificationUrl(publicId: string, origin: string = window.locati
 }
 // Scaffold placeholder replaced by task FS-B. See docs/ai/FULL-STACK-CONTRACT.md.
 export async function renderCertificatePdf(input: CertificateInput): Promise<Uint8Array> {
-  throw new Error(`certificate rendering is not implemented yet (${input.publicId})`);
+  return (await import('./render')).createPdf(input);
 }
+

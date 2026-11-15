@@ -1,0 +1,21 @@
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { ApiProvider } from '../../lib/api/context';
+import { ApiError, type DeliveredCredential, type VeriMarkApi } from '../../lib/api/types';
+import ReceivePage from './ReceivePage';
+import { renderCertificatePdf } from '../../lib/certificate';
+vi.mock('../../lib/certificate',()=>({verificationUrl:(id:string)=>`https://example.test/verify/${id}`,renderCertificatePdf:vi.fn()}));
+vi.mock('../../lib/certificate/download',()=>({certificateFilename:()=> 'certificate.pdf',downloadPdf:vi.fn()}));
+const secret='a'.repeat(43);
+const record: DeliveredCredential={publicId:'abcdefghijklmnopqrstuv',status:'valid',issuerDisplayName:'Fictional Institute',recipientDisplayName:'Example Person',title:'Workshop',achievement:'Completed workshop',issuedAt:'2026-01-01T00:00:00Z',expiresAt:null,template:{heading:'Certificate',bodyPrefix:'Presented to',signatoryName:'Example Signer',signatoryTitle:'Director',accent:'forest',orientation:'landscape'}};
+function mount(handler:VeriMarkApi['exchangeDelivery'],hash=secret){window.history.replaceState({},'',`/receive#${hash}`);const api={mode:'demo',exchangeDelivery:vi.fn(handler)} as unknown as VeriMarkApi;const view=render(<ApiProvider api={api}><MemoryRouter><ReceivePage/></MemoryRouter></ApiProvider>);return {api,...view};}
+afterEach(()=>{window.history.replaceState({},'','/');});
+describe('recipient delivery',()=>{
+ it.each(['','bad', 'x'.repeat(44)])('rejects malformed or missing fragment without exchange',async hash=>{const {api}=mount(async()=>record,hash);expect(await screen.findByText('This access link is unavailable. Contact the issuer for a new link.')).toBeInTheDocument();expect(api.exchangeDelivery).not.toHaveBeenCalled();expect(location.hash).toBe('');});
+ it('gives the identical unavailable message for a rejected capability',async()=>{mount(async()=>{throw new ApiError('DELIVERY_UNAVAILABLE','PRIVATE');});expect(await screen.findByText('This access link is unavailable. Contact the issuer for a new link.')).toBeInTheDocument();expect(screen.queryByText('PRIVATE')).not.toBeInTheDocument();});
+ it.each(['valid','expired','revoked','replaced'] as const)('shows actual %s status and no extra fields',async status=>{const {api}=mount(async()=>({...record,status,recipientEmail:'PRIVATE_SENTINEL'}));await screen.findByText('Example Person');expect(api.exchangeDelivery).toHaveBeenCalledWith(secret);expect(location.hash).toBe('');expect(screen.getByText(status==='valid'?'Valid record':status[0].toUpperCase()+status.slice(1))).toBeInTheDocument();expect(screen.queryByText('PRIVATE_SENTINEL')).not.toBeInTheDocument();expect(screen.getByText('Open public verification page')).toHaveAttribute('href',`/verify/${record.publicId}`);});
+ it('retries using the secret in memory',async()=>{let calls=0;const {api}=mount(async()=>{if(!calls++)throw new Error('raw');return record;});await screen.findByText('Try again');fireEvent.click(screen.getByText('Try again'));await screen.findByText('Example Person');expect(api.exchangeDelivery).toHaveBeenNthCalledWith(2,secret);});
+ it('sets no-referrer and restores previous policy',()=>{const meta=document.createElement('meta');meta.name='referrer';meta.content='origin';document.head.append(meta);const {unmount}=mount(()=>new Promise(()=>{}));expect(meta.content).toBe('no-referrer');expect(screen.getByRole('status')).toHaveTextContent('Exchanging');unmount();expect(meta.content).toBe('origin');meta.remove();});
+ it('handles pending, failed, and successful PDF generation',async()=>{mount(async()=>record);await screen.findByText('Example Person');let reject!:(error:Error)=>void;vi.mocked(renderCertificatePdf).mockImplementationOnce(()=>new Promise((_,r)=>{reject=r;}));fireEvent.click(screen.getByText('Download certificate (PDF)'));expect(screen.getByRole('button',{name:/Preparing/})).toBeDisabled();reject(new Error('private'));await screen.findByText(/PDF could not be prepared/);vi.mocked(renderCertificatePdf).mockResolvedValueOnce(new Uint8Array([1]));fireEvent.click(screen.getByText('Download certificate (PDF)'));await waitFor(()=>expect(screen.getByText('Download certificate (PDF)')).toBeEnabled());});
+});
