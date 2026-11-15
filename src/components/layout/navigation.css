@@ -39,7 +39,7 @@
   background: var(--forest2);
   color: var(--paper);
 }
-.workspace-drawer[open] { display: flex; flex-direction: column; animation: drawer-enter 220ms var(--ease); }
+.workspace-drawer[open] { display: flex; flex-direction: column; animation: drawer-enter var(--motion-action) var(--ease); }
 .workspace-drawer::backdrop { background: #0f322999; }
 .drawer-close-row { display: flex; justify-content: flex-end; padding: max(12px, env(safe-area-inset-top)) 12px 0; }
 .drawer-close-row button { color: var(--paper); }
@@ -58,4 +58,14 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .workspace-drawer[open] { animation: none; }
+}
+
+/* Opening only: dismissal and focus restoration remain synchronous. */
+.public-navigation-panel:not([hidden]) { animation: navigation-enter var(--motion-action) var(--ease); }
+.side-nav a, .nav-desktop a, .public-navigation-panel a { transition: background-color var(--motion-action) var(--ease), color var(--motion-action) var(--ease); }
+.side-nav a:hover { background-color: #2b5b49; }
+.nav-desktop a:hover, .public-navigation-panel a:hover { background-color: var(--surface2); }
+@keyframes navigation-enter {
+  from { opacity: .55; }
+  to { opacity: 1; }
 }
