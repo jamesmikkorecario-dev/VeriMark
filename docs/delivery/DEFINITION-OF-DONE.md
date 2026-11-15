@@ -1,17 +1,15 @@
-# Definition of Done
+# VeriMark definition of done
 
-A story is done only when all applicable items are verified:
+Documentation setup is ready for review when scoped docs match inputs, examples stay inactive, ownership/diff/link checks pass, sources/unknowns are recorded and coordinator independently reviews the commit. This does not mean the MVP works.
 
-- [ ] User story and acceptance criteria are satisfied in working software.
-- [ ] Functional behavior includes validation, loading, empty, error, success, denied access.
-- [ ] Authentication/authorization and ownership are enforced at trusted boundaries.
-- [ ] Accessibility/responsive behavior checked for affected screens.
-- [ ] Tests added/updated; relevant checks executed and actual evidence recorded.
-- [ ] Security/privacy/data changes reviewed; no new high-risk unresolved findings.
-- [ ] Docs/API contracts/schema/design system updated where changed.
-- [ ] Logs and errors are safe; cost/dependency impact reviewed.
-- [ ] Independent code review complete; CI required checks green.
-- [ ] Release-specific smoke, rollback, and monitoring criteria documented (when releasing).
-- [ ] Human has authorized merge/release as applicable.
+Implementation slices require:
 
-N/A items require a reason. A green lint check alone is not completion.
+- Working acceptance cases including loading, empty, error, success and denied states.
+- Server/database tenant isolation and private Storage policies passing direct negative tests.
+- Immutable issued snapshots/history and audited replacement/revocation.
+- Relevant unit/component/integration/E2E, a11y/visual/performance and full configured static checks with SHA/commands/results.
+- Limited public fields, no directory, safe logs, PDF/QR comparison wording and database-only trust limitations reviewed.
+- Updated API/schema/env/docs; migration compatibility, dependency/cost impact understood.
+- Independent review resolving critical findings; deviations have owner/rationale/expiry. Missing harness is NOT CONFIGURED, never PASS.
+
+Release additionally needs explicit human approval, privacy review (notice, minimum public fields, retention/correction, legitimate pilot permissions and applicable obligations), hosting eligibility, isolated restore drill, smoke/monitoring owner and compatible rollback. Privacy review is a release prerequisite, not a legal conclusion. No production-readiness claim without evidence.

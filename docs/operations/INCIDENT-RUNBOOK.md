@@ -1,20 +1,15 @@
-# Incident Response / Maintenance
+# VeriMark incident and maintenance runbook
 
-## Severity
+Maintainer is provisional incident owner; contacts and coverage must be assigned before pilot. No incident tooling configured.
 
-- SEV1: privacy/security exposure, widespread outage, irreversible data risk.
-- SEV2: major feature failure or high error rate.
-- SEV3: localized, recoverable defect.
+- SEV1: private evidence/recipient leak, tenant authorization bypass, false valid status, compromised issuance or irreversible record loss.
+- SEV2: verification unavailable, issuance/download failures, paused backend or quota exhaustion.
+- SEV3: localized recoverable presentation/usability issue without data exposure.
 
-## Response
+Record start time, safe symptom evidence, affected environment/SHA, severity and owner. Stop risky changes; preserve sanitized logs and immutable lifecycle history. Determine provider outage/pause versus app failure. Show unable to verify during outage; never manufacture valid/not-found status.
 
-1. Identify owner, impact, start time, severity; stop risky changes.
-2. Preserve evidence without secrets; confirm known-good deployment and DB state.
-3. Contain: disable affected capability, revoke exposed credential *with authorization*, or roll back code safely.
-4. Communicate status and user impact; escalate if third-party incident.
-5. Verify recovery with primary journey and negative authorization checks.
-6. Write a factual blameless postmortem: timeline, root cause (or unknown), action owners, prevention tests, follow-up deadline.
+Contain affected capability using approved controls; human approval is required for production rollback, credential rotation, shared migrations or destructive recovery. Do not delete credentials/audit to conceal damage or enable public evidence access as a workaround. Escalate costs rather than auto-upgrading. External notifications require authorized owner and privacy review; do not send messages autonomously.
 
-## Maintenance cadence
+Recover using ../delivery/DEPLOYMENT-AND-ROLLBACK.md: compatible artifact/forward fix, separately approved restore, reconcile post-backup issuance. Verify synthetic public states, private access denial, cross-tenant isolation, revoked/replaced freshness and PDF/link access before resuming. Record recovery evidence, residual risk and human decision. Postmortem records impact, timeline, cause or unknowns, owners/deadlines and prevention tests without personal data.
 
-Monthly dependencies/security/quotas, periodic backup restore exercises, accessibility regression, user-feedback review. Set cadence based on risk and actual users.
+Weekly pilot: quotas, failed verification and recovery/export freshness. Monthly: dependencies/advisories, issuer access review, privacy-safe logging, accessibility regression and backup restore exercise into isolated environment. Before each schema release: compatibility/restore drill and immutable snapshot check. Cadences/RPO/RTO are proposals requiring owner acceptance; no backups have been created or tested.

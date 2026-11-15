@@ -1,26 +1,9 @@
-# Git Branching and Parallel AI Work
+# VeriMark Git and ownership
 
-## Default: short-lived branches against protected `main`
+Use short-lived isolated branches and PRs to protected main; no standing dev branch needed. Main protection is required, not verified host configuration. No remote push, merge or deployment is authorized by this document.
 
-`main` is stable/production. Implement from updated `main` in `feat/<ticket>-<slug>`, `fix/<ticket>-<slug>`, `refactor/`, `test/`, `docs/`, or `chore/`; open PRs into `main`. No direct pushes to protected branches. Use a separate Git worktree for concurrent coding agents, each with one owner/branch, and avoid simultaneous edits to shared files.
+Initialization coordinator owns init/verimark-initialization; four isolated child workers own product/workflow, architecture/security, design, and quality/delivery. INIT-D owns delivery/operations, test strategy/performance, .github, templates, .env.example and its handoff; security threat model belongs to architecture/security. Coordinator reviews and sequentially cherry-picks local commits; reconcile shared contracts before integration. Never reset/clean/rebase/delete another worker's worktree.
 
-## Optional `dev` integration branch
+Future branches: feat/<task>-<slug>, fix/<task>-<slug>, docs/<task>-<slug>. Record task, goal, acceptance, ownership, risks and checks before edits. Use small conventional commits. Task-scoped local commits are authorized during initialization; remote/main operations need explicit approval.
 
-Only if you need staged integration: feature → PR to `dev` → release PR `dev` → `main`. Keep `dev` up to date with `main`; do not assume preview deployments use production credentials. Complexity costs time: for a solo MVP, direct PRs into `main` are usually simpler.
-
-## PR quality gate
-
-- Scoped task + acceptance checklist; diff references requirement IDs.
-- Lint/type/build, relevant tests and authorized integration/E2E evidence.
-- Independent review, especially security/schema changes.
-- Docs, migration and env changes identified.
-- No secrets, generated artifacts or unrelated formatting churn.
-- Human approval before merging / deploying.
-
-## Commit convention
-
-Examples: `feat(auth): add email sign-in flow`, `fix(rls): restrict document reads`, `test(forms): cover invalid inputs`. Small coherent commits; no fabricated co-author attribution.
-
-## Worktree rule
-
-The orchestrator assigns an explicit branch and owned file paths; integration owner reconciles changes. Never reset, clean, rebase, delete, or force-push another agent's worktree without permission.
+PRs identify behavior, tenant/privacy/schema impacts, exact verification and rollback compatibility. Independent review is required, especially auth/file/release changes. Coordinator supplies INIT-D review; no own helper workers. Commit synthetic fixtures only, never recipient CSVs or secrets.

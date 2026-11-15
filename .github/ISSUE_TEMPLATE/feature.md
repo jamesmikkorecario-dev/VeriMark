@@ -1,16 +1,20 @@
 ---
-name: Feature
-about: A user-outcome-oriented feature request
+name: VeriMark feature
+about: Scoped credential workflow outcome with testable acceptance
 ---
 
-## Problem and target user
+## Problem, user and requirement/story ID
 
-## User story ID / product requirement
+Issuer, recipient or verifier outcome; link canonical PRD requirement.
 
-## Acceptance criteria (Given / When / Then)
+## Acceptance (Given / When / Then)
 
-## Non-goals
+Include successful flow, denied cross-tenant/role access, failure states, private evidence and minimal public fields where affected.
 
-## Design, data, security, and test implications
+## Scope and exclusions
 
-## Dependencies and priority
+MVP: database-only verification, PDF downloads and recipient-link export. Bulk credential mail, public directory, wallet and signing require separate scope approval.
+
+## Delivery packet
+
+Owner/branch/files, dependencies, API/schema/accessibility impacts, synthetic fixtures, focused/full verification commands, cost/privacy risk and rollback. Distinguish implemented tools from NOT CONFIGURED scripts.

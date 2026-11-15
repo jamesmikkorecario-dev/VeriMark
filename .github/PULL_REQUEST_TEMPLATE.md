@@ -1,27 +1,23 @@
-## Why / story ID
+## VeriMark problem and acceptance
 
-[Problem solved and link to task]
+Task/story ID, user outcome, acceptance cases and owned scope:
 
-## Scope
+## Change and risk
 
-- Changed behavior:
-- Unchanged behavior/contracts:
-- Schema, security, API, env, dependency or cost changes:
+Tenant authorization/private evidence/public fields; immutable issuance/revocation/replacement; API/schema/env/dependencies/cost; PDF/QR and recipient-link export effects:
 
-## Verification evidence
+## Actual verification
 
-| Check | PASS/FAIL/SKIPPED/NOT RUN | Evidence |
+Record command, SHA, environment and evidence; use PASS/FAIL/SKIPPED/NOT RUN/NOT CONFIGURED. No package.json currently; do not invent results.
+
+| Gate | Result | Evidence |
 | --- | --- | --- |
-| Lint | NOT RUN | |
-| Types | NOT RUN | |
-| Tests | NOT RUN | |
-| Build | NOT RUN | |
-| Manual/a11y | NOT RUN | |
+| Static/build | NOT CONFIGURED | |
+| Unit/component | NOT CONFIGURED | |
+| DB/RLS/Storage negative | NOT CONFIGURED | |
+| E2E/a11y/visual/performance | NOT CONFIGURED | |
+| Documentation checks | NOT RUN | |
 
-## Risks and rollout
+## Review and release
 
-- Security/privacy and permission impact:
-- Migration/backfill/rollback:
-- Screenshots/preview:
-- Unresolved issues:
-- Requested review/approval:
+Independent reviewer/findings; privacy/eligibility review; compatible schema/rollback; safe monitoring; unresolved risks and owner; exact requested approval. No main merge, remote push or production deployment is implied by PR creation.

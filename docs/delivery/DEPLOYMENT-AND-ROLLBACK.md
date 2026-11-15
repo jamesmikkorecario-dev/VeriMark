@@ -1,28 +1,23 @@
-# Deployment, Verification, and Rollback Runbook
+# VeriMark release and recovery
+
+No deployment is authorized or verified. Release owner records approver, UTC time, commit/artifact SHA, environment, migration IDs, checks, backup reference and recovery owner.
 
 ## Preflight
 
-- [ ] Scope, commit SHA, PR and required reviews verified.
-- [ ] Relevant tests, security, performance, RLS, accessibility gates passed or deviations approved.
-- [ ] Environment vars/redirect URLs/webhooks checked; no credentials logged.
-- [ ] Schema migration evaluated for backward compatibility and recovery.
-- [ ] Backup/restore plan ready for data-impacting changes.
-- [ ] Explicit human approval to deploy to production recorded.
+1. Independent review and configured static, RLS-negative, lifecycle, E2E, a11y/visual/performance gates pass.
+2. Privacy review, legitimate issuer/pilot permissions, limited public fields, retention/correction process and database-only verification wording are accepted. Do not infer accreditation or legal compliance.
+3. COST-GUARDRAILS eligibility/quotas, production branch/automatic deploy triggers, env/callback isolation and safe logs are confirmed.
+4. Encrypt off-site DB exports and private Storage objects separately with restricted access. Restore into isolated environment before real issuance. Proposed pilot RPO 24 h/RTO 1 working day need human acceptance; free availability is not guaranteed.
+5. Record explicit production authorization; local commits never imply remote push/merge/deploy approval.
 
-## Controlled deployment
+## Rollout and smoke
 
-1. Confirm configured production branch and preview/prod separation.
-2. Merge/push only after approval, then record deployed commit and deployment link.
-3. Smoke test sign-in, primary journey, authorization-negative path, error behavior.
-4. Inspect logs and user-facing reliability signals (excluding sensitive contents).
-5. Report result as verified / failed / cannot verify with evidence.
+Approved additive schema precedes compatible app release. Published migrations are immutable; correct them with new migrations. Preserve issued snapshots, IDs, replacement links, lifecycle/audit events and status semantics across old/new versions. Delay destructive contraction until compatibility window and approved recovery plan.
+
+After authorized release verify sign-in, synthetic approved-issuer issuance, PDF/QR, recipient-link export, public status, revoke/replace, cross-tenant denial and private evidence denial. Production probes need approved synthetic fixtures. Record deployment URL/result, status freshness and safe errors; release owner monitors at least 30 minutes.
 
 ## Recovery
 
-- Revert or promote previous known-good frontend release when safe.
-- **Code rollback does not automatically undo DB changes**; use forward fix or approved recovery procedure.
-- Communicate impact and incident owner; verify successful recovery.
+Any leak, tenant bypass, duplicate issuance or false valid status blocks release and triggers incident response immediately. Proposed reliability trigger: >5% critical request failures for 5 minutes with >=20 requests, or two consecutive synthetic verification failures; no traffic does not prove recovery.
 
-## Release record
-
-Date, approver, commit, migrations, environment, checks, monitoring, incident/rollback link.
+Human approves production rollback/promotion after confirming previous artifact works with current schema/API. Frontend rollback never undoes data/migrations. Prefer compatible forward fix; never erase legitimate issuance/revocation events to recover code. DB restore is exceptional approved recovery: reconcile post-backup issuance and preserve evidence/status before reopening writes. Repeat smoke/negative checks and record recovery/follow-up.

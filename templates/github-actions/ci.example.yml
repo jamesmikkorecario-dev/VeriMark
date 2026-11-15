@@ -1,25 +1,27 @@
-# NOT ACTIVE: rename to ci.yml only after creating matching package scripts.
-# Recommended starting PR pipeline for a single-package React TypeScript app.
-name: Example CI
+# INACTIVE: kept outside .github/workflows; no package.json/scripts currently exist.
+# Proposal only. Activation needs actual scripts, pinned runtime/action SHAs,
+# isolated synthetic tests, least-privilege review and locally passing evidence.
+name: VeriMark proposed checks
 on:
   pull_request:
-  push:
-    branches: [main]
 permissions:
   contents: read
 jobs:
   checks:
     runs-on: ubuntu-latest
     steps:
+      # Replace these version tags with independently reviewed immutable SHAs.
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '22' # Proposal; verify supported pinned runtime at scaffold.
           cache: npm
       - run: npm ci
+      - run: npm run format:check
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run test
       - run: npm run build
-# Add database integration/E2E jobs only once test infrastructure and isolated secrets exist.
-# Pin GitHub Action SHAs per your org's policy and verify supported Node version.
+# Required integration/RLS/Storage-negative, E2E/a11y/visual/performance and
+# dependency/secret gates must be implemented before CI/release activation.
+# No cloud connection, deployment, production secret or bulk-email job here.

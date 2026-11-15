@@ -1,23 +1,9 @@
-# Continuous Integration and Delivery
+# VeriMark CI/CD activation plan
 
-## PR pipeline
+Current: no package.json, lockfile or app scripts; CI is INACTIVE. .github/workflows contains documentation only. The example under templates/github-actions is outside workflow discovery; do not move it merely to display a green badge.
 
-1. Install reproducibly from lockfile.
-2. Lint and typecheck.
-3. Run unit/component suite.
-4. Build production artifact.
-5. Run integration/RLS tests against isolated test environment when configured.
-6. Run critical Playwright flows; upload test artifacts without secrets.
-7. Security/dependency checks where available.
+Activation needs a separately authorized scaffold, pinned runtime/lockfile, matching scripts passing locally, independent review, isolated synthetic fixtures and reviewed permissions/artifact retention. Pin actions to reviewed immutable SHAs at activation; example runtime is only a proposal. Do not skip missing scripts or use continue-on-error to bypass gates.
 
-See `templates/github-actions/ci.example.yml` for a **nonactive template**; rename after verifying package scripts and branch strategy.
+Future PR sequence: install; formatting/lint/types; unit/components; build; isolated DB/RLS/API/Storage negative tests; E2E/axe/reviewed visuals; performance; dependency and secret scanning. Create checks before making them branch requirements. Untrusted fork PRs receive no privileged secrets; never execute untrusted code under pull_request_target. Artifacts contain synthetic data only; proposed retention 7 days.
 
-## Deploy flow
-
-PR → Vercel Preview with **preview-safe** env/data → checks and human preview → approved merge to configured production branch → Vercel Production → post-deploy smoke/monitoring → rollback if gate fails.
-
-Vercel may deploy automatically on pushes to the configured production branch. **Before connecting Git**, verify which branch triggers real production and set branch protection. An AI agent must not approve release for you.
-
-## Secrets
-
-Use provider environment settings, least-privilege tokens, separate preview/prod resources if feasible, no real secrets in CI logs/PR comments.
+Preview publication and Git integration require approval, eligibility review and isolated backend. Before connecting Vercel Git, verify production branch and automatic deployment triggers; an approved merge may trigger release. Production follows DEPLOYMENT-AND-ROLLBACK.md. This setup connects no services.
