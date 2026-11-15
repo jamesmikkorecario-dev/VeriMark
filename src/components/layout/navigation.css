@@ -1,0 +1,61 @@
+/* Navigation layers sit above page content; the workspace dialog uses the top layer. */
+.public-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--canvas);
+}
+
+.public-navigation { position: relative; }
+.navigation-trigger { width: 44px; height: 44px; padding: 0; flex: none; }
+.public-navigation-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(300px, calc(100vw - 34px));
+  max-height: 70dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 12px;
+  background: var(--canvas);
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 25px #12332220;
+}
+.public-navigation-panel nav { display: flex; flex-direction: column; gap: 4px; }
+.public-navigation-panel a { display: block; padding: 14px 12px; color: var(--ink); }
+.workspace-mobile-brand { display: none; }
+.workspace-drawer {
+  position: fixed;
+  inset: 0 auto 0 0;
+  margin: 0;
+  padding: 0 0 env(safe-area-inset-bottom);
+  border: 0;
+  width: min(360px, calc(100vw - 32px));
+  max-width: none;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--forest2);
+  color: var(--paper);
+}
+.workspace-drawer[open] { display: flex; flex-direction: column; animation: drawer-enter 220ms var(--ease); }
+.workspace-drawer::backdrop { background: #0f322999; }
+.drawer-close-row { display: flex; justify-content: flex-end; padding: max(12px, env(safe-area-inset-top)) 12px 0; }
+.drawer-close-row button { color: var(--paper); }
+.workspace-drawer .sidebar-top { padding-top: 12px; }
+.workspace-drawer .side-nav a { flex-shrink: 0; text-decoration: none; }
+.workspace-drawer .side-nav svg { flex: none; }
+.workspace-drawer .side-nav span,
+.workspace-drawer .organization-context div { min-width: 0; overflow-wrap: anywhere; }
+.workspace-drawer .sidebar-footer { flex-shrink: 0; }
+@keyframes drawer-enter { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@media (max-width: 800px) {
+  .workspace-header { position: sticky; top: 0; z-index: 30; }
+  .workspace-mobile-brand { display: block; margin-right: auto; }
+  .workspace-header .workspace-breadcrumb,
+  .workspace-header .demo-bubble { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workspace-drawer[open] { animation: none; }
+}
