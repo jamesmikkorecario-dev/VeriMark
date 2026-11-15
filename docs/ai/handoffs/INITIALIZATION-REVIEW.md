@@ -1,6 +1,6 @@
 # Initialization integration review
 
-Status: IN PROGRESS. Local integration branch: init/verimark-initialization. Main remains unchanged at 197711b. No remote push, production code, provisioning or deployment is authorized or performed.
+Status: INITIALIZATION DELIVERED FOR HUMAN REVIEW; visual selection pending. Local integration branch: init/verimark-initialization. Main remains unchanged at 197711b. No remote push, production code, provisioning or deployment is authorized or performed.
 
 ## Worker ownership and integration
 
@@ -10,7 +10,7 @@ All child worktrees are under C:/Users/James/orca/workspaces/VeriMark/. Each is 
 | --- | --- | --- |
 | init-product-workflow | Product, eleven milestones, backlog, root instructions, eleven portable agents, development prompt | bd7b07b, a52e770, 66917fe |
 | init-architecture-security | Stack, boundaries, contracts, schema, RLS, threat model, SECURITY | 14de405, 837cd1b |
-| init-visual-design | Three six-screen offline concepts, browser evidence, frontend/design docs | cf19ea6, 93e5f7f, b5c3d0, d92f21e; final review pending |
+| init-visual-design | Three six-screen offline concepts, browser evidence, frontend/design docs | cf19ea6, 93e5f7f, b5c3d0, d92f21e; independently reviewed |
 | init-quality-delivery | Test/performance plan, delivery/operations, inactive CI, setup guide, budget | d3c2e3d, 83f57c4 |
 
 Sequential cherry-picks preserved worker histories and files. Coordinator commits reconcile cross-document policy and add validation/export tools. Individual handoffs record exact worker checks. Isolated worktrees are retained for review.
@@ -19,7 +19,7 @@ Sequential cherry-picks preserved worker histories and files. Coordinator commit
 
 Architecture worker independently reviewed sibling work against coordinator 27b085b and requested changes. Main reviewed architecture authorization, capability delivery, immutable issuance, concurrency, public DTO and storage boundaries; no implementation/security-test claim follows from documentation review.
 
-- Prototype selecting original Alex ID after a new Jamie issuance showed Jamie's claims: corrected in b5c3d0 with original/new/unknown-ID regressions. Re-review found a related dashboard link retaining the prior selected ID; explicit record navigation corrected in d92f21e with dashboard-after-original and landing-after-new regressions; independent final review pending.
+- Prototype selecting original Alex ID after a new Jamie issuance showed Jamie's claims: corrected in b5c3d0 with original/new/unknown-ID regressions. Re-review found a related dashboard link retaining the prior selected ID; explicit record navigation corrected in d92f21e with dashboard-after-original and landing-after-new regressions; independent final review approved for exploration.
 - Frontend route/state starter placeholders: all four frontend contracts customized in b5c3d0; combined validator PASS.
 - M04 depended on template authoring at M05, creating a cycle: corrected to a reviewed fixture template at M04 and full authoring at M05.
 - PRD role/state drift: proposed reserved reviewer with no grants is now explicit D-014, pending human scope confirmation; replaced is explicit in proposed public outcomes. Self-approval remains undecided.
@@ -38,6 +38,10 @@ Human decisions still required: visual direction; reviewer/self-approval policy;
 
 ## Final verification and export
 
-Combined validator PASS: 24 local Markdown targets, starter markers, preview files, inactive CI and tracked-content boundaries. Whitespace and prototype script syntax checks PASS. Updated browser evidence inspected: 36 screenshots, 435 successful commands, 21 zero-violation axe audits. A provisional ZIP (152 entries, 3,096,566 bytes, zero forbidden paths) was generated from d200d81; it must be regenerated after final review. Final correction review and handoff remain PENDING. Main visually inspected ledger landing desktop, signal details mobile and commons dashboard desktop. Mobile dashboard table pointer activation is unverified after exploratory activation did not navigate; focused link plus Enter passes. No native device, screen-reader or full WCAG conformance claim.
+Combined validator PASS: 24 local Markdown targets, starter markers, preview files, inactive CI and tracked-content boundaries. Whitespace and prototype script syntax checks PASS. Updated browser evidence inspected: 36 screenshots, 435 successful commands, 21 zero-violation axe audits. A provisional ZIP (152 entries, 3,096,566 bytes, zero forbidden paths) was generated from d200d81; it must be regenerated after final review. Final correction review APPROVED for exploration in task task_8ba89e088cce / dispatch ctx_a7432bae5a0e, reviewing integrated f7a4b47. No unresolved blocking review findings remain for this limited initialization. Mobile pointer usability and production acceptance are excluded. Final ZIP is regenerated from the report commit; exact archive SHA-256 is in artifacts/VeriMark-workflow.zip.sha256, outside the archive to avoid a self-referential digest. Main visually inspected ledger landing desktop, signal details mobile and commons dashboard desktop. Mobile dashboard table pointer activation is unverified after exploratory activation did not navigate; focused link plus Enter passes. No native device, screen-reader or full WCAG conformance claim.
 
 Application install/dev/lint/typecheck/unit/integration/E2E/build are NOT CONFIGURED. Prototype browser tests are separate design checks. CI remains inactive. Preserved setup inputs are unchanged. Final export will use tools/Export-Workflow.ps1 against committed allowlisted paths only, excluding Git metadata, credentials, dependencies and unrelated files.
+
+## Human review entry points
+
+Open prototypes/design/index.html for all three six-screen concepts. Civic Ledger is recommended for usability testing, not selected on the owner's behalf. Review docs/design/VISUAL-DIRECTIONS.md and DESIGN-REVIEW.md, product/PRD.md and MVP-ROADMAP.md, architecture/adr/0003-mandatory-stack.md, ai/DECISION-LOG.md and START_DEVELOPMENT_PROMPT.md. Future implementation must be separately authorized after the design gate. No feature milestones are marked implemented.
