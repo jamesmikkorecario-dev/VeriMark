@@ -1,4 +1,5 @@
 import AxeBuilder from '@axe-core/playwright';
+import { settleFiniteMotion } from './motion-helpers';
 import { expect, test, type Page } from '@playwright/test';
 
 const cases = [
@@ -15,6 +16,7 @@ for (const item of cases) {
     await page.goto(item.route);
     const trigger = page.locator('button[aria-controls="' + item.id + '"]');
     const mobile = page.viewportSize()!.width <= 800;
+    await settleFiniteMotion(page);
     await page.screenshot({ path: info.outputPath('closed.png'), fullPage: true });
     await scroll(page);
     if (!mobile) {
@@ -86,6 +88,7 @@ test('workspace modal traps focus, isolates background, preserves scroll and inl
   test.skip(page.viewportSize()!.width > 800, 'Mobile drawer only');
   await page.goto('/workspace');
   await scroll(page);
+  await settleFiniteMotion(page);
   await page.evaluate(() => { document.body.style.paddingRight = '3px'; document.body.style.overflowX = 'clip'; });
   const before = await page.evaluate(() => ({ y: scrollY, style: document.body.getAttribute('style'), top: document.querySelector('main')!.getBoundingClientRect().top, x: document.querySelector('main')!.getBoundingClientRect().x, width: document.querySelector('main')!.getBoundingClientRect().width }));
   const trigger = page.getByRole('button', { name: 'Open workspace navigation', exact: true });
@@ -156,3 +159,4 @@ test('public open panel follows sticky header while scrolling and dismisses on f
   await expect(panel).toBeHidden();
   await expect(trigger).toHaveAccessibleName('Open navigation');
 });
+

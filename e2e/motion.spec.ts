@@ -1,3 +1,4 @@
+import { writeFile } from 'node:fs/promises';
 import { expect, test, type Page } from '@playwright/test';
 
 // Reproduce: $env:PLAYWRIGHT_CHANNEL='chrome'; npx playwright test e2e/motion.spec.ts --project=chromium-1440 --project=chromium-390 --workers=1
@@ -17,7 +18,7 @@ async function instrument(page: Page) {
   });
 }
 async function sample(page: Page, selector: string) {
-  return page.locator(selector).evaluate(element => {
+  return page.locator(selector).first().evaluate(element => {
     const css = getComputedStyle(element);
     return { time: performance.now(), opacity: css.opacity, transform: css.transform, animations: element.getAnimations({ subtree: true }).map(a => ({ state: a.playState, time: a.currentTime, timing: a.effect?.getComputedTiming() })) };
   });
@@ -32,19 +33,25 @@ for (const route of ['/', '/workspace']) {
   test(`${route} temporal entrance, refresh replay and live reduction`, async ({ page }, info) => {
     await instrument(page);
     await page.goto(route, { waitUntil: 'domcontentloaded' });
-    const selector = route === '/' ? '.hero-content' : '.page-heading';
+    const selector = route === '/' ? '[data-motion=hero] > :first-child' : '[data-motion=dashboard-heading]';
+    const stagedSelector = route === '/' ? '[data-motion=credential]' : '[data-motion=metric]';
+    const stagedStart = await sample(page, stagedSelector);
     const timeline = [await sample(page, selector)];
     await page.screenshot({ path: info.outputPath('entrance-start.png') });
     await page.waitForTimeout(100); // Deliberate temporal sample, not a settling workaround.
+    await page.screenshot({ path: info.outputPath('entrance-middle.png') });
     timeline.push(await sample(page, selector));
     await settle(page);
     timeline.push(await sample(page, selector));
     await page.screenshot({ path: info.outputPath('entrance-settled.png') });
     const evidence = await page.evaluate(() => (window as unknown as { motionEvidence: { events: {event:string}[]; defaultReduced:boolean; shifts:number[] } }).motionEvidence);
-    await info.attach('timeline.json', { body: JSON.stringify({ route, timeline, evidence }, null, 2), contentType: 'application/json' });
+    await writeFile(info.outputPath('timeline.json'), JSON.stringify({ route, timeline, stagedStart, evidence }, null, 2));
+    await info.attach('timeline.json', { body: JSON.stringify({ route, timeline, stagedStart, evidence }, null, 2), contentType: 'application/json' });
     expect(evidence.defaultReduced).toBe(false);
     expect(evidence.events.filter(e => e.event === 'animationstart').length).toBeGreaterThan(0);
+    expect(stagedStart.animations.some(a => a.state === 'running')).toBe(true);
     expect(timeline[0].animations.length).toBeGreaterThan(0);
+    expect(timeline[0].transform).not.toBe(timeline[2].transform);
     expect(timeline[0].animations.map(a => a.time)).not.toEqual(timeline[1].animations.map(a => a.time));
     expect(timeline[2].opacity).toBe('1');
     expect(timeline[2].animations.every(a => a.state === 'finished')).toBe(true);
@@ -53,6 +60,8 @@ for (const route of ['/', '/workspace']) {
     if (route === '/workspace') {
       await page.getByLabel('Search records').fill('Alex');
       expect((await sample(page, selector)).animations.every(a => a.state === 'finished')).toBe(true);
+      expect((await sample(page, '[data-motion=dashboard-content]')).animations.every(a => a.state === 'finished')).toBe(true);
+      expect((await sample(page, '[data-motion=metric]')).animations.every(a => a.state === 'finished')).toBe(true);
       await page.getByRole('button', { name: 'Reset filters' }).click();
     }
     await page.reload({ waitUntil: 'domcontentloaded' });
@@ -67,9 +76,15 @@ for (const route of ['/', '/workspace']) {
     if (page.viewportSize()!.width <= 800) {
       const trigger = page.getByRole('button', { name: route === '/' ? 'Open navigation' : 'Open workspace navigation', exact: true });
       await trigger.click();
+      const panel = route === '/' ? '#public-navigation' : '#workspace-navigation';
+      const menuStart = await sample(page, panel);
+      expect(menuStart.animations.some(a => a.state === 'running')).toBe(true);
       await page.screenshot({ path: info.outputPath('menu-open.png') });
       await settle(page);
+      const menuEnd = await sample(page, panel);
+      await writeFile(info.outputPath('menu-timeline.json'), JSON.stringify({ menuStart, menuEnd }, null, 2));
       await page.keyboard.press('Escape');
+      await expect(page.locator(panel)).toBeHidden();
       await expect(trigger).toBeFocused();
     }
   });
@@ -83,18 +98,30 @@ test('promotional reveal runs once, route reentry resets and no observer keeps c
   await card.scrollIntoViewIfNeeded();
   await page.waitForTimeout(100);
   const running = await sample(page, '.method-card');
+  await page.screenshot({ path: info.outputPath('reveal-running.png') });
   await settle(page);
   const settled = await sample(page, '.method-card');
+  await page.screenshot({ path: info.outputPath('reveal-settled.png') });
   await page.evaluate(() => scrollTo(0, 0));
   await card.scrollIntoViewIfNeeded();
   const repeated = await sample(page, '.method-card');
+  await writeFile(info.outputPath('reveal-timeline.json'), JSON.stringify({ running, settled, repeated }, null, 2));
   await info.attach('reveal-timeline.json', { body: JSON.stringify({ running, settled, repeated }, null, 2), contentType: 'application/json' });
   expect(running.animations.some(a => a.state === 'running')).toBe(true);
+  expect(running.transform).not.toBe(settled.transform);
+  expect(settled.transform).toBe('none');
   expect(repeated.animations.every(a => a.state === 'finished')).toBe(true);
+  await expect(card).toHaveAttribute('data-reveal-state', 'complete');
   await page.goto('/workspace');
-  await page.locator('a[href="/"]').first().click();
+  if (page.viewportSize()!.width <= 800) await page.getByRole('button', { name: 'Open workspace navigation', exact: true }).click();
+  await page.getByRole('link', { name: 'Public website', exact: true }).click();
   await expect(page).toHaveURL('/');
-  expect((await sample(page, '.hero-content')).animations.length).toBeGreaterThan(0);
+  expect((await sample(page, '[data-motion=hero]')).animations.length).toBeGreaterThan(0);
+  await expect(card).toHaveAttribute('data-reveal-state', 'pending');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(page.locator('[data-reveal-state=pending]')).toHaveCount(0);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await expect(page.locator('[data-reveal-state=pending]')).toHaveCount(0);
   await page.addInitScript(() => { Object.defineProperty(window, 'IntersectionObserver', { value: undefined, configurable: true }); });
   await page.reload();
   await settle(page);
@@ -119,6 +146,23 @@ test('hover and press feedback changes over time and reduced mode removes it', a
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await button.hover();
   expect(await button.evaluate(el => getComputedStyle(el).transform)).toBe('none');
+  expect(await button.locator('svg').evaluate(el => getComputedStyle(el).transform)).toBe('none');
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/workspace');
+  await settle(page);
+  const row = page.locator('.record-row').first();
+  const idleBackground = await row.evaluate(el => getComputedStyle(el).backgroundColor);
+  await row.hover();
+  await expect.poll(() => row.evaluate(el => getComputedStyle(el).backgroundColor)).not.toBe(idleBackground);
+  const action = row.locator('.record-open');
+  await action.hover();
+  await expect.poll(() => action.locator('svg').evaluate(el => getComputedStyle(el).transform)).not.toBe('none');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  expect(await action.locator('svg').evaluate(el => getComputedStyle(el).transform)).toBe('none');
+  await page.mouse.down();
+  expect(await action.locator('svg').evaluate(el => getComputedStyle(el).transform)).toBe('none');
+  await page.mouse.move(0, 0);
+  await page.mouse.up();
 });
 
 test('reduced initial mount and unavailable observer retain all promotional content', async ({ page }) => {
@@ -132,4 +176,11 @@ test('reduced initial mount and unavailable observer retain all promotional cont
     }
   }
 });
+
+
+
+
+
+
+
 

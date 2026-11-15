@@ -1,4 +1,5 @@
 import AxeBuilder from '@axe-core/playwright';
+import { settleFiniteMotion } from './motion-helpers';
 import { expect, test } from '@playwright/test';
 
 test('public and workspace responsive accessibility and screenshots', async ({ page }, testInfo) => {
@@ -7,6 +8,7 @@ test('public and workspace responsive accessibility and screenshots', async ({ p
     await expect(page.getByRole('main')).toBeFocused();
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await settleFiniteMotion(page);
     const audit = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
     await testInfo.attach(route === '/' ? 'landing-axe' : 'workspace-axe', { body: JSON.stringify(audit.violations, null, 2), contentType: 'application/json' });
     expect.soft(audit.violations).toEqual([]);
@@ -119,4 +121,5 @@ test('deep landing CTA resets scroll and back restores entry position', async ({
   await expect(page.getByRole('heading', { level: 1 })).toBeInViewport();
   await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
 });
+
 
