@@ -64,3 +64,10 @@ test.each(['wheel', 'scrollend'])('manual input or completed scroll clears inten
   preference.matches = true; preference.dispatchEvent(new Event('change'));
   expect(window.scrollTo).not.toHaveBeenCalled();
 });
+test.each([
+  ['/sign-in', 'Sign in | VeriMark'], ['/invite', 'Join an organization | VeriMark'], ['/verify', 'Verify a credential | VeriMark'],
+  ['/verify/demoValidRecord0000001', 'Verification result | VeriMark'], ['/receive', 'Your credential | VeriMark'],
+  ['/app', 'Overview | VeriMark workspace'], ['/app/organization', 'Organization | VeriMark workspace'], ['/app/credentials/c1', 'Credential | VeriMark workspace'],
+  ['/app/unknown', 'Page not found | VeriMark'],
+])('full-stack route %s has its own title and focuses main', (path, title) => { render(<Fixture path={path} />); expect(document.title).toBe(title); expect(screen.getByRole('main')).toHaveFocus(); });
+test('a secret fragment never reaches the document title', () => { render(<Fixture path={'/receive#' + 'S'.repeat(43)} />); expect(document.title).toBe('Your credential | VeriMark'); });
