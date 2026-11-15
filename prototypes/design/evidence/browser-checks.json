@@ -333,7 +333,7 @@
       "--json"
     ],
     "status": 0,
-    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":47,\"incomplete\":1,\"passes\":42,\"violations\":0},\"incomplete\":[{\"help\":\"Elements must meet minimum color contrast ratio thresholds\",\"helpUrl\":\"https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI\",\"id\":\"color-contrast\",\"impact\":\"serious\",\"nodeCount\":4,\"nodes\":[{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<th>Status</th>\",\"target\":[\"th:nth-child(3)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<th>Record</th>\",\"target\":[\"th:nth-child(4)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<td>Valid (demo)</td>\",\"target\":[\"td:nth-child(3)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<a href=\\\"#details\\\">View details</a>\",\"target\":[\"td:nth-child(4) > a[href$=\\\"#details\\\"]\"]}],\"tags\":[\"cat.color\",\"wcag2aa\",\"wcag143\",\"TTv5\",\"TT13.c\",\"EN-301-549\",\"EN-9.1.4.3\",\"ACT\",\"RGAAv4\",\"RGAA-3.2.1\"]}],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/ledger/index.html#dashboard\",\"violations\":[]},\"error\":null}\n",
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":47,\"incomplete\":1,\"passes\":42,\"violations\":0},\"incomplete\":[{\"help\":\"Elements must meet minimum color contrast ratio thresholds\",\"helpUrl\":\"https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI\",\"id\":\"color-contrast\",\"impact\":\"serious\",\"nodeCount\":4,\"nodes\":[{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<th>Status</th>\",\"target\":[\"th:nth-child(3)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<th>Record</th>\",\"target\":[\"th:nth-child(4)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<td>Valid (demo)</td>\",\"target\":[\"td:nth-child(3)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<a href=\\\"#details?id=DEMO-A8K72\\\">View details</a>\",\"target\":[\"a[href=\\\"#details?id=DEMO-A8K72\\\"]\"]}],\"tags\":[\"cat.color\",\"wcag2aa\",\"wcag143\",\"TTv5\",\"TT13.c\",\"EN-301-549\",\"EN-9.1.4.3\",\"ACT\",\"RGAAv4\",\"RGAA-3.2.1\"]}],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/ledger/index.html#dashboard\",\"violations\":[]},\"error\":null}\n",
     "stderr": ""
   },
   {
@@ -735,6 +735,72 @@
   {
     "args": [
       "eval",
+      "location.hash='dashboard'"
+    ],
+    "status": 0,
+    "stdout": "\"dashboard\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Your issuance desk."
+    ],
+    "status": 0,
+    "stdout": "Your issuance desk.\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "focus",
+      "tbody a"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "press",
+      "Enter"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Read the details."
+    ],
+    "status": 0,
+    "stdout": "Read the details.\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "Jamie Example\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({text:document.querySelector('main').innerText})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nJamie Example\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-LOCAL-001\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
       "location.hash='verify'"
     ],
     "status": 0,
@@ -796,6 +862,63 @@
     ],
     "status": 0,
     "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nJamie Example\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-LOCAL-001\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='landing'"
+    ],
+    "status": 0,
+    "stdout": "\"landing\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Read the record"
+    ],
+    "status": 0,
+    "stdout": "Read the record\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      ".panel a"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Read the details."
+    ],
+    "status": 0,
+    "stdout": "Read the details.\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Alex Santos"
+    ],
+    "status": 0,
+    "stdout": "Alex Santos\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({text:document.querySelector('main').innerText})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nAlex Santos (fictional)\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-A8K72\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
     "stderr": ""
   },
   {
@@ -1580,7 +1703,7 @@
       "--json"
     ],
     "status": 0,
-    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":47,\"incomplete\":1,\"passes\":42,\"violations\":0},\"incomplete\":[{\"help\":\"Elements must meet minimum color contrast ratio thresholds\",\"helpUrl\":\"https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI\",\"id\":\"color-contrast\",\"impact\":\"serious\",\"nodeCount\":4,\"nodes\":[{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<th>Status</th>\",\"target\":[\"th:nth-child(3)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<th>Record</th>\",\"target\":[\"th:nth-child(4)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<td>Valid (demo)</td>\",\"target\":[\"td:nth-child(3)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<a href=\\\"#details\\\">View details</a>\",\"target\":[\"td:nth-child(4) > a[href$=\\\"#details\\\"]\"]}],\"tags\":[\"cat.color\",\"wcag2aa\",\"wcag143\",\"TTv5\",\"TT13.c\",\"EN-301-549\",\"EN-9.1.4.3\",\"ACT\",\"RGAAv4\",\"RGAA-3.2.1\"]}],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/signal/index.html#dashboard\",\"violations\":[]},\"error\":null}\n",
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":47,\"incomplete\":1,\"passes\":42,\"violations\":0},\"incomplete\":[{\"help\":\"Elements must meet minimum color contrast ratio thresholds\",\"helpUrl\":\"https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI\",\"id\":\"color-contrast\",\"impact\":\"serious\",\"nodeCount\":4,\"nodes\":[{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<th>Status</th>\",\"target\":[\"th:nth-child(3)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<th>Record</th>\",\"target\":[\"th:nth-child(4)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<td>Valid (demo)</td>\",\"target\":[\"td:nth-child(3)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<a href=\\\"#details?id=DEMO-A8K72\\\">View details</a>\",\"target\":[\"a[href=\\\"#details?id=DEMO-A8K72\\\"]\"]}],\"tags\":[\"cat.color\",\"wcag2aa\",\"wcag143\",\"TTv5\",\"TT13.c\",\"EN-301-549\",\"EN-9.1.4.3\",\"ACT\",\"RGAAv4\",\"RGAA-3.2.1\"]}],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/signal/index.html#dashboard\",\"violations\":[]},\"error\":null}\n",
     "stderr": ""
   },
   {
@@ -1982,6 +2105,72 @@
   {
     "args": [
       "eval",
+      "location.hash='dashboard'"
+    ],
+    "status": 0,
+    "stdout": "\"dashboard\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Your issuance desk."
+    ],
+    "status": 0,
+    "stdout": "Your issuance desk.\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "focus",
+      "tbody a"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "press",
+      "Enter"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Read the details."
+    ],
+    "status": 0,
+    "stdout": "Read the details.\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "Jamie Example\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({text:document.querySelector('main').innerText})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nJamie Example\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-LOCAL-001\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
       "location.hash='verify'"
     ],
     "status": 0,
@@ -2043,6 +2232,63 @@
     ],
     "status": 0,
     "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nJamie Example\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-LOCAL-001\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='landing'"
+    ],
+    "status": 0,
+    "stdout": "\"landing\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Read the record"
+    ],
+    "status": 0,
+    "stdout": "Read the record\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      ".panel a"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Read the details."
+    ],
+    "status": 0,
+    "stdout": "Read the details.\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Alex Santos"
+    ],
+    "status": 0,
+    "stdout": "Alex Santos\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({text:document.querySelector('main').innerText})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nAlex Santos (fictional)\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-A8K72\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
     "stderr": ""
   },
   {
@@ -2827,7 +3073,7 @@
       "--json"
     ],
     "status": 0,
-    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":47,\"incomplete\":1,\"passes\":42,\"violations\":0},\"incomplete\":[{\"help\":\"Elements must meet minimum color contrast ratio thresholds\",\"helpUrl\":\"https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI\",\"id\":\"color-contrast\",\"impact\":\"serious\",\"nodeCount\":3,\"nodes\":[{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<th>Record</th>\",\"target\":[\"th:nth-child(4)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<td>Valid (demo)</td>\",\"target\":[\"td:nth-child(3)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<a href=\\\"#details\\\">View details</a>\",\"target\":[\"td:nth-child(4) > a[href$=\\\"#details\\\"]\"]}],\"tags\":[\"cat.color\",\"wcag2aa\",\"wcag143\",\"TTv5\",\"TT13.c\",\"EN-301-549\",\"EN-9.1.4.3\",\"ACT\",\"RGAAv4\",\"RGAA-3.2.1\"]}],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/commons/index.html#dashboard\",\"violations\":[]},\"error\":null}\n",
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":47,\"incomplete\":1,\"passes\":42,\"violations\":0},\"incomplete\":[{\"help\":\"Elements must meet minimum color contrast ratio thresholds\",\"helpUrl\":\"https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI\",\"id\":\"color-contrast\",\"impact\":\"serious\",\"nodeCount\":3,\"nodes\":[{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<th>Record</th>\",\"target\":[\"th:nth-child(4)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<td>Valid (demo)</td>\",\"target\":[\"td:nth-child(3)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<a href=\\\"#details?id=DEMO-A8K72\\\">View details</a>\",\"target\":[\"a[href=\\\"#details?id=DEMO-A8K72\\\"]\"]}],\"tags\":[\"cat.color\",\"wcag2aa\",\"wcag143\",\"TTv5\",\"TT13.c\",\"EN-301-549\",\"EN-9.1.4.3\",\"ACT\",\"RGAAv4\",\"RGAA-3.2.1\"]}],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/commons/index.html#dashboard\",\"violations\":[]},\"error\":null}\n",
     "stderr": ""
   },
   {
@@ -3229,6 +3475,72 @@
   {
     "args": [
       "eval",
+      "location.hash='dashboard'"
+    ],
+    "status": 0,
+    "stdout": "\"dashboard\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Your issuance desk."
+    ],
+    "status": 0,
+    "stdout": "Your issuance desk.\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "focus",
+      "tbody a"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "press",
+      "Enter"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Read the details."
+    ],
+    "status": 0,
+    "stdout": "Read the details.\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "Jamie Example\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({text:document.querySelector('main').innerText})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nJamie Example\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-LOCAL-001\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
       "location.hash='verify'"
     ],
     "status": 0,
@@ -3290,6 +3602,63 @@
     ],
     "status": 0,
     "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nJamie Example\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-LOCAL-001\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='landing'"
+    ],
+    "status": 0,
+    "stdout": "\"landing\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Read the record"
+    ],
+    "status": 0,
+    "stdout": "Read the record\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      ".panel a"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Read the details."
+    ],
+    "status": 0,
+    "stdout": "Read the details.\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Alex Santos"
+    ],
+    "status": 0,
+    "stdout": "Alex Santos\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({text:document.querySelector('main').innerText})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nAlex Santos (fictional)\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-A8K72\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
     "stderr": ""
   },
   {

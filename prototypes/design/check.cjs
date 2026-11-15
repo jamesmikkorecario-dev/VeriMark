@@ -28,7 +28,11 @@ for(const direction of ['ledger','signal','commons']){
  function assertDetails(id,name,excluded){const data=JSON.parse(JSON.parse(evaluate("JSON.stringify({text:document.querySelector('main').innerText})")));if(!data.text.includes(id)||!data.text.includes(name)||data.text.includes(excluded))throw Error('Wrong selected record: '+data.text)}
  assertDetails('DEMO-LOCAL-001','Jamie Example','Alex Santos');
  evaluate("location.hash='verify'");run('fill','#code','DEMO-A8K72');run('click','#verify button');run('wait','--text','Valid · simulated');run('click','#result a');run('wait','--text','Alex Santos');assertDetails('DEMO-A8K72','Alex Santos','Jamie Example');
+ // Dashboard's recent row owns its target, independent of the last verified record.
+ evaluate("location.hash='dashboard'");run('wait','--text','Your issuance desk.');run('focus','tbody a');run('press','Enter');run('wait','--text','Read the details.');run('wait','--text','Jamie Example');assertDetails('DEMO-LOCAL-001','Jamie Example','Alex Santos');
  evaluate("location.hash='verify'");run('fill','#code','DEMO-LOCAL-001');run('click','#verify button');run('wait','--text','Valid · simulated');run('click','#result a');run('wait','--text','Jamie Example');assertDetails('DEMO-LOCAL-001','Jamie Example','Alex Santos');
+ // Landing always advertises the original fixture, even after a new-ID lookup.
+ evaluate("location.hash='landing'");run('wait','--text','Read the record');run('click','.panel a');run('wait','--text','Read the details.');run('wait','--text','Alex Santos');assertDetails('DEMO-A8K72','Alex Santos','Jamie Example');
  evaluate("location.hash='verify'");run('fill','#code','DEMO-MISSING');run('click','#verify button');run('wait','--text','No fictional record matches');evaluate("location.hash='details'");run('wait','--text','No fictional record matches the selected identifier');
  evaluate("location.hash='recipient'");run('wait','--text','Jamie Example');
  evaluate("location.hash='verify'");
