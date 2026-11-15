@@ -1,6 +1,6 @@
 # VeriMark handoff: M1-MOTION-Q
 
-- Status: partial, dependent source SHA awaited.
+- Status: ready for independent coordinator review; final capture result below.
 - Owner: Q; independent review requested from coordinator after final verification.
 - Goal: real temporal browser evidence, navigation regression preservation and motion acceptance.
 - Branch: jamesmikkorecario-dev/m1-motion-quality; baseline c8ec77e0fa010ff34ac7cb5c6410d4ebeb6b4c98.
@@ -11,3 +11,33 @@
 - npm ci PASS (235 packages, zero audit vulnerabilities); npm run typecheck PASS; npm run lint PASS; npm test -- --run PASS (29 tests, five files); npm run build PASS.
 - Existing navigation tests unchanged. Source-dependent full run, expanded checks and independent render review still required, including inspection of actual temporal samples. Tests are not a production security, physical-device or screen-reader claim; M1 has no server/RLS behavior to test.
 - Capture test uses deliberate 100ms sampling and finite Web Animations completion for settling. Videos and replayable Playwright traces are retained on every run. No new dependency or implementation edits.
+
+## Independent source/render review in progress
+
+- ae7f816 cherry-picked as 9ac96e2. Source uses only content transforms, finite 480ms entrances, 650ms travel-only readable reveals, once-per-mount observer cleanup, 220ms menu/drawer entrances and immediate closing.
+- Independent render check caught reduced-mode hovered button transform matrix(1,0,0,1,0,-2), despite no transitions; reported to coordinator, correction 0d7464b supplied and awaits final run. Keep the reduced transform assertion.
+- Mobile route-reentry selector corrected to open real drawer and click Public website; hidden desktop brand was a test error, not an application defect.
+- Port3000 occupied by another local process; no process killed or reused. PLAYWRIGHT_PORT override and strictPort added to config; Q uses3107. Default remains3000.
+- Navigation assertions retained in full; only finite-motion completion inserted before settled screenshot/axe and modal saved-geometry sampling. No focus/dismissal/scroll tolerance changed.
+- Actual Chrome mobile start/settled frame sequence reviewed with measured sample: hero child opacity.729/translateY4.34 at63ms, opacity.974/translateY.409 at257ms, final opacity1/transform none. Reveal sample translation9.08 at80ms of650ms, then none and no replay on repeated scrolling.
+
+## Verification after correction
+
+- Source correction0d7464b cherry-picked as0439c9b; its handoff did not exist in Q base, so modify/delete conflict resolved by preserving the supplied I handoff. Source patch applied unchanged.
+- npm run typecheck PASS; npm run lint PASS; npm test -- --run PASS34/34, six files; npm run build PASS after correction.
+- Pre-correction full Chrome matrix:104 passed,7 failed (same reduced hover defect at every width),15 desktop-only mobile-test skips; retained artifacts/m1-motion/pre-correction. This was not reported as passing.
+- Q test commits to integrate:2a266f8 then9a9336f; do not cherry-pick source duplicate9ac96e2/0439c9b into an integration branch already carrying ae7f816/0d7464b.
+- Checked-in reproduction: `powershell -File e2e/capture-motion.ps1 -EvidenceName final -Port 3107`; no new dependencies. Replay `npx playwright show-trace <artifact-directory>/trace.zip` or play video.webm. PNG sequences are actual running/middle/settled frames, not substitute static screenshots.
+- Mobile reveal running/settled frame sequence independently inspected: full readable content with restrained travel, no stranded content or clipped header. Actual menu timeline: public opacity.644 at13ms of220ms ->1; drawer x=-281.87 at13ms of220ms ->none; Escape restores focus immediately.
+- Final full matrix/capture outcomes are appended below when completed. Limits: installed desktop Chrome with responsive viewports, not physical mobile/OS settings/screen-reader testing; no live backend/security claims. M1 remains subject to owner approval.
+
+
+## Final matrix result
+
+- `$env:PLAYWRIGHT_CHANNEL='chrome'; $env:PLAYWRIGHT_PORT='3107'; npx playwright test --workers=2`: PASS111, FAIL0, SKIP15,126 total in2.0m. Widths320/390/440/768/1024/1440/1920, all foundation/navigation/motion tests;15 unchanged mobile-only checks skip at desktop widths1024/1440/1920.
+- Full source after0d7464b; local source commit0439c9b. Full matrix included final entrance/reveal sample frames, live reduction, missing observer fallback, filter non-replay, route reentry, public panel/drawer progression, full nav contracts and axe. Record-row/icon extension was added after matrix started and is independently covered by the final capture command below.
+- Preserved complete final matrix under artifacts/m1-motion/final-matrix; summary.json aggregates actual entrance samples/default preference/layout shifts. Each motion case retains video.webm and trace.zip; timeline.json/reveal-timeline.json/menu-timeline.json provide actual progression. Default Chrome preference false in every measured context.
+- Independently viewed desktop hero start/middle/settled, mobile hero start/middle/settled, mobile dashboard start/settled and reveal running/settled frames alongside measured timeline JSON. Entrances settle without shell/header movement; promotional copy remains readable; no stranded content observed. No remaining source defect found after targeted reduced-motion correction.
+- Independent coordinator review requested for Q test changes and temporal evidence; owner M1 approval remains outstanding. No backend/server/RLS exists in this frontend slice; authorization negative tests are not applicable to these CSS/browser changes.
+- Final reproducible capture command `powershell -File e2e/capture-motion.ps1 -EvidenceName final -Port 3107`: PASS10, FAIL0, SKIP0 in29.8s; includes added normal/reduced row hover, icon displacement and reduced press checks at390/1440. Artifacts/m1-motion/final/manifest.json records9a9336f and command/exit0; baseline and pre-correction captures preserved separately.
+- Final Q-owned deliverables: e2e/motion.spec.ts, e2e/motion-helpers.ts, e2e/capture-motion.ps1, finite-settle additions to existing e2e/foundation.spec.ts and e2e/navigation.spec.ts, PLAYWRIGHT_PORT/strictPort in playwright.config.ts, and this handoff. No implementation edits authored by Q, no helpers, push, main changes, deployment, cloud or M2 work.
