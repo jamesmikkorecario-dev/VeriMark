@@ -13,7 +13,7 @@ async function scroll(page: Page) {
 for (const item of cases) {
   test(`${item.route} sticky header, controls, dismissal and screenshots`, async ({ page }, info) => {
     await page.goto(item.route);
-    const trigger = page.getByRole('button', { name: item.open, exact: true });
+    const trigger = page.locator('button[aria-controls="' + item.id + '"]');
     const mobile = page.viewportSize()!.width <= 800;
     await page.screenshot({ path: info.outputPath('closed.png'), fullPage: true });
     await scroll(page);
@@ -24,8 +24,10 @@ for (const item of cases) {
     }
     await expect.poll(async () => (await page.locator(item.header).boundingBox())!.y).toBeCloseTo(0, 0);
     if (item.route === '/') expect((await page.locator('.demo-ribbon').boundingBox())!.y).toBeLessThan(0);
+    await expect(trigger).toHaveAccessibleName(item.open);
     await expect(trigger).toHaveAttribute('aria-controls', item.id);
     expect(await trigger.innerText()).toBe('');
+    await page.screenshot({ path: info.outputPath('scrolled-closed.png') });
     await trigger.click();
     const panel = page.locator('#' + item.id);
     await expect(panel).toBeVisible();
@@ -37,6 +39,7 @@ for (const item of cases) {
       expect(box.y).toBeLessThanOrEqual(header.y + header.height + 2);
       await expect(page.getByRole('button', { name: item.close, exact: true })).toBeVisible();
     }
+    await panel.evaluate(async element => { await Promise.all(element.getAnimations().map(animation => animation.finished)); });
     await page.screenshot({ path: info.outputPath('scrolled-open.png') });
     const audit = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
     await info.attach('open-axe', { body: JSON.stringify(audit.violations, null, 2), contentType: 'application/json' });
@@ -58,7 +61,7 @@ for (const item of cases) {
   test(`${item.route} resize, backdrop and browser history clean up navigation`, async ({ page }) => {
     test.skip(page.viewportSize()!.width > 800, 'Mobile navigation only');
     await page.goto(item.route);
-    const trigger = page.getByRole('button', { name: item.open, exact: true });
+    const trigger = page.locator('button[aria-controls="' + item.id + '"]');
     const panel = page.locator('#' + item.id);
     await trigger.click();
     await page.mouse.click(page.viewportSize()!.width - 2, page.viewportSize()!.height - 2);
@@ -69,7 +72,8 @@ for (const item of cases) {
     expect(await page.evaluate(() => getComputedStyle(document.body).overflow)).not.toBe('hidden');
     await page.setViewportSize({ width: 440, height: 956 });
     await expect(trigger).toHaveAttribute('aria-expanded', 'false');
-    await page.evaluate(() => { history.pushState({}, '', '?navigation-history=1'); dispatchEvent(new PopStateEvent('popstate')); });
+    await trigger.click();
+    await panel.getByRole('link', { name: item.route === '/' ? 'How it works' : 'Credentials', exact: true }).click();
     await trigger.click();
     await page.goBack();
     await expect(panel).toBeHidden();
@@ -83,7 +87,7 @@ test('workspace modal traps focus, isolates background, preserves scroll and inl
   await page.goto('/workspace');
   await scroll(page);
   await page.evaluate(() => { document.body.style.paddingRight = '3px'; document.body.style.overflowX = 'clip'; });
-  const before = await page.evaluate(() => ({ y: scrollY, style: document.body.getAttribute('style'), x: document.querySelector('main')!.getBoundingClientRect().x, width: document.querySelector('main')!.getBoundingClientRect().width }));
+  const before = await page.evaluate(() => ({ y: scrollY, style: document.body.getAttribute('style'), top: document.querySelector('main')!.getBoundingClientRect().top, x: document.querySelector('main')!.getBoundingClientRect().x, width: document.querySelector('main')!.getBoundingClientRect().width }));
   const trigger = page.getByRole('button', { name: 'Open workspace navigation', exact: true });
   await trigger.click();
   const dialog = page.getByRole('dialog', { name: 'Workspace navigation', exact: true });
@@ -100,7 +104,7 @@ test('workspace modal traps focus, isolates background, preserves scroll and inl
   expect(await page.getByRole('main').evaluate(node => node === document.activeElement)).toBe(false);
   await page.mouse.move(page.viewportSize()!.width - 2, page.viewportSize()!.height - 2);
   await page.mouse.wheel(0, 400);
-  expect(await page.evaluate(() => scrollY)).toBe(before.y);
+  expect(await page.getByRole('main').evaluate(node => node.getBoundingClientRect().top)).toBe(before.top);
   expect(await page.getByRole('main').evaluate(node => node.getBoundingClientRect().x)).toBe(before.x);
   expect(await page.getByRole('main').evaluate(node => node.getBoundingClientRect().width)).toBe(before.width);
   await page.keyboard.press('Escape');
@@ -117,7 +121,7 @@ test('short drawer scrolls independently with long organization and route labels
   await page.getByRole('button', { name: 'Open workspace navigation', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Workspace navigation', exact: true });
   await dialog.getByText('Fieldwork Collective', { exact: true }).evaluate(node => { node.textContent = 'International Community Education and Credential Recognition Organization'; });
-  await dialog.locator('nav a').evaluateAll(nodes => nodes.forEach(node => node.append(' — Community educational credential administration')));
+  await dialog.locator('nav a span').evaluateAll(nodes => nodes.forEach(node => node.append(' Community educational credential administration')));
   expect(await dialog.evaluate(node => node.scrollWidth <= node.clientWidth)).toBe(true);
   const last = dialog.getByRole('link', { name: 'Public website' });
   await last.scrollIntoViewIfNeeded();
@@ -132,4 +136,23 @@ test('short drawer scrolls independently with long organization and route labels
   await page.screenshot({ path: info.outputPath('short-long-labels.png') });
   await page.keyboard.press('Escape');
   expect(await page.evaluate(() => getComputedStyle(document.body).overflow)).not.toBe('hidden');
+});
+
+test('public open panel follows sticky header while scrolling and dismisses on focus leave', async ({ page }) => {
+  test.skip(page.viewportSize()!.width > 800, 'Mobile public navigation only');
+  await page.goto('/');
+  const trigger = page.locator('button[aria-controls="public-navigation"]');
+  await trigger.click();
+  const panel = page.locator('#public-navigation');
+  await expect(panel.getByRole('link').first()).toBeFocused();
+  const before = (await panel.boundingBox())!;
+  const headerBefore = (await page.locator('.public-header').boundingBox())!;
+  await page.evaluate(() => scrollTo(0, 650));
+  await expect(panel).toBeVisible();
+  const after = (await panel.boundingBox())!;
+  const headerAfter = (await page.locator('.public-header').boundingBox())!;
+  expect(Math.abs((after.y - headerAfter.y) - (before.y - headerBefore.y))).toBeLessThan(1);
+  await page.getByRole('main').focus();
+  await expect(panel).toBeHidden();
+  await expect(trigger).toHaveAccessibleName('Open navigation');
 });

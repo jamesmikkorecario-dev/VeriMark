@@ -61,7 +61,6 @@ test('keyboard traversal, skip contrast and menu Escape restoration', async ({ p
         await expect(page.getByRole('dialog', { name: 'Workspace navigation', exact: true })).toBeVisible();
         await expect(navigation.getByRole('button', { name: 'Close workspace navigation' })).toBeFocused();
       } else {
-        await page.keyboard.press('Tab');
         await expect(navigation.getByRole('link').first()).toBeFocused();
       }
       await page.keyboard.press('Escape');
