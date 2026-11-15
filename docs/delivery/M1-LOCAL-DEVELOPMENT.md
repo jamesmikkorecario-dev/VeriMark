@@ -43,3 +43,7 @@ The coordinator left a local preview running at http://127.0.0.1:3001/ to avoid 
 ### Motion review
 
 See ../ai/handoffs/M1-MOTION.md and ../quality/evidence/m1-motion/README.md. Reproduce recorded desktop/mobile motion with powershell -File e2e/capture-motion.ps1 -EvidenceName review -Port 3107. Full browser runs can set PLAYWRIGHT_PORT to a free port; strictPort prevents silently testing another server. No unrelated process is killed or reused. Reduce mode intentionally removes playback and action displacement.
+
+### Final anchor refinement
+
+How it works now targets /#method; same-page explicit activation scrolls smoothly only when motion is allowed. Direct/cross-route/hash/history behavior remains immediate. Browser regressions: npm run test:e2e -- e2e/scroll.spec.ts --workers=2 with PLAYWRIGHT_CHANNEL=chrome and a free PLAYWRIGHT_PORT. Report and video index: ../ai/handoffs/M1-SCROLL.md and ../quality/evidence/m1-scroll/README.md.

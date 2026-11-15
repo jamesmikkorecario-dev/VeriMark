@@ -38,3 +38,5 @@ agents/*.md are portable role guides, not automatically registered Orca agents. 
 M1 mobile navigation correction: see [root causes, verification and screenshots](docs/ai/handoffs/M1-NAV.md). Public header is sticky with anchored icon-only navigation; mobile issuer navigation uses a modal sidebar drawer. M1 remains awaiting owner approval.
 
 M1 motion audit/refinement: [audit, timings, verification and review boundary](docs/ai/handoffs/M1-MOTION.md); [actual video walkthroughs](docs/quality/evidence/m1-motion/README.md). M1 remains unapproved pending owner visual review.
+
+Final M1 anchor refinement: public How it works and hero See how it works link to /#method. Explicit same-page actions smooth-scroll with measured sticky-header offset; direct/route/history arrivals remain immediate. [Report](docs/ai/handoffs/M1-SCROLL.md) and [playback evidence](docs/quality/evidence/m1-scroll/README.md). M1 remains unapproved.

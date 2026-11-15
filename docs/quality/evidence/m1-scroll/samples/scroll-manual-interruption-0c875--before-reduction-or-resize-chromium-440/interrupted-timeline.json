@@ -1,0 +1,23 @@
+{
+  "active": {
+    "t": 1490,
+    "y": 74,
+    "top": 1611.1875,
+    "header": 69,
+    "focus": "method"
+  },
+  "manual": {
+    "t": 2433,
+    "y": 1600,
+    "top": 85.1875,
+    "header": 69,
+    "focus": "method"
+  },
+  "reduced": {
+    "t": 2559.899999976158,
+    "y": 1600,
+    "top": 85.1875,
+    "header": 69,
+    "focus": "method"
+  }
+}

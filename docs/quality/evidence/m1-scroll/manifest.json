@@ -1,0 +1,268 @@
+{
+  "implementationCommit": "3188609",
+  "capture": "independent Q focus-boundary-scroll:42 passed",
+  "focusedReduced": "7 passed",
+  "videos": [
+    {
+      "path": "reduction-resize-desktop.webm",
+      "case": "scroll-active-anchor-finis-0d885-e-wheel-clears-stale-intent-chromium-1440"
+    },
+    {
+      "path": "reduction-resize-mobile.webm",
+      "case": "scroll-active-anchor-finis-0d885-e-wheel-clears-stale-intent-chromium-440"
+    },
+    {
+      "path": "anchor-normal-desktop.webm",
+      "case": "scroll-anchor-temporal-no--e96b8--keyboard-and-repeated-hash-chromium-1440"
+    },
+    {
+      "path": "anchor-normal-mobile.webm",
+      "case": "scroll-anchor-temporal-no--e96b8--keyboard-and-repeated-hash-chromium-440"
+    },
+    {
+      "path": "anchor-reduced-desktop.webm",
+      "case": "scroll-anchor-temporal-red-ca884--keyboard-and-repeated-hash-chromium-1440"
+    },
+    {
+      "path": "anchor-reduced-mobile.webm",
+      "case": "scroll-anchor-temporal-red-ca884--keyboard-and-repeated-hash-chromium-440"
+    },
+    {
+      "path": "hash-history-desktop.webm",
+      "case": "scroll-direct-and-cross-ro-e23b9-OP-restores-saved-positions-chromium-1440"
+    },
+    {
+      "path": "hash-history-mobile.webm",
+      "case": "scroll-direct-and-cross-ro-e23b9-OP-restores-saved-positions-chromium-440"
+    },
+    {
+      "path": "route-entries-desktop.webm",
+      "case": "scroll-implemented-route-e-203c0-cus-placeholders-stay-basic-chromium-1440"
+    },
+    {
+      "path": "route-entries-mobile.webm",
+      "case": "scroll-implemented-route-e-203c0-cus-placeholders-stay-basic-chromium-440"
+    },
+    {
+      "path": "manual-scroll-desktop.webm",
+      "case": "scroll-manual-interruption-0c875--before-reduction-or-resize-chromium-1440"
+    },
+    {
+      "path": "manual-scroll-mobile.webm",
+      "case": "scroll-manual-interruption-0c875--before-reduction-or-resize-chromium-440"
+    }
+  ],
+  "files": [
+    {
+      "path": "anchor-filmstrip.png",
+      "sha256": "b426835c71fabbc78c93e4fa7ef83bca951b55cf0a7d2f2f4156157e30b70d53",
+      "bytes": 619456
+    },
+    {
+      "path": "anchor-normal-desktop.webm",
+      "sha256": "69e90b681b60436c2adfdb9d26a4966f628049512efd3110404bc05f3ba889e7",
+      "bytes": 567003
+    },
+    {
+      "path": "anchor-normal-mobile.webm",
+      "sha256": "e1e8bd5371bb61a67c32ed0382797380eec5f04c85fc3def9b48c67b9cf8fe0b",
+      "bytes": 444183
+    },
+    {
+      "path": "anchor-reduced-desktop.webm",
+      "sha256": "d2663845b5b52bd85e11834a93b7447db94506801031fc3a2cecb9c78bbc1fbe",
+      "bytes": 140530
+    },
+    {
+      "path": "anchor-reduced-mobile.webm",
+      "sha256": "40faab28f46f08c3e9d4590f76a085a644e9559683f2542dda75739266491e37",
+      "bytes": 150573
+    },
+    {
+      "path": "hash-history-desktop.webm",
+      "sha256": "5962d3f1a6b98c4cd352f7803fdb49b21c53c6090821cc4debc55f2be12828da",
+      "bytes": 283884
+    },
+    {
+      "path": "hash-history-mobile.webm",
+      "sha256": "d8b6a52652b953be60ddf75a1b5b54ae0362545c1ff226df44f9be2cf8231db6",
+      "bytes": 261280
+    },
+    {
+      "path": "manual-scroll-desktop.webm",
+      "sha256": "88744a0e9e56b3004592f75ce6c0ccde10588efdbb450cd2ff8f87d5ef2e0520",
+      "bytes": 349526
+    },
+    {
+      "path": "manual-scroll-mobile.webm",
+      "sha256": "1069ecedcb70d890d6b225a05e950c5cf96a6d876d4f270b0c5a7eb2e3216bb6",
+      "bytes": 400598
+    },
+    {
+      "path": "reduction-resize-desktop.webm",
+      "sha256": "204de3de4b1d939c0ccb0a464789df251afb5dc8f1f66f2452b2e87823f43cb8",
+      "bytes": 350231
+    },
+    {
+      "path": "reduction-resize-mobile.webm",
+      "sha256": "a63b65e96b271132fdfded620fcb5bc117f0be0f65fca624a0fde01ecf5cc638",
+      "bytes": 334983
+    },
+    {
+      "path": "route-after-load-filmstrip.png",
+      "sha256": "914807e2b753f00132d6710185ee03de56c0e2a0cb8804bcb2db8ad1d09e8445",
+      "bytes": 605042
+    },
+    {
+      "path": "route-entries-desktop.webm",
+      "sha256": "a5313c36ddfc81d09e402eaa82c96f803302a71983b56c3188013b2d2c0a9fe9",
+      "bytes": 619483
+    },
+    {
+      "path": "route-entries-mobile.webm",
+      "sha256": "83ae839d5eaa8bbb965425806ee2056b15fdaabbe81574e281522480a823d931",
+      "bytes": 651230
+    },
+    {
+      "path": "samples/scroll-active-anchor-finis-0d885-e-wheel-clears-stale-intent-chromium-1440/native-scroll.json",
+      "sha256": "3bec4c9d7a24eb9859cb73edf9c27e9db5e908c5887254352bd32fc666ec34a6",
+      "bytes": 163
+    },
+    {
+      "path": "samples/scroll-active-anchor-finis-0d885-e-wheel-clears-stale-intent-chromium-440/native-scroll.json",
+      "sha256": "b30290553d0fbf03cf49c68800348f4b00c16e4d603daf82a5a16e937f14e1ba",
+      "bytes": 163
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-no--e96b8--keyboard-and-repeated-hash-chromium-1440/anchor-end.png",
+      "sha256": "ac2e34af0753a85b73751cb8dae9c162e935807581a0bece25f6644a7f5374f4",
+      "bytes": 66300
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-no--e96b8--keyboard-and-repeated-hash-chromium-1440/anchor-middle.png",
+      "sha256": "aa08aaa1d642719321bc4bf0f3c83a66c9445689ac849c97bbface83a4a03c35",
+      "bytes": 86089
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-no--e96b8--keyboard-and-repeated-hash-chromium-1440/anchor-start.png",
+      "sha256": "2fb4f743305a90ebef2b10745e8f04ccd75c04dba77bbc3d13e6ba5bda116fb1",
+      "bytes": 84439
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-no--e96b8--keyboard-and-repeated-hash-chromium-1440/scroll-timeline.json",
+      "sha256": "5c3e02d694c16242765fa5d3676e6a939e323097da0013ba73b50941c7c15749",
+      "bytes": 341
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-no--e96b8--keyboard-and-repeated-hash-chromium-440/anchor-end.png",
+      "sha256": "87dafc7ad5c031d1a183f4ca36ec70139f4aabb44df3790594c68208a3ba6a4c",
+      "bytes": 33350
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-no--e96b8--keyboard-and-repeated-hash-chromium-440/anchor-middle.png",
+      "sha256": "745596f87bdc04ca6c8e92d28a44ae08245d5056d0f3d887cd0e84e94bacc691",
+      "bytes": 57944
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-no--e96b8--keyboard-and-repeated-hash-chromium-440/anchor-start.png",
+      "sha256": "f97c8425d3d65f47253866adc8d1e12a06cba42c2e94370fc9068e4ca313c07a",
+      "bytes": 44990
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-no--e96b8--keyboard-and-repeated-hash-chromium-440/scroll-timeline.json",
+      "sha256": "2694a79eaf68f19b9c7cfe617aa174e472e1df95a6a419bdd8c4a48c05d5887b",
+      "bytes": 326
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-red-ca884--keyboard-and-repeated-hash-chromium-1440/anchor-end.png",
+      "sha256": "32f45bd4f501bd1f2c41f3af3e1f15fdd7c171eb10a60c6a93ccd57dba365948",
+      "bytes": 51297
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-red-ca884--keyboard-and-repeated-hash-chromium-1440/anchor-middle.png",
+      "sha256": "32f45bd4f501bd1f2c41f3af3e1f15fdd7c171eb10a60c6a93ccd57dba365948",
+      "bytes": 51297
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-red-ca884--keyboard-and-repeated-hash-chromium-1440/anchor-start.png",
+      "sha256": "32f45bd4f501bd1f2c41f3af3e1f15fdd7c171eb10a60c6a93ccd57dba365948",
+      "bytes": 51297
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-red-ca884--keyboard-and-repeated-hash-chromium-1440/scroll-timeline.json",
+      "sha256": "b31455fce94fad3ebfec866feac1c903348a410bbe7b562e93a6d9154ac39a6b",
+      "bytes": 345
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-red-ca884--keyboard-and-repeated-hash-chromium-440/anchor-end.png",
+      "sha256": "f6e96c769069ad302fde0f92bd50762a7b78d55e86098338460226852c566361",
+      "bytes": 33303
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-red-ca884--keyboard-and-repeated-hash-chromium-440/anchor-middle.png",
+      "sha256": "f6e96c769069ad302fde0f92bd50762a7b78d55e86098338460226852c566361",
+      "bytes": 33303
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-red-ca884--keyboard-and-repeated-hash-chromium-440/anchor-start.png",
+      "sha256": "f6e96c769069ad302fde0f92bd50762a7b78d55e86098338460226852c566361",
+      "bytes": 33303
+    },
+    {
+      "path": "samples/scroll-anchor-temporal-red-ca884--keyboard-and-repeated-hash-chromium-440/scroll-timeline.json",
+      "sha256": "417d7eaff7bd3fa52fce8b09f61f1120f672672d34b78c156f7f058fee01cbc1",
+      "bytes": 338
+    },
+    {
+      "path": "samples/scroll-direct-and-cross-ro-e23b9-OP-restores-saved-positions-chromium-1440/instant-timeline.json",
+      "sha256": "27060484822653303e59089d39b45c252d630756d5eb4d33037ae50a884c4884",
+      "bytes": 330
+    },
+    {
+      "path": "samples/scroll-direct-and-cross-ro-e23b9-OP-restores-saved-positions-chromium-440/instant-timeline.json",
+      "sha256": "d52996f67b706a439f44f37711a58488110b9357bba453ae86a4f3ad3c439410",
+      "bytes": 324
+    },
+    {
+      "path": "samples/scroll-implemented-route-e-203c0-cus-placeholders-stay-basic-chromium-1440/entry-replay.json",
+      "sha256": "f5230c432ac4d95d9d223e33b01ea2bbfeb92ce08e620ecf9dfbfc5d78d72547",
+      "bytes": 258
+    },
+    {
+      "path": "samples/scroll-implemented-route-e-203c0-cus-placeholders-stay-basic-chromium-1440/workspace-entry-0.png",
+      "sha256": "e78c255e155cb5a8ab1da8c2cc9c068a3dd109a84d9fcf4cbcd70db74861e087",
+      "bytes": 84591
+    },
+    {
+      "path": "samples/scroll-implemented-route-e-203c0-cus-placeholders-stay-basic-chromium-1440/workspace-entry-1.png",
+      "sha256": "1b446d4ca737c9f43eff0eae524dbd1f4790022f00a7760a4e008ef2be748581",
+      "bytes": 85774
+    },
+    {
+      "path": "samples/scroll-implemented-route-e-203c0-cus-placeholders-stay-basic-chromium-440/entry-replay.json",
+      "sha256": "8649eded964bd8940e478ba193d64d33264a47ca03b8d3da576c502ec018d7ac",
+      "bytes": 257
+    },
+    {
+      "path": "samples/scroll-implemented-route-e-203c0-cus-placeholders-stay-basic-chromium-440/workspace-entry-0.png",
+      "sha256": "c4fc4ef050132754298d849e5023accb9552a3924be4e9543009e570b126aaa4",
+      "bytes": 44797
+    },
+    {
+      "path": "samples/scroll-implemented-route-e-203c0-cus-placeholders-stay-basic-chromium-440/workspace-entry-1.png",
+      "sha256": "ae16ba8d53d43c0de79b1b547f57627bd866953897a9d6a847b649febcaef1e0",
+      "bytes": 42989
+    },
+    {
+      "path": "samples/scroll-manual-interruption-0c875--before-reduction-or-resize-chromium-1440/interrupted-timeline.json",
+      "sha256": "32bced6b520e2a57e5f534dc4cd34e8f0a22851899f500df94d334019ad9e0dd",
+      "bytes": 337
+    },
+    {
+      "path": "samples/scroll-manual-interruption-0c875--before-reduction-or-resize-chromium-440/interrupted-timeline.json",
+      "sha256": "a12daa88a5b31bca918382cd94769e9b573cc53fe094bf742f2eadff21269fd9",
+      "bytes": 343
+    }
+  ],
+  "localTraceArchive": "artifacts/m1-scroll-worker/focus-boundary-scroll"
+}

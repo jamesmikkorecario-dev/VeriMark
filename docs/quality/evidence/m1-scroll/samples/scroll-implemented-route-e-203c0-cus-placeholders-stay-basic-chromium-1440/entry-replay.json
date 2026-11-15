@@ -1,0 +1,20 @@
+[
+  {
+    "opacity": 0.739648,
+    "animations": [
+      {
+        "state": "running",
+        "duration": 480
+      }
+    ]
+  },
+  {
+    "opacity": 0.599805,
+    "animations": [
+      {
+        "state": "running",
+        "duration": 480
+      }
+    ]
+  }
+]

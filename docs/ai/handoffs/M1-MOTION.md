@@ -95,3 +95,5 @@ After combined verification, both worktrees were clean. Worker artifacts were ar
 No unresolved actionable defect remains in the tested motion scope. No physical-device/Safari/screen-reader or production claim. The public panel and drawer intentionally close immediately to preserve accessibility/scroll lifecycle behavior; entrances and interaction feedback animate. M1 remains **unapproved** until owner visual review. No M2 begins automatically.
 
 Preview: http://127.0.0.1:3001/ and /workspace. Refresh with reduced motion off to see entrances; scroll reveals run once per mount. Normal npm run dev prefers port3000; tests may use PLAYWRIGHT_PORT to avoid occupied ports without killing/reusing unrelated processes.
+
+Final anchor/scroll policy was subsequently refined; see M1-SCROLL.md. Existing route entrances and motion timings are preserved; M1 remains unapproved.
