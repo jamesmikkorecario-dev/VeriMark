@@ -50,6 +50,8 @@ export function Modal({ open, title, onClose, busy = false, children, describedB
     if (open && !dialog.open) {
       returnFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       dialog.showModal();
+      const first = dialog.querySelector<HTMLElement>('input:not([disabled]), textarea:not([disabled]), select:not([disabled]), button:not([disabled]), a[href]');
+      first?.focus();
     } else if (!open && dialog.open) {
       dialog.close();
       const target = returnFocus.current;
