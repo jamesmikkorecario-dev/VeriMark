@@ -6,5 +6,5 @@ import App from './app/App';
 import './styles/index.css';
 const root = document.getElementById('root');
 if (!root) throw new Error('Missing application root');
-const api = createApi();
+const api = await createApi();
 createRoot(root).render(<StrictMode><ApiProvider api={api}><BrowserRouter><App /></BrowserRouter></ApiProvider></StrictMode>);
