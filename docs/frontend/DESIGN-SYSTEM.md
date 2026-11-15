@@ -1,4 +1,8 @@
-# Frontend Design System
+# Frontend Design System — PROVISIONAL
+
+Human visual selection is pending. No production tokens are finalized or approved. The placeholder token table below is a future specification template, not an implemented system. See [visual directions](../design/VISUAL-DIRECTIONS.md) and [design decisions](../design/DESIGN-DECISIONS.md) for the three original local prototypes; prototype CSS values must not be promoted to production defaults before a human chooses.
+
+Proposed common behavior: labeled semantic controls, visible keyboard focus, textual status, 44px minimum target height, readable 390px single-column layout, and reduced-motion support. Prototype layouts switch below 700px; this is an experiment, not an approved breakpoint token. Typography ranges from 38–76px display headings with 17px base body text. Exact direction palettes, fonts, edges and grid proportions remain isolated inside the standalone exploration artifacts.
 
 **Visual direction:** [brand personality e.g. monochrome editorial / warm utility].
 

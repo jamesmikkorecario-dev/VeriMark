@@ -1,0 +1,2921 @@
+[
+  {
+    "args": [
+      "open",
+      "file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/ledger/index.html"
+    ],
+    "status": 0,
+    "stdout": "✓ Welcome · VeriMark demo\n  file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/ledger/index.html\n",
+    "stderr": "[agent-browser] launched browser\n"
+  },
+  {
+    "args": [
+      "set",
+      "viewport",
+      "1440",
+      "1000"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='landing'"
+    ],
+    "status": 0,
+    "stdout": "\"landing\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#landing\\\",\\\"title\\\":\\\"Welcome · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-landing-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-landing-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#verify\\\",\\\"title\\\":\\\"Public verification · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-verify-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-verify-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='details'"
+    ],
+    "status": 0,
+    "stdout": "\"details\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#details\\\",\\\"title\\\":\\\"Credential details · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-details-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-details-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='dashboard'"
+    ],
+    "status": 0,
+    "stdout": "\"dashboard\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#dashboard\\\",\\\"title\\\":\\\"Issuer dashboard · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-dashboard-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-dashboard-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='issue'"
+    ],
+    "status": 0,
+    "stdout": "\"issue\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#issue\\\",\\\"title\\\":\\\"Issue a credential · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-issue-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-issue-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='recipient'"
+    ],
+    "status": 0,
+    "stdout": "\"recipient\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#recipient\\\",\\\"title\\\":\\\"Recipient access · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-recipient-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-recipient-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "set",
+      "viewport",
+      "390",
+      "844"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='landing'"
+    ],
+    "status": 0,
+    "stdout": "\"landing\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#landing\\\",\\\"title\\\":\\\"Welcome · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":52,\"incomplete\":0,\"passes\":37,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/ledger/index.html#landing\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-landing-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-landing-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#verify\\\",\\\"title\\\":\\\"Public verification · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":50,\"incomplete\":0,\"passes\":39,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/ledger/index.html#verify\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-verify-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-verify-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='details'"
+    ],
+    "status": 0,
+    "stdout": "\"details\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#details\\\",\\\"title\\\":\\\"Credential details · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":50,\"incomplete\":0,\"passes\":39,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/ledger/index.html#details\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-details-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-details-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='dashboard'"
+    ],
+    "status": 0,
+    "stdout": "\"dashboard\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#dashboard\\\",\\\"title\\\":\\\"Issuer dashboard · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":47,\"incomplete\":1,\"passes\":42,\"violations\":0},\"incomplete\":[{\"help\":\"Elements must meet minimum color contrast ratio thresholds\",\"helpUrl\":\"https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI\",\"id\":\"color-contrast\",\"impact\":\"serious\",\"nodeCount\":4,\"nodes\":[{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<th>Status</th>\",\"target\":[\"th:nth-child(3)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<th>Record</th>\",\"target\":[\"th:nth-child(4)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<td>Valid (demo)</td>\",\"target\":[\"td:nth-child(3)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<a href=\\\"#details\\\">View details</a>\",\"target\":[\"td:nth-child(4) > a[href$=\\\"#details\\\"]\"]}],\"tags\":[\"cat.color\",\"wcag2aa\",\"wcag143\",\"TTv5\",\"TT13.c\",\"EN-301-549\",\"EN-9.1.4.3\",\"ACT\",\"RGAAv4\",\"RGAA-3.2.1\"]}],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/ledger/index.html#dashboard\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-dashboard-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-dashboard-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='issue'"
+    ],
+    "status": 0,
+    "stdout": "\"issue\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#issue\\\",\\\"title\\\":\\\"Issue a credential · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":48,\"incomplete\":0,\"passes\":41,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/ledger/index.html#issue\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-issue-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-issue-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='recipient'"
+    ],
+    "status": 0,
+    "stdout": "\"recipient\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#recipient\\\",\\\"title\\\":\\\"Recipient access · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":49,\"incomplete\":0,\"passes\":40,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/ledger/index.html#recipient\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-recipient-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\ledger-recipient-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-A8K72"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Valid · simulated"
+    ],
+    "status": 0,
+    "stdout": "Valid · simulated\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "bad"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Invalid identifier"
+    ],
+    "status": 0,
+    "stdout": "Invalid identifier\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-MISSING"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "No fictional record matches"
+    ],
+    "status": 0,
+    "stdout": "No fictional record matches\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='issue'"
+    ],
+    "status": 0,
+    "stdout": "\"issue\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#recipient",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#issue button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#edit"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#issue button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#approve"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Success: demo record created"
+    ],
+    "status": 0,
+    "stdout": "Success: demo record created\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='details'"
+    ],
+    "status": 0,
+    "stdout": "\"details\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "Jamie Example\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-LOCAL-001"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Valid · simulated"
+    ],
+    "status": 0,
+    "stdout": "Valid · simulated\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "loading"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Loading"
+    ],
+    "status": 0,
+    "stdout": "Loading\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "empty"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Empty"
+    ],
+    "status": 0,
+    "stdout": "Empty\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "invalid"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Invalid"
+    ],
+    "status": 0,
+    "stdout": "Invalid\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "not-found"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Not found"
+    ],
+    "status": 0,
+    "stdout": "Not found\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "expired"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Expired"
+    ],
+    "status": 0,
+    "stdout": "Expired\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "revoked"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Revoked"
+    ],
+    "status": 0,
+    "stdout": "Revoked\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "unable"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Unable to verify"
+    ],
+    "status": 0,
+    "stdout": "Unable to verify\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "error"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Error"
+    ],
+    "status": 0,
+    "stdout": "Error\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "success"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Success"
+    ],
+    "status": 0,
+    "stdout": "Success\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "denied"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Access denied"
+    ],
+    "status": 0,
+    "stdout": "Access denied\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "focus",
+      ".skip"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "press",
+      "Enter"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({skipFocus:document.activeElement.id})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"skipFocus\\\":\\\"main\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "errors"
+    ],
+    "status": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":50,\"incomplete\":0,\"passes\":39,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/ledger/index.html#verify\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "open",
+      "file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/signal/index.html"
+    ],
+    "status": 0,
+    "stdout": "✓ Welcome · VeriMark demo\n  file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/signal/index.html\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "set",
+      "viewport",
+      "1440",
+      "1000"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='landing'"
+    ],
+    "status": 0,
+    "stdout": "\"landing\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#landing\\\",\\\"title\\\":\\\"Welcome · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-landing-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-landing-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#verify\\\",\\\"title\\\":\\\"Public verification · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-verify-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-verify-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='details'"
+    ],
+    "status": 0,
+    "stdout": "\"details\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#details\\\",\\\"title\\\":\\\"Credential details · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-details-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-details-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='dashboard'"
+    ],
+    "status": 0,
+    "stdout": "\"dashboard\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#dashboard\\\",\\\"title\\\":\\\"Issuer dashboard · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-dashboard-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-dashboard-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='issue'"
+    ],
+    "status": 0,
+    "stdout": "\"issue\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#issue\\\",\\\"title\\\":\\\"Issue a credential · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-issue-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-issue-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='recipient'"
+    ],
+    "status": 0,
+    "stdout": "\"recipient\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#recipient\\\",\\\"title\\\":\\\"Recipient access · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-recipient-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-recipient-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "set",
+      "viewport",
+      "390",
+      "844"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='landing'"
+    ],
+    "status": 0,
+    "stdout": "\"landing\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#landing\\\",\\\"title\\\":\\\"Welcome · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":52,\"incomplete\":0,\"passes\":37,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/signal/index.html#landing\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-landing-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-landing-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#verify\\\",\\\"title\\\":\\\"Public verification · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":50,\"incomplete\":0,\"passes\":39,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/signal/index.html#verify\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-verify-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-verify-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='details'"
+    ],
+    "status": 0,
+    "stdout": "\"details\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#details\\\",\\\"title\\\":\\\"Credential details · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":50,\"incomplete\":0,\"passes\":39,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/signal/index.html#details\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-details-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-details-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='dashboard'"
+    ],
+    "status": 0,
+    "stdout": "\"dashboard\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#dashboard\\\",\\\"title\\\":\\\"Issuer dashboard · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":47,\"incomplete\":1,\"passes\":42,\"violations\":0},\"incomplete\":[{\"help\":\"Elements must meet minimum color contrast ratio thresholds\",\"helpUrl\":\"https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI\",\"id\":\"color-contrast\",\"impact\":\"serious\",\"nodeCount\":4,\"nodes\":[{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<th>Status</th>\",\"target\":[\"th:nth-child(3)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<th>Record</th>\",\"target\":[\"th:nth-child(4)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<td>Valid (demo)</td>\",\"target\":[\"td:nth-child(3)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<a href=\\\"#details\\\">View details</a>\",\"target\":[\"td:nth-child(4) > a[href$=\\\"#details\\\"]\"]}],\"tags\":[\"cat.color\",\"wcag2aa\",\"wcag143\",\"TTv5\",\"TT13.c\",\"EN-301-549\",\"EN-9.1.4.3\",\"ACT\",\"RGAAv4\",\"RGAA-3.2.1\"]}],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/signal/index.html#dashboard\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-dashboard-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-dashboard-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='issue'"
+    ],
+    "status": 0,
+    "stdout": "\"issue\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#issue\\\",\\\"title\\\":\\\"Issue a credential · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":48,\"incomplete\":0,\"passes\":41,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/signal/index.html#issue\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-issue-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-issue-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='recipient'"
+    ],
+    "status": 0,
+    "stdout": "\"recipient\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#recipient\\\",\\\"title\\\":\\\"Recipient access · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":49,\"incomplete\":0,\"passes\":40,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/signal/index.html#recipient\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-recipient-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\signal-recipient-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-A8K72"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Valid · simulated"
+    ],
+    "status": 0,
+    "stdout": "Valid · simulated\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "bad"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Invalid identifier"
+    ],
+    "status": 0,
+    "stdout": "Invalid identifier\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-MISSING"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "No fictional record matches"
+    ],
+    "status": 0,
+    "stdout": "No fictional record matches\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='issue'"
+    ],
+    "status": 0,
+    "stdout": "\"issue\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#recipient",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#issue button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#edit"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#issue button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#approve"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Success: demo record created"
+    ],
+    "status": 0,
+    "stdout": "Success: demo record created\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='details'"
+    ],
+    "status": 0,
+    "stdout": "\"details\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "Jamie Example\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-LOCAL-001"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Valid · simulated"
+    ],
+    "status": 0,
+    "stdout": "Valid · simulated\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "loading"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Loading"
+    ],
+    "status": 0,
+    "stdout": "Loading\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "empty"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Empty"
+    ],
+    "status": 0,
+    "stdout": "Empty\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "invalid"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Invalid"
+    ],
+    "status": 0,
+    "stdout": "Invalid\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "not-found"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Not found"
+    ],
+    "status": 0,
+    "stdout": "Not found\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "expired"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Expired"
+    ],
+    "status": 0,
+    "stdout": "Expired\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "revoked"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Revoked"
+    ],
+    "status": 0,
+    "stdout": "Revoked\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "unable"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Unable to verify"
+    ],
+    "status": 0,
+    "stdout": "Unable to verify\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "error"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Error"
+    ],
+    "status": 0,
+    "stdout": "Error\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "success"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Success"
+    ],
+    "status": 0,
+    "stdout": "Success\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "denied"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Access denied"
+    ],
+    "status": 0,
+    "stdout": "Access denied\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "focus",
+      ".skip"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "press",
+      "Enter"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({skipFocus:document.activeElement.id})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"skipFocus\\\":\\\"main\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "errors"
+    ],
+    "status": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":50,\"incomplete\":0,\"passes\":39,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/signal/index.html#verify\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "open",
+      "file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/commons/index.html"
+    ],
+    "status": 0,
+    "stdout": "✓ Welcome · VeriMark demo\n  file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/commons/index.html\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "set",
+      "viewport",
+      "1440",
+      "1000"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='landing'"
+    ],
+    "status": 0,
+    "stdout": "\"landing\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#landing\\\",\\\"title\\\":\\\"Welcome · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-landing-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-landing-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#verify\\\",\\\"title\\\":\\\"Public verification · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-verify-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-verify-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='details'"
+    ],
+    "status": 0,
+    "stdout": "\"details\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#details\\\",\\\"title\\\":\\\"Credential details · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-details-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-details-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='dashboard'"
+    ],
+    "status": 0,
+    "stdout": "\"dashboard\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#dashboard\\\",\\\"title\\\":\\\"Issuer dashboard · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-dashboard-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-dashboard-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='issue'"
+    ],
+    "status": 0,
+    "stdout": "\"issue\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#issue\\\",\\\"title\\\":\\\"Issue a credential · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-issue-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-issue-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='recipient'"
+    ],
+    "status": 0,
+    "stdout": "\"recipient\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#recipient\\\",\\\"title\\\":\\\"Recipient access · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-recipient-desktop.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-recipient-desktop.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "set",
+      "viewport",
+      "390",
+      "844"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='landing'"
+    ],
+    "status": 0,
+    "stdout": "\"landing\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#landing\\\",\\\"title\\\":\\\"Welcome · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":52,\"incomplete\":0,\"passes\":37,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/commons/index.html#landing\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-landing-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-landing-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#verify\\\",\\\"title\\\":\\\"Public verification · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":50,\"incomplete\":0,\"passes\":39,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/commons/index.html#verify\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-verify-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-verify-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='details'"
+    ],
+    "status": 0,
+    "stdout": "\"details\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#details\\\",\\\"title\\\":\\\"Credential details · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":50,\"incomplete\":0,\"passes\":39,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/commons/index.html#details\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-details-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-details-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='dashboard'"
+    ],
+    "status": 0,
+    "stdout": "\"dashboard\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#dashboard\\\",\\\"title\\\":\\\"Issuer dashboard · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":47,\"incomplete\":1,\"passes\":42,\"violations\":0},\"incomplete\":[{\"help\":\"Elements must meet minimum color contrast ratio thresholds\",\"helpUrl\":\"https://dequeuniversity.com/rules/axe/4.12/color-contrast?application=axeAPI\",\"id\":\"color-contrast\",\"impact\":\"serious\",\"nodeCount\":3,\"nodes\":[{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<th>Record</th>\",\"target\":[\"th:nth-child(4)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<td>Valid (demo)</td>\",\"target\":[\"td:nth-child(3)\"]},{\"failureSummary\":\"Fix any of the following:\\n  Element's background color could not be determined because it's partially obscured by another element\",\"html\":\"<a href=\\\"#details\\\">View details</a>\",\"target\":[\"td:nth-child(4) > a[href$=\\\"#details\\\"]\"]}],\"tags\":[\"cat.color\",\"wcag2aa\",\"wcag143\",\"TTv5\",\"TT13.c\",\"EN-301-549\",\"EN-9.1.4.3\",\"ACT\",\"RGAAv4\",\"RGAA-3.2.1\"]}],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/commons/index.html#dashboard\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-dashboard-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-dashboard-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='issue'"
+    ],
+    "status": 0,
+    "stdout": "\"issue\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#issue\\\",\\\"title\\\":\\\"Issue a credential · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":48,\"incomplete\":0,\"passes\":41,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/commons/index.html#issue\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-issue-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-issue-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='recipient'"
+    ],
+    "status": 0,
+    "stdout": "\"recipient\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({screen:location.hash,title:document.title,h1:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"screen\\\":\\\"#recipient\\\",\\\"title\\\":\\\"Recipient access · VeriMark demo\\\",\\\"h1\\\":1,\\\"overflow\\\":false}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":49,\"incomplete\":0,\"passes\":40,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/commons/index.html#recipient\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "screenshot",
+      "C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-recipient-mobile.png",
+      "--full"
+    ],
+    "status": 0,
+    "stdout": "✓ Screenshot saved to C:\\Users\\James\\orca\\workspaces\\VeriMark\\init-visual-design\\prototypes\\design\\evidence\\commons-recipient-mobile.png\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-A8K72"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Valid · simulated"
+    ],
+    "status": 0,
+    "stdout": "Valid · simulated\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "bad"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Invalid identifier"
+    ],
+    "status": 0,
+    "stdout": "Invalid identifier\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-MISSING"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "No fictional record matches"
+    ],
+    "status": 0,
+    "stdout": "No fictional record matches\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='issue'"
+    ],
+    "status": 0,
+    "stdout": "\"issue\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#recipient",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#issue button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#edit"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#issue button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#approve"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Success: demo record created"
+    ],
+    "status": 0,
+    "stdout": "Success: demo record created\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='details'"
+    ],
+    "status": 0,
+    "stdout": "\"details\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "Jamie Example\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-LOCAL-001"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Valid · simulated"
+    ],
+    "status": 0,
+    "stdout": "Valid · simulated\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "loading"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Loading"
+    ],
+    "status": 0,
+    "stdout": "Loading\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "empty"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Empty"
+    ],
+    "status": 0,
+    "stdout": "Empty\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "invalid"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Invalid"
+    ],
+    "status": 0,
+    "stdout": "Invalid\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "not-found"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Not found"
+    ],
+    "status": 0,
+    "stdout": "Not found\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "expired"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Expired"
+    ],
+    "status": 0,
+    "stdout": "Expired\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "revoked"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Revoked"
+    ],
+    "status": 0,
+    "stdout": "Revoked\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "unable"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Unable to verify"
+    ],
+    "status": 0,
+    "stdout": "Unable to verify\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "error"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Error"
+    ],
+    "status": 0,
+    "stdout": "Error\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "success"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Success"
+    ],
+    "status": 0,
+    "stdout": "Success\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "denied"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Access denied"
+    ],
+    "status": 0,
+    "stdout": "Access denied\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "focus",
+      ".skip"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "press",
+      "Enter"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({skipFocus:document.activeElement.id})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"skipFocus\\\":\\\"main\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "errors"
+    ],
+    "status": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "a11y",
+      "--json"
+    ],
+    "status": 0,
+    "stdout": "{\"success\":true,\"data\":{\"axeVersion\":\"4.12.1\",\"counts\":{\"inapplicable\":50,\"incomplete\":0,\"passes\":39,\"violations\":0},\"incomplete\":[],\"lifecycle\":{\"effectiveLaunch\":{\"browserLaunched\":true,\"engine\":\"chrome\",\"launchHash\":11677035664275010974},\"launched\":false,\"relaunchedBrowser\":false,\"restartedBackground\":false,\"restoreStatus\":\"not_configured\",\"reused\":true,\"saveStatus\":\"not_attempted\"},\"url\":\"file:///C:/Users/James/orca/workspaces/VeriMark/init-visual-design/prototypes/design/commons/index.html#verify\",\"violations\":[]},\"error\":null}\n",
+    "stderr": ""
+  }
+]
