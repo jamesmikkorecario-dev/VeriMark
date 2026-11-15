@@ -46,7 +46,7 @@ Public outcomes: valid, expired, revoked, replaced, not found, unable to verify.
 
 Target WCAG 2.2 AA, semantic keyboard/focus patterns, readable mobile layouts and explicit loading/empty/error/success/unauthorized states; target is not a compliance claim. Security gates include anonymous, wrong-role and cross-tenant database/storage denial tests. No performance/SLA promises yet: M01 defines representative batch sizes and baseline budgets; M10 measures them. No production reliability or unlimited free-tier promise.
 
-Minimize collected data and logs. Retention, access-token recovery/lifetime, region, incident contacts and privacy notice require product/security decisions. Relevant Philippine privacy obligations need qualified review before real data; this is not a legal compliance finding. Vercel and Supabase are proposals subject to current terms and explicit approval before provisioning.
+Minimize collected data and logs. Retention, access-token recovery/lifetime, region, incident contacts and privacy notice require product/security decisions. Relevant Philippine privacy obligations need qualified review before real data; this is not a legal compliance finding. React/TypeScript + Vite, Supabase backend/PostgreSQL/Auth and Vercel are mandatory, FREE TIERS ONLY (ADR-0003). Storage/Edge require justification; no Next.js, separate Node backend or additional cloud service without explicit approval. Provisioning remains unauthorized; free-tier eligibility and operational feasibility remain release gates.
 
 ## Future scope and non-goals
 

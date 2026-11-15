@@ -14,7 +14,7 @@ VeriMark is a planned digital credential issuance and online verification platfo
 ## Current boundaries
 Initialization permits assigned documentation, local prototypes and local task commits. No production application code or packages. Install/dev/lint/typecheck/unit/E2E/build scripts are **not configured**; inspect actual package.json before executing engineering commands.
 
-Working stack: React, TypeScript, Vite, Tailwind, shadcn/ui, React Router, TanStack Query, React Hook Form, Zod; Supabase Auth/Postgres RLS/Storage/Edge Functions/RPC. Vercel is proposed. Reconcile docs/architecture/TECH-STACK.md before scaffolding.
+Working stack: React, TypeScript, Vite, Tailwind, shadcn/ui, React Router, TanStack Query, React Hook Form, Zod; Supabase Auth/Postgres RLS/Storage/Edge Functions/RPC. Core stack React/TypeScript + Vite, Supabase backend/PostgreSQL/Auth and Vercel is mandatory; FREE TIERS ONLY. Storage/Edge require technical justification. No Next.js, separate Node.js backend or additional cloud service without explicit approval. Styling and component choices remain exploratory. Reconcile docs/architecture/TECH-STACK.md before scaffolding.
 
 MVP: database-only verification, account-free recipient access and verification, immutable issuance with tracked replacement, private assets, public field allowlist. No wallet/crypto/bulk email. Design approval is pending; never finalize proposed tokens. QR links establish access, not authenticity; issuer recognition is not accreditation.
 

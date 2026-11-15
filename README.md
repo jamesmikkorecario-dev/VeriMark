@@ -27,7 +27,7 @@ Design approval is pending. Prototypes and tokens are proposals. Cross-owner doc
 
 MVP covers organization authorization/roles, templates, validated single/CSV issuance, private PDFs with QR links, account-free recipient access, restricted public verification, expiry/revocation/replacement, audit history and basic metrics. Issued claims are immutable. Verification confirms database recognition, not accreditation. Wallet, cryptographic credentials, LMS integrations, advanced workflows and bulk email are future scope.
 
-Working stack: React + TypeScript + Vite, Tailwind + shadcn/ui, React Router, TanStack Query, React Hook Form + Zod; Supabase Auth/Postgres/RLS/Storage/Edge Functions/RPC. Vercel is proposed, not provisioned. Budgets, regions and provider terms require checks before launch.
+Working stack: React + TypeScript + Vite, Tailwind + shadcn/ui, React Router, TanStack Query, React Hook Form + Zod; Supabase Auth/Postgres/RLS/Storage/Edge Functions/RPC. React/TypeScript + Vite, Supabase backend/PostgreSQL/Auth and Vercel are approved mandatory constraints; FREE TIERS ONLY. Storage/Edge require technical justification; no Next.js, separate Node backend or extra cloud service without explicit approval. UI libraries and visual choices remain proposals. No resources are provisioned. Regions, free-tier eligibility and recovery require checks before launch. See [ADR-0003](docs/architecture/adr/0003-mandatory-stack.md).
 
 ## Running and agents
 
