@@ -184,3 +184,34 @@ test('reduced initial mount and unavailable observer retain all promotional cont
 
 
 
+
+for (const route of ['/', '/workspace']) {
+  test(`${route} coordinated entrance delays survive the stylesheet cascade`, async ({ page }, info) => {
+    await page.goto(route, { waitUntil: 'domcontentloaded' });
+    const selector = route === '/'
+      ? '[data-motion=credential]'
+      : '[data-motion=dashboard-heading], [data-motion=metric], [data-motion=dashboard-content]';
+    // Read actual Chrome cascade and active Web Animations timing together, before settling.
+    const stages = await page.locator(selector).evaluateAll(elements => elements.map(element => {
+      const css = getComputedStyle(element);
+      return {
+        target: element.getAttribute('data-motion'),
+        delayMs: parseFloat(css.animationDelay) * (css.animationDelay.endsWith('ms') ? 1 : 1000),
+        animations: element.getAnimations().map(animation => ({
+          delay: animation.effect?.getTiming().delay,
+          duration: animation.effect?.getTiming().duration,
+          currentTime: animation.currentTime,
+          state: animation.playState,
+        })),
+      };
+    }));
+    await writeFile(info.outputPath('coordination.json'), JSON.stringify({ route, stages }, null, 2));
+    await info.attach('coordination.json', { body: JSON.stringify({ route, stages }, null, 2), contentType: 'application/json' });
+    const expectedDelays = route === '/' ? [100] : [0, 60, 110, 160, 180];
+    expect(stages.map(stage => stage.delayMs)).toEqual(expectedDelays);
+    expect(stages.map(stage => stage.animations[0]?.delay)).toEqual(expectedDelays);
+    expect(stages.every(stage => stage.animations[0]?.duration === 480)).toBe(true);
+    await settle(page);
+    expect(await page.locator(selector).evaluateAll(elements => elements.every(element => getComputedStyle(element).opacity === '1'))).toBe(true);
+  });
+}
