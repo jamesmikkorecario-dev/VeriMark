@@ -5,7 +5,7 @@
 - Branch/worktree: jamesmikkorecario-dev/init-architecture-security; C:/Users/James/orca/workspaces/VeriMark/init-architecture-security.
 - Goal/acceptance: replace owned templates with coherent proposed VeriMark architecture, stack, API/error contracts, permissions, tenant schema/RLS, immutable lifecycle, recovery and threat model; preserve explicit unresolved policy gates; no runtime code/cloud changes.
 - Files: SECURITY.md; docs/architecture/{TECH-STACK,SYSTEM-ARCHITECTURE,REPOSITORY-STRUCTURE,API-CONTRACTS}.md; docs/architecture/adr/{0001-record-template,0002-immutable-issuance}.md; docs/backend/{BACKEND-DESIGN,AUTH-AND-PERMISSIONS}.md; docs/database/{DATA-MODEL,RLS-AND-MIGRATIONS}.md; docs/quality/SECURITY-THREAT-MODEL.md; this handoff. All relative to the worktree above.
-- Commit: implementation documentation commit recorded below after commit creation; final handoff commit is returned to coordinator.
+- Commit: 14de4054877aa39f6eb2b3a05a75ab990b1ba4e9 (documentation); final evidence-only handoff commit is returned to coordinator.
 - Contracts/environment: proposed v1 contracts only, no migration/schema/function deployed, packages installed, secrets read or cloud resources changed.
 
 ## Verification evidence
