@@ -640,6 +640,251 @@
   },
   {
     "args": [
+      "click",
+      "#result a"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "Jamie Example\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({text:document.querySelector('main').innerText})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nJamie Example\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-LOCAL-001\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-A8K72"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Valid · simulated"
+    ],
+    "status": 0,
+    "stdout": "Valid · simulated\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#result a"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Alex Santos"
+    ],
+    "status": 0,
+    "stdout": "Alex Santos\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({text:document.querySelector('main').innerText})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nAlex Santos (fictional)\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-A8K72\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-LOCAL-001"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Valid · simulated"
+    ],
+    "status": 0,
+    "stdout": "Valid · simulated\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#result a"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "Jamie Example\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({text:document.querySelector('main').innerText})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nJamie Example\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-LOCAL-001\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-MISSING"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "No fictional record matches"
+    ],
+    "status": 0,
+    "stdout": "No fictional record matches\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='details'"
+    ],
+    "status": 0,
+    "stdout": "\"details\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "No fictional record matches the selected identifier"
+    ],
+    "status": 0,
+    "stdout": "No fictional record matches the selected identifier\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='recipient'"
+    ],
+    "status": 0,
+    "stdout": "\"recipient\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "Jamie Example\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
       "select",
       "#state",
       "loading"
@@ -801,6 +1046,35 @@
     ],
     "status": 0,
     "stdout": "Revoked\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "replaced"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Replaced"
+    ],
+    "status": 0,
+    "stdout": "Replaced\n",
     "stderr": ""
   },
   {
@@ -1613,6 +1887,251 @@
   },
   {
     "args": [
+      "click",
+      "#result a"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "Jamie Example\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({text:document.querySelector('main').innerText})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nJamie Example\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-LOCAL-001\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-A8K72"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Valid · simulated"
+    ],
+    "status": 0,
+    "stdout": "Valid · simulated\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#result a"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Alex Santos"
+    ],
+    "status": 0,
+    "stdout": "Alex Santos\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({text:document.querySelector('main').innerText})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nAlex Santos (fictional)\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-A8K72\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-LOCAL-001"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Valid · simulated"
+    ],
+    "status": 0,
+    "stdout": "Valid · simulated\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#result a"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "Jamie Example\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({text:document.querySelector('main').innerText})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nJamie Example\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-LOCAL-001\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-MISSING"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "No fictional record matches"
+    ],
+    "status": 0,
+    "stdout": "No fictional record matches\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='details'"
+    ],
+    "status": 0,
+    "stdout": "\"details\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "No fictional record matches the selected identifier"
+    ],
+    "status": 0,
+    "stdout": "No fictional record matches the selected identifier\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='recipient'"
+    ],
+    "status": 0,
+    "stdout": "\"recipient\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "Jamie Example\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
       "select",
       "#state",
       "loading"
@@ -1774,6 +2293,35 @@
     ],
     "status": 0,
     "stdout": "Revoked\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "replaced"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Replaced"
+    ],
+    "status": 0,
+    "stdout": "Replaced\n",
     "stderr": ""
   },
   {
@@ -2586,6 +3134,251 @@
   },
   {
     "args": [
+      "click",
+      "#result a"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "Jamie Example\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({text:document.querySelector('main').innerText})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nJamie Example\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-LOCAL-001\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-A8K72"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Valid · simulated"
+    ],
+    "status": 0,
+    "stdout": "Valid · simulated\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#result a"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Alex Santos"
+    ],
+    "status": 0,
+    "stdout": "Alex Santos\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({text:document.querySelector('main').innerText})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nAlex Santos (fictional)\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-A8K72\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-LOCAL-001"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Valid · simulated"
+    ],
+    "status": 0,
+    "stdout": "Valid · simulated\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#result a"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "Jamie Example\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "JSON.stringify({text:document.querySelector('main').innerText})"
+    ],
+    "status": 0,
+    "stdout": "\"{\\\"text\\\":\\\"PUBLIC ISSUANCE RECORD / FICTIONAL\\\\nRead the details.\\\\nRECIPIENT\\\\nJamie Example\\\\nACHIEVEMENT\\\\nCommunity Research Workshop\\\\nISSUER\\\\nExample Learning Collective\\\\nISSUED\\\\n15 November 2026\\\\nDEMO IDENTIFIER\\\\nDEMO-LOCAL-001\\\\nValid · simulated\\\\nRecognized by the issuer\\\\n\\\\nIssuer identity reviewed — demo only. Review means identity and authority checks; it is not accreditation or a guarantee of educational quality.\\\\n\\\\nCompare recipient, achievement, issuer and date with the document presented. A QR code only opens a link; it is not proof. This demo uses fictional records, with no live database or portable signature check.\\\\n\\\\nOpen recipient view\\\\nExplore a simulated state\\\\nvalid\\\\nloading\\\\nempty\\\\ninvalid\\\\nnot-found\\\\nexpired\\\\nrevoked\\\\nreplaced\\\\nunable\\\\nerror\\\\nsuccess\\\\ndenied\\\\n\\\\nState controls are prototype review tools. No service is contacted.\\\"}\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "fill",
+      "#code",
+      "DEMO-MISSING"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#verify button"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "No fictional record matches"
+    ],
+    "status": 0,
+    "stdout": "No fictional record matches\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='details'"
+    ],
+    "status": 0,
+    "stdout": "\"details\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "No fictional record matches the selected identifier"
+    ],
+    "status": 0,
+    "stdout": "No fictional record matches the selected identifier\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='recipient'"
+    ],
+    "status": 0,
+    "stdout": "\"recipient\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Jamie Example"
+    ],
+    "status": 0,
+    "stdout": "Jamie Example\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "eval",
+      "location.hash='verify'"
+    ],
+    "status": 0,
+    "stdout": "\"verify\"\n",
+    "stderr": ""
+  },
+  {
+    "args": [
       "select",
       "#state",
       "loading"
@@ -2747,6 +3540,35 @@
     ],
     "status": 0,
     "stdout": "Revoked\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "click",
+      "#retry"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "select",
+      "#state",
+      "replaced"
+    ],
+    "status": 0,
+    "stdout": "✓ Done\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "wait",
+      "--text",
+      "Replaced"
+    ],
+    "status": 0,
+    "stdout": "Replaced\n",
     "stderr": ""
   },
   {

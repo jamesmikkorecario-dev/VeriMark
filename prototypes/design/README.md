@@ -18,3 +18,5 @@ Every screen has an explicit review-only state selector: valid, loading, empty, 
 
 Regenerate standalone artifacts: `node prototypes/design/build.cjs`.
 Repeat browser evidence: `node prototypes/design/check.cjs`. This uses an already installed Orca agent-browser executable; override its location through `VERIMARK_BROWSER`. It neither installs packages nor downloads browsers. Screenshots and command-level JSON output are in `evidence/`. The test launches its own named browser session and closes it.
+
+Review correction: verification/details now resolve by exact selected identifier; after local issuance the original DEMO-A8K72 still displays Alex and DEMO-LOCAL-001 displays the new fictional recipient. Unknown identifiers remain not found on details too. Recipient view intentionally shows the local issuance. The state selector additionally includes replaced, explicitly labeled a proposed lifecycle behavior; it does not perform a real replacement. Proposed status precedence is revoked > replaced > expired > valid.

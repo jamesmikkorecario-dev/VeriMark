@@ -23,7 +23,16 @@ for(const direction of ['ledger','signal','commons']){
  evaluate("location.hash='issue'");run('fill','#recipient','Jamie Example');run('click','#issue button');run('click','#edit');run('click','#issue button');run('click','#approve');run('wait','--text','Success: demo record created');
  evaluate("location.hash='details'");run('wait','--text','Jamie Example');
  evaluate("location.hash='verify'");run('fill','#code','DEMO-LOCAL-001');run('click','#verify button');run('wait','--text','Valid · simulated');
- for(const state of ['loading','empty','invalid','not-found','expired','revoked','unable','error','success','denied']){run('select','#state',state);run('wait','--text',state==='not-found'?'Not found':state==='unable'?'Unable to verify':state==='denied'?'Access denied':state[0].toUpperCase()+state.slice(1));run('click','#retry')}
+ // Identity regression: creating a second record must never rewrite the original lookup.
+ run('click','#result a');run('wait','--text','Jamie Example');
+ function assertDetails(id,name,excluded){const data=JSON.parse(JSON.parse(evaluate("JSON.stringify({text:document.querySelector('main').innerText})")));if(!data.text.includes(id)||!data.text.includes(name)||data.text.includes(excluded))throw Error('Wrong selected record: '+data.text)}
+ assertDetails('DEMO-LOCAL-001','Jamie Example','Alex Santos');
+ evaluate("location.hash='verify'");run('fill','#code','DEMO-A8K72');run('click','#verify button');run('wait','--text','Valid · simulated');run('click','#result a');run('wait','--text','Alex Santos');assertDetails('DEMO-A8K72','Alex Santos','Jamie Example');
+ evaluate("location.hash='verify'");run('fill','#code','DEMO-LOCAL-001');run('click','#verify button');run('wait','--text','Valid · simulated');run('click','#result a');run('wait','--text','Jamie Example');assertDetails('DEMO-LOCAL-001','Jamie Example','Alex Santos');
+ evaluate("location.hash='verify'");run('fill','#code','DEMO-MISSING');run('click','#verify button');run('wait','--text','No fictional record matches');evaluate("location.hash='details'");run('wait','--text','No fictional record matches the selected identifier');
+ evaluate("location.hash='recipient'");run('wait','--text','Jamie Example');
+ evaluate("location.hash='verify'");
+ for(const state of ['loading','empty','invalid','not-found','expired','revoked','replaced','unable','error','success','denied']){run('select','#state',state);run('wait','--text',state==='not-found'?'Not found':state==='unable'?'Unable to verify':state==='denied'?'Access denied':state[0].toUpperCase()+state.slice(1));run('click','#retry')}
  run('focus','.skip');run('press','Enter');evaluate("JSON.stringify({skipFocus:document.activeElement.id})");
  run('errors');run('a11y','--json');
 }
