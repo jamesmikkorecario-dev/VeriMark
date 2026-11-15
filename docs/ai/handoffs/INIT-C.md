@@ -29,3 +29,5 @@ Tools: installed Orca agent-browser with Chrome/CDP, named isolated session veri
 All failures/loading/lifecycle statuses are simulated. No authorization enforcement, real credentials, delivery, actual PDF, QR generation or portable signing. Recipient download produces labeled fictional text; show-link and download buttons were not exercised by browser test. One local issuance replaces the prior local fixture; dashboard is a visual preview, not a full inventory. Refresh clears state. Native device, screen reader, zoom 200%, translation stress and usability research unrun.
 
 Coordinator must independently review trust claims, state precedence, keyboard/focus semantics and scope isolation before integration. No helper reviewer spawned per dispatch. Human must choose a direction; no design approval or production tokens finalized. Commit SHA is provided in worker completion report; this handoff is included in that commit.
+
+Implementation and evidence commit: cf19ea64a89713eb8a07dabc1852172b2552a44d. A subsequent handoff-only commit records this SHA.
