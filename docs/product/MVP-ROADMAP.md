@@ -1,25 +1,19 @@
-# MVP Scope and Roadmap
+# VeriMark eleven-milestone roadmap
 
-Prioritize usable **vertical slices** (UI + auth + database + tests), not months of disconnected frontend and backend work.
+Status: proposed implementation order; initialization only is authorized. All M01?M11 are planned, not completed. Dependencies are gates; independent planning may proceed, but implementation waits for contracts and design approval. M04 is the smallest end-to-end trust slice, using a reviewed fixture template before full authoring at M05. No dates promised.
 
-| Phase | Deliverable | Exit gate |
-| --- | --- | --- |
-| 0 — Discovery & foundation | Problem validated enough to scope, stack/ADR, repo and CI, data/auth plan | PRD approved, commands work, threat model started |
-| 1 — Design system & shell | Tokens, app shell, navigation, core reusable components | responsive/a11y baselines verified |
-| 2 — First end-to-end slice | One real user outcome using UI → data → permissions | automated acceptance + RLS negative tests pass |
-| 3 — Complete MVP flows | Remaining P0 stories and edge states | all P0 tests and review gates pass |
-| 4 — Hardening | Security, performance, observability, operations | launch checklist and rollback ready |
-| 5 — Controlled launch | Production release with user approval | smoke checks, monitoring, user feedback plan |
+| Milestone | Outcome | Depends on | Accountable roles | Exit acceptance | Required evidence |
+| --- | --- | --- | --- | --- | --- |
+| M01 Discovery and requirements baseline | Interview/pilot plan, scope decisions and measurable workload/budget proposals; unknown evidence remains labeled | none | product-manager / orchestrator | Human reviews MVP and resolves launch-critical unknowns; no fabricated interviews | PRD/story traceability and decision review |
+| M02 Design direction and approval | Proposed responsive issuer/recipient/verifier screens and full state inventory | M01 | ui-ux-designer | Human records selected direction and tokens; keyboard/mobile/contrast review | dated design approval and screen-state checklist |
+| M03 Tooling, auth and organization isolation | Separately authorized scaffold, scripts and owner workspace with authority-review model | M01, M02 | system-architect + database/backend/frontend | Own organization works; anonymous/wrong-role/other tenant denied; actual engineering gates configured | EV-US-001 plus script inventory and policy output |
+| M04 First issuance and public verification slice | Minimal approved template fixture, immutable issuance and restricted status comparison | M03 | backend + database + frontend; QA/security review | Authorized issuance and account-free allowlisted lookup; retries safe; all five states and denial tested | EV-US-003/006, API/RLS and browser evidence |
+| M05 Private template authoring | Validated template editing/preview with private asset rules | M04 | frontend + backend + database | One usable template; unsafe uploads and unauthorized access denied; snapshot stable | EV-US-002, upload and storage denial results |
+| M06 CSV batch preview and guarded issuance | Row validation, duplicates, preview, confirmation and recoverable issuance | M05 | backend + frontend; QA | No hidden partial success; repeated approval cannot duplicate records; size limits defined | EV-US-004 and bounded batch timing/error report |
+| M07 PDF, QR and account-free recipient delivery | Private PDF delivery, secure individual access and exportable links | M04, M05, M06 | frontend + backend; security | PDF matches snapshot; QR opens official record; invalid links denied; no signup or bulk email | EV-US-005, QR comparison and private-access denial |
+| M08 Lifecycle and replacement | Expiry/revocation/atomic linked replacement and audit | M04, M07 | database + backend + frontend | Old claims never change; replacement/race/retry and role denial tested | EV-US-007 and concurrency/status matrix |
+| M09 History and basic metrics | Scoped paginated history and minimal usage counts | M06, M08 | frontend + backend; QA | Counts distinguish status and fixtures; no tenant/PII leaks | EV-US-008, pagination and privacy tests |
+| M10 Security, accessibility and operational hardening | Independent security/a11y review, restore/rollback plan and bounded performance evidence | M07, M08, M09 | qa-engineer + security-reviewer + devops-engineer | Configured full gates pass; blocking findings resolved; operational rehearsal recorded | commit-specific reports, gate logs and recovery rehearsal |
+| M11 Approved pilot and observed evaluation | Only after explicit release approval, consented pilot and measured feedback | M10 | human product owner + devops + QA | Authorized issuer/recipients complete journey; smoke checks and honest metrics recorded; rollback ready | EV-US-009, authorization, release SHA, smoke and pilot report |
 
-## Backlog policy
-
-- **P0:** required for product value/safety.
-- **P1:** desirable for early users; not launch blocking without a reason.
-- **P2:** defer; document rather than implement speculatively.
-
-## Current sprint
-
-- Goal: [ONE user outcome]
-- Stories: [US-IDs]
-- Explicit exclusions: [..]
-- Owner, branch, deadline, dependencies: [..]
+Task ownership, likely paths and risks: ../../tasks/BACKLOG.md. Product acceptance: PRD.md and USER-STORIES.md. Engineering scripts are not configured; M03 must establish actual commands before later gates can run. Milestone acceptance does not grant push/merge/deploy authority. Design approval and production/pilot approval are separate human decisions.

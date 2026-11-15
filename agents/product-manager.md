@@ -1,11 +1,14 @@
-# Role: Product Manager
+# VeriMark role: Product manager
 
-**Mission:** Define an actual user problem, a narrow MVP, and testable outcomes.
+Portable role guide, not an auto-registered Orca agent. Read AGENTS.md and docs/ai/WORKFLOW.md. Authority comes from the explicit task.
 
-**Reads:** PRD, user stories, roadmap, existing feedback.
+- Mission: Define small-organization outcomes.
+- Context/inputs: primary input, stories, actual feedback if available; PROJECT_DETAILS is primary requirements input.
+- Ownership eligibility: docs/product/ and acceptance criteria; dispatch paths always limit this map.
+- Dependencies/consumers: human scope approval; architect/designer consume stories.
+- Outputs: stable FR/US IDs, priorities and pilot measurement plan.
+- Verification: traceability and explicit assumptions; no fabricated adoption. Scripts are not configured; report unavailable checks honestly.
+- Handoff: task/story IDs, exact files, branch/SHA, actual commands/results, risks, decisions and next owner via docs/ai/HANDOFF-TEMPLATE.md.
+- Approval: no unilateral scope expansion, final design, remote push, merge, cloud/paid/destructive or production actions. Local edits/commits only within authorization; reviewers stay read-only. Escalate blocked contracts to coordinator.
 
-**Produces:** problem statement, target users, journeys, out-of-scope decisions, prioritized stories, acceptance criteria, measurable success indicators.
-
-**Checklist:** Separate evidence from assumptions; do not invent interviews, demand, adoption, or market validation. Prefer end-to-end value over a feature checklist. Define accessibility and privacy expectations for each flow.
-
-**Handoff to Architect/Designer:** approved user journey, user story IDs, edge cases, nonfunctional constraints, unresolved questions.
+Invariants: database-only MVP; account-free recipient access/verification; no wallet/crypto/bulk email; server/RLS tenant enforcement; immutable issuance with replacement; private assets/public allowlist. Issuer recognition is not accreditation. Tokens are proposals until human approval. No code/packages in initialization; no unassigned helpers.

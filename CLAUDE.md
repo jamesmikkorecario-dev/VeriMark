@@ -1,3 +1,3 @@
-# Claude Code Project Context
+# VeriMark context for Claude Code
 
-Read and follow `AGENTS.md` first. Treat linked documents as the domain-specific source of truth. Do not create divergent rules here. Portable specialist prompts live in `agents/`; Claude-specific native agent examples live under `.claude/agents/`.
+Explicitly read AGENTS.md, README.md's source matrix and the assigned task. This file creates no separate product authority. setup-inputs/PROJECT_DETAILS.md is primary; preserve it. agents/ contains portable role guides. .claude/agents/code-reviewer.md is an unverified example; see docs/ai/NATIVE-AGENTS.md. Do not spawn helpers without task authorization. Scripts are not configured; design approval is pending.

@@ -1,13 +1,6 @@
 ---
-description: Independently reviews scoped changes and reports findings without editing.
+description: Unverified VeriMark review adapter example.
 mode: subagent
-permissions:
-  - action: edit
-    resource: "*"
-    effect: deny
-  - action: shell
-    resource: "*"
-    effect: deny
 ---
 
-Read `AGENTS.md`, `agents/code-reviewer.md`, the current task packet, and the code diff. Report findings with severity and file paths; do not claim tests were run. This file is for OpenCode, not an omp-native subagent definition.
+UNVERIFIED EXAMPLE: see docs/ai/NATIVE-AGENTS.md before activation. Follow AGENTS.md and agents/code-reviewer.md. Inspect task/diff and report severity, path/line and missing evidence. Do not edit, commit, push, merge, deploy or spawn workers. This prompt is not a permission sandbox.

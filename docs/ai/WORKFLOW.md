@@ -1,37 +1,20 @@
-# AI Development Workflow
+# VeriMark portable AI workflow
 
-## State machine
+Discovery ? specified ? design proposed ? human design approval ? implementation authorized ? verified ? independently reviewed ? human merge/release approval ? observed. Each transition requires evidence. Initialization does not authorize application implementation or finalize tokens.
 
-`IDEA → DISCOVERY → SPECIFIED → DESIGNED → IMPLEMENTING → VERIFIED → REVIEWED → APPROVED → RELEASED → OBSERVED`
+Coordinator assigns task ID, role, branch/worktree, exact paths, input docs, dependency versions, acceptance and forbidden actions. One writer per file; synchronize shared API/schema contracts before dependent work. agents/*.md are portable role prompts; see NATIVE-AGENTS.md before adapters. Do not imply agents ran from reading profiles.
 
-A state advances only with evidence, not the AI saying 'done'. It is okay to revisit earlier states when requirements change.
+Product supplies stable stories to architect/designer. Architect coordinates database/backend contracts. Frontend waits for design and contracts. QA tests an identified commit. Independent reviewers inspect diff and evidence. Coordinator integrates sequentially. Blocked dependencies pause dependent work, not independent read-only checks.
 
-## Phases and owners
+| Action | Authority |
+| --- | --- |
+| Scoped local documentation/prototypes/commits | authorized initialization task |
+| Application code/packages | separately authorized implementation task |
+| Tests | non-destructive assigned local checks; exact results required |
+| Review | independent read-only context unless reassigned |
+| Scope/major contracts/final design | recorded human decision |
+| Remote push/merge/cloud/paid/destructive/production actions | explicit human authorization for action/target |
 
-| Stage | Lead | Specialist | Output | Gate |
-| --- | --- | --- | --- | --- |
-| Discover | human | product | PRD, stories, scope | human accepts goal |
-| Design | architect | UI/UX, database, security | ADR, diagrams, tokens, threat model | design approved |
-| Plan slice | orchestrator | frontend/backend/QA | task packet, branches, tests | scope agreed |
-| Implement | relevant engineer | bounded parallel specialist | code/tests/doc diffs | local checks |
-| Verify | QA | security reviewer | actual test evidence | acceptance pass |
-| Review | independent reviewer | lead | findings + resolved changes | PR checks/review |
-| Release | human owner | DevOps | deployment record | explicit production approval |
-| Operate | human/ops | product + QA | alerts, incidents, insights | feedback → next story |
+Never silently widen public fields, weaken RLS or expose assets. Public verification returns a projection, not table access. Recipient access tokens and public IDs have different privacy purposes; define lifetime/recovery before implementation.
 
-## Delegation rules
-
-- One agent owns each editable file at a time; parallel only when files/interfaces are clearly split.
-- Assign **task ID + branch + file paths + required docs + acceptance tests + forbidden changes**.
-- The orchestrator reviews handoffs, never assumes a subagent's self-reported tests are true without evidence.
-- If shared API contracts or schema changes, stop dependent tasks and synchronize before implementing both sides.
-- Read-only review should be a separate context where possible.
-- If the harness lacks native subagents, switch roles sequentially by reading the role prompt in `agents/`.
-
-## Approval matrix
-
-Agent may independently: inspect, propose plan, edit task-scoped local code, run non-destructive local checks (subject to your tool permissions). Human must approve: changing scope/contracts with broad impact, destructive migrations, prod credentials or data, paid resource creation, pushing/merging protected branch, production deploy or rollback.
-
-## Efficient context
-
-Use a short root contract + focused linked docs, rather than loading 30 long docs into every prompt. Close each task with `HANDOFF-TEMPLATE.md`. Split vertical slices when the diff becomes too large to review meaningfully.
+Close with HANDOFF-TEMPLATE.md: actual evidence, deviations, open decisions and reviewer status. Coordinator arranges review; no unassigned helpers. Orca workers read installed orchestration skill, ask coordinator for blockers and send worker_done once. These files do not register Orca agents.

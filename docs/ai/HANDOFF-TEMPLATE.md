@@ -1,24 +1,20 @@
-# Agent Handoff: TASK-[ID]
+# VeriMark handoff: [task ID]
 
-- **Status:** ready for review / blocked / partial / verified
-- **Role:** [..]
-- **Branch / worktree / commit:** [..]
-- **Goal and delivered behavior:** [..]
-- **Changed files (full paths):** [..]
-- **Contract/migration/environment changes:** [..]
+- Status: ready for review / partial / blocked
+- Owner / independent reviewer:
+- Goal / stories / acceptance coverage:
+- Branch / worktree / base SHA / delivered SHA:
+- Exact changed paths and reasons:
+- Inputs/contracts consumed; API/migration/env effects:
+- Decisions/deviations/constraints preserved:
 
-## Verification evidence
-
-| Command/check | Status: PASS/FAIL/SKIPPED/NOT RUN | Evidence/notes |
+| Actual command/check | Result | Evidence/environment/commit |
 | --- | --- | --- |
-| `npm run typecheck` | NOT RUN | [explain] |
+| [command] | PASS / FAIL / NOT RUN / NOT CONFIGURED | [observed output or reason] |
 
-## Review inputs
+- Security/privacy/design risks:
+- Open decisions / next owner:
+- Independent review status/findings:
+- Human approvals still needed:
 
-- Relevant acceptance criteria and links:
-- Known defects/limitations:
-- Risk/security/privacy findings:
-- Screenshots/preview if available:
-- Follow-up tasks, owner and priority:
-
-**Never say 'fully tested', 'merged', or 'deployed' without observed evidence.**
+Never infer tests, deployment or adoption from plans. A committed report cannot contain its own SHA: record implementation SHA and send final report commit separately.

@@ -1,42 +1,14 @@
-# TASK-[ID]: [Value-oriented title]
+# VeriMark task: VM-[ID] ? [outcome]
 
-- **Status:** backlog / ready / in progress / verifying / reviewed / merged
-- **Story / phase:** US-[ID] / Phase [N]
-- **Owner / role:** [..]
-- **Branch/worktree:** [..]
-- **Dependencies:** [..]
-- **Risk:** low / medium / high (and why)
+- Status / owner role / independent reviewer:
+- Story IDs / milestone / requirement IDs:
+- Assigned branch/worktree / base SHA:
+- Exact editable paths / forbidden paths:
+- Goal / Given-When-Then acceptance / negative authorization / UI states:
+- Dependencies and accepted contract versions:
+- Inputs: AGENTS, PROJECT_DETAILS and relevant API/data/design docs:
+- Risks and mitigations: tenant isolation, private assets, immutable issuance:
+- Actual verification commands / expected artifacts:
+- Human decisions / blocked dependencies:
 
-## Goal and user-visible outcome
-
-[One paragraph.]
-
-## Read before changing
-
-- `AGENTS.md`
-- [relevant canonical docs + precise source paths]
-
-## In scope
-
-- [specific behaviors/files]
-
-## Out of scope / constraints
-
-- [must preserve, no new dependencies, no prod changes, etc.]
-
-## Acceptance criteria
-
-- [ ] Given/When/Then success.
-- [ ] Negative authorization / invalid input path.
-- [ ] Loading, empty, error, responsive and accessibility states as applicable.
-
-## Verification
-
-- Focused tests: [exact commands]
-- Full gates: [exact commands]
-- Manual checks: [..]
-- Expected artifact: [screens/report/PR]
-
-## Completion and review
-
-Use `docs/ai/HANDOFF-TEMPLATE.md`. Independent reviewer: [..]. Human approvals required: [..].
+Engineering commands are not configured. Inspect real scripts after scaffolding before execution. Design proposals are not approved tokens. Close with HANDOFF-TEMPLATE.md; evidence is required for verified/reviewed/merged/released states.

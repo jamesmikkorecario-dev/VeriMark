@@ -1,61 +1,36 @@
-# Full-Stack AI Development Starter Kit
+# VeriMark
 
-A reusable documentation-first system for building production-minded full-stack applications with AI coding agents. **This is a template, not a completed app, production deployment, or tested repository.**
+Issue with confidence. Verify with trust.
 
-## Recommended example stack
+VeriMark is a planned platform for smaller organizations to issue accountable certificates and let recipients and third parties check issuer records and lifecycle status. This repository is an initialization foundation, not an implemented or deployed service. The working name has not been cleared for public launch.
 
-- Frontend: React + TypeScript + Vite (use Next.js instead when server rendering/SEO is essential).
-- Hosting: Vercel (production branch `main`, preview deployments for pull requests).
-- Backend: Supabase Auth, Postgres, Storage, and optional Edge Functions for trusted server-side operations.
-- Quality: ESLint, TypeScript, Vitest + React Testing Library, Playwright, accessibility checks.
-- Git: short-lived feature branches + PRs to protected `main` by default; optional `dev` integration branch if needed.
-- Package manager example: npm. Pin actual versions in `package.json` when scaffolding the application.
+Start with [AGENTS.md](AGENTS.md), [PRD](docs/product/PRD.md), [roadmap](docs/product/MVP-ROADMAP.md), [workflow](docs/ai/WORKFLOW.md), then [development prompt](START_DEVELOPMENT_PROMPT.md).
 
-## Start here (in order)
+## Source of truth
 
-1. Copy this folder's contents into a **new or existing Git repository**. Review before overwriting existing files.
-2. Fill project-specific fields in `docs/product/PRD.md`, `docs/product/MVP-ROADMAP.md`, `docs/architecture/TECH-STACK.md`, `docs/delivery/ENVIRONMENTS.md` and `.env.example`.
-3. Read `AGENTS.md` and `docs/ai/WORKFLOW.md`. These govern how agents work.
-4. Have a lead agent propose one vertical slice using `docs/ai/TASK-TEMPLATE.md`; review before implementation.
-5. Scaffold app/code separately. Then replace example commands in `AGENTS.md` and configure CI using `templates/github-actions/ci.example.yml`.
-6. Require implementation, tests, reviewer report, PR, and approval before release.
-
-## What is automatically loaded?
-
-- `AGENTS.md`: cross-tool entry point. Supported by multiple coding agents, including omp.
-- `CLAUDE.md`: lightweight compatibility note for Claude Code.
-- `agents/*.md`: **portable role prompts, NOT automatically registered subagents**. The lead can read/delegate these instructions manually.
-- `.claude/agents/code-reviewer.md`: Claude Code native example subagent.
-- `.opencode/agents/code-reviewer.md`: OpenCode native example subagent, verified against OpenCode agent-file format as of Nov 2026; it is **not** an omp-specific config.
-
-For Orca + omp: work from the repository root, ask the lead to read `AGENTS.md`, then invoke specialists by giving them the relevant `agents/*.md` role file. Check your installed harness's actual subagent commands before relying on automatic delegation.
-
-## Single source of truth
-
-| Topic | Canonical document |
+| Topic | Authority |
 | --- | --- |
-| Product requirements | `docs/product/PRD.md` |
-| Scope / phase order | `docs/product/MVP-ROADMAP.md` |
-| Technology decisions | `docs/architecture/TECH-STACK.md` + ADRs |
-| System boundaries | `docs/architecture/SYSTEM-ARCHITECTURE.md` |
-| Application folders and imports | `docs/architecture/REPOSITORY-STRUCTURE.md` |
-| API behavior | `docs/architecture/API-CONTRACTS.md` |
-| Design tokens | `docs/frontend/DESIGN-SYSTEM.md` |
-| UI components | `docs/frontend/COMPONENT-LIBRARY.md` |
-| Schema and authorization | `docs/database/*` |
-| Tests and release gates | `docs/quality/*` + `docs/delivery/*` |
-| Agent behavior | `AGENTS.md` + `docs/ai/WORKFLOW.md` |
+| Primary product requirements | [setup-inputs/PROJECT_DETAILS.md](setup-inputs/PROJECT_DETAILS.md); latest explicit user decisions prevail |
+| Preserved setup procedure | [setup-inputs/PROJECT_SETUP_PROMPT.md](setup-inputs/PROJECT_SETUP_PROMPT.md); old template stop rules superseded by authorized initialization |
+| Derived scope and acceptance | [PRD](docs/product/PRD.md), [stories](docs/product/USER-STORIES.md) |
+| Milestones/tasks | [roadmap](docs/product/MVP-ROADMAP.md), [backlog](tasks/BACKLOG.md) |
+| Stack, boundaries, contracts | docs/architecture/TECH-STACK.md, SYSTEM-ARCHITECTURE.md, API-CONTRACTS.md, ADRs |
+| Authorization/schema/storage | docs/backend/AUTH-AND-PERMISSIONS.md, docs/database/ |
+| Design approval proposals | [docs/design/](docs/design/) and [prototypes/design/](prototypes/design/) (planned coordinator-owned deliverables); docs/frontend/DESIGN-SYSTEM.md |
+| UI components/states | docs/frontend/COMPONENT-LIBRARY.md, ROUTES-AND-STATES.md |
+| Quality/release/operations | docs/quality/, docs/delivery/, docs/operations/ |
+| Agent authority | AGENTS.md, docs/ai/WORKFLOW.md, agents/ |
 
-Do not duplicate decisions across multiple files; link to the canonical owner instead.
+Design approval is pending. Prototypes and tokens are proposals. Cross-owner docs are integrated by the coordinator; report conflicts against the primary input.
 
-## First prompt for your agent
+## Scope and proposed implementation
 
-> Read `AGENTS.md`, `docs/ai/WORKFLOW.md`, `docs/product/PRD.md`, `docs/architecture/TECH-STACK.md`, and `docs/delivery/GIT-BRANCHING.md`. Identify missing project-specific decisions and propose a scoped Phase 0 plan. Do not modify code, install packages, create billable resources, push, merge, or deploy yet. Return architecture questions, a file-by-file plan, acceptance criteria, verification commands, and approval points. Do not claim tests were executed.
+MVP covers organization authorization/roles, templates, validated single/CSV issuance, private PDFs with QR links, account-free recipient access, restricted public verification, expiry/revocation/replacement, audit history and basic metrics. Issued claims are immutable. Verification confirms database recognition, not accreditation. Wallet, cryptographic credentials, LMS integrations, advanced workflows and bulk email are future scope.
 
-## References
+Working stack: React + TypeScript + Vite, Tailwind + shadcn/ui, React Router, TanStack Query, React Hook Form + Zod; Supabase Auth/Postgres/RLS/Storage/Edge Functions/RPC. Vercel is proposed, not provisioned. Budgets, regions and provider terms require checks before launch.
 
-- AGENTS.md standard: https://agents.md/
-- Claude Code subagents: https://claude.com/resources/articles/steering-claude-code-skills-hooks-rules-subagents-and-more
-- OpenCode agent files: https://opencode.ai/docs/agents
-- Vercel Git deployments: https://vercel.com/docs/git
-- Supabase production security: https://supabase.com/docs/guides/security/production-checklist
+## Running and agents
+
+No package.json is configured. Install/dev/lint/typecheck/unit/E2E/build scripts are **not configured**. Do not enable example CI or install packages during initialization.
+
+agents/*.md are portable role guides, not automatically registered Orca agents. .claude/ and .opencode/ are unverified adapter examples; see [native status](docs/ai/NATIVE-AGENTS.md). Automatic instruction loading is not claimed for any installed harness. Orca requires explicit task dispatch and its installed orchestration skill. Scoped local commits are allowed; remote pushes, merges and releases require explicit authorization.
