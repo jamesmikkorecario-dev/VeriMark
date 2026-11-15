@@ -20,3 +20,8 @@ Repository ID (Orca): `57c04b55-8f63-4efa-b7cc-718ff107fbdc`.
 | Path | Branch | Owner | Run | Created | Initial HEAD | Integration | Cleanup |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | C:/Users/James/orca/workspaces/VeriMark/full-stack-integration | dev/full-stack-integration | orchestrator | – | 2026-11-16 | c45bf28 | integration branch | keep (permanent) |
+| C:/Users/James/orca/workspaces/VeriMark/fs-a-auth-org | jamesmikkorecario-dev/fs-a-auth-org | FS-A, Claude, dispatch ctx_fda17d7d9b33 | run_693a93931d57 | 2026-11-16 03:20 | 61035bd | in progress (has uncommitted work) | not eligible |
+| C:/Users/James/orca/workspaces/VeriMark/fs-b-verify-delivery | jamesmikkorecario-dev/fs-b-verify-delivery | FS-B, Codex, dispatch ctx_6d37a5f5ae64 | run_693a93931d57 | 2026-11-16 03:20 | 61035bd | integrated (fast-forward, 0cf578b) | disposable; kept until the owner confirms |
+| C:/Users/James/orca/workspaces/VeriMark/fs-c-issuer-features | jamesmikkorecario-dev/fs-c-issuer-features | FS-C, Claude, dispatch ctx_58117d522558 | run_693a93931d57 | 2026-11-16 03:20 | 61035bd | integrated (merge 27ff4e2, head d5a9f3c) | disposable; kept until the owner confirms |
+
+Worker worktrees are left in place for now. Each holds an installed `node_modules` and nothing else untracked that matters; removal is optional housekeeping and waits for the owner because of the unresolved incident above.
