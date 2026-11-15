@@ -46,3 +46,9 @@ Dispatched workers follow task/dispatch preamble: ask coordinator then end turn;
 ## Approval and release boundary
 
 Local isolated tests/docs are permitted within scope; integration coordinator reviews and cherry-picks sequentially. No main merge, push, service connection/provisioning, deployment, paid activity, production secrets or shared migrations without explicit approval. Complete privacy/eligibility and restore gates before real pilot; current documents do not establish legal clearance or production readiness.
+
+## Mandatory stack update
+
+React.js + TypeScript, Vite, Supabase backend/PostgreSQL/Auth and Vercel hosting are approved requirements, with FREE TIERS ONLY. Storage/Edge Functions are conditional on documented need. No Next.js, separate Node backend, substituted host or extra cloud service without explicit approval. Styling, colors, typography and components remain exploratory; no visual approval has been granted. This authorization permits no production features, provisioning, push or deployment.
+
+Vercel Hobby eligibility for organizational use remains unresolved. Default Auth SMTP is unsuitable for general production email-based onboarding/reset; no external SMTP service is approved. Free recovery must cover DB exports and any private Storage objects without assuming a paid backup or extra cloud service. Report these conflicts and block dependent release work rather than substituting services or treating approval as implicit.

@@ -39,3 +39,11 @@ All paths relative to assigned worktree C:/Users/James/orca/workspaces/VeriMark/
 Latest task authorization supersedes old setup template's no-write gate for docs/local commits only. Targets, quota bands, caps, log retention and RPO/RTO are proposed policies, not vendor guarantees or implemented controls. Canonical product/API/schema docs were generic in this worker base; coordinator must reconcile role grants, upload caps, status/cache contracts and privacy decisions after sibling integration. Vercel organizational/commercial eligibility, production auth SMTP, separate Storage backups and real-pilot permissions/privacy review remain prerequisites; no legal conclusions.
 
 Coordinator must independently review this diff (no own workers authorized), integrate sequentially, validate combined references/contracts, and build requested workflow ZIP after combined validation. Nothing has been merged or deployed. Commit SHA is reported by worker_done and available from git log; this handoff is included in that commit to avoid a self-referential SHA.
+
+## Mandatory stack follow-up: task_90d3d01dbaa6
+
+Continued compliant INIT-D work without restarting. Mandatory stack: React.js + TypeScript, Vite, Supabase PostgreSQL/Auth backend, Vercel hosting; FREE TIERS ONLY. Storage/Edge require justification; no Next.js, separate Node backend or extra cloud service without explicit approval. Design styling/colors/type/components remain exploratory, not approved.
+
+Updated COST-GUARDRAILS, ENVIRONMENTS and SETUP-AND-VALIDATION to remove any implied permission to switch hosting or adopt paid/external services. Vercel Hobby organizational eligibility, production email-based Auth SMTP and free DB/private-object backup recovery remain unresolved release conflicts. No substitutes, extra services, provisioning, production features, push or deployment were performed. Main reconciles canonical architecture/product docs and independently reviews this follow-up.
+
+Checks: git diff --check and staged diff whitespace check passed; package.json remains absent; .github/workflows contains README.md only; changed paths remain owned. App checks remain NOT CONFIGURED. Commit SHA supplied in follow-up worker_done, avoiding self-reference.
