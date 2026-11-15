@@ -16,7 +16,7 @@ Start with [AGENTS.md](AGENTS.md), [PRD](docs/product/PRD.md), [roadmap](docs/pr
 | Milestones/tasks | [roadmap](docs/product/MVP-ROADMAP.md), [backlog](tasks/BACKLOG.md) |
 | Stack, boundaries, contracts | docs/architecture/TECH-STACK.md, SYSTEM-ARCHITECTURE.md, API-CONTRACTS.md, ADRs |
 | Authorization/schema/storage | docs/backend/AUTH-AND-PERMISSIONS.md, docs/database/ |
-| Design approval proposals | [docs/design/](docs/design/) and [prototypes/design/](prototypes/design/) (planned coordinator-owned deliverables); docs/frontend/DESIGN-SYSTEM.md |
+| Design approval proposals | [design review](docs/design/DESIGN-REVIEW.md), [interactive comparison](prototypes/design/index.html); docs/frontend/DESIGN-SYSTEM.md |
 | UI components/states | docs/frontend/COMPONENT-LIBRARY.md, ROUTES-AND-STATES.md |
 | Quality/release/operations | docs/quality/, docs/delivery/, docs/operations/ |
 | Agent authority | AGENTS.md, docs/ai/WORKFLOW.md, agents/ |

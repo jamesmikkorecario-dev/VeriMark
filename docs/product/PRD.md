@@ -1,6 +1,6 @@
 # VeriMark product requirements
 
-Status: initialization draft, 2026-11-15. Product decision owner: human project owner (name not supplied). Primary requirements: ../../setup-inputs/PROJECT_DETAILS.md, read completely; latest INIT-A working decisions prevail over generic setup prompts. This document describes planned behavior, not shipped functionality or validated demand.
+Status: initialization draft, 2026-11-15. Product decision owner: human project owner (name not supplied). Primary requirements: ../../setup-inputs/PROJECT_DETAILS.md, read completely; explicit user decisions prevail over generic setup prompts; derived proposals never override the primary product input. This document describes planned behavior, not shipped functionality or validated demand.
 
 ## Problem and hypothesis
 
@@ -36,13 +36,13 @@ All are P0 unless noted; detailed acceptance and dependencies are in USER-STORIE
 | FR-008 | US-008 | Inspect issuance history and usage |
 | FR-009 | US-009 | Operate a bounded pilot |
 
-MVP includes accessible responsive navigation, Supabase authentication for issuer staff, organization registration and authority review, owner/issuer/reviewer/viewer roles, at least one template, single/CSV issuance, unpredictable IDs, PDFs/QR links, account-free recipient retrieval/verification, expiry/revocation/replacement, history/basic metrics and security tests. Formal multi-step approvals are future; basic review/confirmation before issuance is MVP.
+MVP includes accessible responsive navigation, Supabase authentication for issuer staff, organization registration and authority review, owner/issuer/viewer roles under the proposed least-privilege matrix; reviewer remains a reserved role with no grants pending D-014, at least one template, single/CSV issuance, unpredictable IDs, PDFs/QR links, account-free recipient retrieval/verification, expiry/revocation/replacement, history/basic metrics and security tests. Formal multi-step approvals are future; basic review/confirmation before issuance is MVP.
 
 ## Security, privacy and lifecycle acceptance
 
 Issued content is immutable; correction creates a linked replacement with protected audit events. Server/database operations enforce organization/role checks, idempotency and valid transitions. No anonymous access to tenant tables or asset buckets. Template assets, evidence and PDFs remain private, accessed through authorized short-lived delivery. Public allowlist proposal: credential ID, title/achievement, permitted recipient display name, issuer display identity/review explanation, issue/expiry dates, lifecycle status and limited replacement reference. Confirm display-name permission and replacement disclosure before schema freeze. Never expose emails, student IDs, birthdates, private reasons/evidence, directories or internal audit details.
 
-Public statuses: valid, expired, revoked, not found, unable to verify. Service failure must remain distinguishable from missing records. Public endpoint uses exact lookup, throttling and unpredictable IDs, not browse/search-by-person. Status precedence and replacement invalidation must be agreed before implementation (D-013).
+Public outcomes: valid, expired, revoked, replaced, not found, unable to verify. Replaced is the proposed explicit presentation of the required replacement lifecycle, subject to D-013. Service failure must remain distinguishable from missing records. Public endpoint uses exact lookup, throttling and unpredictable IDs, not browse/search-by-person. Proposed precedence is revoked > replaced > expired > valid, using database time; confirm D-013 before implementation.
 
 Target WCAG 2.2 AA, semantic keyboard/focus patterns, readable mobile layouts and explicit loading/empty/error/success/unauthorized states; target is not a compliance claim. Security gates include anonymous, wrong-role and cross-tenant database/storage denial tests. No performance/SLA promises yet: M01 defines representative batch sizes and baseline budgets; M10 measures them. No production reliability or unlimited free-tier promise.
 

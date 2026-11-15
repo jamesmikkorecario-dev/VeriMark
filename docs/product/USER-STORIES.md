@@ -8,7 +8,7 @@ As a **owner**, I want to **register and manage an organization and scoped membe
 
 Priority: P0. Dependencies: none. Milestone: M03. Status: backlog.
 
-Acceptance: An authenticated owner creates a workspace; an authorized platform operator records issuer-review evidence; owner/issuer/reviewer/viewer permissions are enforced server-side; cross-tenant and anonymous private access fail.
+Acceptance: An authenticated owner creates a workspace; an authorized platform operator records issuer-review evidence; owner/issuer/viewer permissions are enforced server-side; reserved reviewer has no grants until D-014 is resolved; cross-tenant and anonymous private access fail.
 
 Verification evidence ID: EV-US-001; future unit/contract/integration tests plus critical browser journey at an identified commit. Every private operation includes anonymous, wrong-role and cross-tenant denial. UI must support loading, empty, validation/error, success and unauthorized states, keyboard focus and narrow screens. Exact commands are not configured yet.
 
@@ -30,7 +30,7 @@ Design: proposed issuer/recipient/verifier screens in ../../docs/design/ and ../
 
 As a **issuer**, I want to **approve a reviewed credential and produce a defensible record**.
 
-Priority: P0. Dependencies: US-001, US-002. Milestone: M04. Status: backlog.
+Priority: P0. Dependencies: US-001 and a reviewed fixture template; full US-002 authoring follows at M05. Milestone: M04. Status: backlog.
 
 Acceptance: An approved organization issues validated data once despite retries; identifier is unpredictable; claims become immutable; audit records actor/action/time; unapproved organizations and unauthorized roles are denied.
 
@@ -68,7 +68,7 @@ As a **public verifier**, I want to **compare a presented certificate with issue
 
 Priority: P0. Dependencies: US-003. Milestone: M04. Status: backlog.
 
-Acceptance: QR URL or ID lookup returns only approved public fields and issuer trust explanation; valid/expired/revoked/not found/unable to verify are distinct; outage is not reported as not found; requests are throttled and directories unavailable.
+Acceptance: QR URL or ID lookup returns only approved public fields and issuer trust explanation; valid/expired/revoked/replaced/not found/unable to verify are distinct; outage is not reported as not found; requests are throttled and directories unavailable.
 
 Verification evidence ID: EV-US-006; future unit/contract/integration tests plus critical browser journey at an identified commit. Every private operation includes anonymous, wrong-role and cross-tenant denial. UI must support loading, empty, validation/error, success and unauthorized states, keyboard focus and narrow screens. Exact commands are not configured yet.
 

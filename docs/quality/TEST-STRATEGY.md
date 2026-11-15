@@ -33,7 +33,7 @@ Use synthetic tenants A/B with owner/issuer/reviewer/viewer fixtures and genuine
 | Any user edits issued snapshot or erases lifecycle history | Denied; authorized corrections create tracked replacement |
 | Duplicate/replayed issuance, concurrent revoke/replace, partial batch failure | No duplicates/untracked partial issuance; transaction/idempotency contract tested |
 
-Status cases: valid, expired, revoked, not found, unable to verify; exact expiry boundary, replacement navigation, malformed IDs and forged fields. Backend failure must never become valid or not found.
+Status cases: valid, expired, revoked, replaced, not found, unable to verify; exact expiry boundary, replacement navigation, malformed IDs and forged fields. Proposed precedence is revoked > replaced > expired > valid; confirm the policy before implementation. Backend failure must never become valid or not found.
 
 ## Evidence and gates
 

@@ -16,6 +16,7 @@
 | D-010 | Open | Pilot organization and issuer-review operator/evidence; human product owner |
 | D-011 | Open | Recipient token lifetime/recovery, display-name permission, retention/region; product/security before API/schema freeze |
 | D-012 | Open | Budget, provider terms, domain/name clearance and deadline; human before public pilot |
-| D-013 | Proposed | Revocation precedes expiry; replacement withdraws original atomically; architect/security confirm before M04 |
+| D-013 | Proposed | Revoked > replaced > expired > valid using database UTC; replacement withdraws original atomically; confirm before M04 |
+| D-014 | Open proposal | Requirements name reviewer among organization roles. Proposed MVP grants owner/issuer/viewer only, reserves reviewer with no grants; human must confirm reviewer scope and self-approval vs distinct approver before M03/M04. No role removal is approved by this proposal. |
 
 No adoption, accreditation, legal compliance or vendor capacity is certified. No approval is inferred from a proposal or elapsed time.
