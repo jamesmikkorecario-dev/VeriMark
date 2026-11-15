@@ -55,8 +55,8 @@ for (const item of cases) {
     await expect(panel).toBeHidden();
     await trigger.click();
     await panel.getByRole('link', { name: item.route === '/' ? 'How it works' : 'Credentials', exact: true }).click();
-    await expect(page).toHaveURL(item.route === '/' ? '/preview/how' : '/workspace/records');
-    await expect(page.getByRole('main')).toBeFocused();
+    await expect(page).toHaveURL(item.route === '/' ? '/#method' : '/workspace/records');
+    await expect(item.route === '/' ? page.getByRole('region', { name: 'From recognition to reassurance.' }) : page.getByRole('main')).toBeFocused();
     await expect(page.locator('#' + item.id)).toBeHidden();
   });
 
@@ -159,4 +159,5 @@ test('public open panel follows sticky header while scrolling and dismisses on f
   await expect(panel).toBeHidden();
   await expect(trigger).toHaveAccessibleName('Open navigation');
 });
+
 
