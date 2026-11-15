@@ -73,6 +73,21 @@ describe('workspace modal lifecycle', () => {
     document.body.removeAttribute('style');
   });
 
+  it.each([
+    'padding-right:3px;overflow-x:clip;--unrelated: keep-me;',
+    'padding: 1px 3px !important; overflow-x: clip !important; overflow-y: scroll; position: relative !important; color: red;',
+  ])('restores exact inline declarations including overflow longhands and priorities: %s', style => {
+    document.body.setAttribute('style', style);
+    render(<MemoryRouter initialEntries={['/workspace']}><IssuerWorkspaceLayout><p>Page</p></IssuerWorkspaceLayout></MemoryRouter>);
+    fireEvent.click(screen.getByRole('button', { name: 'Open workspace navigation' }));
+    expect(document.body.style.position).toBe('fixed');
+    fireEvent(screen.getByRole('dialog'), new Event('cancel', { cancelable: true }));
+    expect(document.body.getAttribute('style')).toBe(style);
+    expect(document.body.style.overflowX).toBe('clip');
+    expect(document.body.style.getPropertyPriority('overflow-x')).toBe(style.includes('overflow-x: clip !important') ? 'important' : '');
+    document.body.removeAttribute('style');
+  });
+
   it('cleans modal and scroll lock on desktop resize, route change, and unmount', () => {
     const { unmount } = render(<MemoryRouter initialEntries={['/workspace']}><IssuerWorkspaceLayout><NavigateAway /></IssuerWorkspaceLayout></MemoryRouter>);
     const open = () => fireEvent.click(screen.getByRole('button', { name: 'Open workspace navigation' }));

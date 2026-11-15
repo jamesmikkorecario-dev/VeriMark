@@ -64,8 +64,9 @@ export function WorkspaceDrawer({ children }: { children: ReactNode }) {
     const body = document.body;
     const scrollX = window.scrollX;
     const scrollY = window.scrollY;
-    const properties = ['position', 'top', 'left', 'width', 'overflow', 'padding-right'] as const;
-    const saved = properties.map(name => [name, body.style.getPropertyValue(name), body.style.getPropertyPriority(name)]);
+    // Shorthand writes can replace independent longhands and their priorities.
+    // Restore the original declaration text, including unrelated inline styles.
+    const originalStyle = body.getAttribute('style');
     const gutter = window.innerWidth - document.documentElement.clientWidth;
     const padding = parseFloat(getComputedStyle(body).paddingRight) || 0;
     body.style.position = 'fixed';
@@ -82,10 +83,8 @@ export function WorkspaceDrawer({ children }: { children: ReactNode }) {
     return () => {
       desktop.removeEventListener('change', resize);
       element.close();
-      for (const [name, value, priority] of saved) {
-        if (value) body.style.setProperty(name, value, priority);
-        else body.style.removeProperty(name);
-      }
+      if (originalStyle === null) body.removeAttribute('style');
+      else body.setAttribute('style', originalStyle);
       window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
     };
   }, [open]);
