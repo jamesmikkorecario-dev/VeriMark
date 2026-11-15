@@ -45,6 +45,12 @@ Dispatched workers follow task/dispatch preamble: ask coordinator then end turn;
 
 ## Approval and release boundary
 
+## Initialization artifact maintenance
+
+From repository root, run `node tools/validate-initialization.cjs` for tracked local Markdown targets, starter markers, three preview files, inactive CI and tracked-content boundaries. Run `git diff --check` for whitespace. These are documentation checks, not runtime security or application tests. Open `prototypes/design/index.html` for the offline comparison and see its README for browser evidence reproduction; the optional browser check requires the already installed Orca browser executable and does not install dependencies.
+
+After committing the reviewed workflow, run `powershell -NoProfile -File tools/Export-Workflow.ps1`. It exports committed allowlisted workflow, input, configuration, documentation and prototype paths into ignored `artifacts/VeriMark-workflow.zip`, prints SHA-256, and excludes `.git`, actual environment secrets, dependencies and unrelated working files. Rerun after a later documentation commit to refresh the archive. It does not export uncommitted changes. Inspect the ZIP entry list before sharing; the archive includes clearly fictional prototype data and an example environment file only.
+
 Local isolated tests/docs are permitted within scope; integration coordinator reviews and cherry-picks sequentially. No main merge, push, service connection/provisioning, deployment, paid activity, production secrets or shared migrations without explicit approval. Complete privacy/eligibility and restore gates before real pilot; current documents do not establish legal clearance or production readiness.
 
 ## Mandatory stack update
