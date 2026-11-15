@@ -26,3 +26,26 @@
 - Browser tests implement overflow/axe audits and screenshots of landing/workspace at all six widths; route reload/history/404, keyboard/menu disclosure, search/empty/reset/status filtering, reduced-motion checks. These are unexecuted integration assertions, not evidence of passing accessibility or screenshots. No visual inspection or screen-reader compliance claim.
 - Next owner/coordinator: independently review and integrate A then B then C, reconcile browser selectors to actual accessible page controls if needed, rerun all commands and inspect screenshot outputs against approved reference. Browser launch failure requires local environment diagnosis; no settings bypass attempted. Future server/RLS negative authorization tests are outside this frontend-only scope.
 - Human approval: none needed for authorized local integration checks; deployment/push/main merge remain prohibited without authorization.
+
+## Follow-up task_bcad19c66264: browser runtime and independent-review corrections
+
+- Status: ready for coordinator review; implementation bfc5da079f06bd6a2527760fd4a9f4d0e0897ace.
+- Same isolated worker branch; integrated B/C commits cherry-picked for local verification because coordinator cherry-picked original A commits, preventing fast-forward. Coordinator should cherry-pick ONLY bfc5da0 plus this handoff update, not duplicated B/C history. Included C correction 25ab0a8 as local fdbbba8 without editing C paths.
+- Browser diagnosis: default bundled chromium headless shell v1255 fails browserType.launch spawn UNKNOWN; installed Chrome 157.0.8103.78 and Edge 157.0.4341.60 both launch, as does cached full Chromium 151.0.7922.34 (v1234). Cause below process spawning remains unknown; no OS safety settings changed.
+- Playwright config now permits PLAYWRIGHT_CHANNEL=chrome (or msedge), alternatively PLAYWRIGHT_EXECUTABLE_PATH; specifying both fails explicitly. Default remains bundled Chromium and no machine paths are committed. PowerShell invocation: `$env:PLAYWRIGHT_CHANNEL='chrome'; npm run test:e2e -- --workers=2`.
+- RouteEffects starts PUSH/REPLACE routes at top or explicit fragment; saves entry scroll on scroll events and restores on POP; same-page hash navigation keeps current focus, and history scrollRestoration is temporarily manual. Tests cover closing CTA from deep landing to workspace, back position, deferred destination heading visibility, and hash target/focus handling.
+- Strengthened browser tests use real Tab traversal, focused skip-link axe checks, menu Enter/Tab/Escape/restoration and displayed revoked rows. Fixed ambiguous Reset/Clear selector. Audit JSON attached to report; screenshots generated despite soft audit failure so future findings retain visual evidence.
+
+| Follow-up actual command | Result | Evidence |
+| --- | --- | --- |
+| npm run typecheck | PASS | strict TS, integrated modules present |
+| npm run lint | PASS | exit 0 |
+| npm test -- --run | PASS | 5 files, 24 tests including 8 routing lifecycle cases |
+| npm run build | PASS | Vite 8.3.8, 32 modules, built in 161 ms |
+| PLAYWRIGHT_CHANNEL=chrome npm run test:e2e -- --workers=2 | PASS | 36 cases, 27.5 seconds; six widths 320/390/768/1024/1440/1920 |
+| git diff --check | PASS | standard LF/CRLF warnings only |
+
+- Initial Chrome run: 18 pass/12 fail; six reset-selector failures fixed by A, six axe failures from .strip-decoration p contrast 4.27:1 reported to coordinator and corrected by C in 25ab0a8. Final run passes all page and focused skip-link axe assertions. No screen-reader/compliance claim.
+- Screenshot root (local, ignored): C:/Users/James/orca/workspaces/VeriMark/m1-foundation/test-results/foundation-public-and-work-c1469-cessibility-and-screenshots-chromium-{width}/ with landing.png and workspace.png for each width above (12 total). HTML report at playwright-report/index.html; raw run log m1-a-browser.log.
+- Visually inspected 1440 landing against approved home-desktop.png and 390 workspace: major layout, hierarchy and fictional disclosures remain readable, no observed clipping. Remaining C visual difference: .strip-decoration displays a literal question mark instead of reference star glyph; reported for coordinator/C review, not changed in A scope. This spot inspection is not a pixel-equality claim.
+- Independent review requested: coordinator to review bfc5da0 and inspect screenshot artifacts; primary/main untouched, no cloud operations or pushes.
