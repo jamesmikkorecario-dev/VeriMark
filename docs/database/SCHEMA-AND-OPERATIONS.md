@@ -63,6 +63,8 @@ Organization, template name and template text fields 120 characters (body prefix
 
 ## Applying to a Supabase project (requires owner approval; not done)
 
+The current, detailed procedure and the hosted testing checklist are in `HOSTED-MIGRATION-PLAN.md`. The summary below is kept for orientation.
+
 1. Create the project (free tier) and keep e-mail confirmation enabled.
 2. Apply the migration with the Supabase CLI (`supabase db push`) or the SQL editor.
 3. Make sure the Data API exposes only the `public` schema (the default). Never expose `app`.

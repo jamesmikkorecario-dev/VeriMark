@@ -26,6 +26,13 @@ Not deliverable locally (needs owner approval or external resources): a hosted S
 - Next, in order: (1) review and integrate FS-A, re-run all gates and the browser suite with `--workers=2`; (2) act on FS-REVIEW findings with a test per fix; (3) FS-E2E browser journeys on the demo adapter (issue → verify → revoke → replace → receive, roles, 320 px, axe); (4) FS-RC: setup guide, `.env.example`, README status, release-candidate report.
 - To resume in a new session: read this file, `docs/ai/FULL-STACK-CONTRACT.md`, `docs/ai/WORKTREE-REGISTRY.md`, then `orca orchestration run-use run_693a93931d57` and `orca orchestration worker-list`.
 
+## Checkpoint 2026-11-16 16:40 — hosted Supabase preflight
+
+- A Supabase Free development project exists and `.env.local` is configured in the integration worktree. **Nothing has been applied to it.** Plan and checklist: `docs/database/HOSTED-MIGRATION-PLAN.md`; hosted test: `supabase/hosted/README.md`.
+- Preflight corrections: profile backfill for existing accounts, explicit `public` schema access for API roles, malformed identifiers reported as not found, browser suite pinned to the demonstration adapter.
+- The integration worktree was re-checked-out after an interrupted deletion; `HEAD` was intact and nothing uncommitted was lost (snapshot kept at `refs/backup/preflight-20261116-worktree`). Local-only folders `artifacts/` and `dist/` were lost; they held only regenerable output.
+- Waiting for the owner: approval to install the Supabase CLI as a development dependency, link the project, dry-run and apply the migration.
+
 ## Checkpoint 2026-11-16 08:15 — local release candidate
 
 - All engineering tasks above are integrated on `dev/full-stack-integration`. Gates: typecheck, lint, 219 unit/component, 147 database, build, 283 browser (`--workers=2`) — all pass.

@@ -505,6 +505,12 @@ begin
 end $$;
 create trigger verimark_on_auth_user_created after insert on auth.users for each row execute function app.handle_new_user();
 
+-- Accounts created before this migration (for example while setting the project up) get the same profile row.
+insert into public.profiles (id, display_name)
+select u.id, left(coalesce(nullif(app.clean(u.raw_user_meta_data ->> 'display_name'), ''), nullif(split_part(coalesce(u.email, ''), '@', 1), ''), 'Member'), 120)
+  from auth.users u
+on conflict (id) do nothing;
+
 -- ---------------------------------------------------------------------------------------------
 -- Organizations, members, invitations
 -- ---------------------------------------------------------------------------------------------
@@ -1168,6 +1174,9 @@ revoke all on all functions in schema app from public, anon, authenticated;
 revoke all on all functions in schema public from public, anon, authenticated;
 revoke all on schema app from public, anon;
 grant usage on schema app to authenticated;
+-- The API roles need to reach the functions and the few readable tables in public. Stated here so the migration does
+-- not depend on a project's defaults (USAGE lets a role look objects up; it grants no access to any of them).
+grant usage on schema public to anon, authenticated;
 grant execute on function app.is_member(uuid) to authenticated;
 
 grant execute on function

@@ -27,6 +27,7 @@
     "src",
     "e2e",
     "supabase/tests",
+    "supabase/hosted",
     "*.config.ts"
   ]
 }

@@ -36,6 +36,8 @@ export function toApiError(error: { message?: string; details?: string | null; c
     const retryAfter = code === 'RATE_LIMITED' && /^\d+$/.test(detail) ? Number(detail) : undefined;
     return new ApiError(code, code, { retryable: CODES[code], fields: code === 'VALIDATION' ? parseFields(detail) : [], retryAfterSeconds: retryAfter });
   }
+  // 22P02: an identifier in the request is not a UUID (for example a mistyped address). No such record can exist.
+  if (error?.code === '22P02') return new ApiError('NOT_FOUND', 'NOT_FOUND');
   // PostgREST reports a missing or expired JWT with these codes.
   if (error?.code === 'PGRST301' || error?.code === 'PGRST302') return new ApiError('UNAUTHENTICATED', 'UNAUTHENTICATED');
   return new ApiError(fallback, fallback, { retryable: true });

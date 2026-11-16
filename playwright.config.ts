@@ -30,6 +30,9 @@ export default defineConfig({
     command: `npm run dev -- --host 127.0.0.1 --port ${port} --strictPort`,
     url: `http://127.0.0.1:${port}`,
     reuseExistingServer: false,
+    // The browser suite always runs on the demonstration adapter, even when .env.local points at a real project:
+    // these tests must never send requests to a hosted backend.
+    env: { VITE_SUPABASE_URL: '', VITE_SUPABASE_PUBLISHABLE_KEY: '' },
   },
 });
 

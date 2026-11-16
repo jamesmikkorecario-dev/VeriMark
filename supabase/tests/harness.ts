@@ -14,7 +14,10 @@ create schema extensions;
 create schema auth;
 create table auth.users (id uuid primary key, email text unique, email_confirmed_at timestamptz, raw_user_meta_data jsonb not null default '{}');
 create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid $$;
-grant usage on schema public, auth, extensions to anon, authenticated, service_role;
+-- No USAGE on schema public here: a project with automatic exposure switched off may not have it,
+-- so the migration must grant what it needs itself.
+revoke all on schema public from public;
+grant usage on schema auth, extensions to anon, authenticated, service_role;
 grant execute on function auth.uid() to anon, authenticated, service_role;
 alter default privileges in schema public grant all on tables to anon, authenticated, service_role;
 alter default privileges in schema public grant all on functions to anon, authenticated, service_role;
@@ -29,9 +32,11 @@ export class TestDb {
   private constructor(readonly pg: PGlite) {}
   private n = 0;
 
-  static async create(): Promise<TestDb> {
+  /** `before` runs after the Supabase stand-in and before the migrations, to model a project that already has state. */
+  static async create(before = ''): Promise<TestDb> {
     const pg = new PGlite({ extensions: { pgcrypto } });
     await pg.exec(SUPABASE_SHIM);
+    if (before) await pg.exec(before);
     for (const file of readdirSync(MIGRATIONS_DIR).filter(name => name.endsWith('.sql')).sort()) await pg.exec(readFileSync(join(MIGRATIONS_DIR, file), 'utf8'));
     return new TestDb(pg);
   }
