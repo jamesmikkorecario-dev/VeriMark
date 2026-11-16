@@ -100,10 +100,25 @@ describe('invitations', () => {
     expect(await db.admin("select count(*)::int as n from public.organization_invites where email = 'single@example.test' and revoked_at is null and accepted_at is null")).toEqual([{ n: 1 }]);
     expect(second.token).toMatch(/^[A-Za-z0-9_-]{43}$/);
   });
-  it('accepting never changes an existing member\'s role', async () => {
-    const created = await invite('alpha-owner@example.test', 'viewer');
-    expect(await db.rpc(t.owner, 'accept_invite', { p_token: created.token })).toMatchObject({ role: 'owner' });
+  it('refuses to invite an address that is already a member, whatever its letter case', async () => {
+    for (const email of ['alpha-owner@example.test', 'Alpha-Viewer@Example.Test']) {
+      const error = await db.fails(invite(email, 'viewer'));
+      expect(error.code).toBe('VALIDATION');
+      expect(JSON.parse(error.detail)).toEqual([{ field: 'email', code: 'ALREADY_MEMBER' }]);
+    }
     expect(await role(t.org, t.owner)).toBe('owner');
+    expect(await db.admin("select count(*)::int as n from public.organization_invites where email in ('alpha-owner@example.test', 'alpha-viewer@example.test') and accepted_at is null")).toEqual([{ n: 0 }]);
+  });
+  it('an invitation accepted by someone who became a member meanwhile leaves their role unchanged', async () => {
+    const late = await db.user('joins-twice');
+    const first = await invite('joins-twice@example.test', 'issuer');
+    await db.rpc(late, 'accept_invite', { p_token: first.token });
+    // A second outstanding invitation can only exist through direct database access; it must still not change the role.
+    const token = 'z'.repeat(43);
+    await db.admin(`insert into public.organization_invites (organization_id, email, role, token_hash, expires_at, created_by)
+      values ($1, 'joins-twice@example.test', 'viewer', extensions.digest(convert_to($2, 'UTF8'), 'sha256'), now() + interval '1 day', $3)`, [t.org, token, t.owner]);
+    expect(await db.rpc(late, 'accept_invite', { p_token: token })).toMatchObject({ role: 'issuer' });
+    expect(await role(t.org, late)).toBe('issuer');
   });
   it('only pending invitations are listed, without secrets', async () => {
     await invite('listed@example.test', 'viewer');

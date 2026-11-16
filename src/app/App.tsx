@@ -25,6 +25,7 @@ import CredentialsPage from '../features/credentials/CredentialsPage';
 import CredentialDetailPage from '../features/credentials/CredentialDetailPage';
 import IssuePage from '../features/issuance/IssuePage';
 import TemplatesPage from '../features/templates/TemplatesPage';
+import RemountOnFragment from './RemountOnFragment';
 import RouteEffects from './RouteEffects';
 
 export default function App() {
@@ -37,12 +38,12 @@ export default function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/verify" element={<VerifyPage />} />
           <Route path="/verify/:publicId" element={<VerifyPage />} />
-          <Route path="/receive" element={<ReceivePage />} />
+          <Route path="/receive" element={<RemountOnFragment><ReceivePage /></RemountOnFragment>} />
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/update-password" element={<UpdatePasswordPage />} />
-          <Route path="/invite" element={<InvitePage />} />
+          <Route path="/invite" element={<RemountOnFragment><InvitePage /></RemountOnFragment>} />
           <Route path="/app" element={<RequireAuth><AppLayout /></RequireAuth>}>
             <Route index element={<DashboardHome />} />
             <Route path="credentials" element={<CredentialsPage />} />

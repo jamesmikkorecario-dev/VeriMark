@@ -20,7 +20,7 @@ async function databaseWorld(): Promise<World> {
     try { return { data: await db.rpc(actor, name, args), error: null }; }
     catch (error) { const e = error as { message: string; detail?: string; code?: string }; return { data: null, error: { message: e.message, details: e.detail ?? null, code: e.code } }; }
   } } as unknown as SupabaseClient);
-  return { org: main.org, otherOrg: other.org, as: async persona => apiFor(actors[persona]) };
+  return { org: main.org, otherOrg: other.org, viewerEmail: 'parity-viewer@example.test', as: async persona => apiFor(actors[persona]) };
 }
 
 async function demoWorld(): Promise<World> {
@@ -28,7 +28,7 @@ async function demoWorld(): Promise<World> {
   const emails: Record<Exclude<Persona, 'anonymous'>, string> = { owner: 'owner@demo.verimark.test', issuer: 'issuer@demo.verimark.test', viewer: 'viewer@demo.verimark.test', otherOwner: 'north@demo.verimark.test' };
   await api.signIn(emails.owner, DEMO_PASSWORD); const org = (await api.listMemberships())[0].organizationId;
   await api.signIn(emails.otherOwner, DEMO_PASSWORD); const otherOrg = (await api.listMemberships())[0].organizationId;
-  return { org, otherOrg, as: async persona => { await api.signOut(); if (persona !== 'anonymous') await api.signIn(emails[persona], DEMO_PASSWORD); return api; } };
+  return { org, otherOrg, viewerEmail: emails.viewer, as: async persona => { await api.signOut(); if (persona !== 'anonymous') await api.signIn(emails[persona], DEMO_PASSWORD); return api; } };
 }
 
 describe('demonstration adapter and database agree', () => {

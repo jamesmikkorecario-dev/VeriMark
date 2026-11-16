@@ -1,8 +1,8 @@
 # VeriMark schema and trusted operations (implemented)
 
-Source of truth: `supabase/migrations/20261116000000_verimark_core.sql`. Decisions: ADR-0005. Tests: `supabase/tests/README.md`. `DATA-MODEL.md` and `RLS-AND-MIGRATIONS.md` describe the earlier, larger proposal; where they differ, this file and the migration describe what exists.
+Source of truth: `supabase/migrations/20261116000000_verimark_core.sql` plus subsequent approved migrations. Decisions: ADR-0005. Tests: `supabase/tests/README.md`. `DATA-MODEL.md` and `RLS-AND-MIGRATIONS.md` describe the earlier, larger proposal; where they differ, this file and the migrations describe what exists.
 
-Status: applied and tested only on a local in-process PostgreSQL. No hosted database exists.
+Status: the core migration is applied to the development project `otovaqtmodpqelwbrglj`, with verification recorded at `742e03f`. The owner has configured the first real platform administrator. Autonomous hosted test data remains approval-gated; see `e2e-live/README.md`. The local invitation correction `20261116010000_invite_existing_member.sql` is not applied or authorized yet.
 
 ## Access model
 
@@ -61,7 +61,7 @@ Organization, template name and template text fields 120 characters (body prefix
 - Lock ordering was reviewed twice (author and independent reviewer; one inconsistency was found and fixed) but has not been exercised with real concurrent connections: the test engine has a single connection. Deadlocks, quota races and issue-versus-suspension interleavings need a multi-connection test on a real PostgreSQL before pilot.
 - `auth.users.email_confirmed_at` is trusted for invitation matching, so e-mail confirmation must stay enabled in Supabase Auth.
 
-## Applying to a Supabase project (requires owner approval; not done)
+## Applying subsequent migrations (requires explicit owner approval)
 
 The current, detailed procedure and the hosted testing checklist are in `HOSTED-MIGRATION-PLAN.md`. The summary below is kept for orientation.
 

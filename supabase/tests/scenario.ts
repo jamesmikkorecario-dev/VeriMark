@@ -3,7 +3,7 @@ import { ApiError, type DraftRowInput, type VeriMarkApi } from '../../src/lib/ap
 // One end-to-end scenario of rules, refusals and result shapes, written against VeriMarkApi only, so the same
 // checks can run on the demonstration adapter, on the local database, and on a hosted Supabase project.
 export type Persona = 'owner' | 'issuer' | 'viewer' | 'otherOwner' | 'anonymous';
-export interface World { as(persona: Persona): Promise<VeriMarkApi>; org: string; otherOrg: string }
+export interface World { as(persona: Persona): Promise<VeriMarkApi>; org: string; otherOrg: string; /** Address of the viewer persona, an existing member of `org`. */ viewerEmail: string }
 
 const code = async (run: Promise<unknown>): Promise<string> => {
   try { await run; return 'OK'; } catch (error) { if (error instanceof ApiError) return error.code; throw error; }
@@ -71,13 +71,16 @@ export async function scenario(world: World): Promise<Record<string, unknown>> {
   api = await world.as('issuer');
   out.issuerInvite = await code(api.inviteMember(org, { email: 'friend@example.test', role: 'issuer' }));
   out.issuerRename = await code(api.renameOrganization(org, { displayName: 'Hijack', expectedRevision: 1 }));
+  api = await world.as('owner');
+  out.inviteExistingMember = await code(api.inviteMember(org, { email: world.viewerEmail.toUpperCase(), role: 'issuer' }));
   api = await world.as('otherOwner');
   out.crossTenantList = await code(api.listCredentials(org));
   out.crossTenantGet = await code(api.getCredential(org, first.credential.id));
   out.crossTenantRevoke = await code(api.revokeCredential(org, first.credential.id, { reason: 'no', idempotencyKey: crypto.randomUUID() }));
   out.ownIdForeignRecord = await code(api.getCredential(otherOrg, first.credential.id));
   // The other organization is not reviewed: it can prepare but not issue.
-  const otherTemplate = await api.saveTemplate(otherOrg, { name: 'Parity', config: template.config });
+  // Reuse a template when one exists: repeated runs against a persistent database must not pile up templates.
+  const otherTemplate = (await api.listTemplates(otherOrg)).find(t => !t.archived) ?? await api.saveTemplate(otherOrg, { name: 'Parity', config: template.config });
   const pending = await api.createBatch(otherOrg, { templateId: otherTemplate.id, source: 'single', rows: [person('Pending Person')] });
   const pendingPreview = await api.previewBatch(otherOrg, pending.batchId);
   const pendingApproval = await api.approveBatch(otherOrg, pending.batchId, { expectedRevision: pendingPreview.revision, previewDigest: pendingPreview.previewDigest });
@@ -109,7 +112,7 @@ export async function scenario(world: World): Promise<Record<string, unknown>> {
 
 /** The outcomes that matter most, pinned so that two implementations cannot be wrong in the same way. */
 export const REQUIRED_OUTCOMES = {
-  viewerRevoke: 'FORBIDDEN', viewerCreateBatch: 'FORBIDDEN', viewerInvite: 'FORBIDDEN', viewerLink: 'FORBIDDEN', issuerInvite: 'FORBIDDEN', issuerRename: 'FORBIDDEN',
+  viewerRevoke: 'FORBIDDEN', viewerCreateBatch: 'FORBIDDEN', viewerInvite: 'FORBIDDEN', viewerLink: 'FORBIDDEN', issuerInvite: 'FORBIDDEN', issuerRename: 'FORBIDDEN', inviteExistingMember: 'VALIDATION',
   crossTenantList: 'NOT_FOUND', crossTenantGet: 'NOT_FOUND', crossTenantRevoke: 'NOT_FOUND', ownIdForeignRecord: 'NOT_FOUND', unreviewedIssue: 'ISSUER_NOT_ELIGIBLE',
   issueWithoutApproval: 'APPROVAL_REQUIRED', approveWrongDigest: 'REVISION_CONFLICT', keyReusedForOtherBatch: 'IDEMPOTENCY_CONFLICT',
   issuedTwiceNewKey: 'INVALID_TRANSITION', replaySame: true, duplicateRows: 'VALIDATION', publicIdShape: true, tokenShape: true,

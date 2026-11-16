@@ -1,35 +1,26 @@
 # Hosted verification
 
-`npm run test:hosted` runs the same end-to-end rule scenario used locally (`supabase/tests/scenario.ts`) against a real Supabase project, plus direct table-access denial checks with real sessions. **Not yet run against any project.**
+`npm run test:hosted` runs the shared rule scenario against real Supabase Auth/PostgREST sessions and checks table privileges, tenant isolation and platform-admin isolation. **Hosted execution has not been authorized or run.** This is a writing suite, not a read-only preflight. It requires a separate disposable Free project; the protected development project is rejected.
 
-It **writes test data** (two organizations, templates, a few records per run, audit rows) and cannot delete it: issued records are immutable by design. Use a development project only. It is skipped unless everything below is set.
+## Approval and prerequisites
 
-## Prerequisites (after the migration has been applied with the owner's approval)
+Follow `e2e-live/README.md` for the complete approval/data plan and browser coverage. Both suites share `fixtures.ts`.
 
-1. In the Supabase dashboard, Authentication → Users → Add user, create five users with **Auto Confirm** ticked and one shared strong password: owner, issuer, viewer, other-owner, admin. Use addresses you control or a reserved test domain. No e-mail is sent.
-2. Make the admin test user a platform administrator (SQL editor): `insert into public.platform_admins (user_id) select id from auth.users where email = '<admin test address>';`
-3. Create `.env.hosted-test.local` in this worktree (ignored by git; never commit it):
+- Obtain explicit owner approval for six fictional Auth accounts, one dedicated test-admin assignment, the pending invitation correction migration, and the permanent records listed in that plan.
+- Never use the owner's account, password, service-role key or database password.
+- Keep email confirmation enabled. Fixture accounts must be confirmed through an approved operator provisioning process; the harness never creates accounts or changes Auth settings.
+- Configure six exact account UUIDs and fictional email addresses in the test worktree's ignored `.env.hosted-test.local`. Invalid or missing configuration fails the explicitly requested hosted suite before authentication.
+- Set `VM_TEST_PROJECT_REF`, `VM_TEST_SUPABASE_URL` and `VM_TEST_PUBLISHABLE_KEY` for the separately confirmed disposable project only. The runner never reads application `.env.local` or `VITE_*` credentials. `otovaqtmodpqelwbrglj` is forbidden even with matching URL/ref and write consent.
+- Initial setup requires all six accounts to have no memberships. It creates two organizations and prints each UUID immediately. Pin their UUIDs before subsequent runs, including the browser suite. A partial setup requires inspection and explicit recovery: pin any already-created organization independently; only missing expected issuer/viewer memberships may be repaired.
 
-```
-VM_HOSTED_TESTS=I-understand-this-writes-test-data
-VM_TEST_PASSWORD=<the shared password>
-VM_TEST_OWNER_EMAIL=...
-VM_TEST_ISSUER_EMAIL=...
-VM_TEST_VIEWER_EMAIL=...
-VM_TEST_OTHER_OWNER_EMAIL=...
-VM_TEST_ADMIN_EMAIL=...
-```
+## Coverage
 
-`VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` are read from `.env.local`.
+Anonymous table/RPC privileges; direct member write denial; private columns; exact tenant rows; platform admin without implicit tenant reads; owner/issuer/viewer roles; existing-member invitation rejection; approval/digest/idempotency; pending issuer refusal; issuance, public allowlist, revocation, replacement and delivery rotation.
 
-## What it checks
+UPDATE/DELETE probes use contradictory filters so they cannot match any row even if privileges regress. The platform-admin INSERT probe targets the existing fictional administrator row, not another account.
 
-- Anonymous: every table refuses reads and writes with PostgreSQL's permission error; member-only functions are refused; the two public functions answer.
-- The scenario's pinned outcomes (roles, tenant separation, approval, idempotency, eligibility, revoke, replace, delivery links, public allowlist).
-- With real sessions: no table accepts a write; private tables and private columns cannot be read; each member sees only their own organization's rows; a platform administrator sees no tenant data.
+Run sequentially, with no concurrent browser suite. Organizations, memberships and fixture roles must match the pinned identities before application writes. The other organization must remain pending. Account sessions are signed out locally after completion.
 
-Re-runs reuse the two organizations. The "other" organization must stay unreviewed. The public rate budget (600 lookups a minute) is not exercised here.
+## Limits
 
-## What it does not check
-
-Sign-up, e-mail confirmation and password-recovery e-mails; invitation acceptance by a brand-new account; real concurrency; rate-limit exhaustion; backups. These are in the manual checklist in `docs/database/HOSTED-MIGRATION-PLAN.md`.
+No signup/confirmation/recovery email delivery, concurrent database sessions, rate exhaustion, expiry waiting, backups or performance proof. Public lookup calls update rate/counter records. Immutable issuance/audit history cannot be cleaned up through the application. Never reset the shared development project to clean up tests.

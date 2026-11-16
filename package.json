@@ -15,7 +15,8 @@
     "preview": "vite preview",
     "test:e2e": "playwright test",
     "test:db": "vitest run --config vitest.db.config.ts",
-    "test:hosted": "vitest run --config vitest.hosted.config.ts"
+    "test:hosted": "vitest run --config vitest.hosted.config.ts",
+    "test:live": "playwright test --config playwright.live.config.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.119.0",

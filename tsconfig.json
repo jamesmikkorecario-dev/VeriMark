@@ -28,6 +28,7 @@
     "e2e",
     "supabase/tests",
     "supabase/hosted",
+    "e2e-live",
     "*.config.ts"
   ]
 }

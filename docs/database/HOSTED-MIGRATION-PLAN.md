@@ -1,5 +1,7 @@
 # Hosted Supabase migration plan (development project)
 
+> Historical development-project record, not a current execution recipe. Project `otovaqtmodpqelwbrglj` now contains real accounts and its real administrator and is PROTECTED: never run test migrations, fictional provisioning or hosted suites against it. The owner requires a separate disposable Free project. Use `DISPOSABLE-HOSTED-TEST-PLAN.md` for all new preflight/migration approval steps; commands and empty-account observations below describe the earlier approved operation only.
+
 Status 2026-11-16 16:44 (+08): **migration `20261116000000_verimark_core.sql` applied to the development project with the owner's approval** (Supabase CLI 3.1.0, `db push --remote --skip-vault --yes`, one attempt, exit 0). No platform administrator, test user or test data exists yet. See "Applied: verification record" at the end. Earlier preflight text is kept below for reference; CLI 3 targets the hosted project only with `--remote`.
 
 Original preflight status: Every step marked APPROVAL needs the owner's explicit go-ahead. Never paste a key, password or token into a commit, an issue or a chat.
