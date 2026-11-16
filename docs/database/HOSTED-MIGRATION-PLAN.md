@@ -1,6 +1,8 @@
 # Hosted Supabase migration plan (development project)
 
-Status 2026-11-16: **preflight only. Nothing has been applied to the hosted project.** Every step marked APPROVAL needs the owner's explicit go-ahead. Never paste a key, password or token into a commit, an issue or a chat.
+Status 2026-11-16 16:44 (+08): **migration `20261116000000_verimark_core.sql` applied to the development project with the owner's approval** (Supabase CLI 3.1.0, `db push --remote --skip-vault --yes`, one attempt, exit 0). No platform administrator, test user or test data exists yet. See "Applied: verification record" at the end. Earlier preflight text is kept below for reference; CLI 3 targets the hosted project only with `--remote`.
+
+Original preflight status: Every step marked APPROVAL needs the owner's explicit go-ahead. Never paste a key, password or token into a commit, an issue or a chat.
 
 ## Preflight findings
 
@@ -129,3 +131,32 @@ Manual, in the running app against the project:
 - [ ] Usage page stays within free-tier limits; no paid add-on is enabled.
 
 Still not covered after all of the above: real concurrent load, rate-limit exhaustion, backup and restore, privacy review. These remain release prerequisites, not development blockers.
+## Applied: verification record (2026-11-16)
+
+All checks below were read-only (`supabase db query --remote --read-only`, HTTP requests with the publishable key, `supabase db advisors`).
+
+| Check | Result |
+| --- | --- |
+| Remote migration history | `20261116000000` present; a further dry run reports "up to date" |
+| PostgreSQL | 17.11 |
+| Tables in `public` | 17, all with row level security; no other relation |
+| Policies | 6, all `SELECT` for `authenticated` |
+| Functions | 30 of ours in `public`, all `SECURITY DEFINER` with empty `search_path`; 26 in `app` |
+| `anon` may execute | `verify_credential`, `exchange_delivery` only |
+| `authenticated` may execute | the 30 public functions and `app.is_member` only |
+| Table-level privileges for `anon` / `authenticated` | none (no insert, update, delete, truncate or whole-table select) |
+| Column read access for `authenticated` | listed columns of 6 tables only; no private column; none for `anon` |
+| Schema access | `public`: usage for both API roles, create for neither; `app`: usage for `authenticated` only; `app` is not exposed by the API |
+| Triggers | 11 integrity triggers in `public`, 1 on `auth.users` |
+| Data | 0 accounts, profiles, platform administrators, organizations, records, audit rows, rate rows |
+| From outside, as `anon` | all 17 tables refuse reads with 42501; member functions refuse with 42501; both public functions are known to the API |
+| Auth settings | unchanged (sign-up on, e-mail confirmation required) |
+| Security Advisor | 11 × "RLS enabled, no policy" (info), 2 + 30 × "SECURITY DEFINER function executable" (warn): exactly the two expected categories |
+
+Not done in this step: the two public functions were not invoked (each call writes a rate-counter row), no signed-in path was exercised, and nothing concurrent was tested.
+
+Notes:
+
+- The project has Supabase's own function `public.rls_auto_enable` (event trigger `ensure_rls`). The migration's blanket `revoke ... on all functions in schema public` also applied to it. It is not callable by API roles, which is correct; whether it was before is unknown. Event triggers do not need that privilege to fire, but automatic row level security on a future table has not been re-tested since.
+- The CLI connects through a temporary database login role that it creates itself ("Initialising login role...").
+- GraphQL (`pg_graphql`) is not enabled on this project, contrary to the earlier preflight note, which only saw the endpoint respond.

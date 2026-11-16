@@ -31,7 +31,7 @@ Not deliverable locally (needs owner approval or external resources): a hosted S
 - A Supabase Free development project exists and `.env.local` is configured in the integration worktree. **Nothing has been applied to it.** Plan and checklist: `docs/database/HOSTED-MIGRATION-PLAN.md`; hosted test: `supabase/hosted/README.md`.
 - Preflight corrections: profile backfill for existing accounts, explicit `public` schema access for API roles, malformed identifiers reported as not found, browser suite pinned to the demonstration adapter.
 - The integration worktree was re-checked-out after an interrupted deletion; `HEAD` was intact and nothing uncommitted was lost (snapshot kept at `refs/backup/preflight-20261116-worktree`). Local-only folders `artifacts/` and `dist/` were lost; they held only regenerable output.
-- Waiting for the owner: approval to install the Supabase CLI as a development dependency, link the project, dry-run and apply the migration.
+- 16:44: with the owner's approval the migration was applied to the development project and verified read-only (record in `docs/database/HOSTED-MIGRATION-PLAN.md`). Waiting for separate approvals: first platform administrator, hosted test users, `npm run test:hosted`.
 
 ## Checkpoint 2026-11-16 08:15 — local release candidate
 
