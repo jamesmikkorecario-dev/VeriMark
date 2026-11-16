@@ -162,7 +162,7 @@ function CredentialRecord({ credentialId }: { credentialId: string }) {
         {link && <div className="fsc-secret" ref={linkRef} tabIndex={-1} aria-labelledby="link-title">
           <h2 id="link-title" style={{ fontSize: 22, margin: 0 }}>Recipient link</h2>
           <p><strong>This link is shown only once.</strong> Copy it now and send it to the recipient yourself; VeriMark does not send e-mail. Creating a new link disables this one.</p>
-          <FormField id="recipient-link" label="Private recipient link" hint={`Expires ${formatDateTime(link.expiresAt)}.`}>
+          <FormField id="recipient-link" label="Private recipient link" hint={api.mode === 'demo' ? `Expires ${formatDateTime(link.expiresAt)}. Demonstration: this link only works in this browser tab, because demonstration data is not stored on a server.` : `Expires ${formatDateTime(link.expiresAt)}.`}>
             <TextInput readOnly value={link.url} onFocus={e => e.currentTarget.select()} />
           </FormField>
           <div className="fsc-actions"><Button size="sm" onClick={() => copy(link.url, 'Recipient link')}>Copy recipient link</Button></div>

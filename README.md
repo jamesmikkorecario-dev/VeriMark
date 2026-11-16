@@ -2,7 +2,18 @@
 
 Issue with confidence. Verify with trust.
 
-VeriMark is a planned platform for smaller organizations to issue accountable certificates and let recipients and third parties check issuer records and lifecycle status. This branch implements the authorized M1 frontend demonstration; it is not a deployed credential service. The working name has not been cleared for public launch.
+VeriMark lets smaller organizations issue accountable certificates and lets recipients and third parties check the issuer's record and its current status. The working name has not been cleared for public launch.
+
+## Status of this branch (`dev/full-stack-integration`)
+
+A local release candidate of the full application: sign-in, organizations and roles, templates, single and CSV issuance, public verification, private recipient links with PDF certificates, revocation and replacement, activity history. It runs in two modes:
+
+- **Demonstration** (default, no configuration): fictional data held in the browser. Use it to try every screen.
+- **Supabase**: the real backend is one SQL migration (`supabase/migrations`), tested locally on PostgreSQL. **It has not been applied to a hosted Supabase project, and nothing is deployed.**
+
+Start here: [local development](docs/delivery/LOCAL-DEVELOPMENT.md) · [architecture decision](docs/architecture/adr/0005-full-stack-release-candidate.md) · [schema and operations](docs/database/SCHEMA-AND-OPERATIONS.md) · [release-candidate report](docs/delivery/RELEASE-CANDIDATE.md) · [roadmap and status](docs/product/FULL-STACK-ROADMAP.md).
+
+Not done, by design: deployment, a hosted database, e-mail delivery, merge to `main`. Each needs the owner's approval.
 
 Start with [AGENTS.md](AGENTS.md), [PRD](docs/product/PRD.md), [roadmap](docs/product/MVP-ROADMAP.md), [workflow](docs/ai/WORKFLOW.md), then [development prompt](START_DEVELOPMENT_PROMPT.md).
 
