@@ -14,11 +14,12 @@ Status: **not approved for a public or real-person pilot**. Development mileston
 | P2 engineering gate | Member-first writes could deadlock membership administration. Reproduced on real PostgreSQL; additive local migration fixes the demonstrated cycle. | Independently reviewed, local tests pass; applying migration to any hosted project still requires explicit approval. Broader concurrency schedules remain unexecuted. |
 | P2 security gate | One unpatched picomatch ReDoS advisory propagates into 12 high dev-tool audit entries; production-only audit has zero findings. | Upstream patch plus verification or explicit exposure/risk decision; no force downgrades, suppression or inferred acceptance. [Dependency evidence](../../security/hardening/DEPENDENCIES.md). |
 | P2 privacy gate | Delivery capability reusable for 30 days; downloaded PDFs cannot be recalled. | Owner chooses exact lifetime/recovery/rotation and existing-link treatment; shorter lifetime is proposed, not adopted. Privacy P-03/P-04. |
-| P2 verification gate | CSP still permits inline styles required by existing previews; platform headers, RPC cache behavior and Firefox/WebKit/accessibility-device behavior unverified. | Static-style migration before removing exception; verify real hosting responses only after deployment approval. Chromium-only CI is not cross-browser proof. |
+| P2 verification gate | Platform headers, Supabase RPC cache behavior and Firefox/WebKit/accessibility-device behavior unverified; CSP `connect-src` still allows any `*.supabase.co`. | Verify real hosting responses only after deployment approval; narrow `connect-src` to the production project origin once chosen. Chromium-only CI is not cross-browser proof. (The inline-style CSP exception was removed; see below.) |
 
 ## Implemented local changes
 
-- HTTP configuration: default `Cache-Control: no-store` and `Referrer-Policy: no-referrer` across frontend documents, preserving immutable hashed assets, framing/MIME/device restrictions, SPA routing and existing CSP functionality. Twenty-seven configuration assertions are not deployed CDN evidence.
+- HTTP configuration: default `Cache-Control: no-store` and `Referrer-Policy: no-referrer` across frontend documents, preserving immutable hashed assets and SPA routing. Follow-up: CSP is now strict (`style-src 'self'`, no `'unsafe-inline'` anywhere, `frame-src 'none'`, `upgrade-insecure-requests`), with `Cross-Origin-Opener-Policy`/`Cross-Origin-Resource-Policy: same-origin` and a wider `Permissions-Policy`. The one markup-style write (`Navigation.tsx`) now uses CSSOM. Config assertions plus a production-build Chromium spec (`e2e/http-security.spec.ts`, zero CSP violations across all main flows) back this; neither is deployed CDN evidence.
+- Demo/database parity: the demo adapter now withdraws recipient links on replacement, refuses links for replaced records, and keeps the issuer-name snapshot like the database. The shared demo/database/hosted scenario checks both link rules and failed against the previous demo adapter. Reported by the quota-interrupted privacy attempt (`jamesmikkorecario-dev/hardening-privacy`, `b0b088a`, retained, not merged; its alternative policy recommendations are available for the owner's comparison).
 - Database: new `20261118010000_concurrency_hardening.sql` acquires organization SHARE before membership SHARE in `app.require_role`. Existing applied migrations, grants, error policy and public contracts are unchanged. Authorization now follows the same organization-first order before writes can later acquire organization FK locks.
 - Real local runner: `tools/test-concurrency.mjs` uses independent PostgreSQL clients and observer-confirmed blocking barriers, fresh synthetic databases and loopback-only runtime. Baseline produced `40P01`; fixed version allowed both operations to commit. Duplicate exact issue produced one credential/event/receipt; issuance waiting behind member removal was denied without effects. This proves three schedules, not all races.
 - Rate and authorization regressions: eight additional real-schema cases, with aggregate cross-minute counts, pinned boundary/cleanup transactions and specific permission-denial assertions. Six sequential lifecycle/revision/authorization regressions explicitly do not claim concurrency proof.
@@ -52,7 +53,7 @@ React/Vite static frontend on an eligible Vercel Hobby `vercel.app` origin; sepa
 
 ## Completion evidence
 
-Candidate implementation merge: `f67da59` on `wf/pilot-hardening`; this final documentation commit follows it. `dev/full-stack-integration` remains at `bd640e4`; `main` remains protected. No existing worktree/branch was deleted or its uncommitted work incorporated.
+Candidate implementation merge: `f67da59` on `wf/pilot-hardening`, followed by documentation `8b06774`, demo parity fix `0238d60` and strict CSP `9809f0a`. `dev/full-stack-integration` remains at `bd640e4`; `main` remains protected. No existing worktree/branch was deleted or its uncommitted work incorporated.
 
 | Observed check | Result |
 |---|---|
@@ -68,6 +69,21 @@ Candidate implementation merge: `f67da59` on `wf/pilot-hardening`; this final do
 | `omp-flow check-commits bd640e4..HEAD` at `f67da59` | 17 commits use configured Git identity; no AI attribution. |
 | `omp-flow scan-diff bd640e4 HEAD` at `f67da59` | No high-confidence secrets. |
 
+Follow-up round (parity fix `0238d60` and strict CSP `9809f0a`), Vite Supabase variables blank:
+
+| Observed check | Result |
+|---|---|
+| `npx vitest run --config vitest.db.config.ts supabase/tests/parity.test.ts supabase/tests/adapter.test.ts` | 4 passed. The same parity test against the previous demo adapter failed on `linkAfterReplace` (`OK` vs `INVALID_TRANSITION`) and, after reordering to avoid masking, on `replacedLink` (`OK` vs `DELIVERY_UNAVAILABLE`). |
+| `npx vitest run`; `npm run test:db`; `npm run build` | 223 unit/component passed; 217 database/security passed; build passed. |
+| `npx playwright test e2e/http-security.spec.ts --project=chromium-1440 --retries=0` (after review fixes) | 4 passed: zero CSP violations under `style-src 'self'`; inline script, `<style>` and style attributes refused; CSSOM `cssText` allowed. |
+| `npx playwright test e2e/navigation.spec.ts --workers=2 --retries=0` | 34 passed, 15 skipped, 0 failed (covers inline-style restoration). |
+| `npm run test:e2e -- --workers=2` while other local browser checks ran concurrently | 283 passed, **4 flaky** (navigation resize 320, accessibility `/app/activity` and `/app/organization` 1440, motion 1440), 483 skips. |
+| Same full suite rerun with no other load (`HTTP_SECURITY_PORT=3686 PLAYWRIGHT_PORT=3687`) | **287 passed, 0 failed, 0 flaky**, 483 width skips. The four flakes did not reproduce; consistent with load contention. The new spec adds an in-suite production build at 1440, which raises CPU load during that project. |
+| `npm run test:live` | 22 passed, 12 by-design skips. |
+| Independent reviews | Parity fix: no findings. Strict CSP (security reviewer): no P0–P2; P3-1 (force demo build env), P3-3 (probe `cssText`) and P3-4 (explicit priority checks) fixed; P3-2 (Supabase adapter under CSP with a mocked backend) remains open and documented. |
+
 CI independent review found Node 22.14 incompatible with locked jsdom/undici engine requirements. Worker pinned Node 24.19.0, retained earlier evidence, and re-review found no actionable issue. No review findings remain unaddressed in delivered fixes; the explicitly listed architecture/privacy/deployment limitations remain blockers, not silently accepted risks.
 
-Completed Orca agent terminals were released without deleting their worktrees or branches. Two quota-blocked Claude attempts were fenced and retained, not retried against the exhausted provider. The integration branch is explicitly retained; cleanup ran dry-run only. No services were provisioned and neither Supabase project was modified or tested during hardening.
+Completed Orca agent terminals were released without deleting their worktrees or branches. Two Claude attempts hit the provider's weekly limit and were fenced and not retried; both later completed on their own (`b0b088a`, `d9db9e2`). Their branches and worktrees are retained unmerged: verified findings from them were ported (parity gaps, CSSOM finding, stricter headers, browser CSP spec) and weaker choices were not. The integration branch is explicitly retained; cleanup ran dry-run only. No services were provisioned and neither Supabase project was modified or tested during hardening.
+
+Browser flake: `e2e/motion.spec.ts:33` (`/workspace temporal entrance`) flaked once in each of two full runs on this branch (Chromium `captureScreenshot` protocol error at 320; page-lifecycle error at 1024), passing on retry. Ten repeats per width with no retries: candidate 1 failure in 70 ("execution context was destroyed"), baseline `bd640e4` 0 in 70. That difference is not statistically meaningful; the errors are around the test's own reload rather than application assertions, and no candidate change touches motion or workspace UI. Recorded as an unresolved timing flake in the already-known unstable motion class, neither proven nor excluded as a regression.
