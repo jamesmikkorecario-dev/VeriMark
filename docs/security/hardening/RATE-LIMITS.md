@@ -37,3 +37,9 @@ All checks ran locally with `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_K
 | `git diff --check` | Passed. |
 
 Full DB/unit suites, builds and browser suites were not run: this task requests focused checks once at end, with no browsers; no application or schema behavior changed. No remote commands, environment files, secrets or real recipient data were used. Changed paths: this report and `supabase/tests/public-rate-hardening.test.ts` only. No migration was created. Remaining risks: shared exhaustion, rollback/non-HTTP counting, boundary bursts, database contention and unmeasured provider resource limits. Review status: pending independent coordinator review.
+
+### Review correction: task `task_52c6d0bbc281`
+
+Review of `7f84927` identified minute-rollover sensitivity in the committed-miss and changing-header loops and a weak authorization assertion that accepted unrelated database failures. Those loops now assert `SUM(hits) GROUP BY bucket` across committed windows; the existing pinned transaction limit-boundary test retains its exact row assertion. Cleanup previously preserved the seeded delivery row across ordinary minute rollover, but its description as a *current* budget could become inaccurate; it now pins transaction time for setup, RPC and assertion with rollback in `finally`. Direct counter/helper denial assertions now require `/permission denied/` using the same pattern as existing authorization tests rather than accepting generic `DATABASE` errors.
+
+Verification after all test fixes, run once with both Vite Supabase variables blank: `npx vitest run --config vitest.db.config.ts supabase/tests/public-rate-hardening.test.ts` passed 1 file, 8/8 tests, 0 failures (2.46 seconds). `git diff --check` passed before commit. Only this report and the assigned test changed; no hosted operations, package edits or schema changes. Independent re-review remains requested.
