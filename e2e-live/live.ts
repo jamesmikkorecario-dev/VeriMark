@@ -75,8 +75,9 @@ function recordDiagnostics(page: Page, label: string, events: string[], t0: numb
   page.on('framenavigated', frame => { if (frame === page.mainFrame()) events.push(`${at()} navigated ${where(frame.url())}`); });
   page.on('response', response => { if (/\/(auth|rest|functions)\/v1\//.test(new URL(response.url()).pathname)) events.push(`${at()} ${response.request().method()} ${where(response.url())} → ${response.status()}`); });
   page.on('requestfailed', request => { events.push(`${at()} request failed ${request.method()} ${where(request.url())}: ${request.failure()?.errorText ?? 'unknown'}`); });
-  page.on('console', message => { if (message.type() === 'error' || message.type() === 'warning') events.push(`${at()} console.${message.type()}: ${message.text().slice(0, 300)}`); });
-  page.on('pageerror', error => { events.push(`${at()} page error: ${error.message.slice(0, 300)}`); });
+  // Kept whole: the reporter truncates only after redacting, so a secret is never cut in half and missed.
+  page.on('console', message => { if (message.type() === 'error' || message.type() === 'warning') events.push(`${at()} console.${message.type()}: ${message.text()}`); });
+  page.on('pageerror', error => { events.push(`${at()} page error: ${error.message}`); });
 }
 export const test = base.extend<{ stage: Stage; diagnostics: Watch }>({
   diagnostics: [async ({ page }, provide, info) => {

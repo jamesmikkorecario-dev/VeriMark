@@ -12,7 +12,7 @@ Date: 2026-11-18 (UTC 2026-11-17 18:19:26–18:19:30). One approved targeted run
 4. B → `/user`, refresh, `/user` again (same `session_id` after refresh).
 5. B signed out locally; nothing left behind.
 
-Local validation before the hosted run (`supabase/tests/session-scope.test.ts`, fake Auth server with GoTrue logout/refresh semantics): passes with the current adapter; fails with the pre-fix adapter (`logoutScopes ['global']`, B ended); refuses the protected ref before any request; refuses without hosted consent.
+Local validation before the hosted run (`supabase/tests/session-scope.test.ts`, fake Auth server with GoTrue logout/refresh semantics): passes with the current adapter; fails with the pre-fix adapter (`logoutScopes ['global']`, B ended); refuses the protected ref before any request. Separately, the hosted runner `supabase/hosted/session-scope.test.ts` refused to load with `VM_HOSTED_TESTS` unset (checked once locally, no network).
 
 ## Preflight
 
