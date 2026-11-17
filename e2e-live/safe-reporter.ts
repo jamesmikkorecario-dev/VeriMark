@@ -27,15 +27,18 @@ function knownSecrets(): string[] {
   } catch { return []; }
 }
 
-/** Hosted failures can contain passwords or bearer links. Persists statuses plus redacted, truncated error text only;
- * never stdout, attachments, DOM snapshots, traces or screenshots. */
+/** Hosted failures can contain passwords or bearer links. Persists statuses plus redacted, truncated error text and the
+ * failure-only `diagnostics` annotation (redacted); never stdout, attachments, DOM snapshots, traces or screenshots. */
 export default class SafeReporter implements Reporter {
-  private results: { file: string; line: number; status: string; expectedStatus: string; error?: string }[] = [];
+  private results: { file: string; line: number; status: string; expectedStatus: string; error?: string; diagnostics?: string }[] = [];
   onTestEnd(test: TestCase, result: TestResult) {
+    const secrets = knownSecrets();
     const raw = result.errors.map(e => e.message ?? '').join('\n').trim();
-    const error = raw ? redact(raw, knownSecrets()).slice(0, 2000) : undefined;
-    this.results.push({ file: test.location.file, line: test.location.line, status: result.status, expectedStatus: test.expectedStatus, ...(error ? { error } : {}) });
-    console.log(`${result.status}: ${test.location.file}:${test.location.line}${error ? `\n${error}` : ''}`);
+    const error = raw ? redact(raw, secrets).slice(0, 2000) : undefined;
+    const rawDiagnostics = result.annotations.filter(a => a.type === 'diagnostics').map(a => a.description ?? '').join('\n').trim();
+    const diagnostics = rawDiagnostics ? redact(rawDiagnostics, secrets).slice(-4000) : undefined;
+    this.results.push({ file: test.location.file, line: test.location.line, status: result.status, expectedStatus: test.expectedStatus, ...(error ? { error } : {}), ...(diagnostics ? { diagnostics } : {}) });
+    console.log(`${result.status}: ${test.location.file}:${test.location.line}${error ? `\n${error}` : ''}${diagnostics ? `\n--- diagnostics ---\n${diagnostics}` : ''}`);
   }
   onError() { console.error('Hosted runner failed; error details suppressed to protect credentials. Check configuration and local rehearsal.'); }
   onEnd(result: FullResult) {
