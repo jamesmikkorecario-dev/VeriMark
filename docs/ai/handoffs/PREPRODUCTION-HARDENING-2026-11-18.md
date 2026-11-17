@@ -49,3 +49,25 @@ React/Vite static frontend on an eligible Vercel Hobby `vercel.app` origin; sepa
 4. Review this isolated candidate before integrating into `dev/full-stack-integration`, particularly its pre-existing `vercel.json` worktree state. No merge to `main` or push is authorized.
 5. Only with separate exact-ref approvals: export/restore evidence, pause test, provision Free pilot, configure Auth/SMTP and apply specified migration set. Neither hosted project was contacted by this hardening task.
 6. Actual deployment/runtime headers/mail/negative authorization smoke and public launch require their own release approval. A green local workflow is not launch permission.
+
+## Completion evidence
+
+Candidate implementation merge: `f67da59` on `wf/pilot-hardening`; this final documentation commit follows it. `dev/full-stack-integration` remains at `bd640e4`; `main` remains protected. No existing worktree/branch was deleted or its uncommitted work incorporated.
+
+| Observed check | Result |
+|---|---|
+| `npm run typecheck`; `npm run lint` | Passed initially and after final integration, with both Vite Supabase variables blank. |
+| `npx vitest run` | 21 files, 222 unit/component tests passed. |
+| `npm run test:db` after concurrency integration | 14 files, 217 database/security tests passed. |
+| `npm run build` | Passed; production assets generated locally. |
+| `PLAYWRIGHT_PORT=3671 npm run test:e2e -- --workers=2 --reporter=line` | 282 passed, **1 flaky**, 459 width-specific skips. Chromium initially failed `Page.captureScreenshot` at `e2e/motion.spec.ts:40`; the configured retry passed. No application assertion failed on that initial attempt. |
+| `PLAYWRIGHT_PORT=3673 npm run test:e2e -- e2e/motion.spec.ts:33 --project=chromium-320 --grep '/workspace temporal' --workers=2 --retries=0 --output=test-results-motion-diagnostic --reporter=line` | Exact case passed once, no retries (4.9 seconds). Evidence supports intermittent capture/runtime instability, not proof that the cause is resolved. Diagnostic-only output removed; original run evidence retained by the session artifact. |
+| `LIVE_PORT=3672 npm run test:live` | 22 passed, 12 by-design skips, demo-only; no hosted run. |
+| Worker `node tools/test-concurrency.mjs <temporary-runtime> --expect-deadlock`, then after migration without the flag | Three barrier-controlled schedules passed in each mode on loopback PostgreSQL 18.6; baseline deadlock reproduced, fixed schedule committed. Cluster stopped; binaries/cluster/logs retained outside repository. |
+| CI YAML parse + semantic checks in temporary external tooling | Passed; explicit demo live step, read-only permissions and pinned Node/actions verified. All 213 declared Node engine ranges accept Node 24.19.0. Ubuntu/GitHub execution remains unrun. |
+| `omp-flow check-commits bd640e4..HEAD` at `f67da59` | 17 commits use configured Git identity; no AI attribution. |
+| `omp-flow scan-diff bd640e4 HEAD` at `f67da59` | No high-confidence secrets. |
+
+CI independent review found Node 22.14 incompatible with locked jsdom/undici engine requirements. Worker pinned Node 24.19.0, retained earlier evidence, and re-review found no actionable issue. No review findings remain unaddressed in delivered fixes; the explicitly listed architecture/privacy/deployment limitations remain blockers, not silently accepted risks.
+
+Completed Orca agent terminals were released without deleting their worktrees or branches. Two quota-blocked Claude attempts were fenced and retained, not retried against the exhausted provider. The integration branch is explicitly retained; cleanup ran dry-run only. No services were provisioned and neither Supabase project was modified or tested during hardening.
