@@ -90,7 +90,8 @@ export function createSupabaseApi(url: string, publishableKey: string, client: S
       return { needsEmailConfirmation: !data.session };
     },
     async signOut() {
-      const { error } = await client.auth.signOut();
+      // Ends this browser's session only; the user's sessions on other devices stay signed in.
+      const { error } = await client.auth.signOut({ scope: 'local' });
       if (error && error.status !== 401 && error.status !== 403) throw authFailure(error.status);
     },
     async requestPasswordReset(email) {
