@@ -37,3 +37,8 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e -- --workers=2
+      - name: Live journeys (demo rehearsal)
+        run: npm run test:live
+        env:
+          LIVE_TARGET: demo
+          LIVE_PORT: '3872'
