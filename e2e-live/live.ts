@@ -32,12 +32,12 @@ export async function signOut(page: Page) {
 export class Stage {
   private readonly contexts: BrowserContext[] = [];
   private current: { page: Page; persona: TestPersona | null } | null = null;
-  constructor(private readonly browser: Browser, private readonly demoPage: Page, private readonly baseURL: string) {}
+  constructor(private readonly browser: Browser, private readonly demoPage: Page, private readonly baseURL: string, private readonly watch: Watch) {}
   async as(persona: TestPersona): Promise<Page> {
     if (live.target === 'hosted') {
       const context = await this.browser.newContext({ baseURL: this.baseURL, storageState: live.storage![persona], viewport: this.demoPage.viewportSize()!, acceptDownloads: true });
       this.contexts.push(context);
-      const page = await context.newPage(); await page.goto('/app');
+      const page = await context.newPage(); this.watch(page, persona); await page.goto('/app');
       await expect(page).toHaveURL(/\/app(?:\/.*)?$/);
       return page;
     }
@@ -53,15 +53,41 @@ export class Stage {
     if (live.target === 'hosted') {
       const context = await this.browser.newContext({ baseURL: this.baseURL, viewport: this.demoPage.viewportSize()!, acceptDownloads: true });
       this.contexts.push(context);
-      return context.newPage();
+      const page = await context.newPage(); this.watch(page, 'anonymous');
+      return page;
     }
     if (this.current?.persona) { await this.demoPage.goto('/app'); await signOut(this.demoPage); this.current = { page: this.demoPage, persona: null }; }
     return this.demoPage;
   }
   async close() { for (const context of this.contexts) await context.close(); }
 }
-export const test = base.extend<{ stage: Stage }>({
-  stage: async ({ browser, page, baseURL }, provide) => { const stage = new Stage(browser, page, baseURL!); await provide(stage); await stage.close(); },
+/** Starts recording a page's diagnostics under a label (persona, `anonymous` or `page`). */
+type Watch = (page: Page, label: string) => void;
+/**
+ * Failure-only diagnostics for every page a test opens (its own page and each Stage page): navigations, Auth/REST
+ * responses (method, path, status — never query strings, fragments, headers or bodies), failed requests, console
+ * errors and page errors. Stored as a `diagnostics` annotation only when the test fails; the hosted reporter redacts
+ * it like any error text.
+ */
+function recordDiagnostics(page: Page, label: string, events: string[], t0: number) {
+  const at = () => `+${((Date.now() - t0) / 1000).toFixed(1)}s [${label}]`;
+  const where = (url: string) => { const u = new URL(url); return u.hostname === '127.0.0.1' || u.hostname === 'localhost' ? u.pathname : `[backend]${u.pathname}`; };
+  page.on('framenavigated', frame => { if (frame === page.mainFrame()) events.push(`${at()} navigated ${where(frame.url())}`); });
+  page.on('response', response => { if (/\/(auth|rest|functions)\/v1\//.test(new URL(response.url()).pathname)) events.push(`${at()} ${response.request().method()} ${where(response.url())} → ${response.status()}`); });
+  page.on('requestfailed', request => { events.push(`${at()} request failed ${request.method()} ${where(request.url())}: ${request.failure()?.errorText ?? 'unknown'}`); });
+  page.on('console', message => { if (message.type() === 'error' || message.type() === 'warning') events.push(`${at()} console.${message.type()}: ${message.text().slice(0, 300)}`); });
+  page.on('pageerror', error => { events.push(`${at()} page error: ${error.message.slice(0, 300)}`); });
+}
+export const test = base.extend<{ stage: Stage; diagnostics: Watch }>({
+  diagnostics: [async ({ page }, provide, info) => {
+    const events: string[] = [];
+    const t0 = Date.now();
+    const watch: Watch = (target, label) => recordDiagnostics(target, label, events, t0);
+    watch(page, 'page');
+    await provide(watch);
+    if (info.status !== info.expectedStatus) info.annotations.push({ type: 'diagnostics', description: events.slice(-80).join('\n') || '(no page events recorded)' });
+  }, { auto: true }],
+  stage: async ({ browser, page, baseURL, diagnostics }, provide) => { const stage = new Stage(browser, page, baseURL!, diagnostics); await provide(stage); await stage.close(); },
 });
 export { expect };
 
