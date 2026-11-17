@@ -138,13 +138,13 @@ export function createDemoApi(options: DemoApiOptions = {}): VeriMarkApi {
   function requireEligible(organization: OrgRec) {
     if (organization.reviewState !== 'reviewed') throw new ApiError('ISSUER_NOT_ELIGIBLE', 'This organization has not been reviewed for issuing.');
   }
-  function newCredential(draft: DemoState, organizationId: string, row: NormalRow, template: CredentialRec['template'], actor: string, extra: Partial<CredentialRec> = {}): CredentialRec {
+  function newCredential(draft: DemoState, organizationId: string, issuerDisplayName: string, row: NormalRow, template: CredentialRec['template'], actor: string, extra: Partial<CredentialRec> = {}): CredentialRec {
     const issuedAt = iso();
     let publicId = newPublicId();
     while (draft.credentials.some(c => c.publicId === publicId)) publicId = newPublicId();
     const credential: CredentialRec = {
       id: newInternalId('cred'), organizationId, seq: nextSeq(draft), publicId, batchId: null,
-      recipientDisplayName: row.recipientDisplayName, title: row.title, achievement: row.achievement, recipientEmail: row.recipientEmail,
+      issuerDisplayName, recipientDisplayName: row.recipientDisplayName, title: row.title, achievement: row.achievement, recipientEmail: row.recipientEmail,
       issuedAt, expiresAt: row.expiresOn ? endOfUtcDay(row.expiresOn) : null, template: clone(template), versionNumber: 1,
       revokedAt: null, replacedById: null, replacesId: null,
       events: [{ id: newInternalId('evt'), type: 'issued', at: issuedAt, actorDisplayName: actor, reason: null }],
@@ -521,7 +521,7 @@ export function createDemoApi(options: DemoApiOptions = {}): VeriMarkApi {
       }
       return commit(draft => {
         const credentials: IssuedCredentialRef[] = batch.rows.map((row, index) => {
-          const c = newCredential(draft, organizationId, row, template.config, user.displayName, { batchId });
+          const c = newCredential(draft, organizationId, organization.displayName, row, template.config, user.displayName, { batchId });
           audit(draft, organizationId, user.displayName, 'credential.issued', `${c.recipientDisplayName} · ${c.title}`);
           return { id: c.id, publicId: c.publicId, sourceRow: index + 1 };
         });
@@ -548,11 +548,11 @@ export function createDemoApi(options: DemoApiOptions = {}): VeriMarkApi {
     },
     async getCredential(organizationId, credentialId) {
       const s = await load();
-      const { membership, organization } = access(s, organizationId);
+      const { membership } = access(s, organizationId);
       const c = credentialIn(s, organizationId, credentialId);
       const publicIdOf = (id: string | null) => (id ? s.credentials.find(x => x.id === id)?.publicId ?? null : null);
       const detail: CredentialDetail = {
-        ...summary(c), issuerDisplayName: organization.displayName, template: clone(c.template), events: clone(c.events),
+        ...summary(c), issuerDisplayName: c.issuerDisplayName, template: clone(c.template), events: clone(c.events),
         replacedByPublicId: publicIdOf(c.replacedById), replacesPublicId: publicIdOf(c.replacesId),
         recipientEmail: membership.role === 'viewer' ? null : c.recipientEmail,
       };
@@ -589,9 +589,11 @@ export function createDemoApi(options: DemoApiOptions = {}): VeriMarkApi {
       if (original.revokedAt || original.replacedById) throw new ApiError('INVALID_TRANSITION', 'Only a current credential can be replaced.');
       return commit(draft => {
         const previous = draft.credentials.find(x => x.id === credentialId)!;
-        const successor = newCredential(draft, organizationId, row, previous.template, user.displayName, { versionNumber: previous.versionNumber + 1, replacesId: previous.id });
+        const successor = newCredential(draft, organizationId, organization.displayName, row, previous.template, user.displayName, { versionNumber: previous.versionNumber + 1, replacesId: previous.id });
         previous.replacedById = successor.id;
         previous.events.push({ id: newInternalId('evt'), type: 'replaced', at: successor.issuedAt, actorDisplayName: user.displayName, reason });
+        // Like the database: replacing withdraws every recipient link to the original.
+        for (const link of draft.deliveries) if (link.credentialId === credentialId && !link.revokedAt) link.revokedAt = successor.issuedAt;
         const result: IssuedCredentialRef = { id: successor.id, publicId: successor.publicId, sourceRow: 1 };
         draft.idempotency.push({ scope: `${organizationId}:${input.idempotencyKey.trim()}`, operation: 'replace', target: credentialId, requestDigest, result });
         audit(draft, organizationId, user.displayName, 'credential.replaced', `${previous.recipientDisplayName} · ${previous.title} → v${successor.versionNumber}`);
@@ -602,7 +604,7 @@ export function createDemoApi(options: DemoApiOptions = {}): VeriMarkApi {
       const s = await load();
       const { user } = access(s, organizationId, WRITE_ROLES);
       const credential = credentialIn(s, organizationId, credentialId);
-      if (credential.revokedAt) throw new ApiError('INVALID_TRANSITION', 'A revoked credential cannot be delivered.');
+      if (credential.revokedAt || credential.replacedById) throw new ApiError('INVALID_TRANSITION', 'Only a current credential can be delivered.');
       const token = newSecretToken();
       const tokenHash = await sha256Hex(token);
       return commit(draft => {
@@ -643,7 +645,7 @@ export function createDemoApi(options: DemoApiOptions = {}): VeriMarkApi {
         const successor = c.replacedById ? draft.credentials.find(x => x.id === c.replacedById) : undefined;
         const value: VerificationResult = {
           publicId: c.publicId, status: statusOf(c, now()),
-          issuer: { displayName: org.displayName, reviewState: org.reviewState },
+          issuer: { displayName: c.issuerDisplayName, reviewState: org.reviewState },
           recipientDisplayName: c.recipientDisplayName, title: c.title, achievement: c.achievement,
           issuedAt: c.issuedAt, expiresAt: c.expiresAt, checkedAt: iso(), proofType: 'online_database',
           replacementPublicId: successor?.publicId ?? null,
@@ -660,9 +662,8 @@ export function createDemoApi(options: DemoApiOptions = {}): VeriMarkApi {
       const link = s.deliveries.find(d => d.tokenHash === tokenHash);
       const c = link && s.credentials.find(x => x.id === link.credentialId);
       if (!link || !c || link.revokedAt || c.revokedAt || new Date(link.expiresAt).getTime() <= now().getTime()) throw unavailable;
-      const org = s.organizations.find(o => o.id === c.organizationId)!;
       const delivered: DeliveredCredential = {
-        publicId: c.publicId, status: statusOf(c, now()), issuerDisplayName: org.displayName,
+        publicId: c.publicId, status: statusOf(c, now()), issuerDisplayName: c.issuerDisplayName,
         recipientDisplayName: c.recipientDisplayName, title: c.title, achievement: c.achievement,
         issuedAt: c.issuedAt, expiresAt: c.expiresAt, template: clone(c.template),
       };

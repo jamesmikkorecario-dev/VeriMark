@@ -3,7 +3,7 @@ import { sha256Hex } from './crypto';
 import type { NormalRow } from './validation';
 
 export const DEMO_STORAGE_KEY = 'verimark.demo.state.v1';
-export const DEMO_STATE_VERSION = 1;
+export const DEMO_STATE_VERSION = 2;
 export const DEMO_PASSWORD = 'demo-password-1';
 
 /** Fixed, fictional public identifiers used by the seed so browser tests can reference them. */
@@ -36,7 +36,8 @@ export interface BatchRec {
 }
 export interface CredentialRec {
   id: string; organizationId: string; seq: number; publicId: string; batchId: string | null;
-  recipientDisplayName: string; title: string; achievement: string; recipientEmail: string | null;
+  /** Issuer name as it stood at issuance, like the database snapshot: later renames do not rewrite issued records. */
+  issuerDisplayName: string; recipientDisplayName: string; title: string; achievement: string; recipientEmail: string | null;
   issuedAt: string; expiresAt: string | null; template: TemplateConfig; versionNumber: number;
   revokedAt: string | null; replacedById: string | null; replacesId: string | null; events: CredentialEvent[];
 }
@@ -102,7 +103,7 @@ export async function createSeed(now: Date): Promise<DemoState> {
     const issuedAt = at(row.issued);
     const credential: CredentialRec = {
       id: `cred_demo_${row.key}`, organizationId: fieldwork.id, seq: ++seq, publicId: row.publicId, batchId: null,
-      recipientDisplayName: row.name, title: row.title, achievement: row.achievement, recipientEmail: row.email ?? null,
+      issuerDisplayName: fieldwork.displayName, recipientDisplayName: row.name, title: row.title, achievement: row.achievement, recipientEmail: row.email ?? null,
       issuedAt, expiresAt: row.expires === undefined ? null : at(row.expires), template: config, versionNumber: 1,
       revokedAt: null, replacedById: null, replacesId: null,
       events: [{ id: `evt_demo_${row.key}_issued`, type: 'issued', at: issuedAt, actorDisplayName: 'Mika Chen', reason: null }],

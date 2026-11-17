@@ -157,6 +157,21 @@ describe('tenant separation and roles', () => {
     await rejects(api.renameOrganization(FIELDWORK, { displayName: 'x'.repeat(121), expectedRevision: renamed.revision }), 'VALIDATION');
   });
 
+  it('keeps the issuer name issued records were signed with after a rename, like the database snapshot', async () => {
+    await as('issuer');
+    const issued = (await issueOne()).result.credentials[0];
+    const link = await api.createDeliveryLink(FIELDWORK, issued.id);
+    await as('owner');
+    const org = await api.getOrganization(FIELDWORK);
+    await api.renameOrganization(FIELDWORK, { displayName: 'Fieldwork Commons', expectedRevision: org.revision });
+    expect((await api.getCredential(FIELDWORK, issued.id)).issuerDisplayName).toBe('Fieldwork Collective');
+    expect((await api.verifyCredential(issued.publicId)).issuer.displayName).toBe('Fieldwork Collective');
+    expect((await api.exchangeDelivery(link.token)).issuerDisplayName).toBe('Fieldwork Collective');
+    await as('issuer');
+    const after = (await issueOne({ recipientDisplayName: 'After Rename' }, 'key-2')).result.credentials[0];
+    expect((await api.getCredential(FIELDWORK, after.id)).issuerDisplayName).toBe('Fieldwork Commons');
+  });
+
   it('protects the last owner from demotion and removal', async () => {
     await as('owner');
     await rejects(api.setMemberRole(FIELDWORK, 'user_demo_owner', 'issuer'), 'INVALID_TRANSITION');

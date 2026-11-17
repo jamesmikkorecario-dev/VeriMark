@@ -99,12 +99,12 @@ Static projections independently reviewed; failures can leave a partial set. The
 | Approvals | 10 | 9 |
 | Credentials | **13** | **12** |
 | Credential events | 17 | 16 |
-| Delivery capabilities | 4 | 4 |
+| Delivery capabilities | 5 | 5 |
 | Idempotency receipts | 13 | 12 |
-| Audit rows | 54 | 43 |
+| Audit rows | 55 | 44 |
 | Verification counter rows | 2 | 0 (existing values increase) |
 
-Rate-window rows depend on elapsed minute boundaries. Auth sign-ins create/update Supabase-managed sessions and security records. Six users/one admin grant are additional to the suite's application counts. API alone first creates 4 credentials (seed + 3); browser after it adds 9. Browser alone on fresh fixtures creates 10. Browser creates one unissued narrow-screen draft; API leaves an approved batch in the pending organization. Repeated membership testing removes/re-adds only the fictional invitee. Counts assume no extra retries, fixtures or manual records.
+Rate-window rows depend on elapsed minute boundaries. Auth sign-ins create/update Supabase-managed sessions and security records. Six users/one admin grant are additional to the suite's application counts. API alone first creates 4 credentials (seed + 3); browser after it adds 9. Browser alone on fresh fixtures creates 10. Browser creates one unissued narrow-screen draft; API leaves an approved batch in the pending organization. Repeated membership testing removes/re-adds only the fictional invitee. Since 2026-11-18 each API run also creates one delivery link (and its audit row) on the record it then replaces, to prove replacement withdraws it; hosted runs 1–3 predate this and match the earlier 4/54 and 4/43 figures. Counts assume no extra retries, fixtures or manual records.
 
 ## Exact execution sequence — only after approval
 

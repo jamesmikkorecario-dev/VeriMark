@@ -95,7 +95,11 @@ export async function scenario(world: World): Promise<Record<string, unknown>> {
   out.revokeAgain = await code(api.revokeCredential(org, first.credential.id, { reason: 'Again', idempotencyKey: crypto.randomUUID() }));
   out.replaceRevoked = await code(api.replaceCredential(org, first.credential.id, { reason: 'Fix', replacement: person('Parity One Fixed'), idempotencyKey: crypto.randomUUID() }));
   out.linkAfterRevoke = await code(api.createDeliveryLink(org, first.credential.id));
+  const linkTwo = await api.createDeliveryLink(org, two.id);
   const successor = await api.replaceCredential(org, two.id, { reason: 'Name corrected', replacement: person('Parity Two Fixed'), idempotencyKey: crypto.randomUUID() });
+  // Checked before any new-link attempt: a successful attempt would itself revoke linkTwo and hide the defect.
+  out.replacedLink = await code(api.exchangeDelivery(linkTwo.token));
+  out.linkAfterReplace = await code(api.createDeliveryLink(org, two.id));
   out.replaceAgain = await code(api.replaceCredential(org, two.id, { reason: 'Fork', replacement: person('Fork'), idempotencyKey: crypto.randomUUID() }));
   out.successorVersion = (await api.getCredential(org, successor.id)).versionNumber;
   out.eventsOfReplaced = (await api.getCredential(org, two.id)).events.map(e => e.type);
@@ -116,8 +120,8 @@ export const REQUIRED_OUTCOMES = {
   crossTenantList: 'NOT_FOUND', crossTenantGet: 'NOT_FOUND', crossTenantRevoke: 'NOT_FOUND', ownIdForeignRecord: 'NOT_FOUND', unreviewedIssue: 'ISSUER_NOT_ELIGIBLE',
   issueWithoutApproval: 'APPROVAL_REQUIRED', approveWrongDigest: 'REVISION_CONFLICT', keyReusedForOtherBatch: 'IDEMPOTENCY_CONFLICT',
   issuedTwiceNewKey: 'INVALID_TRANSITION', replaySame: true, duplicateRows: 'VALIDATION', publicIdShape: true, tokenShape: true,
-  revokeNoReason: 'VALIDATION', revoke: 'OK', revokeReplay: 'OK', revokeAgain: 'INVALID_TRANSITION', replaceRevoked: 'INVALID_TRANSITION', linkAfterRevoke: 'INVALID_TRANSITION',
-  replaceAgain: 'INVALID_TRANSITION', oldLink: 'DELIVERY_UNAVAILABLE', revokedLink: 'DELIVERY_UNAVAILABLE', publicIdAsToken: 'DELIVERY_UNAVAILABLE',
+  revokeNoReason: 'VALIDATION', revoke: 'OK', revokeReplay: 'OK', revokeAgain: 'INVALID_TRANSITION', replaceRevoked: 'INVALID_TRANSITION', linkAfterRevoke: 'INVALID_TRANSITION', linkAfterReplace: 'INVALID_TRANSITION',
+  replaceAgain: 'INVALID_TRANSITION', oldLink: 'DELIVERY_UNAVAILABLE', revokedLink: 'DELIVERY_UNAVAILABLE', replacedLink: 'DELIVERY_UNAVAILABLE', publicIdAsToken: 'DELIVERY_UNAVAILABLE',
   verifyValid: 'valid', verifyUnknown: 'NOT_FOUND', verifyMalformed: 'NOT_FOUND', verifyRevoked: 'revoked', viewerSeesEmail: null, issuerSeesEmail: 'one@example.test',
   verifyReplaced: ['replaced', true, 'Parity Two'], verifySuccessor: 'Parity Two Fixed', successorVersion: 2, eventsOfReplaced: ['issued', 'replaced'],
   verifyKeys: ['achievement', 'checkedAt', 'expiresAt', 'issuedAt', 'issuer', 'proofType', 'publicId', 'recipientDisplayName', 'replacementPublicId', 'status', 'title'],
