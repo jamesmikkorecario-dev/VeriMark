@@ -1,3 +1,7 @@
-# VeriMark workflows intentionally inactive
+# VeriMark local validation workflow
 
-No package.json or app scripts exist. Do not add .yml/.yaml here until matching tools/scripts and synthetic isolated tests pass and CI activation is reviewed. Filename example does not make a workflow in this directory inert. The retained proposal is ../../templates/github-actions/ci.example.yml, outside workflow discovery. See ../../docs/delivery/CI-CD.md and SETUP-AND-VALIDATION.md for gates; no deployments are authorized.
+`pilot-validation.yml` runs typecheck, lint, unit/component tests, PGlite database/security tests, the production build, two-worker Chromium tests and the one-worker live **demo** rehearsal. It pins its actions and Node runtime, grants read-only repository access and persists no checkout credentials.
+
+The workflow has no hosted Supabase credentials, provisioning, deployments or artifact uploads. Remote GitHub execution and branch-protection activation have not been observed; local passing checks are not release approval. Full dependency-audit findings remain a separate explicit release blocker.
+
+See [free pilot readiness](../../docs/delivery/FREE-PILOT-READINESS.md) and [pre-production assessment](../../docs/ai/handoffs/PREPRODUCTION-HARDENING-2026-11-18.md). Historical proposals in `templates/github-actions/` are not active workflows. No push or deployment is authorized.
