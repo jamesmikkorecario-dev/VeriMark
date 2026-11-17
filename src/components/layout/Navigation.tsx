@@ -84,7 +84,8 @@ export function WorkspaceDrawer({ children }: { children: ReactNode }) {
       desktop.removeEventListener('change', resize);
       element.close();
       if (originalStyle === null) body.removeAttribute('style');
-      else body.setAttribute('style', originalStyle);
+      // CSSOM, not setAttribute('style'): the production CSP (style-src 'self') refuses style attributes set as markup.
+      else body.style.cssText = originalStyle;
       window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
     };
   }, [open]);

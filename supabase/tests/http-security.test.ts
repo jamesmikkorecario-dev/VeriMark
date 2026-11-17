@@ -28,6 +28,7 @@ const documents = [
   '/sign-in', '/sign-up', '/reset-password', '/update-password',
   '/update-password?code=fictional', '/unknown-route',
 ];
+const PERMISSIONS = 'accelerometer=(), camera=(), display-capture=(), geolocation=(), gyroscope=(), hid=(), magnetometer=(), microphone=(), payment=(), serial=(), usb=()';
 
 describe('HTTP security configuration (not runtime platform evidence)', () => {
   test.each(documents)('%s forbids response storage and referrer disclosure', path => {
@@ -42,28 +43,31 @@ describe('HTTP security configuration (not runtime platform evidence)', () => {
       'cache-control': 'public, max-age=31536000, immutable',
       'x-content-type-options': 'nosniff',
       'x-frame-options': 'DENY',
-      'permissions-policy': 'camera=(), microphone=(), geolocation=()',
+      'permissions-policy': PERMISSIONS,
+      'cross-origin-resource-policy': 'same-origin',
     });
   });
 
-  test('global controls retain strict script, framing, MIME and device restrictions', () => {
+  test('global controls keep strict script, style, framing, MIME, device and cross-origin restrictions', () => {
     const headers = headersFor('/verify/VM-AAAA-1111');
     expect(headers).toMatchObject({
       'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY',
-      'permissions-policy': 'camera=(), microphone=(), geolocation=()',
+      'permissions-policy': PERMISSIONS,
       'strict-transport-security': 'max-age=63072000; includeSubDomains',
+      'cross-origin-opener-policy': 'same-origin', 'cross-origin-resource-policy': 'same-origin',
     });
     const directives = Object.fromEntries(headers['content-security-policy'].split(';').map(d => {
       const [name, ...values] = d.trim().split(/\s+/);
       return [name, values.join(' ')];
     }));
     expect(directives).toEqual({
-      'default-src': "'self'", 'script-src': "'self'",
-      'style-src': "'self' 'unsafe-inline'", 'img-src': "'self' data: blob:",
-      'font-src': "'self'", 'connect-src': "'self' https://*.supabase.co",
+      'default-src': "'self'", 'script-src': "'self'", 'style-src': "'self'", 'img-src': "'self' data: blob:",
+      'font-src': "'self'", 'connect-src': "'self' https://*.supabase.co", 'frame-src': "'none'",
       'object-src': "'none'", 'base-uri': "'self'", 'form-action': "'self'",
-      'frame-ancestors': "'none'",
+      'frame-ancestors': "'none'", 'upgrade-insecure-requests': '',
     });
+    // No inline script/style or eval escape hatch anywhere in the policy.
+    expect(headers['content-security-policy']).not.toMatch(/unsafe-/);
   });
 
   test('SPA fallback still covers deep links and excludes build assets', () => {

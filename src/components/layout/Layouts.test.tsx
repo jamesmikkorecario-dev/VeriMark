@@ -76,15 +76,25 @@ describe('workspace modal lifecycle', () => {
   it.each([
     'padding-right:3px;overflow-x:clip;--unrelated: keep-me;',
     'padding: 1px 3px !important; overflow-x: clip !important; overflow-y: scroll; position: relative !important; color: red;',
-  ])('restores exact inline declarations including overflow longhands and priorities: %s', style => {
+  ])('restores the same inline declarations including overflow longhands and priorities: %s', style => {
     document.body.setAttribute('style', style);
     render(<MemoryRouter initialEntries={['/workspace']}><IssuerWorkspaceLayout><p>Page</p></IssuerWorkspaceLayout></MemoryRouter>);
     fireEvent.click(screen.getByRole('button', { name: 'Open workspace navigation' }));
     expect(document.body.style.position).toBe('fixed');
     fireEvent(screen.getByRole('dialog'), new Event('cancel', { cancelable: true }));
-    expect(document.body.getAttribute('style')).toBe(style);
+    // Restored through CSSOM (CSP-safe), so compare declarations as the browser serializes them, not the source text.
+    const reference = document.createElement('div');
+    reference.style.cssText = style;
+    expect(document.body.style.cssText).toBe(reference.style.cssText);
     expect(document.body.style.overflowX).toBe('clip');
     expect(document.body.style.getPropertyPriority('overflow-x')).toBe(style.includes('overflow-x: clip !important') ? 'important' : '');
+    // Explicit guards, independent of how jsdom serializes the reference.
+    if (style.includes('--unrelated')) expect(document.body.style.getPropertyValue('--unrelated').trim()).toBe('keep-me');
+    if (style.includes('position: relative !important')) {
+      expect(document.body.style.position).toBe('relative');
+      expect(document.body.style.getPropertyPriority('position')).toBe('important');
+      expect(document.body.style.getPropertyPriority('padding-right')).toBe('important');
+    }
     document.body.removeAttribute('style');
   });
 

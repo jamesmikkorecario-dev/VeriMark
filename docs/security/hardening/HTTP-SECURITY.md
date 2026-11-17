@@ -18,19 +18,21 @@ The no-referrer default prevents outbound and same-origin referrer disclosure ac
 | Control | Audit result |
 | --- | --- |
 | CSP scripts | self only; no unsafe-inline or unsafe-eval for scripts |
-| CSP styles | self plus unsafe-inline retained for existing React style attributes in CertificatePreview, CredentialDetailPage, IssuePage, TemplatesPage and DashboardHome |
+| CSP styles | **self only** (since the coordinator follow-up below). React `style` props and `Navigation` write styles through CSSOM, which CSP does not govern; the one markup-style write (`Navigation.tsx` restoring `body`'s style with `setAttribute`) now uses `style.cssText`. Inline `<style>` elements and style attributes are refused. |
 | CSP connections | self and HTTPS Supabase subdomains; no new destinations, WebSocket or custom-domain support added |
 | CSP resources | self fonts; self/data/blob images support current local previews; object-src none; base-uri and form-action self |
 | Framing | frame-ancestors none and X-Frame-Options DENY retained |
 | MIME | X-Content-Type-Options nosniff retained |
-| Devices | camera, microphone and geolocation disabled; no product capability change |
+| Devices / isolation | accelerometer, camera, display capture, geolocation, gyroscope, HID, magnetometer, microphone, payment, serial and USB disabled; `Cross-Origin-Opener-Policy: same-origin`, `Cross-Origin-Resource-Policy: same-origin`, `frame-src 'none'`, `upgrade-insecure-requests` |
 | HTTPS | existing HSTS two-year includeSubDomains retained; domain/subdomain readiness remains a deployment check |
 
 Vercel headers govern frontend responses only, not cross-origin Supabase Auth/PostgREST responses. These changes cannot force no-store on RPC results, revoke a bearer link, prevent screenshots or solve public enumeration. Backend response caching and intermediary behavior need separate runtime verification before release. No RLS changes were needed; the existing DB authorization negatives still run in the DB suite.
 
-## CSP follow-up proposal (technical, no product-policy decision)
+## Coordinator follow-up: `'unsafe-inline'` removed (2026-11-18)
 
-Recommendation: keep the current inline-style exception for this patch; move React style attributes into the existing static CSS system in a separately owned UI task, then remove unsafe-inline after browser checks under the enforced policy. Static CSS preserves this static-hosting architecture. Hashes can cover fixed style blocks, but style attributes need explicit browser-supported attribute hash handling and exact stable values; changing generated values makes them brittle. Fresh response nonces need per-response HTML/header coordination and do not simply authorize React style attributes; a fixed nonce in vercel.json offers no useful protection. Do not add a server just for this patch. No D-010 through D-014 product defaults were changed or new product-policy decisions required.
+The original recommendation here (keep `'unsafe-inline'` and first migrate React style attributes to static CSS) rested on a wrong premise: React applies `style` props through CSSOM (`element.style`), which CSP does not restrict. A separate, quota-interrupted worker attempt (`jamesmikkorecario-dev/hardening-http`, `d9db9e2`, not merged) found that the only markup-style write in app code is `Navigation.tsx` restoring `body`'s original style with `setAttribute`. That attempt's caching and referrer choices were weaker than this branch's global `no-store`/`no-referrer` and were not adopted. Its stricter CSP/cross-origin headers and its production-build browser spec were ported, with `'unsafe-inline'` removed entirely rather than narrowed to `style-src-attr`.
+
+`e2e/http-security.spec.ts` builds the app into a temporary directory, serves it with `vite preview` plus the `vercel.json` headers for each path, aborts every non-local request and records `securitypolicyviolation` events. Under the strict policy it observed **zero violations** across public, verification, recipient, invitation, auth, workspace, certificate PDF download and mobile navigation flows, and confirmed that inline scripts, injected `<style>` elements and style attributes are refused while CSSOM styling works. This is Chromium evidence for a local emulation of the header rules, not Vercel runtime evidence; Firefox/Safari CSP behavior and the Supabase adapter under CSP remain untested. No D-010 through D-014 product defaults changed.
 
 ## Evidence and boundary
 
@@ -57,4 +59,4 @@ The configuration format and source/header rules were checked against [Vercel's 
 
 ## Handoff and remaining work
 
-Coordinator independent review is requested on the delivered diff; no helper workers were started. Remaining risks: the retained inline-style allowance, broad Supabase connection allowlist, unverified platform headers/CSP behavior and the install-time dependency audit findings. Coordinator should route dependency findings to their dependency owner. No push, merge, deployment, cloud operation or production approval is implied.
+Coordinator independent review is requested on the delivered diff; no helper workers were started. Remaining risks: broad Supabase connection allowlist (`https://*.supabase.co`; narrowing to the exact project origin needs the production project decision), unverified platform headers/CSP behavior, untested non-Chromium CSP behavior and the install-time dependency audit findings. The inline-style allowance was removed in the coordinator follow-up above. No push, merge, deployment, cloud operation or production approval is implied.
