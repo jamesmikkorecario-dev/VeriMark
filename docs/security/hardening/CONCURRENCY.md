@@ -3,7 +3,8 @@
 Task: `task_18c3f0faaee6`, 2026-11-18. Owner: dispatched concurrency worker;
 independent reviewer: coordinator (review requested with delivery, pending).
 Branch: `jamesmikkorecario-dev/hardening-concurrency`, base `bd640e4`.
-Status: sequential regressions complete; multi-connection verification **unverified**.
+Status: sequential regressions complete; three real multi-connection schedules
+executed in the follow-up below. Other schedules remain unverified.
 This report follows the handoff template in the assigned documentation path;
 the shared template itself is unchanged to respect ownership.
 
@@ -13,7 +14,7 @@ lock inventory and repeatable multi-session test design with honest limitations.
 Inputs: README source matrix, PRD, RC assessment, threat model, ADR-0005,
 D-010–D-014, core/invite migrations and shared test harness.
 No API, environment, dependency, applied migration or rate-check changes.
-No additive migration: no race was demonstrated with competing connections.
+Initial audit added no migration; the follow-up demonstrated and fixed a deadlock.
 
 ## Evidence boundary
 
@@ -163,3 +164,89 @@ $env:VITE_SUPABASE_PUBLISHABLE_KEY=''`.
 Independent review is pending; coordinator should review this report and tests
 before integration. Local commit identifies delivered changes; no push, merge,
 cloud operations, policy changes or human approvals were performed.
+
+## Follow-up: portable PostgreSQL execution and demonstrated fix
+
+Task `task_a478793e7c81` supersedes the earlier runtime-unavailable conclusion.
+Prior commit `b1da9db` is preserved. Portable execution was reachable and should
+have been attempted in the first audit. Sources consulted: maintained package
+[repository](https://github.com/leinelissen/embedded-postgres) and its
+[Windows binary package](https://www.npmjs.com/package/@embedded-postgres/windows-x64).
+Registry metadata reported package modification 2026-10-30. Official binary
+installation was unnecessary once the maintained Windows package ran successfully.
+
+Runtime directory (outside repository):
+`C:/Users/James/AppData/Local/Temp/verimark-concurrency-d98f71d4092741578540b324575a9f26`.
+Binary subdirectory: `node_modules/@embedded-postgres/windows-x64/native/bin`.
+Cluster: `data`; log: `server.log`, both beneath that temporary directory.
+No global installation, service, account creation, repository dependency change,
+hosted request or environment-file copy occurred. npm scripts were disabled;
+the package's `pg-symlinks.json` was empty so hydration was unnecessary.
+
+Exact setup commands (PowerShell, `$runtimeDir` set to the directory above):
+
+```powershell
+npm view embedded-postgres version description dist.tarball
+npm view @embedded-postgres/windows-x64 version description dist.tarball
+npm view embedded-postgres readme
+npm view @embedded-postgres/windows-x64 scripts dist.unpackedSize repository
+npm view embedded-postgres repository time.modified
+npm install --prefix $runtimeDir --ignore-scripts --no-audit --no-fund @embedded-postgres/windows-x64@18.6.0-beta.19 pg@8.16.3
+# 15 packages installed successfully outside repo
+$pgBin = Join-Path $runtimeDir 'node_modules/@embedded-postgres/windows-x64/native/bin'
+& (Join-Path $pgBin 'postgres.exe') --version
+# postgres (PostgreSQL) 18.6
+& (Join-Path $pgBin 'initdb.exe') -D (Join-Path $runtimeDir 'data') -A trust -U postgres --encoding=UTF8 --locale=C
+& (Join-Path $pgBin 'pg_ctl.exe') -D (Join-Path $runtimeDir 'data') -l (Join-Path $runtimeDir 'server.log') -o '-h 127.0.0.1 -p 35479' -w start
+```
+
+Trust authentication was limited to a throwaway loopback server, stopped after
+execution; no real data was loaded. The committed runner creates a fresh database,
+uses the existing Supabase shim and sorted migrations, then drops only that database.
+Roles are cluster-wide and retained in the stopped disposable cluster. Independent
+clients use READ COMMITTED; an observer confirms `wait_event_type=Lock` and
+`pg_blocking_pids(B)` includes A before proceeding. The pause between authorization
+and batch creation calls the actual helper, with no production test hooks.
+
+Before adding the new migration:
+`node tools/test-concurrency.mjs $runtimeDir --expect-deadlock` passed 3/3
+expectations. A PID 21728 blocked B PID 36344 at all three barriers. Exact issue
+replay returned the same result and counts 1 credential / 1 event / 1 receipt;
+issue waiting behind removal returned `VM:NOT_FOUND` with counts unchanged;
+the member-first schedule produced `40P01 deadlock detected` on A and B removal
+succeeded. This demonstrates an availability defect, not an authorization bypass.
+
+Fix: additive `20261118010000_concurrency_hardening.sql` replaces only
+`app.require_role`, acquiring organization SHARE before membership SHARE.
+Existing organization-first RPCs retain their order; formerly member-first
+callers now hold organization SHARE before any later FK KEY SHARE. This removes
+the demonstrated cycle with organization UPDATE in membership administration.
+UID/role errors, grants, RLS and policy defaults remain unchanged. Read RPCs using
+this helper now also hold an organization SHARE lock until transaction end;
+this may increase contention with administration and deserves review.
+
+After migration, `node tools/test-concurrency.mjs $runtimeDir` passed 3/3
+expectations. A PID 17964 blocked B PID 18728 at all three barriers; duplicate
+replay and post-wait denial retained their results and counts, while both draft
+creation and removal committed without deadlock. An initial repeat attempt failed
+at setup with SQLSTATE 42710, `role "anon" already exists`: the runner was then
+corrected to reuse cluster roles when creating subsequent disposable databases.
+That failed setup database was removed by the runner's finally block.
+
+Post-fix `npm run test:db`: 182/182 across 12 files, 34.75s; `npm run typecheck`,
+`npm run lint`, `git diff --check`: all exit 0. Vite Supabase variables were blanked
+before checks. No browser/build checks were needed for this SQL/tool-only change.
+No antivirus, provider or network errors occurred.
+
+Remaining: independent coordinator review requested; other schedules in the
+matrix (including suspension waits, competing different keys, last-owner races,
+caps, capability regeneration and cross-resource receipt collisions) have not
+been executed concurrently. Three passing schedules do not certify all races.
+No product decision proposal was needed. Stop/lifecycle evidence follows below.
+
+Shutdown command:
+`pg_ctl.exe -D <runtimeDir>/data -m fast -w stop` returned exit 0,
+`server stopped`; subsequent `pg_ctl.exe -D <runtimeDir>/data status` returned
+exit 3, `no server running`. `Get-NetTCPConnection -LocalPort 35479 -State Listen
+-ErrorAction SilentlyContinue` returned no listener. Temporary binaries, stopped
+cluster and logs are retained for review; no service was registered.
