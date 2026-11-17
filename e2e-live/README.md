@@ -58,6 +58,24 @@ VM_TEST_INVITEE_ID=<exact approved Auth UUID>
 
 Initially leave organization IDs absent; all test accounts must have zero memberships. The first API run creates `VM Test Main (automated)` and `VM Test Other (automated)` and prints their nonsecret UUIDs immediately. Record them privately as `VM_TEST_MAIN_ORG_ID` and `VM_TEST_OTHER_ORG_ID` before the browser or any repeat. Each existing organization must match the approved owner, exact name and allowed fictional member UUIDs. Partial setup is inspected before resumption; pin any already-created organization independently. Never blindly rerun an interrupted writing test: already-issued scenario/browser records are not rolled back.
 
+## Provisioning the six accounts (server-only secret)
+
+`supabase/hosted/provision-users.ts` is the only code that uses an elevated key. It reads `VM_PROVISION_SECRET_KEY` solely from `.env.hosted-admin.local` (ignored by `.env.*` in `.gitignore`). The variable name deliberately lacks the `VM_TEST_` and `VITE_` prefixes, so the hosted runner's loader, Vitest and the Playwright/Vite server never read it (regression: `supabase/tests/provisioning-safety.test.ts`). It refuses a non-`sb_secret_` key, a mismatched URL/reference and the protected development reference, and creates nothing unless the project has zero Auth users.
+
+Owner places the key without echoing it (PowerShell, in the test worktree):
+
+```powershell
+$secure = Read-Host 'verimark_hosted_tests secret key' -AsSecureString
+$bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure)
+try { $plain = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($bstr) } finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($bstr) }
+[IO.File]::WriteAllText("$PWD\.env.hosted-admin.local", "VM_PROVISION_SECRET_KEY=$plain`n")
+Remove-Variable plain, secure
+icacls .env.hosted-admin.local /inheritance:r /grant:r "${env:USERNAME}:(R,W)" | Out-Null
+git check-ignore .env.hosted-admin.local   # must print the file name
+```
+
+Then, once: `node supabase/hosted/provision-users.ts` creates exactly six confirmed accounts at `@example.test` (no e-mail is sent), generates one random test-only password, and appends the password, addresses and returned UUIDs to `.env.hosted-test.local`; it prints UUIDs only. `--check` re-verifies them read-only. The dedicated test administrator row is then inserted by exact UUID through `npx supabase db query --remote=<test ref>`. After provisioning, remove `.env.hosted-admin.local` and revoke the `verimark_hosted_tests` key in the dashboard; the test runs need only the publishable key and the test password.
+
 ## Pending application corrections
 
 - `RemountOnFragment` remounts receive/invite pages on a second native fragment navigation, ensuring the next secret is consumed and removed. Unit regression and browser delivery rehearsal pass. Existing animations and scrolling are unchanged.
