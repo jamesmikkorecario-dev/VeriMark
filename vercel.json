@@ -23,7 +23,7 @@
         },
         {
           "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
+          "value": "no-referrer"
         },
         {
           "key": "Permissions-Policy",
@@ -32,28 +32,6 @@
         {
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains"
-        }
-      ]
-    },
-    {
-      "source": "/receive",
-      "headers": [
-        {
-          "key": "Referrer-Policy",
-          "value": "no-referrer"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "no-store"
-        }
-      ]
-    },
-    {
-      "source": "/invite",
-      "headers": [
-        {
-          "key": "Referrer-Policy",
-          "value": "no-referrer"
         },
         {
           "key": "Cache-Control",
