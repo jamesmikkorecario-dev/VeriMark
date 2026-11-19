@@ -10,7 +10,8 @@ export function ButtonLink({ variant, size, className, ...props }: LinkProps & A
   return <Link className={actionClass(variant, size, className)} {...props} />;
 }
 export function Brand({ to = '/', inverse = false }: { to?: string; inverse?: boolean }) {
-  return <Link to={to} className={`brand${inverse ? ' brand-inverse' : ''}`} aria-label="VeriMark home"><span className="brand-symbol" aria-hidden="true"><span>V</span><i /></span><span className="brand-word">verimark<span className="brand-period">.</span></span></Link>;
+  // The name repeats the visible wordmark (WCAG 2.5.3) and says where the link goes.
+  return <Link to={to} className={`brand${inverse ? ' brand-inverse' : ''}`} aria-label="verimark. home"><span className="brand-symbol" aria-hidden="true"><span>V</span><i /></span><span className="brand-word">verimark<span className="brand-period">.</span></span></Link>;
 }
 const paths = {
   arrow: 'M4 12h16m-7-7 7 7-7 7', menu: 'M4 7h16M4 12h16M4 17h16', close: 'M5 5l14 14M19 5 5 19',

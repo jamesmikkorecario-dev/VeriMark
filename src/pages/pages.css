@@ -99,12 +99,11 @@
 .workspace-header{height:75px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:15px;padding:0 44px;background:#fafbf7}
 .workspace-breadcrumb{font-size:11px;letter-spacing:.07em;text-transform:uppercase;flex:1}
 .workspace-breadcrumb span{color:var(--muted)}
-.demo-bubble{font-size:9px;font-weight:700;letter-spacing:.05em;background:#e6eee2;padding:10px;color:#46664e}
 .workspace-main{padding:50px 44px 80px;flex:1;min-width:0}
 .eyebrow{font-size:10px;font-weight:750;letter-spacing:.13em;color:var(--muted)}
 .workspace-footer{padding:18px 44px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;font-size:10px;color:var(--muted)}
 .deferred-page{padding-block:95px;min-height:55vh}
-.deferred-page h1{font-size:clamp(42px,6vw,80px);line-height:1.1;letter-spacing:-.055em;text-transform:capitalize}
+.deferred-page h1{font-size:clamp(42px,6vw,80px);line-height:1.1;letter-spacing:-.055em}
 .deferred-page p{max-width:650px;line-height:1.8}
 .skip-link{position:absolute;left:12px;top:-100px;z-index:100;background:var(--ink);color:#fff;padding:15px}
 .skip-link:focus{top:12px}
@@ -174,7 +173,6 @@
   .workspace-main{padding:32px 17px 55px}
   .workspace-header{padding-inline:16px;gap:10px}
   .workspace-breadcrumb{font-size:9px}
-  .demo-bubble{font-size:8px;padding:7px}
   .workspace-footer{flex-direction:column;padding-inline:17px}
   .deferred-page{padding-block:65px}
 }

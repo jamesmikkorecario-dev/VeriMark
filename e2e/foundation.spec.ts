@@ -42,7 +42,7 @@ test('retired prototype routes redirect to the working product, replacing histor
   await expect(page.getByRole('heading', { name: 'Valid record', exact: true })).toBeVisible();
   await page.goto('/preview/verify');
   await expect(page).toHaveURL('/verify');
-  await expect(page).toHaveTitle(/Verify a credential/);
+  await expect(page).toHaveTitle(/Verify a record/);
   await page.goto('/preview/about');
   await expect(page).toHaveURL('/#method');
   await expect(page.locator('#method')).toBeFocused();

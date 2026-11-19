@@ -58,7 +58,7 @@ export function RevokeDialog({ open, organizationId, credential, onClose, onInva
 
   return <Modal open={open} title="Revoke this record?" onClose={close} busy={busy} describedBy="revoke-consequence">
     <form className="fsc-form" onSubmit={submit} noValidate>
-      <p id="revoke-consequence">Revoking withdraws the record for <strong>{credential.recipientDisplayName}</strong>. Anyone who checks <span className="fsc-mono">{credential.publicId}</span> will see it as revoked. <strong>This cannot be undone.</strong></p>
+      <p id="revoke-consequence">Revoking withdraws <strong>{credential.title}</strong> for <strong>{credential.recipientDisplayName}</strong>. Anyone who checks this record will see it as revoked. <strong>This cannot be undone.</strong></p>
       <FormField id="revoke-reason" label="Reason for revoking" hint="Required, up to 1000 characters. Kept in your organization's history; it is not shown publicly." error={error}>
         <TextArea value={reason} onChange={e => setReason(e.target.value)} required />
       </FormField>

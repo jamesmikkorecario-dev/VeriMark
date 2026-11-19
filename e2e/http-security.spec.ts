@@ -129,7 +129,7 @@ test('public, recipient, invitation and auth pages render with no policy violati
   await visit(page, '/verify/' + DEMO_PUBLIC_IDS.valid);
   await expect(page.getByRole('heading', { name: 'Valid record', exact: true })).toBeVisible();
   for (const id of [DEMO_PUBLIC_IDS.revoked, DEMO_PUBLIC_IDS.replaced, DEMO_PUBLIC_IDS.expired]) await visit(page, '/verify/' + id);
-  for (const path of ['/sign-up', '/reset-password', '/update-password', '/workspace', '/no-such-page']) await visit(page, path);
+  for (const path of ['/sign-up', '/reset-password', '/update-password', '/demo', '/workspace', '/no-such-page']) await visit(page, path);
   await visit(page, '/receive#' + 'x'.repeat(43));
   await expect(page.getByRole('heading', { name: 'Access link unavailable' })).toBeVisible();
   await visit(page, '/invite#' + 'x'.repeat(43));

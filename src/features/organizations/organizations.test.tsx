@@ -63,6 +63,13 @@ describe('workspace shell', () => {
     expect(location()).toBe('/app/review');
   });
 
+  it('sends an admin without a membership to platform review, not onboarding', async () => {
+    const api = signedInApi(null, { isPlatformAdmin: async () => true, listReviewQueue: async () => [] });
+    renderApp('/app/credentials', api);
+    await waitFor(() => expect(location()).toBe('/app/review'));
+    expect(await screen.findByRole('heading', { level: 1, name: 'Organization review' })).toBeInTheDocument();
+  });
+
   it('switches organization, persists the choice for the session and clears it on sign-out', async () => {
     const second: Organization = { ...organization, id: 'org2', displayName: 'Second Guild' };
     const api = signedInApi('owner', {

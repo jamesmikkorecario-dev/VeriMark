@@ -105,11 +105,4 @@ describe('TemplatesPage', () => {
     await user.click(screen.getByRole('button', { name: 'Try again' }));
     expect(await screen.findByRole('heading', { name: 'Course completion' })).toBeInTheDocument();
   });
-
-  it('labels demo mode', async () => {
-    const api = createFakeApi('demo');
-    api.listTemplates.mockResolvedValue([]);
-    renderPage(<TemplatesPage />, { api });
-    expect(await screen.findByText(/fictional/)).toBeInTheDocument();
-  });
 });

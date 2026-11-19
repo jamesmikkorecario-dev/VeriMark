@@ -3,7 +3,7 @@ import { sha256Hex } from './crypto';
 import type { NormalRow } from './validation';
 
 export const DEMO_STORAGE_KEY = 'verimark.demo.state.v1';
-export const DEMO_STATE_VERSION = 2;
+export const DEMO_STATE_VERSION = 3;
 export const DEMO_PASSWORD = 'demo-password-1';
 
 /** Fixed, fictional public identifiers used by the seed so browser tests can reference them. */
@@ -65,9 +65,10 @@ export function isDemoState(value: unknown): value is DemoState {
 export const passwordHash = (email: string, password: string) => sha256Hex(`verimark-demo-password:${email}:${password}`);
 
 const DAY = 86_400_000;
+const HOUR = 3_600_000;
 
 export async function createSeed(now: Date): Promise<DemoState> {
-  const at = (days: number) => new Date(now.getTime() + days * DAY).toISOString();
+  const at = (days: number, hours = 0) => new Date(now.getTime() + days * DAY + hours * HOUR).toISOString();
   const users: UserRec[] = await Promise.all(DEMO_ACCOUNTS.map(async (account, index) => ({
     id: `user_demo_${['owner', 'issuer', 'viewer', 'admin', 'north'][index]}`,
     email: account.email, displayName: account.displayName,
@@ -77,38 +78,44 @@ export async function createSeed(now: Date): Promise<DemoState> {
   const northgate: OrgRec = { id: 'org_demo_northgate', displayName: 'Northgate Guild', reviewState: 'pending', revision: 1, createdAt: at(-5), lastReviewAt: null, verificationChecks: 0 };
   const config: TemplateConfig = { heading: 'Certificate of Completion', bodyPrefix: 'This certifies that', signatoryName: 'Mika Chen', signatoryTitle: 'Programme Lead (fictional)', accent: 'forest', orientation: 'landscape' };
   const templates: TemplateRec[] = [
-    { id: 'tpl_demo_fieldwork', organizationId: fieldwork.id, name: 'Workshop completion', revision: 1, config, archived: false, updatedAt: at(-180) },
+    { id: 'tpl_demo_fieldwork', organizationId: fieldwork.id, name: 'Workshop completion', revision: 2, config, archived: false, updatedAt: at(-75, -3) },
     { id: 'tpl_demo_northgate', organizationId: northgate.id, name: 'Guild membership', revision: 1, config: { ...config, heading: 'Certificate of Membership', signatoryName: 'Jo Rivers', signatoryTitle: 'Guild Secretary (fictional)', accent: 'ink' }, archived: false, updatedAt: at(-4) },
   ];
   let seq = 0;
   const audit: AuditRec[] = [];
   const log = (organizationId: string, when: string, actorDisplayName: string, action: string, targetLabel: string) =>
     audit.push({ id: `audit_seed_${audit.length + 1}`, organizationId, seq: ++seq, at: when, actorDisplayName, action, targetLabel });
-  log(fieldwork.id, at(-200), 'Mika Chen', 'organization.created', 'Fieldwork Collective');
-  log(fieldwork.id, at(-190), 'Platform review', 'organization.reviewed', 'Fieldwork Collective');
-  log(northgate.id, at(-5), 'Jo Rivers', 'organization.created', 'Northgate Guild');
+  log(fieldwork.id, at(-200, -2), 'Mika Chen', 'organization.created', 'Fieldwork Collective');
+  log(fieldwork.id, at(-190, 1), 'Platform review', 'organization.review_reviewed', 'Fieldwork Collective');
+  log(fieldwork.id, at(-185, -5), 'Mika Chen', 'template.created', 'Workshop completion');
+  log(fieldwork.id, at(-181, 2), 'Mika Chen', 'invite.created', 'sam.okafor@example.test (issuer)');
+  log(fieldwork.id, at(-180, 6), 'Sam Okafor', 'invite.accepted', 'Sam Okafor (issuer)');
+  log(fieldwork.id, at(-171, -1), 'Mika Chen', 'invite.created', 'lee.park@example.test (viewer)');
+  log(fieldwork.id, at(-170, 4), 'Lee Park', 'invite.accepted', 'Lee Park (viewer)');
+  log(fieldwork.id, at(-75, -3), 'Mika Chen', 'template.updated', 'Workshop completion');
+  log(northgate.id, at(-5, -4), 'Jo Rivers', 'organization.created', 'Northgate Guild');
 
-  type SeedCredential = { key: string; publicId: string; name: string; title: string; achievement: string; issued: number; expires?: number; email?: string };
+  type SeedCredential = { key: string; publicId: string; name: string; title: string; achievement: string; issued: number; by: string; hours: number; expires?: number; email?: string };
   const seedRows: SeedCredential[] = [
-    { key: 'replaced', publicId: DEMO_PUBLIC_IDS.replaced, name: 'Noor Haddad', title: 'Field Methods Intensive', achievement: 'Completed twelve sessions of supervised field practice.', issued: -150 },
-    { key: 'revoked', publicId: DEMO_PUBLIC_IDS.revoked, name: 'Theo Lindqvist', title: 'Archive Handling Basics', achievement: 'Completed the archive handling module.', issued: -140, email: 'theo@example.test' },
-    { key: 'expired', publicId: DEMO_PUBLIC_IDS.expired, name: 'Priya Raman', title: 'First Aid Refresher', achievement: 'Completed the annual refresher.', issued: -120, expires: -20 },
-    { key: 'f5', publicId: 'demoFieldworkRecord005', name: 'Jonas Weber', title: 'Oral History Interviewing', achievement: 'Completed four recorded interviews with peer review.', issued: -90 },
-    { key: 'replacement', publicId: DEMO_PUBLIC_IDS.replacement, name: 'Noor Haddad', title: 'Field Methods Intensive', achievement: 'Completed twelve sessions of supervised field practice with distinction.', issued: -60 },
-    { key: 'f6', publicId: 'demoFieldworkRecord006', name: 'Ana Costa', title: 'Community Mapping Workshop', achievement: 'Produced a neighbourhood asset map.', issued: -30, expires: 335 },
-    { key: 'f7', publicId: 'demoFieldworkRecord007', name: 'Kenji Mori', title: 'Research Ethics Primer', achievement: 'Completed the ethics primer and assessment.', issued: -14 },
-    { key: 'valid', publicId: DEMO_PUBLIC_IDS.valid, name: 'Alex Santos', title: 'Community Research Workshop', achievement: 'Completed the six-week community research workshop.', issued: -7, expires: 358, email: 'alex@example.test' },
+    { key: 'replaced', publicId: DEMO_PUBLIC_IDS.replaced, name: 'Noor Haddad', title: 'Field Methods Intensive', achievement: 'Completed twelve sessions of supervised field practice.', issued: -150, by: 'Mika Chen', hours: -4 },
+    { key: 'revoked', publicId: DEMO_PUBLIC_IDS.revoked, name: 'Theo Lindqvist', title: 'Archive Handling Basics', achievement: 'Completed the archive handling module.', issued: -140, by: 'Sam Okafor', hours: 3, email: 'theo@example.test' },
+    { key: 'expired', publicId: DEMO_PUBLIC_IDS.expired, name: 'Priya Raman', title: 'First Aid Refresher', achievement: 'Completed the annual refresher.', issued: -120, by: 'Sam Okafor', hours: -6, expires: -20 },
+    { key: 'f5', publicId: 'demoFieldworkRecord005', name: 'Jonas Weber', title: 'Oral History Interviewing', achievement: 'Completed four recorded interviews with peer review.', issued: -90, by: 'Mika Chen', hours: 5 },
+    { key: 'replacement', publicId: DEMO_PUBLIC_IDS.replacement, name: 'Noor Haddad', title: 'Field Methods Intensive', achievement: 'Completed twelve sessions of supervised field practice with distinction.', issued: -60, by: 'Mika Chen', hours: -2 },
+    { key: 'f6', publicId: 'demoFieldworkRecord006', name: 'Ana Costa', title: 'Community Mapping Workshop', achievement: 'Produced a neighbourhood asset map.', issued: -30, by: 'Sam Okafor', hours: 2, expires: 335 },
+    { key: 'f7', publicId: 'demoFieldworkRecord007', name: 'Kenji Mori', title: 'Research Ethics Primer', achievement: 'Completed the ethics primer and assessment.', issued: -14, by: 'Sam Okafor', hours: -7 },
+    { key: 'valid', publicId: DEMO_PUBLIC_IDS.valid, name: 'Alex Santos', title: 'Community Research Workshop', achievement: 'Completed the six-week community research workshop.', issued: -7, by: 'Mika Chen', hours: 1, expires: 358, email: 'alex@example.test' },
   ];
   const credentials: CredentialRec[] = seedRows.map(row => {
-    const issuedAt = at(row.issued);
+    const issuedAt = at(row.issued, row.hours);
     const credential: CredentialRec = {
       id: `cred_demo_${row.key}`, organizationId: fieldwork.id, seq: ++seq, publicId: row.publicId, batchId: null,
       issuerDisplayName: fieldwork.displayName, recipientDisplayName: row.name, title: row.title, achievement: row.achievement, recipientEmail: row.email ?? null,
       issuedAt, expiresAt: row.expires === undefined ? null : at(row.expires), template: config, versionNumber: 1,
       revokedAt: null, replacedById: null, replacesId: null,
-      events: [{ id: `evt_demo_${row.key}_issued`, type: 'issued', at: issuedAt, actorDisplayName: 'Mika Chen', reason: null }],
+      events: [{ id: `evt_demo_${row.key}_issued`, type: 'issued', at: issuedAt, actorDisplayName: row.by, reason: null }],
     };
-    audit.push({ id: `audit_seed_${row.key}`, organizationId: fieldwork.id, seq: credential.seq, at: issuedAt, actorDisplayName: 'Mika Chen', action: 'credential.issued', targetLabel: `${row.name} · ${row.title}` });
+    audit.push({ id: `audit_seed_${row.key}`, organizationId: fieldwork.id, seq: credential.seq, at: issuedAt, actorDisplayName: row.by, action: 'credential.issued', targetLabel: `${row.name} · ${row.title}` });
     return credential;
   });
   const byKey = (key: string) => credentials.find(credential => credential.id === `cred_demo_${key}`)!;
@@ -118,10 +125,12 @@ export async function createSeed(now: Date): Promise<DemoState> {
   replacement.replacesId = original.id;
   replacement.versionNumber = 2;
   original.events.push({ id: 'evt_demo_replaced', type: 'replaced', at: replacement.issuedAt, actorDisplayName: 'Mika Chen', reason: 'Achievement wording corrected.' });
+  log(fieldwork.id, replacement.issuedAt, 'Mika Chen', 'credential.replaced', `${original.recipientDisplayName} · ${original.title} → v2`);
   const revoked = byKey('revoked');
-  revoked.revokedAt = at(-100);
-  revoked.events.push({ id: 'evt_demo_revoked', type: 'revoked', at: revoked.revokedAt, actorDisplayName: 'Mika Chen', reason: 'Issued in error.' });
-  log(fieldwork.id, revoked.revokedAt, 'Mika Chen', 'credential.revoked', `${revoked.recipientDisplayName} · ${revoked.title}`);
+  revoked.revokedAt = at(-100, 2);
+  revoked.events.push({ id: 'evt_demo_revoked', type: 'revoked', at: revoked.revokedAt, actorDisplayName: 'Sam Okafor', reason: 'Issued in error.' });
+  log(fieldwork.id, revoked.revokedAt, 'Sam Okafor', 'credential.revoked', `${revoked.recipientDisplayName} · ${revoked.title}`);
+  log(fieldwork.id, at(-6, 3), 'Sam Okafor', 'delivery.link_created', `${byKey('valid').recipientDisplayName} · ${byKey('valid').title}`);
   audit.sort((a, b) => a.at.localeCompare(b.at));
   audit.forEach((entry, index) => { entry.seq = index + 1; });
   credentials.forEach(credential => { credential.seq = audit.find(entry => entry.id === `audit_seed_${credential.id.slice('cred_demo_'.length)}`)!.seq; });

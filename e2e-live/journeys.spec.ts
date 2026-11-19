@@ -14,7 +14,7 @@ test('sign-in refuses a wrong password, returns to the requested page, and signs
   await expect(page).toHaveURL(/\/sign-in/);
   await signInWithForm(page, 'viewer');
   await expect(page).toHaveURL('/app/credentials');
-  await expect(page.getByRole('heading', { name: 'Records', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Credentials', exact: true })).toBeVisible();
   await expectModeLabel(page);
   await signOut(page);
   await page.goto('/app');
@@ -124,7 +124,8 @@ test('a recipient link opens without an account, downloads a PDF, and is replace
   const visitor = await stage.anonymous();
   await visitor.goto(first);
   await expect(visitor.getByRole('heading', { name: 'Access link unavailable' })).toBeVisible();
-  const message = await visitor.getByText('This access link is unavailable. Contact the issuer for a new link.').textContent();
+  // Wording differs between the demonstration and hosted modes; what matters is that both failures read identically.
+  const message = await visitor.getByText(/^This access link is unavailable\./).textContent();
   await visitor.goto('/receive#' + 'A'.repeat(43));
   await expect(visitor.getByText(message!)).toBeVisible();
   await visitor.goto(second);

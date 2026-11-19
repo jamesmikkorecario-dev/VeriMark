@@ -53,8 +53,7 @@
 @media (max-width: 800px) {
   .workspace-header { position: sticky; top: 0; z-index: 30; }
   .workspace-mobile-brand { display: block; margin-right: auto; }
-  .workspace-header .workspace-breadcrumb,
-  .workspace-header .demo-bubble { display: none; }
+  .workspace-header .workspace-breadcrumb { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .workspace-drawer[open] { animation: none; }

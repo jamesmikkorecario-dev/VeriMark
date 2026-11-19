@@ -32,7 +32,7 @@ describe('shared accessible controls', () => {
   });
   it('uses real navigable links and keeps decorative icons out of the accessible name', () => {
     render(<MemoryRouter><Brand /><ButtonLink to="/workspace"><Icon name="arrow" />Explore workspace</ButtonLink></MemoryRouter>);
-    expect(screen.getByRole('link', { name: 'VeriMark home' })).toHaveAttribute('href', '/');
+    expect(screen.getByRole('link', { name: 'verimark. home' })).toHaveAttribute('href', '/');
     expect(screen.getByRole('link', { name: 'Explore workspace' })).toHaveAttribute('href', '/workspace');
     expect(screen.queryByRole('img')).not.toBeInTheDocument();
   });

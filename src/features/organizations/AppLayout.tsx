@@ -151,7 +151,7 @@ export default function AppLayout() {
 
   const path = location.pathname;
   const allowedWithoutOrganization = path.startsWith('/app/onboarding') || (path.startsWith('/app/review') && state.isAdmin);
-  if (!state.membership && !allowedWithoutOrganization) return <Navigate to="/app/onboarding" replace />;
+  if (!state.membership && !allowedWithoutOrganization) return <Navigate to={state.isAdmin ? "/app/review" : "/app/onboarding"} replace />;
 
   const section = sectionTitle(path);
   const organization = state.organization;
@@ -163,14 +163,13 @@ export default function AppLayout() {
         <a className="skip-link" href="#main">Skip to content</a>
         <aside className="sidebar">{identity('sidebar')}</aside>
         <div className="workspace-body">
-          {demo && <div className="demo-ribbon app-demo-ribbon"><span>DEMONSTRATION — FICTIONAL DATA · NOTHING HERE IS REAL</span><DemoResetControl appearance="ribbon" /></div>}
+          {demo && <div className="demo-ribbon app-demo-ribbon" role="region" aria-label="Demonstration"><span>DEMONSTRATION — FICTIONAL DATA · NOTHING HERE IS REAL</span><DemoResetControl appearance="ribbon" /></div>}
           <header className="workspace-header">
             <div className="workspace-mobile-brand"><Brand /></div>
             <div className="mobile-navigation">
               <WorkspaceDrawer key={location.key}>{identity('drawer')}</WorkspaceDrawer>
             </div>
             <div className="workspace-breadcrumb">{organization && <span>{organization.displayName} / </span>}<strong>{section}</strong></div>
-            {demo && <span className="demo-bubble">DEMONSTRATION — FICTIONAL DATA</span>}
           </header>
           <main id="main" ref={mainRef} tabIndex={-1} className="workspace-main app-main">
             {signOutFailed && <ErrorState title="Sign-out did not complete" onRetry={() => { void signOut(); }}>Please try again.</ErrorState>}
@@ -185,7 +184,7 @@ export default function AppLayout() {
           </main>
           <footer className="workspace-footer">
             <span>VeriMark / Issuer workspace</span>
-            <span>{demo ? 'Demonstration — fictional data, kept only in this browser tab. Nothing is sent or stored on a server.' : 'Review is an identity check, not accreditation.'}</span>
+            <span>Review is an identity check, not accreditation.</span>
           </footer>
         </div>
       </div>

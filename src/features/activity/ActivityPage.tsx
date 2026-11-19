@@ -3,7 +3,7 @@ import { Button, EmptyState, ErrorState, LoadingState } from '../../components/u
 import { useApi } from '../../lib/api/context';
 import type { AuditEntry } from '../../lib/api/types';
 import { useWorkspace } from '../organizations/WorkspaceContext';
-import { DemoNotice, PageIntro } from '../credentials/shared/components';
+import { PageIntro } from '../credentials/shared/components';
 import { friendlyError, type FriendlyError } from '../credentials/shared/errors';
 import { describeAction, formatDateTime } from '../credentials/shared/format';
 
@@ -40,7 +40,6 @@ export default function ActivityPage() {
     <PageIntro eyebrow={organization.displayName} title="Activity">
       <p>A record of who did what in your organization, newest first. Entries cannot be edited.</p>
     </PageIntro>
-    <DemoNotice />
     {load.state === 'loading' && <LoadingState label="Loading activity…" />}
     {load.state === 'error' && <ErrorState title={load.error.title} onRetry={() => { setLoad({ state: 'loading' }); fetchFirst(); }}>{load.error.message}</ErrorState>}
     {load.state === 'ready' && load.items.length === 0 && <EmptyState title="No activity yet">Actions such as creating templates and issuing records will appear here.</EmptyState>}

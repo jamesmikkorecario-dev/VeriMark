@@ -3,7 +3,7 @@ import { Button, EmptyState, ErrorState, FormField, LoadingState, Select, TextIn
 import { useApi } from '../../lib/api/context';
 import { ApiError, type Template, type TemplateConfig } from '../../lib/api/types';
 import { useWorkspace } from '../organizations/WorkspaceContext';
-import { DemoNotice, ErrorSummary, Modal, PageIntro } from '../credentials/shared/components';
+import { ErrorSummary, Modal, PageIntro } from '../credentials/shared/components';
 import { fieldMessage, friendlyError, type FriendlyError } from '../credentials/shared/errors';
 import { formatDate } from '../credentials/shared/format';
 import { CertificatePreview } from './CertificatePreview';
@@ -138,7 +138,6 @@ export default function TemplatesPage() {
     <PageIntro eyebrow={organization.displayName} title="Templates" actions={canIssue && load.state === 'ready' && active.length > 0 && !draft ? <Button onClick={() => openEditor(null)}>Create template</Button> : undefined}>
       <p>Templates set the wording and layout of certificates. Changing a template never alters records that were already issued.</p>
     </PageIntro>
-    <DemoNotice />
     {!canIssue && <p className="fsc-notice">You can view templates. Only owners and issuers can create, edit or archive them.</p>}
     {status && <p className="fsc-status-line" role="status" tabIndex={-1} ref={statusRef}>{status}</p>}
 

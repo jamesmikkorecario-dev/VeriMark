@@ -48,7 +48,7 @@ export default function LandingPage() {
               <p className="hero-intro">Issue meaningful credentials. Share them with confidence. Give anyone a clear way to check the record.</p>
               <div className="hero-actions">
                 <ButtonLink to={workspaceTo}>{demo ? 'Open the live demo' : 'Sign in to your workspace'} <Icon name="arrow" /></ButtonLink>
-                <ButtonLink to="/verify" variant="outline">Verify a credential <Icon name="arrow" /></ButtonLink>
+                <ButtonLink to="/verify" variant="outline">Verify a record <Icon name="arrow" /></ButtonLink>
                 <Link className="link-arrow hero-method-link" to="/#method" state={{ sectionScroll: true }}>See how it works<Icon name="arrow" /></Link>
               </div>
               <p className="hero-footnote">Built for learning communities, associations,<br />and organizations that can stand behind their work.</p>

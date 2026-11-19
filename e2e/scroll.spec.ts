@@ -139,7 +139,7 @@ test('implemented route entry replays finite visible entrance with immediate foc
     expect(await page.locator('[data-motion=hero]').evaluate(el => el.getAnimations({ subtree: true }).some(a => a.playState === 'running'))).toBe(true);
     await settleFiniteMotion(page);
   }
-  await page.getByRole('link', { name: 'Verify a credential', exact: true }).click();
+  await page.getByRole('main').getByRole('link', { name: 'Verify a record', exact: true }).click();
   await expect(page.getByRole('main')).toBeFocused();
   expect(await page.locator('[data-motion]').count()).toBe(0);
   expect(await page.getByRole('main').evaluate(el => el.getAnimations({ subtree: true }).filter(a => a instanceof CSSAnimation).length)).toBe(0);

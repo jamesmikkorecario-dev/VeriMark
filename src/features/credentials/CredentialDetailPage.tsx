@@ -163,12 +163,16 @@ function CredentialRecord({ credentialId }: { credentialId: string }) {
         {canIssue && !active && <p className="fsc-notice">This record is {c.status}. It can no longer be revoked, replaced or shared.</p>}
 
         {link && <div className="fsc-secret" ref={linkRef} tabIndex={-1} aria-labelledby="link-title">
-          <h2 id="link-title" style={{ fontSize: 22, margin: 0 }}>Recipient link</h2>
+          <h2 id="link-title" className="fsc-card-title">Recipient link</h2>
           <p><strong>This link is shown only once.</strong> Copy it now and send it to the recipient yourself; VeriMark does not send e-mail. Creating a new link disables this one.</p>
           <FormField id="recipient-link" label="Private recipient link" hint={api.mode === 'demo' ? `Expires ${formatDateTime(link.expiresAt)}. Demonstration: this link only works in this browser tab, because demonstration data is not stored on a server.` : `Expires ${formatDateTime(link.expiresAt)}.`}>
             <TextInput readOnly value={link.url} onFocus={e => e.currentTarget.select()} />
           </FormField>
-          <div className="fsc-actions"><Button size="sm" onClick={() => copy(link.url, 'Recipient link')}>Copy recipient link</Button></div>
+          <div className="fsc-actions">
+            <Button size="sm" onClick={() => copy(link.url, 'Recipient link')}>Copy recipient link</Button>
+            {/* Demonstration data lives in this tab, so the recipient view must open here too (a full page load keeps the tab's session storage). */}
+            {api.mode === 'demo' && <a className="button button-outline button-sm" href={link.url}>Open recipient view</a>}
+          </div>
         </div>}
         {copyStatus && <p role="status" className="field-hint">{copyStatus}</p>}
       </div>

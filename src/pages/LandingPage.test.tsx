@@ -19,7 +19,7 @@ describe('landing page in the demonstration build', () => {
   it('leads with the live demo and offers verification second', () => {
     view('demo');
     expect(main().getByRole('link', { name: 'Open the live demo' })).toHaveAttribute('href', '/demo');
-    expect(main().getByRole('link', { name: 'Verify a credential' })).toHaveAttribute('href', '/verify');
+    expect(main().getByRole('link', { name: 'Verify a record' })).toHaveAttribute('href', '/verify');
     expect(main().getByRole('link', { name: 'Explore the live demo' })).toHaveAttribute('href', '/demo');
     expect(main().getByRole('link', { name: 'See how it works' })).toHaveAttribute('href', '/#method');
   });
@@ -44,7 +44,7 @@ describe('landing page with a real backend', () => {
   it('has no demo links: issuers are sent to sign-in', () => {
     const { container } = view('supabase');
     expect(main().getByRole('link', { name: 'Sign in to your workspace' })).toHaveAttribute('href', '/sign-in');
-    expect(main().getByRole('link', { name: 'Verify a credential' })).toHaveAttribute('href', '/verify');
+    expect(main().getByRole('link', { name: 'Verify a record' })).toHaveAttribute('href', '/verify');
     expect(main().getByRole('link', { name: 'Check a record' })).toHaveAttribute('href', '/verify');
     expect(Array.from(container.querySelectorAll('a')).map(link => link.getAttribute('href'))).not.toContain('/demo');
     expect(container).not.toHaveTextContent(/live demo/i);

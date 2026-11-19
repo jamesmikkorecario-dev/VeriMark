@@ -80,7 +80,7 @@ test.describe('narrow screens', () => {
     const dialog = page.getByRole('dialog', { name: 'Workspace navigation' }); await expect(dialog).toBeVisible();
     await keyboardTo(page, dialog.getByRole('link', { name: 'Credentials', exact: true }));
     await page.keyboard.press('Enter');
-    await expect(page).toHaveURL('/app/credentials'); await expect(page.getByRole('heading', { name: 'Records', exact: true })).toBeVisible();
+    await expect(page).toHaveURL('/app/credentials'); await expect(page.getByRole('heading', { name: 'Credentials', exact: true })).toBeVisible();
     await keyboardTo(page, open); await page.keyboard.press('Space'); await expect(dialog).toBeVisible();
     await page.keyboard.press('Escape'); await expect(dialog).toHaveCount(0); await expect(open).toBeFocused();
   });

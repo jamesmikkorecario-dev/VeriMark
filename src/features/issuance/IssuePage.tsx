@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, ButtonLink, EmptyState, ErrorState, FormField, LoadingState, Select, TextInput } from '../../components/ui';
+import { Button, ButtonLink, EmptyState, ErrorState, FormField, Icon, LoadingState, Select, TextInput } from '../../components/ui';
 import { useApi } from '../../lib/api/context';
 import { ApiError, type BatchDraft, type BatchPreview, type DraftRowInput, type FieldError, type IssueResult, type Template } from '../../lib/api/types';
 import { verificationUrl } from '../../lib/certificate';
@@ -326,7 +326,7 @@ export default function IssuePage() {
         </dl>
         <ScrollRegion label="Records that will be issued">
           <table className="fsc-table fsc-cards">
-            <caption>Exactly these {preview.rowCount} {preview.rowCount === 1 ? 'record' : 'records'} will be issued.</caption>
+            <caption>{preview.rowCount === 1 ? 'This record will be issued.' : `These ${preview.rowCount} records will be issued.`}</caption>
             <thead><tr><th scope="col">Row</th><th scope="col">Recipient</th><th scope="col">Title</th><th scope="col">Achievement</th><th scope="col">Expires</th></tr></thead>
             <tbody>{preview.rows.map(row => <tr key={row.sourceRow}>
               <td data-label="Row">{row.sourceRow}</td><td data-label="Recipient">{row.recipientDisplayName}</td><td data-label="Title">{row.title}</td>
@@ -345,8 +345,8 @@ export default function IssuePage() {
         <p id="issue-hint" className="field-hint">Records are issued together: either all of them or none.</p>
       </div>}
 
-      {step === 'done' && result && <div className="fsc-panel fsc-form">
-        <h2 ref={stepHeading} tabIndex={-1}>{result.credentials.length} {result.credentials.length === 1 ? 'record' : 'records'} issued</h2>
+      {step === 'done' && result && <div className="fsc-panel fsc-form fsc-success">
+        <h2 ref={stepHeading} tabIndex={-1} className="fsc-success-heading"><Icon name="check" size={22} />{result.credentials.length} {result.credentials.length === 1 ? 'record' : 'records'} issued</h2>
         <p role="status">The records are now online. Share each recipient's record from its page, or export the verification links.</p>
         <ScrollRegion label="Issued records">
           <table className="fsc-table fsc-cards">
@@ -360,6 +360,7 @@ export default function IssuePage() {
           </table>
         </ScrollRegion>
         <div className="fsc-actions">
+          {result.credentials.length === 1 && <ButtonLink to={`/app/credentials/${encodeURIComponent(result.credentials[0].id)}`}>Open the record to share it <Icon name="arrow" /></ButtonLink>}
           <Button variant="outline" onClick={exportLinks}>Export record links (CSV)</Button>
           <Button variant="ghost" onClick={startOver}>Issue more</Button>
         </div>

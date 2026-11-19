@@ -52,7 +52,7 @@ for (const width of [390, 320]) {
       await keyboardTo(page, open); await focusVisible(open); await page.keyboard.press('Enter');
       const dialog = page.getByRole('dialog', { name: 'Workspace navigation' }); await expect(dialog).toBeVisible();
       await keyboardTo(page, dialog.getByRole('link', { name: 'Credentials', exact: true }));
-      await page.keyboard.press('Enter'); await expect(page).toHaveURL('/app/credentials'); await expect(page.getByRole('heading', { name: 'Records', exact: true })).toBeVisible(); await expect(page.getByRole('main')).toBeFocused();
+      await page.keyboard.press('Enter'); await expect(page).toHaveURL('/app/credentials'); await expect(page.getByRole('heading', { name: 'Credentials', exact: true })).toBeVisible(); await expect(page.getByRole('main')).toBeFocused();
       await keyboardTo(page, open); await page.keyboard.press('Space'); await expect(dialog).toBeVisible();
       await page.keyboard.press('Escape'); await expect(dialog).toHaveCount(0); await expect(open).toBeFocused();
     });
@@ -130,7 +130,7 @@ test('reset demo data asks first, then restores the seeded records and the owner
   await expect(page).toHaveURL('/app');
   await expect(page.getByText('Fieldwork Collective · owner')).toBeVisible();
   await page.goto('/app/credentials');
-  await expect(page.getByRole('heading', { name: 'Records', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Credentials', exact: true })).toBeVisible();
   await expect(page.getByRole('main')).toContainText('Alex Santos');
   await expect(page.getByRole('main')).not.toContainText('Casey Fictional');
 });

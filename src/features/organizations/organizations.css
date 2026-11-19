@@ -19,12 +19,12 @@
 
 .org-page { min-width: 0; }
 .org-heading { margin-bottom: 28px; max-width: 760px; }
-.org-heading h1 { font-size: clamp(36px, 5vw, 56px); line-height: 1.06; letter-spacing: -.06em; margin: 16px 0; overflow-wrap: anywhere; }
+.org-heading h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(32px, 5vw, 52px); line-height: 1.06; letter-spacing: -.04em; margin: 16px 0 10px; overflow-wrap: anywhere; }
 .org-heading > p:last-child { color: var(--muted); line-height: 1.7; }
 .org-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
 .org-card { background: var(--paper); border: 1px solid var(--line); padding: clamp(18px, 3vw, 28px); min-width: 0; }
 .org-wide { grid-column: 1 / -1; }
-.org-card h2 { font-size: 24px; letter-spacing: -.04em; margin: 0 0 12px; }
+.org-card h2 { font-family: var(--serif); font-weight: 500; font-size: 24px; letter-spacing: -.02em; margin: 0 0 12px; }
 .org-card p { line-height: 1.7; }
 .org-card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .org-muted { color: var(--muted); font-size: 14px; }
@@ -73,7 +73,4 @@
   .invite-fields { grid-template-columns: minmax(0, 1fr); }
   .invite-fields > .button { justify-self: start; }
   .review-form { grid-template-columns: minmax(0, 1fr); }
-}
-@media (max-width: 800px) {
-  .app-workspace .workspace-header .demo-bubble { display: none; }
 }

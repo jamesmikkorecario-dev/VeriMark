@@ -4,7 +4,7 @@ import { Button, ButtonLink, EmptyState, ErrorState, FormField, LoadingState, Se
 import { useApi } from '../../lib/api/context';
 import type { CredentialStatus, CredentialSummary } from '../../lib/api/types';
 import { useWorkspace } from '../organizations/WorkspaceContext';
-import { DemoNotice, PageIntro } from './shared/components';
+import { PageIntro } from './shared/components';
 import { friendlyError, type FriendlyError } from './shared/errors';
 import { formatDate } from './shared/format';
 
@@ -57,10 +57,9 @@ export default function CredentialsPage() {
   const restart = () => { setList({ state: 'loading' }); setAttempt(a => a + 1); };
 
   return <section className="fsc-page">
-    <PageIntro eyebrow={organization.displayName} title="Records" actions={canIssue ? <ButtonLink to="/app/issue">Issue credentials</ButtonLink> : undefined}>
+    <PageIntro eyebrow={organization.displayName} title="Credentials" actions={canIssue ? <ButtonLink to="/app/issue">Issue credentials</ButtonLink> : undefined}>
       <p>Every credential your organization has issued, with its current status.</p>
     </PageIntro>
-    <DemoNotice />
     <form className="fsc-form-grid" role="search" aria-label="Filter records" onSubmit={e => { e.preventDefault(); setQuery(search.trim()); }}>
       <FormField id="records-search" label="Search records" hint="Recipient name, title or public ID.">
         <TextInput type="search" value={search} onChange={e => { setSearch(e.target.value); }} autoComplete="off" />

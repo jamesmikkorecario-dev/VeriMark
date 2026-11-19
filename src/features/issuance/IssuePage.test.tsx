@@ -68,7 +68,7 @@ describe('IssuePage', () => {
     await reachReview(user);
     expect(api.createBatch).toHaveBeenCalledWith('org-1', { templateId: 'tpl-1', source: 'single', rows: [{ recipientDisplayName: 'Rowan Example', title: 'Community First Aid', achievement: 'Completed the course.' }] });
     expect(api.previewBatch).toHaveBeenCalledWith('org-1', 'batch-1');
-    const table = screen.getByRole('table', { name: /Exactly these 1 record will be issued/ });
+    const table = screen.getByRole('table', { name: 'This record will be issued.' });
     expect(within(table).getByText('Rowan Example')).toBeInTheDocument();
     const issue = screen.getByRole('button', { name: 'Approve and issue 1 record' });
     expect(issue).toBeDisabled();

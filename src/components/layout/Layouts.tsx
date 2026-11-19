@@ -22,14 +22,14 @@ export function PublicLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <a className="skip-link" href="#main">Skip to content</a>
-      {demo && <div className="demo-ribbon">DEMONSTRATION / FICTIONAL DATA · NOTHING HERE IS REAL</div>}
+      {demo && <div className="demo-ribbon" role="region" aria-label="Demonstration">DEMONSTRATION / FICTIONAL DATA · NOTHING HERE IS REAL</div>}
       <header className="public-header">
         <div className="experience-container header-row">
           <Brand />
           <nav className="nav-desktop" aria-label="Main navigation"><PublicLinks demo={demo} /></nav>
           <div className="header-end">
             <ButtonLink className="desktop-action" to="/verify" size="sm">
-              Verify credential <Icon name="arrow" />
+              Verify a record <Icon name="arrow" />
             </ButtonLink>
             <div className="mobile-navigation">
               <PublicNavigation key={location.key}>

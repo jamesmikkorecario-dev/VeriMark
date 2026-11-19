@@ -4,7 +4,7 @@ import { sectionTitle } from '../features/organizations/ShellContext';
 
 const publicTitles: Record<string, string> = {
   '/sign-in': 'Sign in', '/sign-up': 'Create an account', '/reset-password': 'Reset your password',
-  '/update-password': 'Set a new password', '/invite': 'Join an organization', '/verify': 'Verify a credential', '/receive': 'Your credential',
+  '/update-password': 'Set a new password', '/invite': 'Join an organization', '/verify': 'Verify a record', '/receive': 'Your certificate',
   '/demo': 'Live demo',
 };
 

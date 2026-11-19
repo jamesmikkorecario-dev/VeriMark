@@ -6,7 +6,13 @@ test.beforeEach(({ page }, info) => {
   test.skip(!['chromium-390', 'chromium-1440'].includes(info.project.name), 'Journeys run at one mobile and one desktop width');
 });
 test('single issuance is public and recorded in credentials and activity', async ({ page }) => {
-  await login(page); await reviewSingle(page); await issue(page);
+  await login(page); await reviewSingle(page);
+  // On the mobile card layout the caption once collapsed into a narrow column; it must span the table.
+  const table = page.getByRole('table', { name: 'This record will be issued.' });
+  await expect(table.locator('caption')).toBeVisible();
+  const [caption, box] = [await table.locator('caption').boundingBox(), await table.boundingBox()];
+  expect(caption!.width).toBeGreaterThan(box!.width * 0.9);
+  await issue(page);
   await page.getByRole('link', { name: 'Open record for Casey Fictional' }).click();
   const url = await page.getByLabel('Verification link', { exact: true }).inputValue();
   await page.goto(url);
@@ -129,4 +135,18 @@ test('same-tab account-free recipient can download a real PDF', async ({ page })
   const download = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Download certificate (PDF)', exact: true }).click();
   expect((await readFile((await (await download).path())!)).subarray(0, 4).toString()).toBe('%PDF');
+});
+
+test('demo "Open recipient view" opens the new link in the same tab, where the demonstration data lives', async ({ page }) => {
+  await login(page); await page.goto('/app/credentials/cred_demo_valid');
+  await page.getByRole('button', { name: 'Create recipient link', exact: true }).click();
+  await page.getByRole('button', { name: 'Create link', exact: true }).click();
+  const link = await page.getByLabel('Private recipient link').inputValue();
+  const open = page.getByRole('link', { name: 'Open recipient view', exact: true });
+  await expect(open).not.toHaveAttribute('target');
+  await open.click();
+  await expect(page).toHaveURL(/\/receive$/);
+  expect(link).toMatch(/\/receive#[A-Za-z0-9_-]{43}$/);
+  await expect(page.getByRole('heading', { name: 'Your certificate' })).toBeVisible();
+  await expect(page.getByText('Alex Santos', { exact: true })).toBeVisible();
 });
