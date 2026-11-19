@@ -100,12 +100,12 @@ Public verification exposes the recipient's name and achievement with no publica
 
 ## 9. Automated testing and hosted integration evidence
 
-| Layer | What it covers | Latest recorded result |
+| Layer | What it covers | Latest recorded result (portfolio release) |
 | --- | --- | --- |
-| Unit/component (Vitest) | UI features, adapters, sign-out scope, certificates | 225/225 (release record) |
-| Database/security (PGlite, `npm run test:db`) | Real migration SQL as `anon`/`authenticated`: RLS, grants, RPCs, immutability, rate budgets, parity with the demo | 217 at the hardening milestone |
-| Browser (Playwright, `npm run test:e2e`) | Journeys, accessibility, navigation, motion, HTTP security, at multiple widths | 287 passed, 0 failed at the hardening milestone |
-| Live journeys (`npm run test:live`) | Full user journeys, run against the demo build in CI and against hosted | 22 passed, 12 by-design skips |
+| Unit/component (Vitest) | UI features, adapters, sign-out scope, certificates | 272/272 in 23 files |
+| Database/security (PGlite, `npm run test:db`) | Real migration SQL as `anon`/`authenticated`: RLS, grants, RPCs, immutability, rate budgets, parity with the demo | 218/218 in 14 files |
+| Browser (Playwright, `npm run test:e2e -- --workers=2`) | Journeys, accessibility, navigation, motion, HTTP security, at multiple widths | 290 passed, 0 failed, 508 skipped (each spec runs only on its target viewport projects) |
+| Live journeys (`npm run test:live`) | Full user journeys, run against the demo build in CI and against hosted | 22 passed, 12 by-design skips (demo build) |
 | Hosted (disposable project) | Real Supabase Auth, PostgREST and Postgres | Runs 1–3, below |
 | Real-PostgreSQL concurrency (`tools/test-concurrency.mjs`) | Multi-connection lock schedules | Three schedules, below |
 
@@ -161,16 +161,16 @@ All **Planned / not built**; each needs an owner decision first (`PREPRODUCTION-
 
 ## Screenshots
 
-The coordinator will capture these; paths are fixed.
+Captured from the demonstration build (`npm run build:demo`, served by `vite preview`) with Playwright at 1440×900, and at 390×844 for mobile.
 
 | View | File |
 | --- | --- |
-| Landing | `docs/portfolio/screenshots/landing.png` |
-| Demo overview | `docs/portfolio/screenshots/demo-overview.png` |
-| Issue and review | `docs/portfolio/screenshots/issue-review.png` |
-| Record detail | `docs/portfolio/screenshots/record-detail.png` |
-| Public verification, valid | `docs/portfolio/screenshots/public-verify-valid.png` |
-| Public verification, replaced | `docs/portfolio/screenshots/public-verify-replaced.png` |
-| Recipient delivery | `docs/portfolio/screenshots/recipient-delivery.png` |
-| Activity | `docs/portfolio/screenshots/activity.png` |
-| Mobile app navigation | `docs/portfolio/screenshots/mobile-app-nav.png` |
+| Landing | ![Landing](screenshots/landing.png) |
+| Demo overview | ![Demo overview](screenshots/demo-overview.png) |
+| Issue and review | ![Issue and review](screenshots/issue-review.png) |
+| Record detail | ![Record detail](screenshots/record-detail.png) |
+| Public verification, valid | ![Public verification, valid](screenshots/public-verify-valid.png) |
+| Public verification, replaced | ![Public verification, replaced](screenshots/public-verify-replaced.png) |
+| Recipient delivery | ![Recipient delivery](screenshots/recipient-delivery.png) |
+| Activity | ![Activity](screenshots/activity.png) |
+| Mobile app navigation | ![Mobile app navigation](screenshots/mobile-app-nav.png) |
