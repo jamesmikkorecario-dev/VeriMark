@@ -121,8 +121,12 @@ describe('CredentialDetailPage', () => {
     await user.clear(name);
     await user.type(name, 'Rowan Example-Smith');
     await user.click(within(dialog).getByRole('button', { name: 'Issue replacement' }));
-    expect(within(dialog).getByRole('alert')).toHaveTextContent('Enter the reason.');
+    const summary = within(dialog).getByRole('alert');
+    expect(summary).toHaveTextContent('Enter the reason.');
     expect(api.replaceCredential).not.toHaveBeenCalled();
+    // The dialog moves focus to the error summary on the next animation frame. Wait for it, as a person would:
+    // typing before it lands sends the rest of the keystrokes to the summary (seen on slower Linux CI).
+    await waitFor(() => expect(summary).toHaveFocus());
     await user.type(within(dialog).getByLabelText('Reason for replacing'), 'Name corrected');
     await user.click(within(dialog).getByRole('button', { name: 'Issue replacement' }));
     expect(api.replaceCredential).toHaveBeenCalledWith('org-1', 'cred-1', {
