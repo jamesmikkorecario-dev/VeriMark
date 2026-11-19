@@ -141,7 +141,10 @@ function CredentialRecord({ credentialId }: { credentialId: string }) {
           <FormField id="verify-url" label="Verification link"><TextInput readOnly value={verifyUrl} onFocus={e => e.currentTarget.select()} /></FormField>
           <div className="fsc-actions">
             <Button size="sm" variant="outline" onClick={() => copy(verifyUrl, 'Verification link')}>Copy link</Button>
-            <a className="button button-ghost button-sm" href={verifyUrl} target="_blank" rel="noopener noreferrer">Open public page<span className="sr-only"> (opens in a new tab)</span></a>
+            {/* Demonstration data lives in this tab's session storage; a new tab would start from the seed. */}
+            {api.mode === 'demo'
+              ? <Link className="button button-ghost button-sm" to={`/verify/${c.publicId}`}>Open public page</Link>
+              : <a className="button button-ghost button-sm" href={verifyUrl} target="_blank" rel="noopener noreferrer">Open public page<span className="sr-only"> (opens in a new tab)</span></a>}
           </div>
         </div>
 

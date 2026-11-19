@@ -12,6 +12,7 @@
     "lint": "eslint .",
     "test": "vitest",
     "build": "tsc --noEmit && vite build",
+    "build:demo": "node tools/build-demo.mjs",
     "preview": "vite preview",
     "test:e2e": "playwright test",
     "test:db": "vitest run --config vitest.db.config.ts",

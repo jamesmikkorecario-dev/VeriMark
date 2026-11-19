@@ -31,6 +31,15 @@ describe('CredentialDetailPage', () => {
     expect(screen.getByRole('button', { name: 'Revoke' })).toBeInTheDocument();
   });
 
+  it('opens the public page in the same tab in the demonstration, where data lives in this tab only', async () => {
+    const api = createFakeApi('demo');
+    api.getCredential.mockResolvedValue(detail());
+    renderPage(<CredentialDetailPage />, { api, ...route });
+    const link = await screen.findByRole('link', { name: 'Open public page' });
+    expect(link).toHaveAttribute('href', '/verify/VM-AAAA-1111');
+    expect(link).not.toHaveAttribute('target');
+  });
+
   it('shows viewers no actions and no recipient e-mail', async () => {
     const api = createFakeApi();
     api.getCredential.mockResolvedValue(detail());

@@ -59,9 +59,9 @@ test.beforeAll(async () => {
   if (test.info().project.name !== 'chromium-1440') return;
   rules = (JSON.parse(await readFile(join(root, 'vercel.json'), 'utf8')) as { headers: HeaderRule[] }).headers;
   outDir = await mkdtemp(join(tmpdir(), 'verimark-http-'));
-  // Vite copies VITE_* variables from this worker's own environment into the build; blank them so an exported hosted
-  // configuration cannot select the Supabase adapter here.
-  process.env.VITE_SUPABASE_URL = ''; process.env.VITE_SUPABASE_PUBLISHABLE_KEY = '';
+  // Vite copies VITE_* variables from this worker's own environment into the build: blank the Supabase ones and build
+  // exactly the public demo release mode (`npm run build:demo`), with the Supabase adapter compiled out.
+  process.env.VITE_SUPABASE_URL = ''; process.env.VITE_SUPABASE_PUBLISHABLE_KEY = ''; process.env.VITE_DEMO_ONLY = 'true';
   const envDir = await mkdtemp(join(tmpdir(), 'verimark-http-env-')); // empty: no .env file can select a hosted backend
   try {
     const shared = { root, configFile: join(root, 'vite.config.ts'), envDir, logLevel: 'warn' as const, plugins: [vercelHeaders] };

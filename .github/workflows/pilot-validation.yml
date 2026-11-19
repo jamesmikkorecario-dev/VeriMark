@@ -35,6 +35,8 @@ jobs:
       - run: npx vitest run
       - run: npm run test:db
       - run: npm run build
+      - name: Demo release build (Supabase compiled out, output scanned)
+        run: npm run build:demo
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e -- --workers=2
       - name: Live journeys (demo rehearsal)

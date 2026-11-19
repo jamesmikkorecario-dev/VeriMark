@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 
 const config = JSON.parse(readFileSync(new URL('../../vercel.json', import.meta.url), 'utf8')) as {
+  installCommand: string; buildCommand: string; outputDirectory: string;
   headers: { source: string; headers: { key: string; value: string }[] }[];
   rewrites: { source: string; destination: string }[];
 };
@@ -83,5 +84,10 @@ describe('HTTP security configuration (not runtime platform evidence)', () => {
       const keys = rule.headers.map(header => header.key.toLowerCase());
       expect(new Set(keys).size).toBe(keys.length);
     }
+  });
+
+  test('the deployment installs locked dependencies and builds the demo-only release (Supabase compiled out)', () => {
+    expect({ installCommand: config.installCommand, buildCommand: config.buildCommand, outputDirectory: config.outputDirectory })
+      .toEqual({ installCommand: 'npm ci', buildCommand: 'npm run build:demo', outputDirectory: 'dist' });
   });
 });
