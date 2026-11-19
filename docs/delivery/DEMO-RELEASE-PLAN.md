@@ -33,23 +33,32 @@ A static React/Vite site on Vercel Hobby with **no backend**:
 - No server-side state, so the earlier P1 blockers (shared rate-limit exhaustion, public PII, retention, bearer-link lifetime, email) do not apply to this release. They apply to the later real pilot.
 - Residual exposure: static asset bandwidth on Hobby (first 100 GB/month Fast Data Transfer). Vercel's default DDoS mitigation applies, and Attack Mode is available. No functions, edge middleware or image optimization are used.
 - Dependency advisory `GHSA-fc5q-39xc-vjpf` affects development and build tooling only; the production-only audit is clean ([dependencies](../security/hardening/DEPENDENCIES.md)). Vercel installs with `npm ci` from the lockfile.
-- Security reporting: the GitHub repository is public, and GitHub private vulnerability reporting is currently **disabled** (read-only API check, 2026-11-19). Recommended before release: enable it (a repository setting) and publish it in `SECURITY.md` after a test report ([procedure](../security/hardening/SECURITY-REPORTING.md)).
+- Security reporting: GitHub private vulnerability reporting was enabled on 2026-11-19 (API `PUT`, confirmed `enabled: true` by a separate read) and is published in `SECURITY.md`. The end-to-end test report from a non-maintainer account is still pending; it is a gate for the real pilot, not for this fictional-data demo.
 - CSP `connect-src` still lists `https://*.supabase.co` for the future pilot. Nothing in the demo bundle connects there; narrowing it is a pilot-phase task.
 
 ## Vercel Hobby eligibility
 
-[Vercel Terms](https://vercel.com/legal/terms) §4: Hobby is for "personal or non-commercial use". A personal portfolio demonstration with fictional data and no paying users or business operator fits this. It would stop fitting if the deployment served an organization's real credentials, charged anyone, or was run for a business; that is the pilot-phase decision (D-012). §3: on Hobby, project content may be used for model training unless the owner opts out in Team settings. The content here is public code and fictional data, but the owner should decide on the opt-out. No account settings were read or changed.
+[Vercel Terms](https://vercel.com/legal/terms) §4: Hobby is for "personal or non-commercial use". A personal portfolio demonstration with fictional data and no paying users or business operator fits this. It would stop fitting if the deployment served an organization's real credentials, charged anyone, or was run for a business; that is the pilot-phase decision (D-012). On Hobby, AI model training on project code is **on by default**. The [opt-out](https://vercel.com/changelog/updates-to-terms-of-service-march-2026) is a dashboard toggle (Team Settings → Data Preferences, with per-project overrides); no API for it is documented. The owner chose to opt out; it must be set in the dashboard by the account owner **before importing**, because opting out is not retroactive.
 
-## Release steps (each needs owner approval)
+## Release sequence (route A: GitHub + Vercel Hobby)
 
-1. Merge `wf/demo-release` into `dev/full-stack-integration` (local).
-2. Choose the deployment route:
-   - **A. Git integration (recommended):** push a release branch (or `main` after the merge-to-main approval) to GitHub; import the repository in Vercel (Hobby, framework Vite). `vercel.json` supplies the install command, build command and output directory. Set **no** environment variables. Gives preview deployments and the CI workflow on push.
-   - **B. Vercel CLI from a fresh clone:** `npx vercel` / `npx vercel --prod` (needs Vercel login). No GitHub push needed, but no CI run. Use a fresh clone, not a working checkout: the CLI uploads files that are only git-ignored (local `.env*`, `setup-inputs/`, test output), and the repository has no `.vercelignore`.
-3. Choose the project name, which sets the `<name>.vercel.app` URL; availability can only be checked at creation.
-4. Optional: enable GitHub private vulnerability reporting.
-5. Smoke-check the live deployment: response headers on `/`, `/verify/<seeded id>`, `/app/credentials`, `/receive`, `/sign-in` and `/assets/*`. Then the demo flows in a browser (sign-in, issue, verify, revoke/replace, recipient link, PDF download, mobile navigation) with the console open for CSP violations. Then confirm no request goes to `supabase.co`.
-6. Record the deployment URL, commit SHA and smoke evidence in a handoff.
+Vercel deploys the production branch (the repository default, `main`) **as soon as the project is imported**. `origin/main` is still the init commit `197711b`, which has no app and no `vercel.json`: imported now, Vercel would publish those repository files as a bare static site without the security headers. So `main` must hold the release commit before Vercel ever sees the repository. Each step needs the owner's release approval.
+
+1. Merge `wf/demo-release` into `dev/full-stack-integration` (local). Done: `19b734a`.
+2. First Ubuntu CI run without touching `main`: `git push origin 19b734a:refs/heads/dev/full-stack-integration`. Wait for **Pilot validation** to pass, and fix forward if it fails. It has never run on Linux.
+3. Fast-forward `main` to the release commit: `git push origin 19b734a:refs/heads/main` (no `--force`; it is rejected if `origin/main` moved). Confirm with `git ls-remote origin main`. CI runs again on `main`.
+4. In Vercel (Hobby): opt out of AI model training (Team Settings → Data Preferences) first. Then import `jamesmikkorecario-dev/VeriMark` as project `verimark-demo`:
+   - root directory `./`, framework Vite, production branch `main`;
+   - **no environment variables** (`build:demo` refuses any `VITE_*SUPABASE*` variable, so a mistake fails the build instead of shipping);
+   - no paid add-ons.
+
+   `vercel.json` supplies `npm ci`, `npm run build:demo` and `dist`. `verimark-demo.vercel.app` returned `DEPLOYMENT_NOT_FOUND` on 2026-11-19; if the name is taken, use `verimark-portfolio`, which also returned `DEPLOYMENT_NOT_FOUND`.
+5. In the first build log, confirm `npm ci`, `npm run build:demo` and the line `build:demo: N files in dist/, demonstration adapter only…`.
+6. Smoke-check the live deployment: response headers on `/`, `/verify/<seeded id>`, `/app/credentials`, `/receive`, `/sign-in` and `/assets/*`. Then the demo flows in a browser (sign-in, issue, verify, revoke/replace, recipient link, PDF download, mobile navigation) with the console open for CSP violations. Then confirm no request leaves the site's own origin.
+7. Record the deployment URL, commit SHA and smoke evidence in a handoff, and update `README.md` (it still says nothing is deployed).
+8. Optional afterwards: protect `main` and require the Pilot validation check.
+
+Do not push a separate release branch and change Vercel's production branch afterwards: by then the import has already deployed the old `main`. Route B (Vercel CLI) is not selected. If it is ever used, run it from a fresh clone, because the CLI uploads git-ignored local files such as `.env*`, `dist/` and `test-results-live/`.
 
 Rollback: redeploy the previous deployment in Vercel (instant), or remove the project. No data migration is involved.
 

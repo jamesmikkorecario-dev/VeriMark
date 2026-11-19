@@ -8,7 +8,7 @@ Prepared 2026-11-18; process proposal, not a live reporting channel. The reposit
 2. Prefer GitHub private vulnerability reporting if the repository is public and eligible. The owner must enable it in repository Settings > Security and quality > Advanced Security, then verify the Security tab exposes Report a vulnerability to an external reporter. See [GitHub activation instructions](https://docs.github.com/en/code-security/security-advisories/working-with-repository-security-advisories/configuring-private-vulnerability-reporting-for-a-repository). This task changes no remote settings.
 3. Alternatively designate an owner-controlled private inbox/form with restricted access and a secure attachment route. Do not publish a guessed address. An already trusted private conversation may request a destination but is not a publicly discoverable reporting channel.
 4. Before launch, submit a harmless synthetic report from a non-maintainer account; verify private visibility, owner and backup notifications, acknowledgement/reply, attachment permissions, escalation and closure. Record date, responsible humans and sanitized evidence privately; publish only the verified channel and expectations in SECURITY.md after separate authorization to edit that file.
-5. Re-test after ownership/settings changes. Until this succeeds and the verified route is published, public launch remains blocked.
+5. Re-test after ownership/settings changes. Status 2026-11-19: GitHub private vulnerability reporting is enabled and published in `SECURITY.md`; the synthetic non-maintainer report (step 4) is still pending. That test gates the real pilot. It does not gate the fictional-data portfolio demonstration, which has no backend or personal data.
 
 ## Handling a report
 
