@@ -86,12 +86,12 @@ export async function createSeed(now: Date): Promise<DemoState> {
   const log = (organizationId: string, when: string, actorDisplayName: string, action: string, targetLabel: string) =>
     audit.push({ id: `audit_seed_${audit.length + 1}`, organizationId, seq: ++seq, at: when, actorDisplayName, action, targetLabel });
   log(fieldwork.id, at(-200, -2), 'Mika Chen', 'organization.created', 'Fieldwork Collective');
-  log(fieldwork.id, at(-190, 1), 'Platform review', 'organization.review_reviewed', 'Fieldwork Collective');
+  log(fieldwork.id, at(-190), 'Platform review', 'organization.review_reviewed', 'Fieldwork Collective');
   log(fieldwork.id, at(-185, -5), 'Mika Chen', 'template.created', 'Workshop completion');
-  log(fieldwork.id, at(-181, 2), 'Mika Chen', 'invite.created', 'sam.okafor@example.test (issuer)');
-  log(fieldwork.id, at(-180, 6), 'Sam Okafor', 'invite.accepted', 'Sam Okafor (issuer)');
-  log(fieldwork.id, at(-171, -1), 'Mika Chen', 'invite.created', 'lee.park@example.test (viewer)');
-  log(fieldwork.id, at(-170, 4), 'Lee Park', 'invite.accepted', 'Lee Park (viewer)');
+  log(fieldwork.id, at(-181, 2), 'Mika Chen', 'invite.created', 'issuer@demo.verimark.test (issuer)');
+  log(fieldwork.id, at(-180), 'Sam Okafor', 'invite.accepted', 'Sam Okafor (issuer)');
+  log(fieldwork.id, at(-171, -1), 'Mika Chen', 'invite.created', 'viewer@demo.verimark.test (viewer)');
+  log(fieldwork.id, at(-170), 'Lee Park', 'invite.accepted', 'Lee Park (viewer)');
   log(fieldwork.id, at(-75, -3), 'Mika Chen', 'template.updated', 'Workshop completion');
   log(northgate.id, at(-5, -4), 'Jo Rivers', 'organization.created', 'Northgate Guild');
 
@@ -104,7 +104,8 @@ export async function createSeed(now: Date): Promise<DemoState> {
     { key: 'replacement', publicId: DEMO_PUBLIC_IDS.replacement, name: 'Noor Haddad', title: 'Field Methods Intensive', achievement: 'Completed twelve sessions of supervised field practice with distinction.', issued: -60, by: 'Mika Chen', hours: -2 },
     { key: 'f6', publicId: 'demoFieldworkRecord006', name: 'Ana Costa', title: 'Community Mapping Workshop', achievement: 'Produced a neighbourhood asset map.', issued: -30, by: 'Sam Okafor', hours: 2, expires: 335 },
     { key: 'f7', publicId: 'demoFieldworkRecord007', name: 'Kenji Mori', title: 'Research Ethics Primer', achievement: 'Completed the ethics primer and assessment.', issued: -14, by: 'Sam Okafor', hours: -7 },
-    { key: 'valid', publicId: DEMO_PUBLIC_IDS.valid, name: 'Alex Santos', title: 'Community Research Workshop', achievement: 'Completed the six-week community research workshop.', issued: -7, by: 'Mika Chen', hours: 1, expires: 358, email: 'alex@example.test' },
+    // Issued exactly seven days ago: the landing page's sample card shows the same date.
+    { key: 'valid', publicId: DEMO_PUBLIC_IDS.valid, name: 'Alex Santos', title: 'Community Research Workshop', achievement: 'Completed the six-week community research workshop.', issued: -7, by: 'Mika Chen', hours: 0, expires: 358, email: 'alex@example.test' },
   ];
   const credentials: CredentialRec[] = seedRows.map(row => {
     const issuedAt = at(row.issued, row.hours);
@@ -147,6 +148,10 @@ export async function createSeed(now: Date): Promise<DemoState> {
     ],
     invites: [],
     reviews: [{ organizationId: fieldwork.id, outcome: 'reviewed', reason: 'Fictional seed: identity documents checked.', at: at(-190), reviewerId: admin.id }],
-    templates, batches: [], credentials, deliveries: [], idempotency: [], audit,
+    templates, batches: [], credentials,
+    // Matches the seeded "Created a recipient link" activity entry. No token hashes to all zeros, so the link cannot be opened;
+    // creating a new link revokes it like any earlier one.
+    deliveries: [{ id: 'dlv_demo_valid', credentialId: 'cred_demo_valid', tokenHash: '0'.repeat(64), createdAt: at(-6, 3), expiresAt: at(24, 3), revokedAt: null }],
+    idempotency: [], audit,
   };
 }

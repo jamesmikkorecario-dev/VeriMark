@@ -152,6 +152,8 @@ describe('CredentialDetailPage', () => {
     expect(api.createDeliveryLink).toHaveBeenCalledWith('org-1', 'cred-1');
     expect(await screen.findByLabelText('Private recipient link')).toHaveValue(`${window.location.origin}/receive#secret-token-1`);
     expect(screen.getByText('This link is shown only once.')).toBeInTheDocument();
+    // The same-tab shortcut exists only for the demonstration; a real issuer sends the link to someone else.
+    expect(screen.queryByRole('link', { name: 'Open recipient view' })).not.toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Create a new recipient link' }));
     const again = screen.getByRole('dialog', { name: 'Create a new recipient link?' });
