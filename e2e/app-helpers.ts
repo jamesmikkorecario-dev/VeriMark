@@ -7,6 +7,13 @@ export async function login(page: Page, role = 'issuer') {
   await page.getByRole('button', { name: 'Sign in', exact: true }).click();
   await expect(page).toHaveURL(/\/app(?:\/.*)?$/);
 }
+/** The one-click demo entry: signs in as a seeded persona (owner by default) and waits for the workspace overview to render. */
+export async function openDemo(page: Page, persona?: 'owner' | 'issuer' | 'viewer' | 'admin' | 'north') {
+  await page.goto(persona ? `/demo?as=${persona}` : '/demo');
+  await expect(page).toHaveURL(persona === 'admin' ? '/app/review' : '/app');
+  if (persona !== 'admin') await expect(page.getByRole('heading', { level: 1, name: 'Overview' })).toBeVisible();
+  if (persona === undefined || persona === 'owner') await expect(page.getByText('Record counts')).toBeVisible();
+}
 export async function logout(page: Page) {
   if (page.viewportSize()!.width <= 800) await page.getByRole('button', { name: 'Open workspace navigation' }).click();
   await page.getByRole('button', { name: 'Sign out' }).click();

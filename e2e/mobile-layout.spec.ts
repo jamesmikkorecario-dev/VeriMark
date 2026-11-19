@@ -11,7 +11,7 @@ const matrix = [
   { width: 390, height: 844, deviceScaleFactor: 3 },
   { width: 440, height: 956, deviceScaleFactor: 3 },
 ];
-const publicRoutes = ['/', '/preview/verify', '/preview/about', '/missing-page'];
+const publicRoutes = ['/', '/verify', '/sign-in', '/missing-page'];
 
 type Overflow = { clientWidth: number; scrollWidth: number; bodyScrollWidth: number; scrollX: number; offenders: string[] };
 function overflow(page: Page) {

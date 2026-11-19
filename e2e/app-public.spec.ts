@@ -1,6 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
-import { DEMO_PUBLIC_IDS as ids, login, reviewSingle, keyboardTo, focusVisible } from './app-helpers';
+import { DEMO_PUBLIC_IDS as ids, login, reviewSingle, issue, openDemo, keyboardTo, focusVisible } from './app-helpers';
 import { settleFiniteMotion } from './motion-helpers';
 test.beforeEach(({ page }, info) => {
   void page;
@@ -75,4 +75,70 @@ test('keyboard alone signs in and issues a single record', async ({ page }) => {
 for (const route of [`/verify/${ids.valid}`, '/app']) test(`reduced motion ${route}`, async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' }); await login(page); await ready(page, route, false);
   expect(await page.getByRole('main').evaluate(el => el.getAnimations({ subtree: true }).filter(a => a.playState === 'running' && Number(a.effect?.getComputedTiming().duration) > 10).length)).toBe(0);
+});
+
+test('the one-click demo entry opens the owner workspace and its guide walks the product', async ({ page }) => {
+  await page.goto('/demo');
+  await expect(page).toHaveURL('/app');
+  await expect(page.getByRole('heading', { level: 1, name: 'Overview' })).toBeVisible();
+  await expect(page.getByText('Fieldwork Collective · owner')).toBeVisible();
+  const guide = page.getByRole('region', { name: 'Explore the demo' });
+  await expect(guide).toBeVisible();
+  await expect(guide.getByRole('link', { name: 'Open a record', exact: true })).toHaveAttribute('href', /^\/app\/credentials\/cred_demo_/);
+  await guide.getByRole('link', { name: 'Open the issue form' }).click();
+  await expect(page).toHaveURL('/app/issue');
+  await page.goBack();
+  await guide.getByRole('link', { name: 'View its public page' }).click();
+  await expect(page).toHaveURL(new RegExp(`^.*/verify/${ids.valid}$`));
+  await expect(page.getByRole('heading', { name: 'Valid record', exact: true })).toBeVisible();
+  await page.goBack();
+  await guide.getByRole('link', { name: 'Choose a record to revoke' }).click();
+  await expect(page.getByRole('button', { name: 'Revoke', exact: true })).toBeVisible();
+});
+
+test('switching role from the guide changes what the workspace allows, and the way back restores it', async ({ page }) => {
+  await openDemo(page);
+  const guide = page.getByRole('region', { name: 'Explore the demo' });
+  await guide.getByRole('link', { name: 'As a viewer (read only)' }).click();
+  await expect(page).toHaveURL('/app');
+  await expect(page.getByText('Fieldwork Collective · viewer')).toBeVisible();
+  await expect(page.getByText('Needs an owner or issuer')).toHaveCount(4);
+  await expect(page.getByRole('link', { name: 'Open the issue form' })).toHaveCount(0);
+  await page.getByRole('region', { name: 'Explore the demo' }).getByRole('link', { name: 'Back to the owner' }).click();
+  await expect(page.getByText('Fieldwork Collective · owner')).toBeVisible();
+  await page.getByRole('region', { name: 'Explore the demo' }).getByRole('link', { name: 'As the platform reviewer' }).click();
+  await expect(page).toHaveURL('/app/review');
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+});
+
+test('reset demo data asks first, then restores the seeded records and the owner session', async ({ page }) => {
+  await login(page); await reviewSingle(page); await issue(page);
+  await page.goto('/app/credentials');
+  await expect(page.getByRole('main')).toContainText('Casey Fictional');
+  const banner = page.locator('.app-demo-ribbon');
+  const reset = banner.getByRole('button', { name: 'Reset demo data' });
+  await reset.click();
+  const dialog = page.getByRole('dialog', { name: 'Reset the demo data?' });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('button', { name: 'Keep my changes' })).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(dialog).toHaveCount(0);
+  await expect(reset).toBeFocused();
+  await expect(page.getByRole('main')).toContainText('Casey Fictional');
+  await reset.click();
+  await page.getByRole('button', { name: 'Yes, reset everything' }).click();
+  await expect(page).toHaveURL('/app');
+  await expect(page.getByText('Fieldwork Collective · owner')).toBeVisible();
+  await page.goto('/app/credentials');
+  await expect(page.getByRole('heading', { name: 'Records', exact: true })).toBeVisible();
+  await expect(page.getByRole('main')).toContainText('Alex Santos');
+  await expect(page.getByRole('main')).not.toContainText('Casey Fictional');
+});
+
+test('the sign-in page offers the same demo entry and reset', async ({ page }) => {
+  await page.goto('/sign-in');
+  await expect(page.getByRole('link', { name: 'Open the live demo' })).toHaveAttribute('href', '/demo');
+  await expect(page.getByRole('button', { name: 'Reset demo data' })).toBeVisible();
+  await page.getByRole('link', { name: 'Open the live demo' }).click();
+  await expect(page).toHaveURL('/app');
 });

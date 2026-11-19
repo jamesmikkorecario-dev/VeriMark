@@ -1,5 +1,6 @@
 import { writeFile } from 'node:fs/promises';
 import { expect, test, type Page } from '@playwright/test';
+import { openDemo } from './app-helpers';
 
 // Reproduce: $env:PLAYWRIGHT_CHANNEL='chrome'; npx playwright test e2e/motion.spec.ts --project=chromium-1440 --project=chromium-390 --workers=1
 // Video, trace, sampled frames and timeline.json are emitted in test-results.
@@ -29,12 +30,13 @@ async function settle(page: Page) {
     await Promise.all(finite.map(a => a.finished.catch(() => {})));
   });
 }
-for (const route of ['/', '/workspace']) {
+for (const route of ['/', '/app']) {
   test(`${route} temporal entrance, refresh replay and live reduction`, async ({ page }, info) => {
     await instrument(page);
+    if (route === '/app') await openDemo(page);
     await page.goto(route, { waitUntil: 'domcontentloaded' });
-    const selector = route === '/' ? '[data-motion=hero] > :first-child' : '[data-motion=dashboard-heading]';
-    const stagedSelector = route === '/' ? '[data-motion=credential]' : '[data-motion=metric]';
+    const selector = route === '/' ? '[data-motion=hero] > :first-child' : '.fsc-page';
+    const stagedSelector = route === '/' ? '[data-motion=credential]' : '.fsc-page';
     const stagedStart = await sample(page, stagedSelector);
     const timeline = [await sample(page, selector)];
     await page.screenshot({ path: info.outputPath('entrance-start.png') });
@@ -57,13 +59,6 @@ for (const route of ['/', '/workspace']) {
     expect(timeline[2].animations.every(a => a.state === 'finished')).toBe(true);
     expect(evidence.shifts.reduce((a, b) => a + b, 0)).toBeLessThan(0.01);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-    if (route === '/workspace') {
-      await page.getByLabel('Search records').fill('Alex');
-      expect((await sample(page, selector)).animations.every(a => a.state === 'finished')).toBe(true);
-      expect((await sample(page, '[data-motion=dashboard-content]')).animations.every(a => a.state === 'finished')).toBe(true);
-      expect((await sample(page, '[data-motion=metric]')).animations.every(a => a.state === 'finished')).toBe(true);
-      await page.getByRole('button', { name: 'Reset filters' }).click();
-    }
     await page.reload({ waitUntil: 'domcontentloaded' });
     expect((await sample(page, selector)).animations.length).toBeGreaterThan(0);
     await page.emulateMedia({ reducedMotion: 'reduce' });
@@ -112,7 +107,7 @@ test('promotional reveal runs once, route reentry resets and no observer keeps c
   expect(settled.transform).toBe('none');
   expect(repeated.animations.every(a => a.state === 'finished')).toBe(true);
   await expect(card).toHaveAttribute('data-reveal-state', 'complete');
-  await page.goto('/workspace');
+  await openDemo(page);
   if (page.viewportSize()!.width <= 800) await page.getByRole('button', { name: 'Open workspace navigation', exact: true }).click();
   await page.getByRole('link', { name: 'Public website', exact: true }).click();
   await expect(page).toHaveURL('/');
@@ -148,19 +143,23 @@ test('hover and press feedback changes over time and reduced mode removes it', a
   expect(await button.evaluate(el => getComputedStyle(el).transform)).toBe('none');
   expect(await button.locator('svg').evaluate(el => getComputedStyle(el).transform)).toBe('none');
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await page.goto('/workspace');
+  await openDemo(page);
   await settle(page);
-  const row = page.locator('.record-row').first();
-  const idleBackground = await row.evaluate(el => getComputedStyle(el).backgroundColor);
-  await row.hover();
-  await expect.poll(() => row.evaluate(el => getComputedStyle(el).backgroundColor)).not.toBe(idleBackground);
-  const action = row.locator('.record-open');
+  const action = page.locator('.fsc-actions .button').first();
+  const idleAction = await action.evaluate(el => getComputedStyle(el).transform);
   await action.hover();
-  await expect.poll(() => action.locator('svg').evaluate(el => getComputedStyle(el).transform)).not.toBe('none');
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  expect(await action.locator('svg').evaluate(el => getComputedStyle(el).transform)).toBe('none');
+  await expect.poll(() => action.evaluate(el => getComputedStyle(el).transform)).not.toBe(idleAction);
+  await settle(page);
+  const hoverAction = await action.evaluate(el => getComputedStyle(el).transform);
   await page.mouse.down();
-  expect(await action.locator('svg').evaluate(el => getComputedStyle(el).transform)).toBe('none');
+  await expect.poll(() => action.evaluate(el => getComputedStyle(el).transform)).not.toBe(hoverAction);
+  await page.mouse.move(0, 0);
+  await page.mouse.up();
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await action.hover();
+  expect(await action.evaluate(el => getComputedStyle(el).transform)).toBe('none');
+  await page.mouse.down();
+  expect(await action.evaluate(el => getComputedStyle(el).transform)).toBe('none');
   await page.mouse.move(0, 0);
   await page.mouse.up();
 });
@@ -168,10 +167,11 @@ test('hover and press feedback changes over time and reduced mode removes it', a
 test('reduced initial mount and unavailable observer retain all promotional content', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.addInitScript(() => { Object.defineProperty(window, 'IntersectionObserver', { value: undefined, configurable: true }); });
-  for (const route of ['/', '/workspace']) {
+  await openDemo(page);
+  for (const route of ['/', '/app']) {
     await page.goto(route);
     expect(await page.evaluate(() => document.getAnimations().filter(a => a.playState === 'running').length)).toBe(0);
-    for (const selector of route === '/' ? ['.hero-content', '.hero-right', '.method-card', '.feature-copy', '.audience-grid', '.closing-section'] : ['.page-heading', '.metric', '.dashboard-main']) {
+    for (const selector of route === '/' ? ['.hero-content', '.hero-right', '.method-card', '.feature-copy', '.audience-grid', '.closing-section'] : ['.fsc-page', '.fsc-metric', '.fsc-panel']) {
       for (const element of await page.locator(selector).all()) expect(await element.evaluate(el => getComputedStyle(el).opacity)).toBe('1');
     }
   }
@@ -185,12 +185,13 @@ test('reduced initial mount and unavailable observer retain all promotional cont
 
 
 
-for (const route of ['/', '/workspace']) {
+for (const route of ['/', '/app']) {
   test(`${route} coordinated entrance delays survive the stylesheet cascade`, async ({ page }, info) => {
+    if (route === '/app') await openDemo(page);
     await page.goto(route, { waitUntil: 'domcontentloaded' });
-    const selector = route === '/'
-      ? '[data-motion=credential]'
-      : '[data-motion=dashboard-heading], [data-motion=metric], [data-motion=dashboard-content]';
+    // The overview enters as one finite stage (.fsc-page); the landing page stages its credential after the hero.
+    const selector = route === '/' ? '[data-motion=credential]' : '.fsc-page';
+    await page.locator(selector).first().waitFor();
     // Read actual Chrome cascade and active Web Animations timing together, before settling.
     const stages = await page.locator(selector).evaluateAll(elements => elements.map(element => {
       const css = getComputedStyle(element);
@@ -207,7 +208,7 @@ for (const route of ['/', '/workspace']) {
     }));
     await writeFile(info.outputPath('coordination.json'), JSON.stringify({ route, stages }, null, 2));
     await info.attach('coordination.json', { body: JSON.stringify({ route, stages }, null, 2), contentType: 'application/json' });
-    const expectedDelays = route === '/' ? [100] : [0, 60, 110, 160, 180];
+    const expectedDelays = route === '/' ? [100] : [0];
     expect(stages.map(stage => stage.delayMs)).toEqual(expectedDelays);
     expect(stages.map(stage => stage.animations[0]?.delay)).toEqual(expectedDelays);
     expect(stages.every(stage => stage.animations[0]?.duration === 480)).toBe(true);

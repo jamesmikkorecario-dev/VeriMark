@@ -52,7 +52,7 @@ test('direct and cross-route hash arrive instantly; POP restores saved positions
   await page.waitForTimeout(100);
   direct.push(await sample(page));
   expect(Math.abs(direct[0].y - direct[1].y)).toBeLessThan(2);
-  await page.goto('/preview/about');
+  await page.goto('/verify');
   await page.getByRole('navigation', { name: 'Footer navigation' }).getByRole('link', { name: 'How it works' }).click();
   await aligned(page);
   direct.push(await sample(page));
@@ -119,10 +119,11 @@ test('implemented route entry replays finite visible entrance with immediate foc
   await start(page);
   const samples = [];
   for (let i = 0; i < 2; i++) {
-    await page.getByRole('link', { name: 'Explore demo workspace', exact: true }).click();
+    await page.getByRole('link', { name: 'Explore the live demo', exact: true }).click();
+    await expect(page).toHaveURL('/app');
     await expect(page.getByRole('main')).toBeFocused();
     expect(await page.evaluate(() => scrollY)).toBe(0);
-    const entry = await page.locator('[data-motion=dashboard-heading]').evaluate(el => ({
+    const entry = await page.locator('.fsc-page').evaluate(el => ({
       opacity: Number(getComputedStyle(el).opacity),
       animations: el.getAnimations().map(a => ({ state: a.playState, duration: a.effect?.getTiming().duration })),
     }));

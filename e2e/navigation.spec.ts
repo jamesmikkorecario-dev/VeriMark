@@ -1,19 +1,24 @@
 import AxeBuilder from '@axe-core/playwright';
 import { settleFiniteMotion } from './motion-helpers';
 import { expect, test, type Page } from '@playwright/test';
+import { openDemo } from './app-helpers';
 
 const cases = [
   { route: '/', header: '.public-header', open: 'Open navigation', close: 'Close navigation', id: 'public-navigation' },
-  { route: '/workspace', header: '.workspace-header', open: 'Open workspace navigation', close: 'Close workspace navigation', id: 'workspace-navigation' },
+  { route: '/app', header: '.workspace-header', open: 'Open workspace navigation', close: 'Close workspace navigation', id: 'workspace-navigation' },
 ];
+/** The public site loads directly; the application is entered through the one-click demo (workspace shell, owner). */
+async function open(page: Page, route: string) {
+  if (route === '/') await page.goto('/');
+  else await openDemo(page);
+}
 async function scroll(page: Page) {
   await page.evaluate(() => scrollTo(0, 650));
   await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(500);
 }
-
 for (const item of cases) {
   test(`${item.route} sticky header, controls, dismissal and screenshots`, async ({ page }, info) => {
-    await page.goto(item.route);
+    await open(page, item.route);
     const trigger = page.locator('button[aria-controls="' + item.id + '"]');
     const mobile = page.viewportSize()!.width <= 800;
     await settleFiniteMotion(page);
@@ -55,14 +60,14 @@ for (const item of cases) {
     await expect(panel).toBeHidden();
     await trigger.click();
     await panel.getByRole('link', { name: item.route === '/' ? 'How it works' : 'Credentials', exact: true }).click();
-    await expect(page).toHaveURL(item.route === '/' ? '/#method' : '/workspace/records');
+    await expect(page).toHaveURL(item.route === '/' ? '/#method' : '/app/credentials');
     await expect(item.route === '/' ? page.getByRole('region', { name: 'From recognition to reassurance.' }) : page.getByRole('main')).toBeFocused();
     await expect(page.locator('#' + item.id)).toBeHidden();
   });
 
   test(`${item.route} resize, backdrop and browser history clean up navigation`, async ({ page }) => {
     test.skip(page.viewportSize()!.width > 800, 'Mobile navigation only');
-    await page.goto(item.route);
+    await open(page, item.route);
     const trigger = page.locator('button[aria-controls="' + item.id + '"]');
     const panel = page.locator('#' + item.id);
     await trigger.click();
@@ -86,7 +91,7 @@ for (const item of cases) {
 
 test('workspace modal traps focus, isolates background, preserves scroll and inline styles', async ({ page }) => {
   test.skip(page.viewportSize()!.width > 800, 'Mobile drawer only');
-  await page.goto('/workspace');
+  await openDemo(page);
   await scroll(page);
   await settleFiniteMotion(page);
   await page.evaluate(() => { document.body.style.paddingRight = '3px'; document.body.style.overflowX = 'clip'; });
@@ -120,7 +125,7 @@ test('short drawer scrolls independently with long organization and route labels
   test.skip(page.viewportSize()!.width > 800, 'Mobile drawer only');
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.setViewportSize({ width: page.viewportSize()!.width, height: 400 });
-  await page.goto('/workspace');
+  await openDemo(page);
   await page.getByRole('button', { name: 'Open workspace navigation', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Workspace navigation', exact: true });
   await dialog.getByText('Fieldwork Collective', { exact: true }).evaluate(node => { node.textContent = 'International Community Education and Credential Recognition Organization'; });
