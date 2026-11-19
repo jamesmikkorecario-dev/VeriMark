@@ -44,9 +44,9 @@ A static React/Vite site on Vercel Hobby with **no backend**:
 
 Vercel deploys the production branch (the repository default, `main`) **as soon as the project is imported**. `origin/main` is still the init commit `197711b`, which has no app and no `vercel.json`: imported now, Vercel would publish those repository files as a bare static site without the security headers. So `main` must hold the release commit before Vercel ever sees the repository. Each step needs the owner's release approval.
 
-1. Merge `wf/demo-release` into `dev/full-stack-integration` (local). Done: `19b734a`.
-2. First Ubuntu CI run without touching `main`: `git push origin 19b734a:refs/heads/dev/full-stack-integration`. Wait for **Pilot validation** to pass, and fix forward if it fails. It has never run on Linux.
-3. Fast-forward `main` to the release commit: `git push origin 19b734a:refs/heads/main` (no `--force`; it is rejected if `origin/main` moved). Confirm with `git ls-remote origin main`. CI runs again on `main`.
+1. Merge `wf/demo-release` into `dev/full-stack-integration` (local). Done. `<release-sha>` below means the commit approved at the release gate (the tip of `dev/full-stack-integration`), recorded in the release handoff.
+2. First Ubuntu CI run without touching `main`: `git push origin <release-sha>:refs/heads/dev/full-stack-integration`. Wait for **Pilot validation** to pass, and fix forward if it fails. It has never run on Linux.
+3. Fast-forward `main` to the release commit: `git push origin <release-sha>:refs/heads/main` (no `--force`; it is rejected if `origin/main` moved). Confirm with `git ls-remote origin main`. CI runs again on `main`.
 4. In Vercel (Hobby): opt out of AI model training (Team Settings → Data Preferences) first. Then import `jamesmikkorecario-dev/VeriMark` as project `verimark-demo`:
    - root directory `./`, framework Vite, production branch `main`;
    - **no environment variables** (`build:demo` refuses any `VITE_*SUPABASE*` variable, so a mistake fails the build instead of shipping);
