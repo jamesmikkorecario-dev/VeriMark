@@ -4,16 +4,18 @@ Issue with confidence. Verify with trust.
 
 VeriMark lets smaller organizations issue accountable certificates and lets recipients and third parties check the issuer's record and its current status. The working name has not been cleared for public launch.
 
-## Status of this branch (`dev/full-stack-integration`)
+**Live demonstration: https://verimark-demo.vercel.app** — fictional data only, held in your own browser tab, with no backend. The demo accounts are listed on the sign-in page. [Release record](docs/delivery/RELEASE-2026-11-20-PORTFOLIO-DEMO.md).
 
-A local release candidate of the full application: sign-in, organizations and roles, templates, single and CSV issuance, public verification, private recipient links with PDF certificates, revocation and replacement, activity history. It runs in two modes:
+## Status
 
-- **Demonstration** (default, no configuration): fictional data held in the browser. Use it to try every screen.
-- **Supabase**: the real backend is one SQL migration (`supabase/migrations`), tested locally on PostgreSQL. **It has not been applied to a hosted Supabase project, and nothing is deployed.**
+The full application: sign-in, organizations and roles, templates, single and CSV issuance, public verification, private recipient links with PDF certificates, revocation and replacement, activity history. It runs in two modes:
 
-Start here: [local development](docs/delivery/LOCAL-DEVELOPMENT.md) · [architecture decision](docs/architecture/adr/0005-full-stack-release-candidate.md) · [schema and operations](docs/database/SCHEMA-AND-OPERATIONS.md) · [release-candidate report](docs/delivery/RELEASE-CANDIDATE.md) · [roadmap and status](docs/product/FULL-STACK-ROADMAP.md).
+- **Demonstration** (the public site, and the default locally): fictional data held in the browser. The public build (`npm run build:demo`) compiles the backend out entirely.
+- **Supabase**: the real backend is SQL migrations (`supabase/migrations`), tested locally on PostgreSQL and on a disposable hosted test project. It is not connected to the public site.
 
-Not done, by design: deployment, a hosted database, e-mail delivery, merge to `main`. Each needs the owner's approval.
+Start here: [local development](docs/delivery/LOCAL-DEVELOPMENT.md) · [demo release plan](docs/delivery/DEMO-RELEASE-PLAN.md) · [architecture decision](docs/architecture/adr/0005-full-stack-release-candidate.md) · [schema and operations](docs/database/SCHEMA-AND-OPERATIONS.md) · [pre-production assessment](docs/ai/handoffs/PREPRODUCTION-HARDENING-2026-11-18.md) · [roadmap and status](docs/product/FULL-STACK-ROADMAP.md).
+
+Not done, by design: a real pilot with real recipients, a production database, and e-mail delivery. Each needs the owner's decisions and approval.
 
 Start with [AGENTS.md](AGENTS.md), [PRD](docs/product/PRD.md), [roadmap](docs/product/MVP-ROADMAP.md), [workflow](docs/ai/WORKFLOW.md), then [development prompt](START_DEVELOPMENT_PROMPT.md).
 
