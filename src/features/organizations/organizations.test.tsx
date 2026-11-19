@@ -3,6 +3,9 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ApiError, type Member, type Organization, type ReviewQueueItem } from '../../lib/api/types';
 import { createFakeApi, membership, organization, renderApp, signedInApi, stubBrowser, user } from '../auth/testing/fakeApi';
+import { resetDemoData } from '../../lib/api/demo/reset';
+
+vi.mock('../../lib/api/demo/reset', () => ({ resetDemoData: vi.fn(), DEMO_ENTRY_PATH: '/demo' }));
 
 beforeEach(() => { stubBrowser(); sessionStorage.clear(); });
 afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); });
@@ -84,6 +87,27 @@ describe('workspace shell', () => {
     renderApp('/app/organization', signedInApi('viewer', { listMembers: async () => members }, 'demo'));
     await screen.findByRole('heading', { level: 1, name: organization.displayName });
     expect(screen.getByText('DEMONSTRATION — FICTIONAL DATA · NOTHING HERE IS REAL')).toBeInTheDocument();
+  });
+
+  it('offers a confirmed "Reset demo data" in the demo banner only', async () => {
+    const ui = userEvent.setup();
+    renderApp('/app/organization', signedInApi('viewer', { listMembers: async () => members }, 'demo'));
+    await screen.findByRole('heading', { level: 1, name: organization.displayName });
+    const banner = screen.getByText('DEMONSTRATION — FICTIONAL DATA · NOTHING HERE IS REAL').parentElement as HTMLElement;
+    await ui.click(within(banner).getByRole('button', { name: 'Reset demo data' }));
+    const dialog = screen.getByRole('dialog', { name: 'Reset the demo data?' });
+    expect(resetDemoData).not.toHaveBeenCalled();
+    await ui.click(within(dialog).getByRole('button', { name: 'Keep my changes' }));
+    expect(resetDemoData).not.toHaveBeenCalled();
+    await ui.click(within(banner).getByRole('button', { name: 'Reset demo data' }));
+    await ui.click(within(screen.getByRole('dialog', { name: 'Reset the demo data?' })).getByRole('button', { name: 'Yes, reset everything' }));
+    expect(resetDemoData).toHaveBeenCalledTimes(1);
+  });
+
+  it('has no reset control outside demo mode', async () => {
+    renderApp('/app/organization', signedInApi('viewer', { listMembers: async () => members }));
+    await screen.findByRole('heading', { level: 1, name: organization.displayName });
+    expect(screen.queryByRole('button', { name: 'Reset demo data' })).toBeNull();
   });
 
   it('shows a retryable error when the workspace cannot load', async () => {

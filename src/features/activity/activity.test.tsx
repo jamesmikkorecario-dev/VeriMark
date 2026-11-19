@@ -61,6 +61,74 @@ describe('DashboardHome', () => {
     expect(await screen.findByText(/Demonstration numbers. They are fictional/)).toBeInTheDocument();
   });
 
+  describe('demo guide', () => {
+    const records = [summary({ id: 'cred-1', publicId: 'PUB-1', status: 'expired' }), summary({ id: 'cred-2', publicId: 'PUB-2' }), summary({ id: 'cred-3', publicId: 'PUB-3' })];
+    const demoApi = () => {
+      const api = createFakeApi('demo');
+      api.getMetrics.mockResolvedValue(metrics);
+      api.listCredentials.mockResolvedValue({ items: records, nextCursor: null });
+      return api;
+    };
+    const guide = async () => {
+      const region = await screen.findByRole('region', { name: 'Explore the demo' });
+      await screen.findByText('340'); // the records the links point at arrive with the metrics
+      return within(region);
+    };
+
+    it('walks an owner through issue, open and verify, replace, revoke, share, activity, roles and reset', async () => {
+      renderPage(<DashboardHome />, { api: demoApi() });
+      const tour = await guide();
+      expect(tour.getByRole('link', { name: 'Open the issue form' })).toHaveAttribute('href', '/app/issue');
+      expect(tour.getByRole('link', { name: 'Open a record' })).toHaveAttribute('href', '/app/credentials/cred-1');
+      expect(tour.getByRole('link', { name: 'View its public page' })).toHaveAttribute('href', '/verify/PUB-1');
+      // Replace, revoke and share target records that can still change: the expired one is skipped.
+      expect(tour.getByRole('link', { name: 'Choose a record to replace' })).toHaveAttribute('href', '/app/credentials/cred-2');
+      expect(tour.getByRole('link', { name: 'Choose a record to revoke' })).toHaveAttribute('href', '/app/credentials/cred-3');
+      expect(tour.getByRole('link', { name: 'Open a record to share' })).toHaveAttribute('href', '/app/credentials/cred-2');
+      expect(tour.getByRole('link', { name: 'Open the activity log' })).toHaveAttribute('href', '/app/activity');
+      expect(tour.getByRole('link', { name: 'As a viewer (read only)' })).toHaveAttribute('href', '/demo?as=viewer');
+      expect(tour.getByRole('link', { name: 'As the platform reviewer' })).toHaveAttribute('href', '/demo?as=admin');
+      expect(tour.queryByRole('link', { name: 'Back to the owner' })).toBeNull();
+      expect(tour.getByRole('button', { name: 'Reset demo data' })).toBeInTheDocument();
+    });
+
+    it('does not appear with a real backend', async () => {
+      const api = createFakeApi();
+      api.getMetrics.mockResolvedValue(metrics);
+      api.listCredentials.mockResolvedValue({ items: records, nextCursor: null });
+      renderPage(<DashboardHome />, { api });
+      await screen.findByText('340');
+      expect(screen.queryByRole('region', { name: 'Explore the demo' })).toBeNull();
+      expect(screen.queryByText(/Explore the demo/)).toBeNull();
+      expect(screen.queryByRole('button', { name: 'Reset demo data' })).toBeNull();
+    });
+
+    it('tells a viewer which steps need another role and offers the way back', async () => {
+      renderPage(<DashboardHome />, { api: demoApi(), workspace: makeWorkspace({ role: 'viewer' }) });
+      const tour = await guide();
+      expect(tour.queryByRole('link', { name: 'Open the issue form' })).toBeNull();
+      expect(tour.getAllByText(/Needs an owner or issuer/)).toHaveLength(4);
+      expect(tour.getByRole('link', { name: 'Open a record' })).toBeInTheDocument();
+      expect(tour.getByRole('link', { name: 'Back to the owner' })).toHaveAttribute('href', '/demo');
+    });
+
+    it('does not send a pending organization to steps it cannot perform', async () => {
+      renderPage(<DashboardHome />, { api: demoApi(), workspace: makeWorkspace({ role: 'owner', reviewState: 'pending' }) });
+      const tour = await guide();
+      expect(tour.getAllByText(/Needs an owner or issuer in a reviewed organization/)).toHaveLength(4);
+    });
+
+    it('still links to the record list before any record exists', async () => {
+      const api = demoApi();
+      api.listCredentials.mockResolvedValue({ items: [], nextCursor: null });
+      renderPage(<DashboardHome />, { api });
+      const tour = await guide();
+      expect(await screen.findByRole('heading', { name: 'No records yet' })).toBeInTheDocument();
+      expect(tour.getByRole('link', { name: 'Open a record' })).toHaveAttribute('href', '/app/credentials');
+      expect(tour.queryByRole('link', { name: 'View its public page' })).toBeNull();
+    });
+  });
+
   it('shows a pending review notice and no issue action while pending', async () => {
     const api = createFakeApi();
     api.getMetrics.mockResolvedValue({ ...metrics, issued: 0 });

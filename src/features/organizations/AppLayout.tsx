@@ -7,6 +7,7 @@ import { WorkspaceDrawer } from '../../components/layout/Navigation';
 import { WorkspaceContext, type Workspace } from './WorkspaceContext';
 import { AppShellContext, reviewExplanations, reviewLabels, roleLabels, sectionTitle, type AppShell } from './ShellContext';
 import { useAuth } from '../auth/AuthContext';
+import { DemoResetControl } from '../auth/DemoAccountsPanel';
 import { errorCode } from '../auth/errors';
 import { readActiveOrganization, writeActiveOrganization } from '../auth/session';
 import '../../pages/pages.css';
@@ -162,7 +163,7 @@ export default function AppLayout() {
         <a className="skip-link" href="#main">Skip to content</a>
         <aside className="sidebar">{identity('sidebar')}</aside>
         <div className="workspace-body">
-          {demo && <div className="demo-ribbon app-demo-ribbon">DEMONSTRATION — FICTIONAL DATA · NOTHING HERE IS REAL</div>}
+          {demo && <div className="demo-ribbon app-demo-ribbon"><span>DEMONSTRATION — FICTIONAL DATA · NOTHING HERE IS REAL</span><DemoResetControl appearance="ribbon" /></div>}
           <header className="workspace-header">
             <div className="workspace-mobile-brand"><Brand /></div>
             <div className="mobile-navigation">

@@ -1,7 +1,10 @@
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
-import { MemoryRouter, useNavigate } from 'react-router-dom';
+import type { ReactNode } from 'react';
+import { Link, MemoryRouter, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { IssuerWorkspaceLayout, PublicLayout } from './Layouts';
+import { PublicLayout } from './Layouts';
+import { WorkspaceDrawer } from './Navigation';
+import { EnvironmentContext } from './environment';
 
 let desktop: EventTarget & { matches: boolean; addListener: () => void; removeListener: () => void };
 beforeEach(() => {
@@ -14,9 +17,26 @@ beforeEach(() => {
 });
 afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
+/** The drawer as AppLayout mounts it: keyed by location, beside the routed page. */
+function WorkspaceShell({ children }: { children: ReactNode }) {
+  const location = useLocation();
+  return (
+    <>
+      <WorkspaceDrawer key={location.key}>
+        <nav aria-label="Workspace">
+          <NavLink end to="/app">Overview</NavLink>
+          <NavLink to="/app/credentials">Credentials</NavLink>
+          <Link to="/">Public website</Link>
+        </nav>
+      </WorkspaceDrawer>
+      <main>{children}</main>
+    </>
+  );
+}
+
 function NavigateAway() {
   const navigate = useNavigate();
-  return <button onClick={() => navigate('/workspace/records')}>Change route</button>;
+  return <button onClick={() => navigate('/app/credentials')}>Change route</button>;
 }
 
 describe('public anchored navigation', () => {
@@ -27,7 +47,7 @@ describe('public anchored navigation', () => {
     fireEvent.click(trigger);
     const panel = document.getElementById('public-navigation')!;
     expect(within(panel).getByRole('link', { name: 'How it works' })).toHaveFocus();
-    within(panel).getByRole('link', { name: 'About' }).focus();
+    within(panel).getByRole('link', { name: 'Verify' }).focus();
     fireEvent.keyDown(document, { key: 'Escape' });
     expect(panel).toHaveAttribute('hidden');
     expect(trigger).toHaveFocus();
@@ -44,8 +64,26 @@ describe('public anchored navigation', () => {
     act(() => { desktop.dispatchEvent(new Event('change')); });
     expect(trigger).toHaveAttribute('aria-expanded', 'false');
     fireEvent.click(trigger);
-    fireEvent.click(within(document.getElementById('public-navigation')!).getByRole('link', { name: 'About' }));
+    fireEvent.click(within(document.getElementById('public-navigation')!).getByRole('link', { name: 'Verify' }));
     expect(screen.getByRole('button', { name: 'Open navigation' })).toHaveAttribute('aria-expanded', 'false');
+  });
+});
+
+describe('public navigation links', () => {
+  it('offers the live demo in demonstration mode and has no About page link', () => {
+    render(<MemoryRouter><PublicLayout><p>Page</p></PublicLayout></MemoryRouter>);
+    const main = screen.getByRole('navigation', { name: 'Main navigation' });
+    expect(within(main).getAllByRole('link').map(link => [link.textContent, link.getAttribute('href')])).toEqual([
+      ['How it works', '/#method'], ['Verify', '/verify'], ['Live demo', '/demo'], ['Sign in', '/sign-in'],
+    ]);
+    expect(screen.queryByRole('link', { name: 'About' })).toBeNull();
+  });
+
+  it('shows nothing extra without the demonstration adapter', () => {
+    render(<MemoryRouter><EnvironmentContext.Provider value="supabase"><PublicLayout><p>Page</p></PublicLayout></EnvironmentContext.Provider></MemoryRouter>);
+    const main = screen.getByRole('navigation', { name: 'Main navigation' });
+    expect(within(main).getAllByRole('link').map(link => link.textContent)).toEqual(['How it works', 'Verify', 'Sign in']);
+    expect(screen.queryByText(/FICTIONAL DATA/)).toBeNull();
   });
 });
 
@@ -53,7 +91,7 @@ describe('workspace modal lifecycle', () => {
   it('focuses close, locks scroll, and restores prior inline styles and scroll on Escape', () => {
     document.body.style.overflow = 'clip';
     document.body.style.top = '2px';
-    render(<MemoryRouter initialEntries={['/workspace']}><IssuerWorkspaceLayout><p>Page</p></IssuerWorkspaceLayout></MemoryRouter>);
+    render(<MemoryRouter initialEntries={['/app']}><WorkspaceShell><p>Page</p></WorkspaceShell></MemoryRouter>);
     const trigger = screen.getByRole('button', { name: 'Open workspace navigation' });
     fireEvent.click(trigger);
     const dialog = screen.getByRole('dialog', { name: 'Workspace navigation' });
@@ -78,7 +116,7 @@ describe('workspace modal lifecycle', () => {
     'padding: 1px 3px !important; overflow-x: clip !important; overflow-y: scroll; position: relative !important; color: red;',
   ])('restores the same inline declarations including overflow longhands and priorities: %s', style => {
     document.body.setAttribute('style', style);
-    render(<MemoryRouter initialEntries={['/workspace']}><IssuerWorkspaceLayout><p>Page</p></IssuerWorkspaceLayout></MemoryRouter>);
+    render(<MemoryRouter initialEntries={['/app']}><WorkspaceShell><p>Page</p></WorkspaceShell></MemoryRouter>);
     fireEvent.click(screen.getByRole('button', { name: 'Open workspace navigation' }));
     expect(document.body.style.position).toBe('fixed');
     fireEvent(screen.getByRole('dialog'), new Event('cancel', { cancelable: true }));
@@ -99,7 +137,7 @@ describe('workspace modal lifecycle', () => {
   });
 
   it('cleans modal and scroll lock on desktop resize, route change, and unmount', () => {
-    const { unmount } = render(<MemoryRouter initialEntries={['/workspace']}><IssuerWorkspaceLayout><NavigateAway /></IssuerWorkspaceLayout></MemoryRouter>);
+    const { unmount } = render(<MemoryRouter initialEntries={['/app']}><WorkspaceShell><NavigateAway /></WorkspaceShell></MemoryRouter>);
     const open = () => fireEvent.click(screen.getByRole('button', { name: 'Open workspace navigation' }));
     open();
     desktop.matches = true;

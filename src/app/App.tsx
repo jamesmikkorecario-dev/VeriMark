@@ -1,9 +1,8 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { useApi } from '../lib/api/context';
 import { EnvironmentContext } from '../components/layout/environment';
 import LandingPage from '../pages/LandingPage';
-import DashboardPage from '../pages/DashboardPage';
-import DeferredPage from '../pages/DeferredPage';
+import DemoEntryPage from '../pages/DemoEntryPage';
 import NotFoundPage from '../pages/NotFoundPage';
 import VerifyPage from '../features/verification/VerifyPage';
 import ReceivePage from '../features/delivery/ReceivePage';
@@ -27,6 +26,7 @@ import IssuePage from '../features/issuance/IssuePage';
 import TemplatesPage from '../features/templates/TemplatesPage';
 import RemountOnFragment from './RemountOnFragment';
 import RouteEffects from './RouteEffects';
+import { PreviewRecordRedirect, WorkspaceRedirect, WorkspaceSectionRedirect } from './LegacyRedirects';
 
 export default function App() {
   const api = useApi();
@@ -36,6 +36,7 @@ export default function App() {
         <RouteEffects />
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/demo" element={<DemoEntryPage />} />
           <Route path="/verify" element={<VerifyPage />} />
           <Route path="/verify/:publicId" element={<VerifyPage />} />
           <Route path="/receive" element={<RemountOnFragment><ReceivePage /></RemountOnFragment>} />
@@ -56,9 +57,12 @@ export default function App() {
             <Route path="review" element={<ReviewPage />} />
             <Route path="*" element={<AppNotFound />} />
           </Route>
-          <Route path="/workspace" element={<DashboardPage />} />
-          <Route path="/workspace/:section" element={<DeferredPage />} />
-          <Route path="/preview/:section" element={<DeferredPage />} />
+          <Route path="/workspace" element={<WorkspaceRedirect />} />
+          <Route path="/workspace/:section" element={<WorkspaceSectionRedirect />} />
+          <Route path="/preview/record" element={<PreviewRecordRedirect />} />
+          <Route path="/preview/verify" element={<Navigate to="/verify" replace />} />
+          <Route path="/preview/about" element={<Navigate to="/#method" replace />} />
+          <Route path="/preview/*" element={<Navigate to="/" replace />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </AuthProvider>
