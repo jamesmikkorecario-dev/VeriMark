@@ -184,7 +184,7 @@ export default function AppLayout() {
           </main>
           <footer className="workspace-footer">
             <span>VeriMark / Issuer workspace</span>
-            <span>{demo ? 'Demonstration — fictional data. Nothing is sent or stored on a server.' : 'Review is an identity check, not accreditation.'}</span>
+            <span>{demo ? 'Demonstration — fictional data, kept only in this browser tab. Nothing is sent or stored on a server.' : 'Review is an identity check, not accreditation.'}</span>
           </footer>
         </div>
       </div>

@@ -70,7 +70,9 @@ describe('sign in', () => {
   it('demo panel fills the form', async () => {
     renderApp('/sign-in', createFakeApi({}, 'demo'));
     const ui = userEvent.setup();
-    await ui.click(await screen.findByRole('button', { name: 'Use viewer@demo.verimark.test' }));
+    // Visitors are told the data is fictional and lives only in this tab before they sign in.
+    expect(await screen.findByText(/fictional data.*stays only in this browser tab/)).toBeInTheDocument();
+    await ui.click(screen.getByRole('button', { name: 'Use viewer@demo.verimark.test' }));
     expect(screen.getByLabelText('Email address')).toHaveValue('viewer@demo.verimark.test');
     expect(screen.getByLabelText('Password')).toHaveValue('demo-password-1');
   });

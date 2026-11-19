@@ -6,7 +6,7 @@ import './app-pages.css';
 export function DemoNotice() {
   const api = useApi();
   if (api.mode !== 'demo') return null;
-  return <p className="fsc-demo-note"><strong>Demonstration.</strong> All people, organizations, records and numbers here are fictional. Nothing is issued for real.</p>;
+  return <p className="fsc-demo-note"><strong>Demonstration.</strong> All people, organizations, records and numbers here are fictional. Nothing is issued for real, and your changes stay only in this browser tab until you close it.</p>;
 }
 
 export function PageIntro({ eyebrow, title, children, actions }: { eyebrow?: string; title: string; children?: ReactNode; actions?: ReactNode }) {

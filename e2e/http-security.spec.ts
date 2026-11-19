@@ -75,10 +75,18 @@ test.afterAll(async () => {
   await server?.close();
   if (outDir) await rm(outDir, { recursive: true, force: true });
 });
+/** Every request the site tried to send anywhere but the local preview (aborted, then asserted empty). */
+let outside: string[] = [];
 test.beforeEach(async ({ context }, info) => {
   test.skip(info.project.name !== 'chromium-1440', 'Runs once: builds and serves its own production preview.');
-  await context.route(url => !url.href.startsWith(origin + '/'), route => route.abort());
+  outside = [];
+  await context.route(url => !url.href.startsWith(origin + '/') && !/^(data|blob):/.test(url.href), route => {
+    outside.push(new URL(route.request().url()).origin);
+    return route.abort();
+  });
 });
+// The demo build has no backend: it must never even try to reach another host (Supabase or anything else).
+test.afterEach(() => { expect(outside).toEqual([]); });
 
 /** Records CSP violations and browser policy complaints for the page's whole life. */
 async function watch(page: Page) {

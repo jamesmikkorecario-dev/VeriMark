@@ -10,7 +10,7 @@ export function DemoAccountsPanel({ onUse }: { onUse?: (email: string, password:
     <aside className="demo-accounts" aria-labelledby="demo-accounts-title">
       <p className="eyebrow">DEMONSTRATION · FICTIONAL DATA</p>
       <h2 id="demo-accounts-title">Demo accounts</h2>
-      <p>This is a local demonstration. Nothing is sent to a server and no email is delivered. Every account below uses the password <code>{DEMO_ACCOUNTS[0].password}</code>.</p>
+      <p>This is a local demonstration with fictional data. Nothing is sent to a server and no email is delivered. Anything you create or change stays only in this browser tab and is gone when you close it. Every account below uses the password <code>{DEMO_ACCOUNTS[0].password}</code>.</p>
       <ul>
         {DEMO_ACCOUNTS.map(account => (
           <li key={account.email}>
