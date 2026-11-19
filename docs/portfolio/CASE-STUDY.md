@@ -130,7 +130,7 @@ Public verification exposes the recipient's name and achievement with no publica
 ## 11. Engineering process
 
 - **Isolated worktrees** per task, one writer per file, with coordinator-owned integration (`docs/ai/WORKFLOW.md`, `docs/ai/WORKTREE-REGISTRY.md`).
-- **Independent reviews** of security-relevant work (rate limits, HTTP, concurrency, CI), recorded with findings and fixes in `PREPRODUCTION-HARDENING-2026-11-18.md`; the first migration review alone found five issues, all fixed.
+- **Independent reviews** of security-relevant work (rate limits, HTTP, concurrency, CI), recorded with findings and fixes in `docs/ai/handoffs/PREPRODUCTION-HARDENING-2026-11-18.md`. The first independent review of the database migration found five issues, all fixed in `7c4e3d9` (FS-REVIEW in `docs/product/FULL-STACK-ROADMAP.md`).
 - **Handoffs with real evidence**: every task records exact commands and observed results, including failures and "not run".
 - **A CI flake was root-caused, not retried.** The first Linux CI run failed a unit test that never failed on Windows. A fresh Ubuntu clone reproduced it (2 of 3 runs). Cause: the dialog moves focus to an error summary on the next animation frame; on the slower runner that frame fired after the test had typed its first character. A race in the test, not the application. The test now waits for focus first, as a person would; 25/25 Linux repeats passed and no assertion was weakened (release record, "Original failure").
 - Commits use the repository's configured identity and carry no AI attribution lines.
