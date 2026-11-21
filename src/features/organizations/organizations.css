@@ -9,7 +9,7 @@
 .review-suspended { background: var(--red-bg); color: var(--red); border-color: #ead0ca; }
 .org-switcher { margin: 0 18px 12px; display: grid; gap: 6px; font-size: 11px; }
 .org-switcher label { color: #c3d7c6; font-weight: 700; letter-spacing: .04em; }
-.org-switcher .select-input { min-height: 44px; padding: 8px 10px; font-size: 13px; }
+.org-switcher .select-input { min-height: 44px; padding: 8px 36px 8px 10px; background-position: right 12px center; font-size: 13px; }
 .sidebar-footer .app-user-email { overflow-wrap: anywhere; }
 .app-sign-out { justify-self: start; background: transparent; color: inherit; border: 1px solid #ffffff55; border-radius: 2px; padding: 10px 14px; min-height: 44px; font-size: 12px; font-weight: 700; margin-top: 6px; transition: background-color var(--motion-action) var(--ease); }
 .app-sign-out:hover:not(:disabled) { background: #2b5b49; }
@@ -46,7 +46,7 @@
 .member-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 10px; }
 .member-role { display: grid; gap: 4px; min-width: 0; }
 .member-role label { font-size: 12px; font-weight: 700; }
-.member-role .select-input { min-height: 44px; padding: 8px 10px; width: auto; min-width: 120px; max-width: 100%; }
+.member-role .select-input { min-height: 44px; padding: 8px 36px 8px 10px; background-position: right 12px center; width: auto; min-width: 120px; max-width: 100%; }
 .member-role-label { font-weight: 700; font-size: 13px; }
 .member-confirm { display: inline-flex; flex-wrap: wrap; gap: 8px; }
 
